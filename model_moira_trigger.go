@@ -1,7 +1,7 @@
 /*
  * Moira Alert
  *
- * This is an API description for [Moira Alert API](https://moira.readthedocs.io/en/latest/overview.html) Check us out on [Github](https://github.com/moira-alert) or look up our [guide on getting started with Moira](https://moira.readthedocs.io)
+ * This is an API description for [Moira Alert API](https://moira.readthedocs.io/en/latest/overview.html) Check us out on [Github](https://github.com/moira-alert) or look up our [guide](https://moira.readthedocs.io) on getting started with Moira
  *
  * API version: master
  * Contact: opensource@skbkontur.com
@@ -11,7 +11,7 @@ package swagger
 
 type MoiraTrigger struct {
 	AloneMetrics map[string]bool `json:"alone_metrics,omitempty"`
-	CreatedAt int32 `json:"created_at,omitempty"`
+	CreatedAt int64 `json:"created_at,omitempty"`
 	CreatedBy string `json:"created_by,omitempty"`
 	Desc string `json:"desc,omitempty"`
 	ErrorValue float64 `json:"error_value,omitempty"`
@@ -26,9 +26,9 @@ type MoiraTrigger struct {
 	Tags []string `json:"tags,omitempty"`
 	Targets []string `json:"targets,omitempty"`
 	TriggerType string `json:"trigger_type,omitempty"`
-	Ttl int32 `json:"ttl,omitempty"`
+	Ttl int64 `json:"ttl,omitempty"`
 	TtlState string `json:"ttl_state,omitempty"`
-	UpdatedAt int32 `json:"updated_at,omitempty"`
+	UpdatedAt int64 `json:"updated_at,omitempty"`
 	UpdatedBy string `json:"updated_by,omitempty"`
 	WarnValue float64 `json:"warn_value,omitempty"`
 }

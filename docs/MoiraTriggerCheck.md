@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AloneMetrics** | **map[string]bool** |  | [optional] [default to null]
-**CreatedAt** | **int32** |  | [optional] [default to null]
+**CreatedAt** | **int64** |  | [optional] [default to null]
 **CreatedBy** | **string** |  | [optional] [default to null]
 **Desc** | **string** |  | [optional] [default to null]
 **ErrorValue** | **float64** |  | [optional] [default to null]
@@ -20,11 +20,11 @@ Name | Type | Description | Notes
 **Sched** | [***MoiraScheduleData**](moira.ScheduleData.md) |  | [optional] [default to null]
 **Tags** | **[]string** |  | [optional] [default to null]
 **Targets** | **[]string** |  | [optional] [default to null]
-**Throttling** | **int32** |  | [optional] [default to null]
+**Throttling** | **int64** |  | [optional] [default to null]
 **TriggerType** | **string** |  | [optional] [default to null]
-**Ttl** | **int32** |  | [optional] [default to null]
+**Ttl** | **int64** |  | [optional] [default to null]
 **TtlState** | **string** |  | [optional] [default to null]
-**UpdatedAt** | **int32** |  | [optional] [default to null]
+**UpdatedAt** | **int64** |  | [optional] [default to null]
 **UpdatedBy** | **string** |  | [optional] [default to null]
 **WarnValue** | **float64** |  | [optional] [default to null]
 

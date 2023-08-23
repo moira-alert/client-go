@@ -1,7 +1,7 @@
 /*
  * Moira Alert
  *
- * This is an API description for [Moira Alert API](https://moira.readthedocs.io/en/latest/overview.html) Check us out on [Github](https://github.com/moira-alert) or look up our [guide on getting started with Moira](https://moira.readthedocs.io)
+ * This is an API description for [Moira Alert API](https://moira.readthedocs.io/en/latest/overview.html) Check us out on [Github](https://github.com/moira-alert) or look up our [guide](https://moira.readthedocs.io) on getting started with Moira
  *
  * API version: master
  * Contact: opensource@skbkontur.com
@@ -13,6 +13,6 @@ type DtoContactEventItem struct {
 	Metric string `json:"metric,omitempty"`
 	OldState string `json:"old_state,omitempty"`
 	State string `json:"state,omitempty"`
-	Timestamp int32 `json:"timestamp,omitempty"`
+	Timestamp int64 `json:"timestamp,omitempty"`
 	TriggerId string `json:"trigger_id,omitempty"`
 }

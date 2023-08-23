@@ -1,7 +1,7 @@
 /*
  * Moira Alert
  *
- * This is an API description for [Moira Alert API](https://moira.readthedocs.io/en/latest/overview.html) Check us out on [Github](https://github.com/moira-alert) or look up our [guide on getting started with Moira](https://moira.readthedocs.io)
+ * This is an API description for [Moira Alert API](https://moira.readthedocs.io/en/latest/overview.html) Check us out on [Github](https://github.com/moira-alert) or look up our [guide](https://moira.readthedocs.io) on getting started with Moira
  *
  * API version: master
  * Contact: opensource@skbkontur.com
@@ -15,6 +15,6 @@ type MoiraScheduledNotification struct {
 	Plotting *MoiraPlottingData `json:"plotting,omitempty"`
 	SendFail int32 `json:"send_fail,omitempty"`
 	Throttled bool `json:"throttled,omitempty"`
-	Timestamp int32 `json:"timestamp,omitempty"`
+	Timestamp int64 `json:"timestamp,omitempty"`
 	Trigger *MoiraTriggerData `json:"trigger,omitempty"`
 }

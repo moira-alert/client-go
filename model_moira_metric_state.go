@@ -1,7 +1,7 @@
 /*
  * Moira Alert
  *
- * This is an API description for [Moira Alert API](https://moira.readthedocs.io/en/latest/overview.html) Check us out on [Github](https://github.com/moira-alert) or look up our [guide on getting started with Moira](https://moira.readthedocs.io)
+ * This is an API description for [Moira Alert API](https://moira.readthedocs.io/en/latest/overview.html) Check us out on [Github](https://github.com/moira-alert) or look up our [guide](https://moira.readthedocs.io) on getting started with Moira
  *
  * API version: master
  * Contact: opensource@skbkontur.com
@@ -10,13 +10,13 @@
 package swagger
 
 type MoiraMetricState struct {
-	EventTimestamp int32 `json:"event_timestamp,omitempty"`
-	Maintenance int32 `json:"maintenance,omitempty"`
+	EventTimestamp int64 `json:"event_timestamp,omitempty"`
+	Maintenance int64 `json:"maintenance,omitempty"`
 	MaintenanceInfo *MoiraMaintenanceInfo `json:"maintenance_info,omitempty"`
 	State string `json:"state,omitempty"`
 	Suppressed bool `json:"suppressed,omitempty"`
 	SuppressedState string `json:"suppressed_state,omitempty"`
-	Timestamp int32 `json:"timestamp,omitempty"`
+	Timestamp int64 `json:"timestamp,omitempty"`
 	Value float64 `json:"value,omitempty"`
 	Values map[string]float64 `json:"values,omitempty"`
 }

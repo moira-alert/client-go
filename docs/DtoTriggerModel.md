@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **Tags** | **[]string** | Set of tags to manipulate subscriptions | [optional] [default to null]
 **Targets** | **[]string** | Graphite-like targets: t1, t2, ... | [optional] [default to null]
 **TriggerType** | **string** | Could be: rising, falling, expression | [optional] [default to null]
-**Ttl** | **int32** | When there are no metrics for trigger, Moira will switch metric to TTLState state after TTL seconds | [optional] [default to null]
+**Ttl** | **int64** | When there are no metrics for trigger, Moira will switch metric to TTLState state after TTL seconds | [optional] [default to null]
 **TtlState** | **string** | When there are no metrics for trigger, Moira will switch metric to TTLState state after TTL seconds | [optional] [default to null]
 **UpdatedAt** | **string** | Datetime  when the trigger was updated | [optional] [default to null]
 **UpdatedBy** | **string** | Username who updated trigger | [optional] [default to null]

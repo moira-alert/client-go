@@ -1,7 +1,7 @@
 /*
  * Moira Alert
  *
- * This is an API description for [Moira Alert API](https://moira.readthedocs.io/en/latest/overview.html) Check us out on [Github](https://github.com/moira-alert) or look up our [guide on getting started with Moira](https://moira.readthedocs.io)
+ * This is an API description for [Moira Alert API](https://moira.readthedocs.io/en/latest/overview.html) Check us out on [Github](https://github.com/moira-alert) or look up our [guide](https://moira.readthedocs.io) on getting started with Moira
  *
  * API version: master
  * Contact: opensource@skbkontur.com
@@ -10,7 +10,7 @@
 package swagger
 
 type MoiraMetricValue struct {
-	Step int32 `json:"step,omitempty"`
-	Ts int32 `json:"ts,omitempty"`
+	Step int64 `json:"step,omitempty"`
+	Ts int64 `json:"ts,omitempty"`
 	Value float64 `json:"value,omitempty"`
 }

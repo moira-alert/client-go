@@ -3,9 +3,9 @@ info:
   title: Moira Alert
   description: |-
     This is an API description for [Moira Alert API](https://moira.readthedocs.io/en/latest/overview.html)
-    Check us out on [Github](https://github.com/moira-alert) or look up our [guide on getting started with Moira](https://moira.readthedocs.io)
+    Check us out on [Github](https://github.com/moira-alert) or look up our [guide](https://moira.readthedocs.io) on getting started with Moira
   contact:
-    name: Contact Moira Team
+    name: Moira Team
     email: opensource@skbkontur.com
   license:
     name: MIT
@@ -383,6 +383,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /event/all:
+    delete:
+      tags:
+      - event
+      summary: Deletes all notification events
+      operationId: delete-all-events
+      responses:
+        "200":
+          description: Events removed successfully
+          content: {}
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
   /event/{triggerID}:
     get:
       tags:
@@ -443,22 +459,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/api.ErrorRenderExample'
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/api.ErrorInternalServerExample'
-  /event/all:
-    delete:
-      tags:
-      - event
-      summary: Deletes all notification events
-      operationId: delete-all-events
-      responses:
-        "200":
-          description: Events removed successfully
-          content: {}
         "500":
           description: Internal server error
           content:
@@ -862,6 +862,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /tag/stats:
+    get:
+      tags:
+      - tag
+      summary: Get all tags and their subscriptions
+      operationId: get-all-tags-and-subscriptions
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TagsStatistics'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
   /tag/{tag}:
     delete:
       tags:
@@ -891,31 +916,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
-        "422":
-          description: Render error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/api.ErrorRenderExample'
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/api.ErrorInternalServerExample'
-  /tag/stats:
-    get:
-      tags:
-      - tag
-      summary: Get all tags and their subscriptions
-      operationId: get-all-tags-and-subscriptions
-      responses:
-        "200":
-          description: Successful
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/dto.TagsStatistics'
         "422":
           description: Render error
           content:
@@ -1626,6 +1626,174 @@ paths:
               schema:
                 $ref: '#/components/schemas/api.ErrorRemoteServerUnavailableExample'
       x-codegen-request-body-name: trigger
+  /trigger/check:
+    put:
+      tags:
+      - trigger
+      summary: Validates trigger target
+      operationId: trigger-check
+      requestBody:
+        description: Trigger data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dto.Trigger'
+        required: true
+      responses:
+        "200":
+          description: "Validation is done, see response body for validation result"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TriggerCheckResponse'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+      x-codegen-request-body-name: trigger
+  /trigger/pagers/{pagerID}:
+    delete:
+      tags:
+      - trigger
+      summary: Delete triggers pager
+      parameters:
+      - name: pagerID
+        in: path
+        description: Pager ID to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Successfully deleted pager
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TriggersSearchResultDeleteResponse'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /trigger/search:
+    get:
+      tags:
+      - trigger
+      summary: Search triggers. Replaces the deprecated `page` path
+      description: |-
+        You can also add filtering by tags, for this purpose add query parameters tags[0]=test, tags[1]=test1 and so on
+        For example, `/api/trigger/search?tags[0]=test&tags[1]=test1`
+      operationId: search-triggers
+      parameters:
+      - name: onlyProblems
+        in: query
+        description: Only include problems
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          default: false
+      - name: text
+        in: query
+        description: Search text
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: cpu
+      - name: p
+        in: query
+        description: Page number
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: Page size
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 10
+      - name: createPager
+        in: query
+        description: Create pager
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          default: false
+      - name: pagerID
+        in: query
+        description: Pager ID
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Successfully fetched matching triggers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TriggersList'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
   /trigger/{triggerID}:
     get:
       tags:
@@ -2205,174 +2373,6 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/api.ErrorInternalServerExample'
-  /trigger/check:
-    put:
-      tags:
-      - trigger
-      summary: Validates trigger target
-      operationId: trigger-check
-      requestBody:
-        description: Trigger data
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/dto.Trigger'
-        required: true
-      responses:
-        "200":
-          description: "Validation is done, see response body for validation result"
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/dto.TriggerCheckResponse'
-        "400":
-          description: Bad request from client
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/api.ErrorInternalServerExample'
-      x-codegen-request-body-name: trigger
-  /trigger/pagers/{pagerID}:
-    delete:
-      tags:
-      - trigger
-      summary: Delete triggers pager
-      parameters:
-      - name: pagerID
-        in: path
-        description: Pager ID to delete
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
-      responses:
-        "200":
-          description: Successfully deleted pager
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/dto.TriggersSearchResultDeleteResponse'
-        "404":
-          description: Resource not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/api.ErrorNotFoundExample'
-        "422":
-          description: Render error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/api.ErrorRenderExample'
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/api.ErrorInternalServerExample'
-  /trigger/search:
-    get:
-      tags:
-      - trigger
-      summary: Search triggers. Replaces the deprecated `page` path
-      description: |-
-        You can also add filtering by tags, for this purpose add query parameters tags[0]=test, tags[1]=test1 and so on
-        For example, `/api/trigger/search?tags[0]=test&tags[1]=test1`
-      operationId: search-triggers
-      parameters:
-      - name: onlyProblems
-        in: query
-        description: Only include problems
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
-          default: false
-      - name: text
-        in: query
-        description: Search text
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          default: cpu
-      - name: p
-        in: query
-        description: Page number
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-          default: 0
-      - name: size
-        in: query
-        description: Page size
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-          default: 10
-      - name: createPager
-        in: query
-        description: Create pager
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
-          default: false
-      - name: pagerID
-        in: query
-        description: Pager ID
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
-      responses:
-        "200":
-          description: Successfully fetched matching triggers
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/dto.TriggersList'
-        "400":
-          description: Bad request from client
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
-        "404":
-          description: Resource not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/api.ErrorNotFoundExample'
-        "422":
-          description: Render error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/api.ErrorRenderExample'
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/api.ErrorInternalServerExample'
   /user:
     get:
       tags:
@@ -2507,6 +2507,7 @@ components:
           type: string
         timestamp:
           type: integer
+          format: int64
         trigger_id:
           type: string
       example:
@@ -2562,12 +2563,15 @@ components:
             $ref: '#/components/schemas/moira.NotificationEvent'
         page:
           type: integer
+          format: int64
           example: 0
         size:
           type: integer
+          format: int64
           example: 100
         total:
           type: integer
+          format: int64
           example: 10
       example:
         total: 10
@@ -2625,6 +2629,7 @@ components:
       properties:
         result:
           type: integer
+          format: int64
           example: 0
       example:
         result: 0
@@ -2637,6 +2642,7 @@ components:
             $ref: '#/components/schemas/moira.ScheduledNotification'
         total:
           type: integer
+          format: int64
           example: 0
       example:
         total: 0
@@ -3479,6 +3485,7 @@ components:
       properties:
         throttling:
           type: integer
+          format: int64
           example: 0
       example:
         throttling: 0
@@ -3576,6 +3583,7 @@ components:
             type: string
         throttling:
           type: integer
+          format: int64
           example: 0
         trigger_type:
           type: string
@@ -3585,6 +3593,7 @@ components:
           type: integer
           description: "When there are no metrics for trigger, Moira will switch metric\
             \ to TTLState state after TTL seconds"
+          format: int64
           example: 600
         ttl_state:
           type: string
@@ -3633,12 +3642,15 @@ components:
       properties:
         event_timestamp:
           type: integer
+          format: int64
           example: 1590741878
         last_successful_check_timestamp:
           type: integer
+          format: int64
           example: 1590741916
         maintenance:
           type: integer
+          format: int64
           example: 0
         maintenance_info:
           $ref: '#/components/schemas/moira.MaintenanceInfo'
@@ -3661,6 +3673,7 @@ components:
           type: string
         score:
           type: integer
+          format: int64
           example: 100
         state:
           type: string
@@ -3672,6 +3685,7 @@ components:
           type: string
         timestamp:
           type: integer
+          format: int64
           example: 1590741916
         trigger_id:
           type: string
@@ -3849,6 +3863,7 @@ components:
             type: integer
         trigger:
           type: integer
+          format: int64
           example: 1594225165
     dto.TriggerMetrics:
       type: object
@@ -3940,6 +3955,7 @@ components:
           type: integer
           description: "When there are no metrics for trigger, Moira will switch metric\
             \ to TTLState state after TTL seconds"
+          format: int64
           example: 600
         ttl_state:
           type: string
@@ -3991,12 +4007,15 @@ components:
             $ref: '#/components/schemas/moira.TriggerCheck'
         page:
           type: integer
+          format: int64
         pager:
           type: string
         size:
           type: integer
+          format: int64
         total:
           type: integer
+          format: int64
       example:
         total: 2
         pager: pager
@@ -4288,12 +4307,15 @@ components:
       properties:
         event_timestamp:
           type: integer
+          format: int64
           example: 1590741878
         last_successful_check_timestamp:
           type: integer
+          format: int64
           example: 1590741916
         maintenance:
           type: integer
+          format: int64
           example: 0
         maintenance_info:
           $ref: '#/components/schemas/moira.MaintenanceInfo'
@@ -4316,6 +4338,7 @@ components:
           type: string
         score:
           type: integer
+          format: int64
           example: 100
         state:
           type: string
@@ -4327,6 +4350,7 @@ components:
           type: string
         timestamp:
           type: integer
+          format: int64
           example: 1590741916
       example:
         msg: msg
@@ -4386,6 +4410,7 @@ components:
       properties:
         interval:
           type: integer
+          format: int64
           example: 0
         maintenance:
           $ref: '#/components/schemas/moira.MaintenanceInfo'
@@ -4401,11 +4426,13 @@ components:
       properties:
         remove_time:
           type: integer
+          format: int64
           example: 0
         remove_user:
           type: string
         setup_time:
           type: integer
+          format: int64
           example: 0
         setup_user:
           type: string
@@ -4419,9 +4446,11 @@ components:
       properties:
         event_timestamp:
           type: integer
+          format: int64
           example: 1590741878
         maintenance:
           type: integer
+          format: int64
           example: 0
         maintenance_info:
           $ref: '#/components/schemas/moira.MaintenanceInfo'
@@ -4435,6 +4464,7 @@ components:
           type: string
         timestamp:
           type: integer
+          format: int64
           example: 1590741878
         value:
           type: number
@@ -4459,8 +4489,10 @@ components:
       properties:
         step:
           type: integer
+          format: int64
         ts:
           type: integer
+          format: int64
         value:
           type: number
       example:
@@ -4489,6 +4521,7 @@ components:
           type: string
         timestamp:
           type: integer
+          format: int64
           example: 1590741878
         trigger_event:
           type: boolean
@@ -4544,12 +4577,15 @@ components:
             $ref: '#/components/schemas/moira.ScheduleDataDay'
         endOffset:
           type: integer
+          format: int64
           example: 1439
         startOffset:
           type: integer
+          format: int64
           example: 0
         tzOffset:
           type: integer
+          format: int64
           example: -60
       example:
         endOffset: 1439
@@ -4589,6 +4625,7 @@ components:
           example: false
         timestamp:
           type: integer
+          format: int64
           example: 1594471927
         trigger:
           $ref: '#/components/schemas/moira.TriggerData'
@@ -4718,6 +4755,7 @@ components:
             t1: true
         created_at:
           type: integer
+          format: int64
         created_by:
           type: string
         desc:
@@ -4769,12 +4807,14 @@ components:
           example: rising
         ttl:
           type: integer
+          format: int64
           example: 600
         ttl_state:
           type: string
           example: NODATA
         updated_at:
           type: integer
+          format: int64
         updated_by:
           type: string
         warn_value:
@@ -4826,6 +4866,7 @@ components:
             t1: true
         created_at:
           type: integer
+          format: int64
         created_by:
           type: string
         desc:
@@ -4880,18 +4921,21 @@ components:
             type: string
         throttling:
           type: integer
+          format: int64
           example: 0
         trigger_type:
           type: string
           example: rising
         ttl:
           type: integer
+          format: int64
           example: 600
         ttl_state:
           type: string
           example: NODATA
         updated_at:
           type: integer
+          format: int64
         updated_by:
           type: string
         warn_value:

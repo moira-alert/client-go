@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **OldState** | **string** |  | [optional] [default to null]
 **State** | **string** |  | [optional] [default to null]
 **SubId** | **string** |  | [optional] [default to null]
-**Timestamp** | **int32** |  | [optional] [default to null]
+**Timestamp** | **int64** |  | [optional] [default to null]
 **TriggerEvent** | **bool** |  | [optional] [default to null]
 **TriggerId** | **string** |  | [optional] [default to null]
 **Value** | **float64** |  | [optional] [default to null]

@@ -1,7 +1,7 @@
 /*
  * Moira Alert
  *
- * This is an API description for [Moira Alert API](https://moira.readthedocs.io/en/latest/overview.html) Check us out on [Github](https://github.com/moira-alert) or look up our [guide on getting started with Moira](https://moira.readthedocs.io)
+ * This is an API description for [Moira Alert API](https://moira.readthedocs.io/en/latest/overview.html) Check us out on [Github](https://github.com/moira-alert) or look up our [guide](https://moira.readthedocs.io) on getting started with Moira
  *
  * API version: master
  * Contact: opensource@skbkontur.com
@@ -38,11 +38,11 @@ type DtoTrigger struct {
 	Tags []string `json:"tags,omitempty"`
 	// Graphite-like targets: t1, t2, ...
 	Targets []string `json:"targets,omitempty"`
-	Throttling int32 `json:"throttling,omitempty"`
+	Throttling int64 `json:"throttling,omitempty"`
 	// Could be: rising, falling, expression
 	TriggerType string `json:"trigger_type,omitempty"`
 	// When there are no metrics for trigger, Moira will switch metric to TTLState state after TTL seconds
-	Ttl int32 `json:"ttl,omitempty"`
+	Ttl int64 `json:"ttl,omitempty"`
 	// When there are no metrics for trigger, Moira will switch metric to TTLState state after TTL seconds
 	TtlState string `json:"ttl_state,omitempty"`
 	// Datetime  when the trigger was updated

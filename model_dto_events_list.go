@@ -1,7 +1,7 @@
 /*
  * Moira Alert
  *
- * This is an API description for [Moira Alert API](https://moira.readthedocs.io/en/latest/overview.html) Check us out on [Github](https://github.com/moira-alert) or look up our [guide on getting started with Moira](https://moira.readthedocs.io)
+ * This is an API description for [Moira Alert API](https://moira.readthedocs.io/en/latest/overview.html) Check us out on [Github](https://github.com/moira-alert) or look up our [guide](https://moira.readthedocs.io) on getting started with Moira
  *
  * API version: master
  * Contact: opensource@skbkontur.com
@@ -11,7 +11,7 @@ package swagger
 
 type DtoEventsList struct {
 	List []MoiraNotificationEvent `json:"list,omitempty"`
-	Page int32 `json:"page,omitempty"`
-	Size int32 `json:"size,omitempty"`
-	Total int32 `json:"total,omitempty"`
+	Page int64 `json:"page,omitempty"`
+	Size int64 `json:"size,omitempty"`
+	Total int64 `json:"total,omitempty"`
 }
