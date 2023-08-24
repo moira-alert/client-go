@@ -1,0 +1,5058 @@
+openapi: 3.0.1
+info:
+  title: Moira Alert
+  description: |-
+    This is an API description for [Moira Alert API](https://moira.readthedocs.io/en/latest/overview.html)
+    Check us out on [Github](https://github.com/moira-alert) or look up our [guide](https://moira.readthedocs.io) on getting started with Moira
+  contact:
+    name: Moira Team
+    email: opensource@skbkontur.com
+  license:
+    name: MIT
+  version: master
+servers:
+- url: /api
+tags:
+- name: contact
+  description: "APIs for working with Moira contacts. For more details, see <https://moira.readthedocs.io/en/latest/installation/webhooks_scripts.html#contact/>"
+- name: config
+  description: "View Moira's runtime configuration. For more details, see <https://moira.readthedocs.io/en/latest/installation/configuration.html>"
+- name: event
+  description: APIs for interacting with notification events. See <https://moira.readthedocs.io/en/latest/user_guide/trigger_page.html#event-history/>
+    for details
+- name: health
+  description: interact with Moira states/health status. See <https://moira.readthedocs.io/en/latest/user_guide/selfstate.html#self-state-monitor/>
+    for details
+- name: notification
+  description: manage notifications that are currently in queue. See <https://moira.readthedocs.io/en/latest/user_guide/hidden_pages.html#notifications/>
+- name: pattern
+  description: APIs for interacting with graphite patterns in Moira. See <https://moira.readthedocs.io/en/latest/development/architecture.html#pattern/>
+- name: subscription
+  description: APIs for managing a user's subscription(s). See <https://moira.readthedocs.io/en/latest/development/architecture.html#subscription/>
+    to learn about Moira subscriptions
+- name: tag
+  description: APIs for managing tags (a grouping of tags and subscriptions). See
+    <https://moira.readthedocs.io/en/latest/user_guide/subscriptions.html#tags/>
+- name: trigger
+  description: APIs for interacting with Moira triggers. See <https://moira.readthedocs.io/en/latest/development/architecture.html#trigger/>
+    to learn about Triggers
+- name: team
+  description: APIs for interacting with Moira teams
+- name: teamSubscription
+  description: APIs for interacting with Moira subscriptions owned by certain team
+- name: teamContact
+  description: APIs for interacting with Moira contacts owned by certain team
+- name: user
+  description: APIs for interacting with Moira users
+paths:
+  /config:
+    get:
+      tags:
+      - config
+      summary: Get available configuration
+      operationId: get-web-config
+      responses:
+        "200":
+          description: Configuration fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/handler.ConfigurationResponse'
+  /contact:
+    get:
+      tags:
+      - contact
+      summary: Gets all Moira contacts
+      operationId: get-all-contacts
+      responses:
+        "200":
+          description: Contacts fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.ContactList'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+    put:
+      tags:
+      - contact
+      summary: Creates a new contact notification for the current user
+      operationId: create-new-contact
+      requestBody:
+        description: Contact data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dto.Contact'
+        required: true
+      responses:
+        "200":
+          description: Contact created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.Contact'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+      x-codegen-request-body-name: contact
+  /contact/{contactID}:
+    get:
+      tags:
+      - contact
+      summary: Get contact by ID
+      operationId: get-contact-by-id
+      parameters:
+      - name: contactID
+        in: path
+        description: Contact ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Successfully received contact
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.Contact'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+    put:
+      tags:
+      - contact
+      summary: Updates an existing notification contact to the values passed in the
+        request body
+      operationId: update-contact
+      parameters:
+      - name: contactID
+        in: path
+        description: ID of the contact to update
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      requestBody:
+        description: Updated contact data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dto.Contact'
+        required: true
+      responses:
+        "200":
+          description: Updated contact
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.Contact'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+      x-codegen-request-body-name: contact
+    delete:
+      tags:
+      - contact
+      summary: Deletes notification contact for the current user and remove the contact
+        ID from all subscriptions
+      operationId: remove-contact
+      parameters:
+      - name: contactID
+        in: path
+        description: ID of the contact to remove
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Contact has been deleted
+          content: {}
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /contact/{contactID}/events:
+    get:
+      tags:
+      - contact
+      summary: Get contact events by ID with time range
+      operationId: get-contact-events-by-id
+      parameters:
+      - name: contactID
+        in: path
+        description: Contact ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      - name: from
+        in: query
+        description: Start time of the time range
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: -3hour
+      - name: to
+        in: query
+        description: End time of the time range
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: now
+      responses:
+        "200":
+          description: Successfully received contact events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.ContactEventItemList'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /contact/{contactID}/test:
+    post:
+      tags:
+      - contact
+      summary: Push a test notification to verify that the contact is properly set
+        up
+      operationId: send-test-contact-notification
+      parameters:
+      - name: contactID
+        in: path
+        description: The ID of the target contact
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Test successful
+          content: {}
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /event/all:
+    delete:
+      tags:
+      - event
+      summary: Deletes all notification events
+      operationId: delete-all-events
+      responses:
+        "200":
+          description: Events removed successfully
+          content: {}
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /event/{triggerID}:
+    get:
+      tags:
+      - event
+      summary: Gets all trigger events for current page and their count
+      operationId: get-events-list
+      parameters:
+      - name: triggerID
+        in: path
+        description: The ID of updated trigger
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      - name: size
+        in: query
+        description: Number of items to be displayed on one page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 100
+      - name: p
+        in: query
+        description: "Defines the number of the displayed page. E.g, p=2 would display\
+          \ the 2nd page"
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      responses:
+        "200":
+          description: Events fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.EventsList'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /health/notifier:
+    get:
+      tags:
+      - health
+      summary: Get notifier state
+      operationId: get-notifier-state
+      responses:
+        "200":
+          description: Notifier state retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.NotifierState'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /notification:
+    get:
+      tags:
+      - notification
+      summary: "Gets a paginated list of notifications, all notifications are fetched\
+        \ if end = -1 and start = 0"
+      operationId: get-notifications
+      parameters:
+      - name: start
+        in: query
+        description: "Default Value: 0"
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: end
+        in: query
+        description: "Default Value: -1"
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: -1
+      responses:
+        "200":
+          description: Notifications fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.NotificationsList'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+    delete:
+      tags:
+      - notification
+      summary: Delete a notification by id
+      operationId: delete-notification
+      parameters:
+      - name: id
+        in: query
+        description: The ID of deleted notification
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Notification have been deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.NotificationDeleteResponse'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /pattern:
+    get:
+      tags:
+      - pattern
+      summary: Get all patterns
+      operationId: get-all-patterns
+      responses:
+        "200":
+          description: Patterns fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.PatternList'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /pattern/{pattern}:
+    delete:
+      tags:
+      - pattern
+      summary: Deletes a Moira pattern
+      operationId: delete-pattern
+      parameters:
+      - name: pattern
+        in: path
+        description: Trigger pattern to operate on
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: DevOps.my_server.hdd.freespace_mbytes
+      responses:
+        "200":
+          description: Pattern deleted successfully
+          content: {}
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /subscription:
+    get:
+      tags:
+      - subscription
+      summary: Get all subscriptions
+      operationId: get-user-subscriptions
+      responses:
+        "200":
+          description: Subscriptions fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.SubscriptionList'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+    put:
+      tags:
+      - subscription
+      summary: Create a new subscription
+      operationId: create-subscription
+      requestBody:
+        description: Subscription data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dto.Subscription'
+        required: true
+      responses:
+        "200":
+          description: Subscription created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.Subscription'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+      x-codegen-request-body-name: subscription
+  /subscription/{subscriptionID}:
+    put:
+      tags:
+      - subscription
+      summary: Update a subscription
+      operationId: update-subscription
+      parameters:
+      - name: subscriptionID
+        in: path
+        description: ID of the subscription to update
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      requestBody:
+        description: Updated subscription data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dto.Subscription'
+        required: true
+      responses:
+        "200":
+          description: Subscription updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.Subscription'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+      x-codegen-request-body-name: subscription
+    delete:
+      tags:
+      - subscription
+      summary: Delete a subscription
+      operationId: remove-subscription
+      parameters:
+      - name: subscriptionID
+        in: path
+        description: ID of the subscription to remove
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Subscription deleted
+          content: {}
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /subscription/{subscriptionID}/test:
+    put:
+      tags:
+      - subscription
+      summary: Send a test notification for a subscription
+      operationId: send-test-notification
+      parameters:
+      - name: subscriptionID
+        in: path
+        description: ID of the subscription to send the test notification
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Test notification sent successfully
+          content: {}
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /tag:
+    get:
+      tags:
+      - tag
+      summary: Get all tags
+      operationId: get-all-tags
+      responses:
+        "200":
+          description: Tags fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TagsData'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /tag/stats:
+    get:
+      tags:
+      - tag
+      summary: Get all tags and their subscriptions
+      operationId: get-all-tags-and-subscriptions
+      responses:
+        "200":
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TagsStatistics'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /tag/{tag}:
+    delete:
+      tags:
+      - tag
+      summary: Remove a tag
+      operationId: remove-tag
+      parameters:
+      - name: tag
+        in: path
+        description: Name of the tag to remove
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: cpu
+      responses:
+        "200":
+          description: Tag removed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.MessageResponse'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /teams:
+    get:
+      tags:
+      - team
+      summary: Get all teams
+      operationId: get-all-teams
+      responses:
+        "200":
+          description: Teams fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.UserTeams'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+    post:
+      tags:
+      - team
+      summary: Create a new team
+      operationId: create-team
+      requestBody:
+        description: Team data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dto.TeamModel'
+        required: true
+      responses:
+        "200":
+          description: Team created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.SaveTeamResponse'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+      x-codegen-request-body-name: team
+  /teams/{teamID}:
+    get:
+      tags:
+      - team
+      summary: Get a team by ID
+      operationId: get-team
+      parameters:
+      - name: teamID
+        in: path
+        description: ID of the team
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Team updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TeamModel'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+    delete:
+      tags:
+      - team
+      summary: Delete a team
+      operationId: delete-team
+      parameters:
+      - name: teamID
+        in: path
+        description: ID of the team
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Team has been successfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.SaveTeamResponse'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+    patch:
+      tags:
+      - team
+      summary: Update existing team
+      operationId: update-team
+      parameters:
+      - name: teamID
+        in: path
+        description: ID of the team
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      requestBody:
+        description: Updated team data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dto.TeamModel'
+        required: true
+      responses:
+        "200":
+          description: Team updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.SaveTeamResponse'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+      x-codegen-request-body-name: team
+  /teams/{teamID}/contacts:
+    post:
+      tags:
+      - teamContact
+      summary: Create a new team contact
+      operationId: create-new-team-contact
+      parameters:
+      - name: teamID
+        in: path
+        description: The ID of team
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      requestBody:
+        description: Team contact data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dto.Contact'
+        required: true
+      responses:
+        "200":
+          description: Team contact created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.Contact'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+      x-codegen-request-body-name: contact
+  /teams/{teamID}/settings:
+    get:
+      tags:
+      - team
+      summary: Get team settings
+      operationId: get-team-settings
+      parameters:
+      - name: teamID
+        in: path
+        description: ID of the team
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Team settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TeamSettings'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /teams/{teamID}/subscriptions:
+    post:
+      tags:
+      - teamSubscription
+      summary: Create a new team subscription
+      operationId: create-new-team-subscription
+      parameters:
+      - name: teamID
+        in: path
+        description: The ID of team
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      requestBody:
+        description: Team subscription data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dto.Subscription'
+        required: true
+      responses:
+        "200":
+          description: Team subscription created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.Subscription'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+      x-codegen-request-body-name: subscription
+  /teams/{teamID}/users:
+    get:
+      tags:
+      - team
+      summary: Get users of a team
+      operationId: get-team-users
+      parameters:
+      - name: teamID
+        in: path
+        description: ID of the team
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Users fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TeamMembers'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+    put:
+      tags:
+      - team
+      summary: Set users of a team
+      operationId: set-team-users
+      parameters:
+      - name: teamID
+        in: path
+        description: ID of the team
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      requestBody:
+        description: Usernames to set as team members
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dto.TeamMembers'
+        required: true
+      responses:
+        "200":
+          description: Team updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TeamMembers'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+      x-codegen-request-body-name: usernames
+    post:
+      tags:
+      - team
+      summary: Add users to a team
+      operationId: add-team-users
+      parameters:
+      - name: teamID
+        in: path
+        description: ID of the team
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      requestBody:
+        description: Usernames to add to the team
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dto.TeamMembers'
+        required: true
+      responses:
+        "200":
+          description: Team updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TeamMembers'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+      x-codegen-request-body-name: usernames
+  /teams/{teamID}/users/{teamUserID}:
+    delete:
+      tags:
+      - team
+      summary: Delete a user from a team
+      operationId: delete-team-user
+      parameters:
+      - name: teamID
+        in: path
+        description: ID of the team
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      - name: teamUserID
+        in: path
+        description: User login in methods related to teams manipulation
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: anonymous
+      responses:
+        "200":
+          description: Team updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TeamMembers'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorForbiddenExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /trigger:
+    get:
+      tags:
+      - trigger
+      summary: Get all triggers
+      operationId: get-all-triggers
+      responses:
+        "200":
+          description: Fetched all triggers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TriggersList'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+    put:
+      tags:
+      - trigger
+      summary: Create a new trigger
+      operationId: create-trigger
+      parameters:
+      - name: validate
+        in: query
+        description: For validating targets
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      requestBody:
+        description: Trigger data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dto.Trigger'
+        required: true
+      responses:
+        "200":
+          description: Trigger created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.SaveTriggerResponse'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+        "503":
+          description: Remote server unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRemoteServerUnavailableExample'
+      x-codegen-request-body-name: trigger
+  /trigger/check:
+    put:
+      tags:
+      - trigger
+      summary: Validates trigger target
+      operationId: trigger-check
+      requestBody:
+        description: Trigger data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dto.Trigger'
+        required: true
+      responses:
+        "200":
+          description: "Validation is done, see response body for validation result"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TriggerCheckResponse'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+      x-codegen-request-body-name: trigger
+  /trigger/pagers/{pagerID}:
+    delete:
+      tags:
+      - trigger
+      summary: Delete triggers pager
+      parameters:
+      - name: pagerID
+        in: path
+        description: Pager ID to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Successfully deleted pager
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TriggersSearchResultDeleteResponse'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /trigger/search:
+    get:
+      tags:
+      - trigger
+      summary: Search triggers. Replaces the deprecated `page` path
+      description: |-
+        You can also add filtering by tags, for this purpose add query parameters tags[0]=test, tags[1]=test1 and so on
+        For example, `/api/trigger/search?tags[0]=test&tags[1]=test1`
+      operationId: search-triggers
+      parameters:
+      - name: onlyProblems
+        in: query
+        description: Only include problems
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          default: false
+      - name: text
+        in: query
+        description: Search text
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: cpu
+      - name: p
+        in: query
+        description: Page number
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: Page size
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 10
+      - name: createPager
+        in: query
+        description: Create pager
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          default: false
+      - name: pagerID
+        in: query
+        description: Pager ID
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Successfully fetched matching triggers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TriggersList'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /trigger/{triggerID}:
+    get:
+      tags:
+      - trigger
+      summary: Get an existing trigger
+      operationId: get-trigger
+      parameters:
+      - name: triggerID
+        in: path
+        description: Trigger ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      - name: populated
+        in: query
+        description: Populated
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          default: false
+      responses:
+        "200":
+          description: Trigger data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.Trigger'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+    put:
+      tags:
+      - trigger
+      summary: Update existing trigger
+      operationId: update-trigger
+      parameters:
+      - name: triggerID
+        in: path
+        description: Trigger ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      - name: validate
+        in: query
+        description: For validating targets
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      requestBody:
+        description: Trigger data
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/dto.Trigger'
+        required: true
+      responses:
+        "200":
+          description: Updated trigger
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.SaveTriggerResponse'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+        "503":
+          description: Remote server unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRemoteServerUnavailableExample'
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+      - trigger
+      summary: Remove trigger
+      operationId: remove-trigger
+      parameters:
+      - name: triggerID
+        in: path
+        description: Trigger ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Successfully removed
+          content: {}
+        "404":
+          description: Resource not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "500":
+          description: Internal server error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /trigger/{triggerID}/dump:
+    get:
+      tags:
+      - trigger
+      summary: Get trigger dump
+      operationId: get-trigger-dump
+      parameters:
+      - name: triggerID
+        in: path
+        description: Trigger ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Trigger dump
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TriggerDump'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /trigger/{triggerID}/metrics:
+    get:
+      tags:
+      - trigger
+      summary: Get metrics associated with certain trigger
+      operationId: get-trigger-metrics
+      parameters:
+      - name: triggerID
+        in: path
+        description: Trigger ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      - name: from
+        in: query
+        description: Start time for metrics retrieval
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: -10minutes
+      - name: to
+        in: query
+        description: End time for metrics retrieval
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: now
+      responses:
+        "200":
+          description: Trigger metrics retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TriggerMetrics'
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+    delete:
+      tags:
+      - trigger
+      summary: Delete metric from last check and all trigger pattern metrics
+      operationId: delete-trigger-metric
+      parameters:
+      - name: triggerID
+        in: path
+        description: Trigger ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      - name: name
+        in: query
+        description: Name of the target metric
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: DevOps.my_server.hdd.freespace_mbytes
+      responses:
+        "200":
+          description: Trigger metric deleted successfully
+          content: {}
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /trigger/{triggerID}/metrics/nodata:
+    delete:
+      tags:
+      - trigger
+      summary: Delete all metrics from last data which are in NODATA state. It also
+        deletes all trigger patterns of those metrics
+      operationId: delete-trigger-nodata-metrics
+      parameters:
+      - name: triggerID
+        in: path
+        description: Trigger ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Trigger nodata metrics deleted successfully
+          content: {}
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /trigger/{triggerID}/render:
+    get:
+      tags:
+      - trigger
+      summary: Render trigger metrics plot
+      operationId: render-trigger-metrics
+      parameters:
+      - name: triggerID
+        in: path
+        description: Trigger ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      - name: target
+        in: query
+        description: Target metric name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: t1
+      - name: from
+        in: query
+        description: Start time for metrics retrieval
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: -1hour
+      - name: to
+        in: query
+        description: End time for metrics retrieval
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: now
+      - name: timezone
+        in: query
+        description: Timezone for rendering
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: UTC
+      - name: theme
+        in: query
+        description: Plot theme
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          default: light
+      - name: realtime
+        in: query
+        description: Fetch real-time data
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          default: false
+      responses:
+        "200":
+          description: Rendered plot image successfully
+          content: {}
+        "400":
+          description: Bad request from client
+          content:
+            image/png:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "404":
+          description: Resource not found
+          content:
+            image/png:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "500":
+          description: Internal server error
+          content:
+            image/png:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /trigger/{triggerID}/setMaintenance:
+    put:
+      tags:
+      - trigger
+      summary: Set metrics and the trigger itself to maintenance mode
+      operationId: set-trigger-maintenance
+      parameters:
+      - name: triggerID
+        in: path
+        description: Trigger ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      requestBody:
+        description: Maintenance data
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/dto.TriggerMaintenance'
+        required: true
+      responses:
+        "200":
+          description: Trigger or metric have been scheduled for maintenance
+          content: {}
+        "400":
+          description: Bad request from client
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInvalidRequestExample'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+      x-codegen-request-body-name: body
+  /trigger/{triggerID}/state:
+    get:
+      tags:
+      - trigger
+      summary: Get the trigger state as at last check
+      operationId: get-trigger-state
+      parameters:
+      - name: triggerID
+        in: path
+        description: Trigger ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Trigger state fetched successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.TriggerCheck'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /trigger/{triggerID}/throttling:
+    get:
+      tags:
+      - trigger
+      summary: Get a trigger with its throttling i.e its next allowed message time
+      operationId: get-trigger-throttling
+      parameters:
+      - name: triggerID
+        in: path
+        description: Trigger ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Trigger throttle info retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.ThrottlingResponse'
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+    delete:
+      tags:
+      - trigger
+      summary: Deletes throttling for a trigger
+      operationId: delete-trigger-throttling
+      parameters:
+      - name: triggerID
+        in: path
+        description: Trigger ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          default: bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+      responses:
+        "200":
+          description: Trigger throttling has been deleted
+          content: {}
+        "404":
+          description: Resource not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/api.ErrorNotFoundExample'
+        "500":
+          description: Internal server error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+  /user:
+    get:
+      tags:
+      - user
+      summary: Gets the username of the authenticated user if it is available
+      operationId: get-user-name
+      responses:
+        "200":
+          description: User name fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.User'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+  /user/settings:
+    get:
+      tags:
+      - user
+      summary: Get the user's contacts and subscriptions
+      operationId: get-user-settings
+      responses:
+        "200":
+          description: Settings fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dto.UserSettings'
+        "422":
+          description: Render error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorRenderExample'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ErrorInternalServerExample'
+components:
+  schemas:
+    api.ErrorForbiddenExample:
+      type: object
+      properties:
+        error:
+          type: string
+          example: you cannot access this resource
+        status:
+          type: string
+          example: Forbidden
+    api.ErrorInternalServerExample:
+      type: object
+      properties:
+        error:
+          type: string
+          example: server error during request handling
+        status:
+          type: string
+          example: Internal Server Error
+    api.ErrorInvalidRequestExample:
+      type: object
+      properties:
+        error:
+          type: string
+          example: resource with the ID does not exist
+        status:
+          type: string
+          example: Invalid request
+    api.ErrorNotFoundExample:
+      type: object
+      properties:
+        error:
+          type: string
+          example: resource with ID '66741a8c-c2ba-4357-a2c9-ee78e0e7' does not exist
+        status:
+          type: string
+          example: Resource not found
+    api.ErrorRemoteServerUnavailableExample:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Remote server error, please contact administrator"
+        status:
+          type: string
+          example: Remote server unavailable
+    api.ErrorRenderExample:
+      type: object
+      properties:
+        error:
+          type: string
+          example: rendering error
+        status:
+          type: string
+          example: Error rendering response
+    dto.Contact:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1dd38765-c5be-418d-81fa-7a5f879c2315
+        team_id:
+          type: string
+        type:
+          type: string
+          example: mail
+        user:
+          type: string
+          example: ""
+        value:
+          type: string
+          example: devops@example.com
+      example:
+        id: 1dd38765-c5be-418d-81fa-7a5f879c2315
+        team_id: team_id
+        type: mail
+        user: ""
+        value: devops@example.com
+    dto.ContactEventItem:
+      type: object
+      properties:
+        metric:
+          type: string
+        old_state:
+          type: string
+        state:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
+        trigger_id:
+          type: string
+      example:
+        metric: metric
+        trigger_id: trigger_id
+        old_state: old_state
+        state: state
+        timestamp: 0
+    dto.ContactEventItemList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/dto.ContactEventItem'
+      example:
+        list:
+        - metric: metric
+          trigger_id: trigger_id
+          old_state: old_state
+          state: state
+          timestamp: 0
+        - metric: metric
+          trigger_id: trigger_id
+          old_state: old_state
+          state: state
+          timestamp: 0
+    dto.ContactList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/moira.ContactData'
+      example:
+        list:
+        - id: 1dd38765-c5be-418d-81fa-7a5f879c2315
+          team: team
+          type: mail
+          user: ""
+          value: devops@example.com
+        - id: 1dd38765-c5be-418d-81fa-7a5f879c2315
+          team: team
+          type: mail
+          user: ""
+          value: devops@example.com
+    dto.EventsList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/moira.NotificationEvent'
+        page:
+          type: integer
+          format: int64
+          example: 0
+        size:
+          type: integer
+          format: int64
+          example: 100
+        total:
+          type: integer
+          format: int64
+          example: 10
+      example:
+        total: 10
+        size: 100
+        page: 0
+        list:
+        - msg: msg
+          metric: carbon.agents.*.metricsReceived
+          sub_id: sub_id
+          trigger_id: 5ff37996-8927-4cab-8987-970e80d8e0a8
+          values:
+            key: 0.8008281904610115
+          old_state: ERROR
+          event_message:
+            interval: 0
+            maintenance:
+              setup_time: 0
+              setup_user: setup_user
+              remove_user: remove_user
+              remove_time: 0
+          state: OK
+          contact_id: contact_id
+          value: 70.0
+          trigger_event: true
+          timestamp: 1590741878
+        - msg: msg
+          metric: carbon.agents.*.metricsReceived
+          sub_id: sub_id
+          trigger_id: 5ff37996-8927-4cab-8987-970e80d8e0a8
+          values:
+            key: 0.8008281904610115
+          old_state: ERROR
+          event_message:
+            interval: 0
+            maintenance:
+              setup_time: 0
+              setup_user: setup_user
+              remove_user: remove_user
+              remove_time: 0
+          state: OK
+          contact_id: contact_id
+          value: 70.0
+          trigger_event: true
+          timestamp: 1590741878
+    dto.MessageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: tag deleted
+      example:
+        message: tag deleted
+    dto.NotificationDeleteResponse:
+      type: object
+      properties:
+        result:
+          type: integer
+          format: int64
+          example: 0
+      example:
+        result: 0
+    dto.NotificationsList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/moira.ScheduledNotification'
+        total:
+          type: integer
+          format: int64
+          example: 0
+      example:
+        total: 0
+        list:
+        - send_fail: 0
+          contact:
+            id: 1dd38765-c5be-418d-81fa-7a5f879c2315
+            team: team
+            type: mail
+            user: ""
+            value: devops@example.com
+          plotting:
+            theme: dark
+            enabled: true
+          trigger:
+            error_value: 1000.0
+            warn_value: 5000.0
+            is_remote: false
+            name: Not enough disk space left
+            id: 292516ed-4924-4154-a62c-ebe312431fce
+            __notifier_trigger_tags:
+            - server
+            - disk
+            targets:
+            - devOps.my_server.hdd.freespace_mbytes
+            desc: check the size of /var/log
+          event:
+            msg: msg
+            metric: carbon.agents.*.metricsReceived
+            sub_id: sub_id
+            trigger_id: 5ff37996-8927-4cab-8987-970e80d8e0a8
+            values:
+              key: 0.8008281904610115
+            old_state: ERROR
+            event_message:
+              interval: 0
+              maintenance:
+                setup_time: 0
+                setup_user: setup_user
+                remove_user: remove_user
+                remove_time: 0
+            state: OK
+            contact_id: contact_id
+            value: 70.0
+            trigger_event: true
+            timestamp: 1590741878
+          throttled: false
+          timestamp: 1594471927
+        - send_fail: 0
+          contact:
+            id: 1dd38765-c5be-418d-81fa-7a5f879c2315
+            team: team
+            type: mail
+            user: ""
+            value: devops@example.com
+          plotting:
+            theme: dark
+            enabled: true
+          trigger:
+            error_value: 1000.0
+            warn_value: 5000.0
+            is_remote: false
+            name: Not enough disk space left
+            id: 292516ed-4924-4154-a62c-ebe312431fce
+            __notifier_trigger_tags:
+            - server
+            - disk
+            targets:
+            - devOps.my_server.hdd.freespace_mbytes
+            desc: check the size of /var/log
+          event:
+            msg: msg
+            metric: carbon.agents.*.metricsReceived
+            sub_id: sub_id
+            trigger_id: 5ff37996-8927-4cab-8987-970e80d8e0a8
+            values:
+              key: 0.8008281904610115
+            old_state: ERROR
+            event_message:
+              interval: 0
+              maintenance:
+                setup_time: 0
+                setup_user: setup_user
+                remove_user: remove_user
+                remove_time: 0
+            state: OK
+            contact_id: contact_id
+            value: 70.0
+            trigger_event: true
+            timestamp: 1590741878
+          throttled: false
+          timestamp: 1594471927
+    dto.NotifierState:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Moira has been turned off for maintenance
+        state:
+          type: string
+          example: ERROR
+      example:
+        state: ERROR
+        message: Moira has been turned off for maintenance
+    dto.PatternData:
+      type: object
+      properties:
+        metrics:
+          type: array
+          example:
+          - DevOps.my_server.hdd.freespace_mbytes
+          - ' DevOps.my_server.hdd.freespace_mbytes'
+          - ' DevOps.my_server.db.*'
+          items:
+            type: string
+        pattern:
+          type: string
+          example: Devops.my_server.*
+        triggers:
+          type: array
+          items:
+            $ref: '#/components/schemas/dto.TriggerModel'
+      example:
+        pattern: Devops.my_server.*
+        metrics:
+        - DevOps.my_server.hdd.freespace_mbytes
+        - ' DevOps.my_server.hdd.freespace_mbytes'
+        - ' DevOps.my_server.db.*'
+        triggers:
+        - error_value: 1000.0
+          expression: ""
+          patterns:
+          - ""
+          trigger_type: rising
+          alone_metrics:
+            t1: true
+          is_remote: false
+          mute_new_metrics: false
+          created_at: created_at
+          ttl_state: NODATA
+          created_by: created_by
+          targets:
+          - devOps.my_server.hdd.freespace_mbytes
+          ttl: 600
+          tags:
+          - server
+          - disk
+          sched: ""
+          updated_at: updated_at
+          warn_value: 500.0
+          name: Not enough disk space left
+          updated_by: updated_by
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          desc: check the size of /var/log
+        - error_value: 1000.0
+          expression: ""
+          patterns:
+          - ""
+          trigger_type: rising
+          alone_metrics:
+            t1: true
+          is_remote: false
+          mute_new_metrics: false
+          created_at: created_at
+          ttl_state: NODATA
+          created_by: created_by
+          targets:
+          - devOps.my_server.hdd.freespace_mbytes
+          ttl: 600
+          tags:
+          - server
+          - disk
+          sched: ""
+          updated_at: updated_at
+          warn_value: 500.0
+          name: Not enough disk space left
+          updated_by: updated_by
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          desc: check the size of /var/log
+    dto.PatternList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/dto.PatternData'
+      example:
+        list:
+        - pattern: Devops.my_server.*
+          metrics:
+          - DevOps.my_server.hdd.freespace_mbytes
+          - ' DevOps.my_server.hdd.freespace_mbytes'
+          - ' DevOps.my_server.db.*'
+          triggers:
+          - error_value: 1000.0
+            expression: ""
+            patterns:
+            - ""
+            trigger_type: rising
+            alone_metrics:
+              t1: true
+            is_remote: false
+            mute_new_metrics: false
+            created_at: created_at
+            ttl_state: NODATA
+            created_by: created_by
+            targets:
+            - devOps.my_server.hdd.freespace_mbytes
+            ttl: 600
+            tags:
+            - server
+            - disk
+            sched: ""
+            updated_at: updated_at
+            warn_value: 500.0
+            name: Not enough disk space left
+            updated_by: updated_by
+            id: 292516ed-4924-4154-a62c-ebe312431fce
+            desc: check the size of /var/log
+          - error_value: 1000.0
+            expression: ""
+            patterns:
+            - ""
+            trigger_type: rising
+            alone_metrics:
+              t1: true
+            is_remote: false
+            mute_new_metrics: false
+            created_at: created_at
+            ttl_state: NODATA
+            created_by: created_by
+            targets:
+            - devOps.my_server.hdd.freespace_mbytes
+            ttl: 600
+            tags:
+            - server
+            - disk
+            sched: ""
+            updated_at: updated_at
+            warn_value: 500.0
+            name: Not enough disk space left
+            updated_by: updated_by
+            id: 292516ed-4924-4154-a62c-ebe312431fce
+            desc: check the size of /var/log
+        - pattern: Devops.my_server.*
+          metrics:
+          - DevOps.my_server.hdd.freespace_mbytes
+          - ' DevOps.my_server.hdd.freespace_mbytes'
+          - ' DevOps.my_server.db.*'
+          triggers:
+          - error_value: 1000.0
+            expression: ""
+            patterns:
+            - ""
+            trigger_type: rising
+            alone_metrics:
+              t1: true
+            is_remote: false
+            mute_new_metrics: false
+            created_at: created_at
+            ttl_state: NODATA
+            created_by: created_by
+            targets:
+            - devOps.my_server.hdd.freespace_mbytes
+            ttl: 600
+            tags:
+            - server
+            - disk
+            sched: ""
+            updated_at: updated_at
+            warn_value: 500.0
+            name: Not enough disk space left
+            updated_by: updated_by
+            id: 292516ed-4924-4154-a62c-ebe312431fce
+            desc: check the size of /var/log
+          - error_value: 1000.0
+            expression: ""
+            patterns:
+            - ""
+            trigger_type: rising
+            alone_metrics:
+              t1: true
+            is_remote: false
+            mute_new_metrics: false
+            created_at: created_at
+            ttl_state: NODATA
+            created_by: created_by
+            targets:
+            - devOps.my_server.hdd.freespace_mbytes
+            ttl: 600
+            tags:
+            - server
+            - disk
+            sched: ""
+            updated_at: updated_at
+            warn_value: 500.0
+            name: Not enough disk space left
+            updated_by: updated_by
+            id: 292516ed-4924-4154-a62c-ebe312431fce
+            desc: check the size of /var/log
+    dto.PatternMetrics:
+      type: object
+      properties:
+        metrics:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/moira.MetricValue'
+        pattern:
+          type: string
+        retention:
+          type: object
+          additionalProperties:
+            type: integer
+      example:
+        pattern: pattern
+        metrics:
+          key:
+          - step: 0
+            value: 1.4658129805029452
+            ts: 6
+          - step: 0
+            value: 1.4658129805029452
+            ts: 6
+        retention:
+          key: 5
+    dto.ProblemOfTarget:
+      type: object
+      properties:
+        argument:
+          type: string
+          example: consolidateBy
+        description:
+          type: string
+          example: This function affects only visual graph representation. It is meaningless
+            in Moira
+        position:
+          type: integer
+          example: 0
+        problems:
+          type: array
+          items:
+            $ref: '#/components/schemas/dto.ProblemOfTarget'
+        type:
+          type: object
+          example: warn
+          allOf:
+          - $ref: '#/components/schemas/dto.typeOfProblem'
+      example:
+        argument: consolidateBy
+        description: This function affects only visual graph representation. It is
+          meaningless in Moira
+        position: 0
+        type: warn
+        problems:
+        - null
+        - null
+    dto.SaveTeamResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: d5d98eb3-ee18-4f75-9364-244f67e23b54
+      example:
+        id: d5d98eb3-ee18-4f75-9364-244f67e23b54
+    dto.SaveTriggerResponse:
+      type: object
+      properties:
+        checkResult:
+          $ref: '#/components/schemas/dto.TriggerCheckResponse'
+        id:
+          type: string
+          example: trigger_id
+        message:
+          type: string
+          example: trigger created
+      example:
+        id: trigger_id
+        message: trigger created
+        checkResult:
+          targets:
+          - syntax_ok: true
+            tree_of_problems:
+              argument: consolidateBy
+              description: This function affects only visual graph representation.
+                It is meaningless in Moira
+              position: 0
+              type: warn
+              problems:
+              - null
+              - null
+          - syntax_ok: true
+            tree_of_problems:
+              argument: consolidateBy
+              description: This function affects only visual graph representation.
+                It is meaningless in Moira
+              position: 0
+              type: warn
+              problems:
+              - null
+              - null
+    dto.Subscription:
+      type: object
+      properties:
+        any_tags:
+          type: boolean
+          example: false
+        contacts:
+          type: array
+          example:
+          - acd2db98-1659-4a2f-b227-52d71f6e3ba1
+          items:
+            type: string
+        enabled:
+          type: boolean
+          example: true
+        id:
+          type: string
+          example: 292516ed-4924-4154-a62c-ebe312431fce
+        ignore_recoverings:
+          type: boolean
+          example: false
+        ignore_warnings:
+          type: boolean
+          example: false
+        plotting:
+          $ref: '#/components/schemas/moira.PlottingData'
+        sched:
+          $ref: '#/components/schemas/moira.ScheduleData'
+        tags:
+          type: array
+          example:
+          - server
+          - cpu
+          items:
+            type: string
+        team_id:
+          type: string
+          example: 324516ed-4924-4154-a62c-eb124234fce
+        throttling:
+          type: boolean
+          example: false
+        user:
+          type: string
+          example: ""
+      example:
+        ignore_warnings: false
+        throttling: false
+        ignore_recoverings: false
+        sched:
+          endOffset: 1439
+          startOffset: 0
+          tzOffset: -60
+          days:
+          - name: Mon
+            enabled: true
+          - name: Mon
+            enabled: true
+        any_tags: false
+        plotting:
+          theme: dark
+          enabled: true
+        id: 292516ed-4924-4154-a62c-ebe312431fce
+        team_id: 324516ed-4924-4154-a62c-eb124234fce
+        user: ""
+        contacts:
+        - acd2db98-1659-4a2f-b227-52d71f6e3ba1
+        enabled: true
+        tags:
+        - server
+        - cpu
+    dto.SubscriptionList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/moira.SubscriptionData'
+      example:
+        list:
+        - ignore_warnings: false
+          throttling: false
+          ignore_recoverings: false
+          sched:
+            endOffset: 1439
+            startOffset: 0
+            tzOffset: -60
+            days:
+            - name: Mon
+              enabled: true
+            - name: Mon
+              enabled: true
+          any_tags: false
+          plotting:
+            theme: dark
+            enabled: true
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          team_id: 324516ed-4924-4154-a62c-eb124234fce
+          user: ""
+          contacts:
+          - acd2db98-1659-4a2f-b227-52d71f6e3ba1
+          enabled: true
+          tags:
+          - server
+          - cpu
+        - ignore_warnings: false
+          throttling: false
+          ignore_recoverings: false
+          sched:
+            endOffset: 1439
+            startOffset: 0
+            tzOffset: -60
+            days:
+            - name: Mon
+              enabled: true
+            - name: Mon
+              enabled: true
+          any_tags: false
+          plotting:
+            theme: dark
+            enabled: true
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          team_id: 324516ed-4924-4154-a62c-eb124234fce
+          user: ""
+          contacts:
+          - acd2db98-1659-4a2f-b227-52d71f6e3ba1
+          enabled: true
+          tags:
+          - server
+          - cpu
+    dto.TagStatistics:
+      type: object
+      properties:
+        name:
+          type: string
+          example: cpu
+        subscriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/moira.SubscriptionData'
+        triggers:
+          type: array
+          example:
+          - bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+          items:
+            type: string
+      example:
+        subscriptions:
+        - ignore_warnings: false
+          throttling: false
+          ignore_recoverings: false
+          sched:
+            endOffset: 1439
+            startOffset: 0
+            tzOffset: -60
+            days:
+            - name: Mon
+              enabled: true
+            - name: Mon
+              enabled: true
+          any_tags: false
+          plotting:
+            theme: dark
+            enabled: true
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          team_id: 324516ed-4924-4154-a62c-eb124234fce
+          user: ""
+          contacts:
+          - acd2db98-1659-4a2f-b227-52d71f6e3ba1
+          enabled: true
+          tags:
+          - server
+          - cpu
+        - ignore_warnings: false
+          throttling: false
+          ignore_recoverings: false
+          sched:
+            endOffset: 1439
+            startOffset: 0
+            tzOffset: -60
+            days:
+            - name: Mon
+              enabled: true
+            - name: Mon
+              enabled: true
+          any_tags: false
+          plotting:
+            theme: dark
+            enabled: true
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          team_id: 324516ed-4924-4154-a62c-eb124234fce
+          user: ""
+          contacts:
+          - acd2db98-1659-4a2f-b227-52d71f6e3ba1
+          enabled: true
+          tags:
+          - server
+          - cpu
+        name: cpu
+        triggers:
+        - bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+    dto.TagsData:
+      type: object
+      properties:
+        list:
+          type: array
+          example:
+          - cpu
+          items:
+            type: string
+      example:
+        list:
+        - cpu
+    dto.TagsStatistics:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/dto.TagStatistics'
+      example:
+        list:
+        - subscriptions:
+          - ignore_warnings: false
+            throttling: false
+            ignore_recoverings: false
+            sched:
+              endOffset: 1439
+              startOffset: 0
+              tzOffset: -60
+              days:
+              - name: Mon
+                enabled: true
+              - name: Mon
+                enabled: true
+            any_tags: false
+            plotting:
+              theme: dark
+              enabled: true
+            id: 292516ed-4924-4154-a62c-ebe312431fce
+            team_id: 324516ed-4924-4154-a62c-eb124234fce
+            user: ""
+            contacts:
+            - acd2db98-1659-4a2f-b227-52d71f6e3ba1
+            enabled: true
+            tags:
+            - server
+            - cpu
+          - ignore_warnings: false
+            throttling: false
+            ignore_recoverings: false
+            sched:
+              endOffset: 1439
+              startOffset: 0
+              tzOffset: -60
+              days:
+              - name: Mon
+                enabled: true
+              - name: Mon
+                enabled: true
+            any_tags: false
+            plotting:
+              theme: dark
+              enabled: true
+            id: 292516ed-4924-4154-a62c-ebe312431fce
+            team_id: 324516ed-4924-4154-a62c-eb124234fce
+            user: ""
+            contacts:
+            - acd2db98-1659-4a2f-b227-52d71f6e3ba1
+            enabled: true
+            tags:
+            - server
+            - cpu
+          name: cpu
+          triggers:
+          - bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+        - subscriptions:
+          - ignore_warnings: false
+            throttling: false
+            ignore_recoverings: false
+            sched:
+              endOffset: 1439
+              startOffset: 0
+              tzOffset: -60
+              days:
+              - name: Mon
+                enabled: true
+              - name: Mon
+                enabled: true
+            any_tags: false
+            plotting:
+              theme: dark
+              enabled: true
+            id: 292516ed-4924-4154-a62c-ebe312431fce
+            team_id: 324516ed-4924-4154-a62c-eb124234fce
+            user: ""
+            contacts:
+            - acd2db98-1659-4a2f-b227-52d71f6e3ba1
+            enabled: true
+            tags:
+            - server
+            - cpu
+          - ignore_warnings: false
+            throttling: false
+            ignore_recoverings: false
+            sched:
+              endOffset: 1439
+              startOffset: 0
+              tzOffset: -60
+              days:
+              - name: Mon
+                enabled: true
+              - name: Mon
+                enabled: true
+            any_tags: false
+            plotting:
+              theme: dark
+              enabled: true
+            id: 292516ed-4924-4154-a62c-ebe312431fce
+            team_id: 324516ed-4924-4154-a62c-eb124234fce
+            user: ""
+            contacts:
+            - acd2db98-1659-4a2f-b227-52d71f6e3ba1
+            enabled: true
+            tags:
+            - server
+            - cpu
+          name: cpu
+          triggers:
+          - bcba82f5-48cf-44c0-b7d6-e1d32c64a88c
+    dto.TeamMembers:
+      type: object
+      properties:
+        usernames:
+          type: array
+          example:
+          - anonymous
+          items:
+            type: string
+      example:
+        usernames:
+        - anonymous
+    dto.TeamModel:
+      type: object
+      properties:
+        description:
+          type: string
+          example: Team that holds all members of infrastructure division
+        id:
+          type: string
+          example: d5d98eb3-ee18-4f75-9364-244f67e23b54
+        name:
+          type: string
+          example: Infrastructure Team
+      example:
+        name: Infrastructure Team
+        description: Team that holds all members of infrastructure division
+        id: d5d98eb3-ee18-4f75-9364-244f67e23b54
+    dto.TeamSettings:
+      type: object
+      properties:
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/moira.ContactData'
+        subscriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/moira.SubscriptionData'
+        team_id:
+          type: string
+          example: d5d98eb3-ee18-4f75-9364-244f67e23b54
+      example:
+        subscriptions:
+        - ignore_warnings: false
+          throttling: false
+          ignore_recoverings: false
+          sched:
+            endOffset: 1439
+            startOffset: 0
+            tzOffset: -60
+            days:
+            - name: Mon
+              enabled: true
+            - name: Mon
+              enabled: true
+          any_tags: false
+          plotting:
+            theme: dark
+            enabled: true
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          team_id: 324516ed-4924-4154-a62c-eb124234fce
+          user: ""
+          contacts:
+          - acd2db98-1659-4a2f-b227-52d71f6e3ba1
+          enabled: true
+          tags:
+          - server
+          - cpu
+        - ignore_warnings: false
+          throttling: false
+          ignore_recoverings: false
+          sched:
+            endOffset: 1439
+            startOffset: 0
+            tzOffset: -60
+            days:
+            - name: Mon
+              enabled: true
+            - name: Mon
+              enabled: true
+          any_tags: false
+          plotting:
+            theme: dark
+            enabled: true
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          team_id: 324516ed-4924-4154-a62c-eb124234fce
+          user: ""
+          contacts:
+          - acd2db98-1659-4a2f-b227-52d71f6e3ba1
+          enabled: true
+          tags:
+          - server
+          - cpu
+        team_id: d5d98eb3-ee18-4f75-9364-244f67e23b54
+        contacts:
+        - id: 1dd38765-c5be-418d-81fa-7a5f879c2315
+          team: team
+          type: mail
+          user: ""
+          value: devops@example.com
+        - id: 1dd38765-c5be-418d-81fa-7a5f879c2315
+          team: team
+          type: mail
+          user: ""
+          value: devops@example.com
+    dto.ThrottlingResponse:
+      type: object
+      properties:
+        throttling:
+          type: integer
+          format: int64
+          example: 0
+      example:
+        throttling: 0
+    dto.TreeOfProblems:
+      type: object
+      properties:
+        syntax_ok:
+          type: boolean
+          example: true
+        tree_of_problems:
+          $ref: '#/components/schemas/dto.ProblemOfTarget'
+      example:
+        syntax_ok: true
+        tree_of_problems:
+          argument: consolidateBy
+          description: This function affects only visual graph representation. It
+            is meaningless in Moira
+          position: 0
+          type: warn
+          problems:
+          - null
+          - null
+    dto.Trigger:
+      type: object
+      properties:
+        alone_metrics:
+          type: object
+          additionalProperties:
+            type: boolean
+          description: A list of targets that have only alone metrics
+          example:
+            t1: true
+        created_at:
+          type: string
+          description: Datetime when the trigger was created
+        created_by:
+          type: string
+          description: Username who created trigger
+        desc:
+          type: string
+          description: Description string
+          example: check the size of /var/log
+        error_value:
+          type: number
+          description: ERROR threshold
+          example: 1000.0
+        expression:
+          type: string
+          description: Used if you need more complex logic than provided by WARN/ERROR
+            values
+          example: ""
+        id:
+          type: string
+          description: Trigger unique ID
+          example: 292516ed-4924-4154-a62c-ebe312431fce
+        is_remote:
+          type: boolean
+          description: Shows if trigger is remote (graphite-backend) based or stored
+            inside Moira-Redis DB
+          example: false
+        mute_new_metrics:
+          type: boolean
+          description: "If true, first event NODATA → OK will be omitted"
+          example: false
+        name:
+          type: string
+          description: Trigger name
+          example: Not enough disk space left
+        patterns:
+          type: array
+          description: Graphite patterns for trigger
+          example:
+          - ""
+          items:
+            type: string
+        sched:
+          type: object
+          description: Determines when Moira should monitor trigger
+          allOf:
+          - $ref: '#/components/schemas/moira.ScheduleData'
+        tags:
+          type: array
+          description: Set of tags to manipulate subscriptions
+          example:
+          - server
+          - disk
+          items:
+            type: string
+        targets:
+          type: array
+          description: "Graphite-like targets: t1, t2, ..."
+          example:
+          - devOps.my_server.hdd.freespace_mbytes
+          items:
+            type: string
+        throttling:
+          type: integer
+          format: int64
+          example: 0
+        trigger_type:
+          type: string
+          description: "Could be: rising, falling, expression"
+          example: rising
+        ttl:
+          type: integer
+          description: "When there are no metrics for trigger, Moira will switch metric\
+            \ to TTLState state after TTL seconds"
+          format: int64
+          example: 600
+        ttl_state:
+          type: string
+          description: "When there are no metrics for trigger, Moira will switch metric\
+            \ to TTLState state after TTL seconds"
+          example: NODATA
+        updated_at:
+          type: string
+          description: Datetime  when the trigger was updated
+        updated_by:
+          type: string
+          description: Username who updated trigger
+        warn_value:
+          type: number
+          description: WARN threshold
+          example: 500.0
+      example:
+        error_value: 1000.0
+        expression: ""
+        patterns:
+        - ""
+        trigger_type: rising
+        alone_metrics:
+          t1: true
+        is_remote: false
+        mute_new_metrics: false
+        created_at: created_at
+        ttl_state: NODATA
+        created_by: created_by
+        targets:
+        - devOps.my_server.hdd.freespace_mbytes
+        ttl: 600
+        tags:
+        - server
+        - disk
+        throttling: 0
+        sched: ""
+        updated_at: updated_at
+        warn_value: 500.0
+        name: Not enough disk space left
+        updated_by: updated_by
+        id: 292516ed-4924-4154-a62c-ebe312431fce
+        desc: check the size of /var/log
+    dto.TriggerCheck:
+      type: object
+      properties:
+        event_timestamp:
+          type: integer
+          format: int64
+          example: 1590741878
+        last_successful_check_timestamp:
+          type: integer
+          format: int64
+          example: 1590741916
+        maintenance:
+          type: integer
+          format: int64
+          example: 0
+        maintenance_info:
+          $ref: '#/components/schemas/moira.MaintenanceInfo'
+        metrics:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/moira.MetricState'
+        metrics_to_target_relation:
+          type: object
+          additionalProperties:
+            type: string
+          description: "MetricsToTargetRelation is a map that holds relation between\
+            \ metric names that was alone during last\ncheck and targets that fetched\
+            \ this metric\n\t{\"t1\": \"metric.name.1\", \"t2\": \"metric.name.2\"\
+            }"
+          example:
+            t1: metric.name.1
+            t2: metric.name.2
+        msg:
+          type: string
+        score:
+          type: integer
+          format: int64
+          example: 100
+        state:
+          type: string
+          example: OK
+        suppressed:
+          type: boolean
+          example: true
+        suppressed_state:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
+          example: 1590741916
+        trigger_id:
+          type: string
+          example: trigger_id
+      example:
+        msg: msg
+        trigger_id: trigger_id
+        event_timestamp: 1590741878
+        last_successful_check_timestamp: 1590741916
+        suppressed_state: suppressed_state
+        score: 100
+        maintenance_info:
+          setup_time: 0
+          setup_user: setup_user
+          remove_user: remove_user
+          remove_time: 0
+        metrics_to_target_relation:
+          t1: metric.name.1
+          t2: metric.name.2
+        metrics:
+          key:
+            maintenance_info: null
+            values:
+              key: 6.027456183070403
+            state: OK
+            suppressed: false
+            event_timestamp: 1590741878
+            maintenance: 0
+            value: 70.0
+            suppressed_state: suppressed_state
+            timestamp: 1590741878
+        state: OK
+        suppressed: true
+        maintenance: 0
+        timestamp: 1590741916
+    dto.TriggerCheckResponse:
+      type: object
+      properties:
+        targets:
+          type: array
+          description: "Graphite-like targets: t1, t2, ..."
+          items:
+            $ref: '#/components/schemas/dto.TreeOfProblems'
+      example:
+        targets:
+        - syntax_ok: true
+          tree_of_problems:
+            argument: consolidateBy
+            description: This function affects only visual graph representation. It
+              is meaningless in Moira
+            position: 0
+            type: warn
+            problems:
+            - null
+            - null
+        - syntax_ok: true
+          tree_of_problems:
+            argument: consolidateBy
+            description: This function affects only visual graph representation. It
+              is meaningless in Moira
+            position: 0
+            type: warn
+            problems:
+            - null
+            - null
+    dto.TriggerDump:
+      type: object
+      properties:
+        created:
+          type: string
+        last_check:
+          $ref: '#/components/schemas/moira.CheckData'
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/dto.PatternMetrics'
+        trigger:
+          $ref: '#/components/schemas/moira.Trigger'
+      example:
+        created: created
+        last_check:
+          msg: msg
+          score: 100
+          maintenance_info:
+            setup_time: 0
+            setup_user: setup_user
+            remove_user: remove_user
+            remove_time: 0
+          metrics_to_target_relation:
+            t1: metric.name.1
+            t2: metric.name.2
+          metrics:
+            key:
+              maintenance_info: null
+              values:
+                key: 6.027456183070403
+              state: OK
+              suppressed: false
+              event_timestamp: 1590741878
+              maintenance: 0
+              value: 70.0
+              suppressed_state: suppressed_state
+              timestamp: 1590741878
+          state: OK
+          suppressed: true
+          event_timestamp: 1590741878
+          maintenance: 0
+          last_successful_check_timestamp: 1590741916
+          suppressed_state: suppressed_state
+          timestamp: 1590741916
+        metrics:
+        - pattern: pattern
+          metrics:
+            key:
+            - step: 0
+              value: 1.4658129805029452
+              ts: 6
+            - step: 0
+              value: 1.4658129805029452
+              ts: 6
+          retention:
+            key: 5
+        - pattern: pattern
+          metrics:
+            key:
+            - step: 0
+              value: 1.4658129805029452
+              ts: 6
+            - step: 0
+              value: 1.4658129805029452
+              ts: 6
+          retention:
+            key: 5
+        trigger:
+          error_value: 1000.0
+          expression: ""
+          patterns:
+          - ""
+          trigger_type: rising
+          alone_metrics:
+            t1: true
+          is_remote: false
+          mute_new_metrics: false
+          created_at: 5
+          ttl_state: NODATA
+          created_by: created_by
+          targets:
+          - devOps.my_server.hdd.freespace_mbytes
+          ttl: 600
+          tags:
+          - server
+          - disk
+          sched:
+            endOffset: 1439
+            startOffset: 0
+            tzOffset: -60
+            days:
+            - name: Mon
+              enabled: true
+            - name: Mon
+              enabled: true
+          updated_at: 2
+          warn_value: 5000.0
+          name: Not enough disk space left
+          updated_by: updated_by
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          python_expression: python_expression
+          desc: check the size of /var/log
+    dto.TriggerMaintenance:
+      type: object
+      properties:
+        metrics:
+          type: object
+          additionalProperties:
+            type: integer
+        trigger:
+          type: integer
+          format: int64
+          example: 1594225165
+    dto.TriggerMetrics:
+      type: object
+      additionalProperties:
+        type: object
+        additionalProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/moira.MetricValue'
+      x-schema-name: dto.TriggerMetrics
+    dto.TriggerModel:
+      type: object
+      properties:
+        alone_metrics:
+          type: object
+          additionalProperties:
+            type: boolean
+          description: A list of targets that have only alone metrics
+          example:
+            t1: true
+        created_at:
+          type: string
+          description: Datetime when the trigger was created
+        created_by:
+          type: string
+          description: Username who created trigger
+        desc:
+          type: string
+          description: Description string
+          example: check the size of /var/log
+        error_value:
+          type: number
+          description: ERROR threshold
+          example: 1000.0
+        expression:
+          type: string
+          description: Used if you need more complex logic than provided by WARN/ERROR
+            values
+          example: ""
+        id:
+          type: string
+          description: Trigger unique ID
+          example: 292516ed-4924-4154-a62c-ebe312431fce
+        is_remote:
+          type: boolean
+          description: Shows if trigger is remote (graphite-backend) based or stored
+            inside Moira-Redis DB
+          example: false
+        mute_new_metrics:
+          type: boolean
+          description: "If true, first event NODATA → OK will be omitted"
+          example: false
+        name:
+          type: string
+          description: Trigger name
+          example: Not enough disk space left
+        patterns:
+          type: array
+          description: Graphite patterns for trigger
+          example:
+          - ""
+          items:
+            type: string
+        sched:
+          type: object
+          description: Determines when Moira should monitor trigger
+          allOf:
+          - $ref: '#/components/schemas/moira.ScheduleData'
+        tags:
+          type: array
+          description: Set of tags to manipulate subscriptions
+          example:
+          - server
+          - disk
+          items:
+            type: string
+        targets:
+          type: array
+          description: "Graphite-like targets: t1, t2, ..."
+          example:
+          - devOps.my_server.hdd.freespace_mbytes
+          items:
+            type: string
+        trigger_type:
+          type: string
+          description: "Could be: rising, falling, expression"
+          example: rising
+        ttl:
+          type: integer
+          description: "When there are no metrics for trigger, Moira will switch metric\
+            \ to TTLState state after TTL seconds"
+          format: int64
+          example: 600
+        ttl_state:
+          type: string
+          description: "When there are no metrics for trigger, Moira will switch metric\
+            \ to TTLState state after TTL seconds"
+          example: NODATA
+        updated_at:
+          type: string
+          description: Datetime  when the trigger was updated
+        updated_by:
+          type: string
+          description: Username who updated trigger
+        warn_value:
+          type: number
+          description: WARN threshold
+          example: 500.0
+      example:
+        error_value: 1000.0
+        expression: ""
+        patterns:
+        - ""
+        trigger_type: rising
+        alone_metrics:
+          t1: true
+        is_remote: false
+        mute_new_metrics: false
+        created_at: created_at
+        ttl_state: NODATA
+        created_by: created_by
+        targets:
+        - devOps.my_server.hdd.freespace_mbytes
+        ttl: 600
+        tags:
+        - server
+        - disk
+        sched: ""
+        updated_at: updated_at
+        warn_value: 500.0
+        name: Not enough disk space left
+        updated_by: updated_by
+        id: 292516ed-4924-4154-a62c-ebe312431fce
+        desc: check the size of /var/log
+    dto.TriggersList:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/moira.TriggerCheck'
+        page:
+          type: integer
+          format: int64
+        pager:
+          type: string
+        size:
+          type: integer
+          format: int64
+        total:
+          type: integer
+          format: int64
+      example:
+        total: 2
+        pager: pager
+        size: 5
+        page: 5
+        list:
+        - error_value: 1000.0
+          expression: ""
+          patterns:
+          - ""
+          trigger_type: rising
+          alone_metrics:
+            t1: true
+          is_remote: false
+          mute_new_metrics: false
+          created_at: 0
+          ttl_state: NODATA
+          created_by: created_by
+          targets:
+          - devOps.my_server.hdd.freespace_mbytes
+          ttl: 600
+          tags:
+          - server
+          - disk
+          throttling: 0
+          highlights:
+            key: highlights
+          sched:
+            endOffset: 1439
+            startOffset: 0
+            tzOffset: -60
+            days:
+            - name: Mon
+              enabled: true
+            - name: Mon
+              enabled: true
+          updated_at: 1
+          warn_value: 5000.0
+          name: Not enough disk space left
+          updated_by: updated_by
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          last_check:
+            msg: msg
+            score: 100
+            maintenance_info:
+              setup_time: 0
+              setup_user: setup_user
+              remove_user: remove_user
+              remove_time: 0
+            metrics_to_target_relation:
+              t1: metric.name.1
+              t2: metric.name.2
+            metrics:
+              key:
+                maintenance_info: null
+                values:
+                  key: 6.027456183070403
+                state: OK
+                suppressed: false
+                event_timestamp: 1590741878
+                maintenance: 0
+                value: 70.0
+                suppressed_state: suppressed_state
+                timestamp: 1590741878
+            state: OK
+            suppressed: true
+            event_timestamp: 1590741878
+            maintenance: 0
+            last_successful_check_timestamp: 1590741916
+            suppressed_state: suppressed_state
+            timestamp: 1590741916
+          python_expression: python_expression
+          desc: check the size of /var/log
+        - error_value: 1000.0
+          expression: ""
+          patterns:
+          - ""
+          trigger_type: rising
+          alone_metrics:
+            t1: true
+          is_remote: false
+          mute_new_metrics: false
+          created_at: 0
+          ttl_state: NODATA
+          created_by: created_by
+          targets:
+          - devOps.my_server.hdd.freespace_mbytes
+          ttl: 600
+          tags:
+          - server
+          - disk
+          throttling: 0
+          highlights:
+            key: highlights
+          sched:
+            endOffset: 1439
+            startOffset: 0
+            tzOffset: -60
+            days:
+            - name: Mon
+              enabled: true
+            - name: Mon
+              enabled: true
+          updated_at: 1
+          warn_value: 5000.0
+          name: Not enough disk space left
+          updated_by: updated_by
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          last_check:
+            msg: msg
+            score: 100
+            maintenance_info:
+              setup_time: 0
+              setup_user: setup_user
+              remove_user: remove_user
+              remove_time: 0
+            metrics_to_target_relation:
+              t1: metric.name.1
+              t2: metric.name.2
+            metrics:
+              key:
+                maintenance_info: null
+                values:
+                  key: 6.027456183070403
+                state: OK
+                suppressed: false
+                event_timestamp: 1590741878
+                maintenance: 0
+                value: 70.0
+                suppressed_state: suppressed_state
+                timestamp: 1590741878
+            state: OK
+            suppressed: true
+            event_timestamp: 1590741878
+            maintenance: 0
+            last_successful_check_timestamp: 1590741916
+            suppressed_state: suppressed_state
+            timestamp: 1590741916
+          python_expression: python_expression
+          desc: check the size of /var/log
+    dto.TriggersSearchResultDeleteResponse:
+      type: object
+      properties:
+        pager_id:
+          type: string
+          example: 292516ed-4924-4154-a62c-ebe312431fce
+      example:
+        pager_id: 292516ed-4924-4154-a62c-ebe312431fce
+    dto.User:
+      type: object
+      properties:
+        login:
+          type: string
+          example: john
+      example:
+        login: john
+    dto.UserSettings:
+      type: object
+      properties:
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/moira.ContactData'
+        login:
+          type: string
+          example: john
+        subscriptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/moira.SubscriptionData'
+      example:
+        subscriptions:
+        - ignore_warnings: false
+          throttling: false
+          ignore_recoverings: false
+          sched:
+            endOffset: 1439
+            startOffset: 0
+            tzOffset: -60
+            days:
+            - name: Mon
+              enabled: true
+            - name: Mon
+              enabled: true
+          any_tags: false
+          plotting:
+            theme: dark
+            enabled: true
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          team_id: 324516ed-4924-4154-a62c-eb124234fce
+          user: ""
+          contacts:
+          - acd2db98-1659-4a2f-b227-52d71f6e3ba1
+          enabled: true
+          tags:
+          - server
+          - cpu
+        - ignore_warnings: false
+          throttling: false
+          ignore_recoverings: false
+          sched:
+            endOffset: 1439
+            startOffset: 0
+            tzOffset: -60
+            days:
+            - name: Mon
+              enabled: true
+            - name: Mon
+              enabled: true
+          any_tags: false
+          plotting:
+            theme: dark
+            enabled: true
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          team_id: 324516ed-4924-4154-a62c-eb124234fce
+          user: ""
+          contacts:
+          - acd2db98-1659-4a2f-b227-52d71f6e3ba1
+          enabled: true
+          tags:
+          - server
+          - cpu
+        login: john
+        contacts:
+        - id: 1dd38765-c5be-418d-81fa-7a5f879c2315
+          team: team
+          type: mail
+          user: ""
+          value: devops@example.com
+        - id: 1dd38765-c5be-418d-81fa-7a5f879c2315
+          team: team
+          type: mail
+          user: ""
+          value: devops@example.com
+    dto.UserTeams:
+      type: object
+      properties:
+        teams:
+          type: array
+          items:
+            $ref: '#/components/schemas/dto.TeamModel'
+      example:
+        teams:
+        - name: Infrastructure Team
+          description: Team that holds all members of infrastructure division
+          id: d5d98eb3-ee18-4f75-9364-244f67e23b54
+        - name: Infrastructure Team
+          description: Team that holds all members of infrastructure division
+          id: d5d98eb3-ee18-4f75-9364-244f67e23b54
+    dto.typeOfProblem:
+      type: string
+      enum:
+      - warn
+      - bad
+      x-enum-varnames:
+      - isWarn
+      - isBad
+    handler.ConfigurationResponse:
+      type: object
+      properties:
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/handler.ContactExample'
+        remoteAllowed:
+          type: boolean
+          example: false
+      example:
+        remoteAllowed: false
+        contacts:
+        - label: Telegram
+          type: telegram
+        - label: Telegram
+          type: telegram
+    handler.ContactExample:
+      type: object
+      properties:
+        label:
+          type: string
+          example: Telegram
+        type:
+          type: string
+          example: telegram
+      example:
+        label: Telegram
+        type: telegram
+    moira.CheckData:
+      type: object
+      properties:
+        event_timestamp:
+          type: integer
+          format: int64
+          example: 1590741878
+        last_successful_check_timestamp:
+          type: integer
+          format: int64
+          example: 1590741916
+        maintenance:
+          type: integer
+          format: int64
+          example: 0
+        maintenance_info:
+          $ref: '#/components/schemas/moira.MaintenanceInfo'
+        metrics:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/moira.MetricState'
+        metrics_to_target_relation:
+          type: object
+          additionalProperties:
+            type: string
+          description: "MetricsToTargetRelation is a map that holds relation between\
+            \ metric names that was alone during last\ncheck and targets that fetched\
+            \ this metric\n\t{\"t1\": \"metric.name.1\", \"t2\": \"metric.name.2\"\
+            }"
+          example:
+            t1: metric.name.1
+            t2: metric.name.2
+        msg:
+          type: string
+        score:
+          type: integer
+          format: int64
+          example: 100
+        state:
+          type: string
+          example: OK
+        suppressed:
+          type: boolean
+          example: true
+        suppressed_state:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
+          example: 1590741916
+      example:
+        msg: msg
+        score: 100
+        maintenance_info:
+          setup_time: 0
+          setup_user: setup_user
+          remove_user: remove_user
+          remove_time: 0
+        metrics_to_target_relation:
+          t1: metric.name.1
+          t2: metric.name.2
+        metrics:
+          key:
+            maintenance_info: null
+            values:
+              key: 6.027456183070403
+            state: OK
+            suppressed: false
+            event_timestamp: 1590741878
+            maintenance: 0
+            value: 70.0
+            suppressed_state: suppressed_state
+            timestamp: 1590741878
+        state: OK
+        suppressed: true
+        event_timestamp: 1590741878
+        maintenance: 0
+        last_successful_check_timestamp: 1590741916
+        suppressed_state: suppressed_state
+        timestamp: 1590741916
+    moira.ContactData:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1dd38765-c5be-418d-81fa-7a5f879c2315
+        team:
+          type: string
+        type:
+          type: string
+          example: mail
+        user:
+          type: string
+          example: ""
+        value:
+          type: string
+          example: devops@example.com
+      example:
+        id: 1dd38765-c5be-418d-81fa-7a5f879c2315
+        team: team
+        type: mail
+        user: ""
+        value: devops@example.com
+    moira.EventInfo:
+      type: object
+      properties:
+        interval:
+          type: integer
+          format: int64
+          example: 0
+        maintenance:
+          $ref: '#/components/schemas/moira.MaintenanceInfo'
+      example:
+        interval: 0
+        maintenance:
+          setup_time: 0
+          setup_user: setup_user
+          remove_user: remove_user
+          remove_time: 0
+    moira.MaintenanceInfo:
+      type: object
+      properties:
+        remove_time:
+          type: integer
+          format: int64
+          example: 0
+        remove_user:
+          type: string
+        setup_time:
+          type: integer
+          format: int64
+          example: 0
+        setup_user:
+          type: string
+      example:
+        setup_time: 0
+        setup_user: setup_user
+        remove_user: remove_user
+        remove_time: 0
+    moira.MetricState:
+      type: object
+      properties:
+        event_timestamp:
+          type: integer
+          format: int64
+          example: 1590741878
+        maintenance:
+          type: integer
+          format: int64
+          example: 0
+        maintenance_info:
+          $ref: '#/components/schemas/moira.MaintenanceInfo'
+        state:
+          type: string
+          example: OK
+        suppressed:
+          type: boolean
+          example: false
+        suppressed_state:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
+          example: 1590741878
+        value:
+          type: number
+          example: 70.0
+        values:
+          type: object
+          additionalProperties:
+            type: number
+      example:
+        maintenance_info: null
+        values:
+          key: 6.027456183070403
+        state: OK
+        suppressed: false
+        event_timestamp: 1590741878
+        maintenance: 0
+        value: 70.0
+        suppressed_state: suppressed_state
+        timestamp: 1590741878
+    moira.MetricValue:
+      type: object
+      properties:
+        step:
+          type: integer
+          format: int64
+        ts:
+          type: integer
+          format: int64
+        value:
+          type: number
+      example:
+        step: 0
+        value: 1.4658129805029452
+        ts: 6
+    moira.NotificationEvent:
+      type: object
+      properties:
+        contact_id:
+          type: string
+        event_message:
+          $ref: '#/components/schemas/moira.EventInfo'
+        metric:
+          type: string
+          example: carbon.agents.*.metricsReceived
+        msg:
+          type: string
+        old_state:
+          type: string
+          example: ERROR
+        state:
+          type: string
+          example: OK
+        sub_id:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
+          example: 1590741878
+        trigger_event:
+          type: boolean
+          example: true
+        trigger_id:
+          type: string
+          example: 5ff37996-8927-4cab-8987-970e80d8e0a8
+        value:
+          type: number
+          example: 70.0
+        values:
+          type: object
+          additionalProperties:
+            type: number
+      example:
+        msg: msg
+        metric: carbon.agents.*.metricsReceived
+        sub_id: sub_id
+        trigger_id: 5ff37996-8927-4cab-8987-970e80d8e0a8
+        values:
+          key: 0.8008281904610115
+        old_state: ERROR
+        event_message:
+          interval: 0
+          maintenance:
+            setup_time: 0
+            setup_user: setup_user
+            remove_user: remove_user
+            remove_time: 0
+        state: OK
+        contact_id: contact_id
+        value: 70.0
+        trigger_event: true
+        timestamp: 1590741878
+    moira.PlottingData:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+        theme:
+          type: string
+          example: dark
+      example:
+        theme: dark
+        enabled: true
+    moira.ScheduleData:
+      type: object
+      properties:
+        days:
+          type: array
+          items:
+            $ref: '#/components/schemas/moira.ScheduleDataDay'
+        endOffset:
+          type: integer
+          format: int64
+          example: 1439
+        startOffset:
+          type: integer
+          format: int64
+          example: 0
+        tzOffset:
+          type: integer
+          format: int64
+          example: -60
+      example:
+        endOffset: 1439
+        startOffset: 0
+        tzOffset: -60
+        days:
+        - name: Mon
+          enabled: true
+        - name: Mon
+          enabled: true
+    moira.ScheduleDataDay:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+        name:
+          type: string
+          example: Mon
+      example:
+        name: Mon
+        enabled: true
+    moira.ScheduledNotification:
+      type: object
+      properties:
+        contact:
+          $ref: '#/components/schemas/moira.ContactData'
+        event:
+          $ref: '#/components/schemas/moira.NotificationEvent'
+        plotting:
+          $ref: '#/components/schemas/moira.PlottingData'
+        send_fail:
+          type: integer
+          example: 0
+        throttled:
+          type: boolean
+          example: false
+        timestamp:
+          type: integer
+          format: int64
+          example: 1594471927
+        trigger:
+          $ref: '#/components/schemas/moira.TriggerData'
+      example:
+        send_fail: 0
+        contact:
+          id: 1dd38765-c5be-418d-81fa-7a5f879c2315
+          team: team
+          type: mail
+          user: ""
+          value: devops@example.com
+        plotting:
+          theme: dark
+          enabled: true
+        trigger:
+          error_value: 1000.0
+          warn_value: 5000.0
+          is_remote: false
+          name: Not enough disk space left
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          __notifier_trigger_tags:
+          - server
+          - disk
+          targets:
+          - devOps.my_server.hdd.freespace_mbytes
+          desc: check the size of /var/log
+        event:
+          msg: msg
+          metric: carbon.agents.*.metricsReceived
+          sub_id: sub_id
+          trigger_id: 5ff37996-8927-4cab-8987-970e80d8e0a8
+          values:
+            key: 0.8008281904610115
+          old_state: ERROR
+          event_message:
+            interval: 0
+            maintenance:
+              setup_time: 0
+              setup_user: setup_user
+              remove_user: remove_user
+              remove_time: 0
+          state: OK
+          contact_id: contact_id
+          value: 70.0
+          trigger_event: true
+          timestamp: 1590741878
+        throttled: false
+        timestamp: 1594471927
+    moira.SubscriptionData:
+      type: object
+      properties:
+        any_tags:
+          type: boolean
+          example: false
+        contacts:
+          type: array
+          example:
+          - acd2db98-1659-4a2f-b227-52d71f6e3ba1
+          items:
+            type: string
+        enabled:
+          type: boolean
+          example: true
+        id:
+          type: string
+          example: 292516ed-4924-4154-a62c-ebe312431fce
+        ignore_recoverings:
+          type: boolean
+          example: false
+        ignore_warnings:
+          type: boolean
+          example: false
+        plotting:
+          $ref: '#/components/schemas/moira.PlottingData'
+        sched:
+          $ref: '#/components/schemas/moira.ScheduleData'
+        tags:
+          type: array
+          example:
+          - server
+          - cpu
+          items:
+            type: string
+        team_id:
+          type: string
+          example: 324516ed-4924-4154-a62c-eb124234fce
+        throttling:
+          type: boolean
+          example: false
+        user:
+          type: string
+          example: ""
+      example:
+        ignore_warnings: false
+        throttling: false
+        ignore_recoverings: false
+        sched:
+          endOffset: 1439
+          startOffset: 0
+          tzOffset: -60
+          days:
+          - name: Mon
+            enabled: true
+          - name: Mon
+            enabled: true
+        any_tags: false
+        plotting:
+          theme: dark
+          enabled: true
+        id: 292516ed-4924-4154-a62c-ebe312431fce
+        team_id: 324516ed-4924-4154-a62c-eb124234fce
+        user: ""
+        contacts:
+        - acd2db98-1659-4a2f-b227-52d71f6e3ba1
+        enabled: true
+        tags:
+        - server
+        - cpu
+    moira.Trigger:
+      type: object
+      properties:
+        alone_metrics:
+          type: object
+          additionalProperties:
+            type: boolean
+          example:
+            t1: true
+        created_at:
+          type: integer
+          format: int64
+        created_by:
+          type: string
+        desc:
+          type: string
+          example: check the size of /var/log
+        error_value:
+          type: number
+          example: 1000.0
+        expression:
+          type: string
+          example: ""
+        id:
+          type: string
+          example: 292516ed-4924-4154-a62c-ebe312431fce
+        is_remote:
+          type: boolean
+          example: false
+        mute_new_metrics:
+          type: boolean
+          example: false
+        name:
+          type: string
+          example: Not enough disk space left
+        patterns:
+          type: array
+          example:
+          - ""
+          items:
+            type: string
+        python_expression:
+          type: string
+        sched:
+          $ref: '#/components/schemas/moira.ScheduleData'
+        tags:
+          type: array
+          example:
+          - server
+          - disk
+          items:
+            type: string
+        targets:
+          type: array
+          example:
+          - devOps.my_server.hdd.freespace_mbytes
+          items:
+            type: string
+        trigger_type:
+          type: string
+          example: rising
+        ttl:
+          type: integer
+          format: int64
+          example: 600
+        ttl_state:
+          type: string
+          example: NODATA
+        updated_at:
+          type: integer
+          format: int64
+        updated_by:
+          type: string
+        warn_value:
+          type: number
+          example: 5000.0
+      example:
+        error_value: 1000.0
+        expression: ""
+        patterns:
+        - ""
+        trigger_type: rising
+        alone_metrics:
+          t1: true
+        is_remote: false
+        mute_new_metrics: false
+        created_at: 5
+        ttl_state: NODATA
+        created_by: created_by
+        targets:
+        - devOps.my_server.hdd.freespace_mbytes
+        ttl: 600
+        tags:
+        - server
+        - disk
+        sched:
+          endOffset: 1439
+          startOffset: 0
+          tzOffset: -60
+          days:
+          - name: Mon
+            enabled: true
+          - name: Mon
+            enabled: true
+        updated_at: 2
+        warn_value: 5000.0
+        name: Not enough disk space left
+        updated_by: updated_by
+        id: 292516ed-4924-4154-a62c-ebe312431fce
+        python_expression: python_expression
+        desc: check the size of /var/log
+    moira.TriggerCheck:
+      type: object
+      properties:
+        alone_metrics:
+          type: object
+          additionalProperties:
+            type: boolean
+          example:
+            t1: true
+        created_at:
+          type: integer
+          format: int64
+        created_by:
+          type: string
+        desc:
+          type: string
+          example: check the size of /var/log
+        error_value:
+          type: number
+          example: 1000.0
+        expression:
+          type: string
+          example: ""
+        highlights:
+          type: object
+          additionalProperties:
+            type: string
+        id:
+          type: string
+          example: 292516ed-4924-4154-a62c-ebe312431fce
+        is_remote:
+          type: boolean
+          example: false
+        last_check:
+          $ref: '#/components/schemas/moira.CheckData'
+        mute_new_metrics:
+          type: boolean
+          example: false
+        name:
+          type: string
+          example: Not enough disk space left
+        patterns:
+          type: array
+          example:
+          - ""
+          items:
+            type: string
+        python_expression:
+          type: string
+        sched:
+          $ref: '#/components/schemas/moira.ScheduleData'
+        tags:
+          type: array
+          example:
+          - server
+          - disk
+          items:
+            type: string
+        targets:
+          type: array
+          example:
+          - devOps.my_server.hdd.freespace_mbytes
+          items:
+            type: string
+        throttling:
+          type: integer
+          format: int64
+          example: 0
+        trigger_type:
+          type: string
+          example: rising
+        ttl:
+          type: integer
+          format: int64
+          example: 600
+        ttl_state:
+          type: string
+          example: NODATA
+        updated_at:
+          type: integer
+          format: int64
+        updated_by:
+          type: string
+        warn_value:
+          type: number
+          example: 5000.0
+      example:
+        error_value: 1000.0
+        expression: ""
+        patterns:
+        - ""
+        trigger_type: rising
+        alone_metrics:
+          t1: true
+        is_remote: false
+        mute_new_metrics: false
+        created_at: 0
+        ttl_state: NODATA
+        created_by: created_by
+        targets:
+        - devOps.my_server.hdd.freespace_mbytes
+        ttl: 600
+        tags:
+        - server
+        - disk
+        throttling: 0
+        highlights:
+          key: highlights
+        sched:
+          endOffset: 1439
+          startOffset: 0
+          tzOffset: -60
+          days:
+          - name: Mon
+            enabled: true
+          - name: Mon
+            enabled: true
+        updated_at: 1
+        warn_value: 5000.0
+        name: Not enough disk space left
+        updated_by: updated_by
+        id: 292516ed-4924-4154-a62c-ebe312431fce
+        last_check:
+          msg: msg
+          score: 100
+          maintenance_info:
+            setup_time: 0
+            setup_user: setup_user
+            remove_user: remove_user
+            remove_time: 0
+          metrics_to_target_relation:
+            t1: metric.name.1
+            t2: metric.name.2
+          metrics:
+            key:
+              maintenance_info: null
+              values:
+                key: 6.027456183070403
+              state: OK
+              suppressed: false
+              event_timestamp: 1590741878
+              maintenance: 0
+              value: 70.0
+              suppressed_state: suppressed_state
+              timestamp: 1590741878
+          state: OK
+          suppressed: true
+          event_timestamp: 1590741878
+          maintenance: 0
+          last_successful_check_timestamp: 1590741916
+          suppressed_state: suppressed_state
+          timestamp: 1590741916
+        python_expression: python_expression
+        desc: check the size of /var/log
+    moira.TriggerData:
+      type: object
+      properties:
+        __notifier_trigger_tags:
+          type: array
+          example:
+          - server
+          - disk
+          items:
+            type: string
+        desc:
+          type: string
+          example: check the size of /var/log
+        error_value:
+          type: number
+          example: 1000.0
+        id:
+          type: string
+          example: 292516ed-4924-4154-a62c-ebe312431fce
+        is_remote:
+          type: boolean
+          example: false
+        name:
+          type: string
+          example: Not enough disk space left
+        targets:
+          type: array
+          example:
+          - devOps.my_server.hdd.freespace_mbytes
+          items:
+            type: string
+        warn_value:
+          type: number
+          example: 5000.0
+      example:
+        error_value: 1000.0
+        warn_value: 5000.0
+        is_remote: false
+        name: Not enough disk space left
+        id: 292516ed-4924-4154-a62c-ebe312431fce
+        __notifier_trigger_tags:
+        - server
+        - disk
+        targets:
+        - devOps.my_server.hdd.freespace_mbytes
+        desc: check the size of /var/log
+x-original-swagger-version: "2.0"
