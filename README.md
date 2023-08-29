@@ -42,6 +42,8 @@ func main() {
 }
 ```
 
+## Examples
+
 ## Triggers
 
 **Get all Triggers:**
