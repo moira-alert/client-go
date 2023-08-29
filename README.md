@@ -44,7 +44,7 @@ func main() {
 
 ## Examples
 
-## Triggers
+## Trigger
 
 **Get all Triggers:**
 ```golang
