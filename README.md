@@ -87,3 +87,31 @@ if err != nil {
 
 log.Println(response.Payload)
 ```
+
+## Subscription
+
+**Update existing subscription:**
+```golang
+client := client.New(transport, strfmt.Default)
+
+ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+defer cancel()
+
+subscriptionDto := &models.DtoSubscription{
+	Tags: []string{"test"},
+	Contacts: []string{"9fe937b0-721f-4b40-b849-ad1623f910a1"},
+	Enabled: false,
+}
+
+response, err := client.Subscription.UpdateSubscription(&subscription.UpdateSubscriptionParams{
+	Subscription: subscriptionDto,
+	SubscriptionID: "2438f803-b278-47ee-91fb-e4345208dfde",
+	Context: ctx,
+})
+
+if err != nil {
+	log.Fatal(err)
+}
+
+log.Println(response.Payload)
+```
