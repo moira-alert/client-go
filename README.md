@@ -10,7 +10,7 @@ Our current documentation is available on [swaggerhub](https://app.swaggerhub.co
 
 ## Installation
 
-Put the package under your project folder and add the following in import:
+Add the following in import:
 
 ```golang
 
