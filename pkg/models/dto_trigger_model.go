@@ -82,7 +82,7 @@ type DtoTriggerModel struct {
 
 	// When there are no metrics for trigger, Moira will switch metric to TTLState state after TTL seconds
 	// Example: NODATA
-	TTLState string `json:"ttl_state,omitempty"`
+	TTLState *string `json:"ttl_state,omitempty"`
 
 	// Datetime  when the trigger was updated
 	UpdatedAt *string `json:"updated_at,omitempty"`
