@@ -43,10 +43,6 @@ type MoiraTrigger struct {
 	// Example: 292516ed-4924-4154-a62c-ebe312431fce
 	ID string `json:"id,omitempty"`
 
-	// is remote
-	// Example: false
-	IsRemote bool `json:"is_remote,omitempty"`
-
 	// mute new metrics
 	// Example: false
 	MuteNewMetrics bool `json:"mute_new_metrics,omitempty"`
@@ -74,6 +70,12 @@ type MoiraTrigger struct {
 	// targets
 	// Example: ["devOps.my_server.hdd.freespace_mbytes"]
 	Targets []string `json:"targets"`
+
+	// trigger source
+	// Example: graphite_local
+	TriggerSource struct {
+		MoiraTriggerSource
+	} `json:"trigger_source,omitempty"`
 
 	// trigger type
 	// Example: rising
@@ -106,6 +108,10 @@ func (m *MoiraTrigger) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateTriggerSource(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -120,11 +126,23 @@ func (m *MoiraTrigger) validateSched(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *MoiraTrigger) validateTriggerSource(formats strfmt.Registry) error {
+	if swag.IsZero(m.TriggerSource) { // not required
+		return nil
+	}
+
+	return nil
+}
+
 // ContextValidate validate this moira trigger based on the context it is used
 func (m *MoiraTrigger) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateSched(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTriggerSource(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -135,6 +153,11 @@ func (m *MoiraTrigger) ContextValidate(ctx context.Context, formats strfmt.Regis
 }
 
 func (m *MoiraTrigger) contextValidateSched(ctx context.Context, formats strfmt.Registry) error {
+
+	return nil
+}
+
+func (m *MoiraTrigger) contextValidateTriggerSource(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }

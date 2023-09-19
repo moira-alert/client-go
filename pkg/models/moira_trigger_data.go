@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -45,6 +46,12 @@ type MoiraTriggerData struct {
 	// Example: ["devOps.my_server.hdd.freespace_mbytes"]
 	Targets []string `json:"targets"`
 
+	// trigger source
+	// Example: graphite_local
+	TriggerSource struct {
+		MoiraTriggerSource
+	} `json:"trigger_source,omitempty"`
+
 	// warn value
 	// Example: 5000
 	WarnValue float64 `json:"warn_value,omitempty"`
@@ -52,11 +59,42 @@ type MoiraTriggerData struct {
 
 // Validate validates this moira trigger data
 func (m *MoiraTriggerData) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateTriggerSource(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this moira trigger data based on context it is used
+func (m *MoiraTriggerData) validateTriggerSource(formats strfmt.Registry) error {
+	if swag.IsZero(m.TriggerSource) { // not required
+		return nil
+	}
+
+	return nil
+}
+
+// ContextValidate validate this moira trigger data based on the context it is used
 func (m *MoiraTriggerData) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateTriggerSource(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *MoiraTriggerData) contextValidateTriggerSource(ctx context.Context, formats strfmt.Registry) error {
+
 	return nil
 }
 

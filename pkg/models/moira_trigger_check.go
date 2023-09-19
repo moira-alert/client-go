@@ -46,10 +46,6 @@ type MoiraTriggerCheck struct {
 	// Example: 292516ed-4924-4154-a62c-ebe312431fce
 	ID string `json:"id,omitempty"`
 
-	// is remote
-	// Example: false
-	IsRemote bool `json:"is_remote,omitempty"`
-
 	// last check
 	LastCheck *MoiraCheckData `json:"last_check,omitempty"`
 
@@ -84,6 +80,12 @@ type MoiraTriggerCheck struct {
 	// throttling
 	// Example: 0
 	Throttling int64 `json:"throttling,omitempty"`
+
+	// trigger source
+	// Example: graphite_local
+	TriggerSource struct {
+		MoiraTriggerSource
+	} `json:"trigger_source,omitempty"`
 
 	// trigger type
 	// Example: rising
@@ -120,6 +122,10 @@ func (m *MoiraTriggerCheck) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateTriggerSource(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -153,6 +159,14 @@ func (m *MoiraTriggerCheck) validateSched(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *MoiraTriggerCheck) validateTriggerSource(formats strfmt.Registry) error {
+	if swag.IsZero(m.TriggerSource) { // not required
+		return nil
+	}
+
+	return nil
+}
+
 // ContextValidate validate this moira trigger check based on the context it is used
 func (m *MoiraTriggerCheck) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -162,6 +176,10 @@ func (m *MoiraTriggerCheck) ContextValidate(ctx context.Context, formats strfmt.
 	}
 
 	if err := m.contextValidateSched(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTriggerSource(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -193,6 +211,11 @@ func (m *MoiraTriggerCheck) contextValidateLastCheck(ctx context.Context, format
 }
 
 func (m *MoiraTriggerCheck) contextValidateSched(ctx context.Context, formats strfmt.Registry) error {
+
+	return nil
+}
+
+func (m *MoiraTriggerCheck) contextValidateTriggerSource(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }

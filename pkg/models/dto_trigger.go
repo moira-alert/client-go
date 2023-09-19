@@ -44,6 +44,8 @@ type DtoTrigger struct {
 	ID string `json:"id,omitempty"`
 
 	// Shows if trigger is remote (graphite-backend) based or stored inside Moira-Redis DB
+	//
+	// Deprecated: Use TriggerSource field instead
 	// Example: false
 	IsRemote bool `json:"is_remote,omitempty"`
 
@@ -76,6 +78,12 @@ type DtoTrigger struct {
 	// Example: 0
 	Throttling int64 `json:"throttling,omitempty"`
 
+	// Shows the source from where the metrics are fetched
+	// Example: graphite_local
+	TriggerSource struct {
+		MoiraTriggerSource
+	} `json:"trigger_source,omitempty"`
+
 	// Could be: rising, falling, expression
 	// Example: rising
 	TriggerType string `json:"trigger_type,omitempty"`
@@ -107,6 +115,10 @@ func (m *DtoTrigger) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateTriggerSource(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -121,11 +133,23 @@ func (m *DtoTrigger) validateSched(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *DtoTrigger) validateTriggerSource(formats strfmt.Registry) error {
+	if swag.IsZero(m.TriggerSource) { // not required
+		return nil
+	}
+
+	return nil
+}
+
 // ContextValidate validate this dto trigger based on the context it is used
 func (m *DtoTrigger) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateSched(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTriggerSource(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -136,6 +160,11 @@ func (m *DtoTrigger) ContextValidate(ctx context.Context, formats strfmt.Registr
 }
 
 func (m *DtoTrigger) contextValidateSched(ctx context.Context, formats strfmt.Registry) error {
+
+	return nil
+}
+
+func (m *DtoTrigger) contextValidateTriggerSource(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }
