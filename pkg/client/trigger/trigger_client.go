@@ -40,6 +40,8 @@ type ClientService interface {
 
 	DeleteTriggerThrottling(params *DeleteTriggerThrottlingParams, opts ...ClientOption) (*DeleteTriggerThrottlingOK, error)
 
+	GetAllTriggers(params *GetAllTriggersParams, opts ...ClientOption) (*GetAllTriggersOK, error)
+
 	GetTrigger(params *GetTriggerParams, opts ...ClientOption) (*GetTriggerOK, error)
 
 	GetTriggerDump(params *GetTriggerDumpParams, opts ...ClientOption) (*GetTriggerDumpOK, error)
@@ -258,6 +260,44 @@ func (a *Client) DeleteTriggerThrottling(params *DeleteTriggerThrottlingParams, 
 }
 
 /*
+GetAllTriggers gets all triggers
+*/
+func (a *Client) GetAllTriggers(params *GetAllTriggersParams, opts ...ClientOption) (*GetAllTriggersOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAllTriggersParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "get-all-triggers",
+		Method:             "GET",
+		PathPattern:        "/trigger",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAllTriggersReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAllTriggersOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for get-all-triggers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetTrigger gets an existing trigger
 */
 func (a *Client) GetTrigger(params *GetTriggerParams, opts ...ClientOption) (*GetTriggerOK, error) {
@@ -458,7 +498,7 @@ func (a *Client) GetUnusedTriggers(params *GetUnusedTriggersParams, opts ...Clie
 	op := &runtime.ClientOperation{
 		ID:                 "get-unused-triggers",
 		Method:             "GET",
-		PathPattern:        "/trigger",
+		PathPattern:        "/trigger/unused",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},

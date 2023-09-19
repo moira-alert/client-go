@@ -42,7 +42,7 @@ func (o *GetUnusedTriggersReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /trigger] get-unused-triggers", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /trigger/unused] get-unused-triggers", response, response.Code())
 	}
 }
 
@@ -91,11 +91,11 @@ func (o *GetUnusedTriggersOK) Code() int {
 }
 
 func (o *GetUnusedTriggersOK) Error() string {
-	return fmt.Sprintf("[GET /trigger][%d] getUnusedTriggersOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /trigger/unused][%d] getUnusedTriggersOK  %+v", 200, o.Payload)
 }
 
 func (o *GetUnusedTriggersOK) String() string {
-	return fmt.Sprintf("[GET /trigger][%d] getUnusedTriggersOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /trigger/unused][%d] getUnusedTriggersOK  %+v", 200, o.Payload)
 }
 
 func (o *GetUnusedTriggersOK) GetPayload() *models.DtoTriggersList {
@@ -159,11 +159,11 @@ func (o *GetUnusedTriggersUnprocessableEntity) Code() int {
 }
 
 func (o *GetUnusedTriggersUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /trigger][%d] getUnusedTriggersUnprocessableEntity  %+v", 422, o.Payload)
+	return fmt.Sprintf("[GET /trigger/unused][%d] getUnusedTriggersUnprocessableEntity  %+v", 422, o.Payload)
 }
 
 func (o *GetUnusedTriggersUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /trigger][%d] getUnusedTriggersUnprocessableEntity  %+v", 422, o.Payload)
+	return fmt.Sprintf("[GET /trigger/unused][%d] getUnusedTriggersUnprocessableEntity  %+v", 422, o.Payload)
 }
 
 func (o *GetUnusedTriggersUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -227,11 +227,11 @@ func (o *GetUnusedTriggersInternalServerError) Code() int {
 }
 
 func (o *GetUnusedTriggersInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /trigger][%d] getUnusedTriggersInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[GET /trigger/unused][%d] getUnusedTriggersInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetUnusedTriggersInternalServerError) String() string {
-	return fmt.Sprintf("[GET /trigger][%d] getUnusedTriggersInternalServerError  %+v", 500, o.Payload)
+	return fmt.Sprintf("[GET /trigger/unused][%d] getUnusedTriggersInternalServerError  %+v", 500, o.Payload)
 }
 
 func (o *GetUnusedTriggersInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
