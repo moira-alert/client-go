@@ -44,6 +44,8 @@ type DtoTrigger struct {
 	ID string `json:"id,omitempty"`
 
 	// Shows if trigger is remote (graphite-backend) based or stored inside Moira-Redis DB
+	//
+	// Deprecated: Use TriggerSource field instead
 	// Example: false
 	IsRemote bool `json:"is_remote,omitempty"`
 
@@ -76,6 +78,10 @@ type DtoTrigger struct {
 	// Example: 0
 	Throttling int64 `json:"throttling,omitempty"`
 
+	// Shows the source from where the metrics are fetched
+	// Example: graphite_local
+	TriggerSource string `json:"trigger_source,omitempty"`
+
 	// Could be: rising, falling, expression
 	// Example: rising
 	TriggerType string `json:"trigger_type,omitempty"`
@@ -86,7 +92,7 @@ type DtoTrigger struct {
 
 	// When there are no metrics for trigger, Moira will switch metric to TTLState state after TTL seconds
 	// Example: NODATA
-	TTLState string `json:"ttl_state,omitempty"`
+	TTLState *string `json:"ttl_state,omitempty"`
 
 	// Datetime  when the trigger was updated
 	UpdatedAt *string `json:"updated_at,omitempty"`

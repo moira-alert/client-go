@@ -68,6 +68,14 @@ type SearchTriggersParams struct {
 	*/
 	CreatePager *bool
 
+	/* CreatedBy.
+
+	   Created By
+
+	   Default: "moira.team"
+	*/
+	CreatedBy *string
+
 	/* OnlyProblems.
 
 	   Only include problems
@@ -124,6 +132,8 @@ func (o *SearchTriggersParams) SetDefaults() {
 	var (
 		createPagerDefault = bool(false)
 
+		createdByDefault = string("moira.team")
+
 		onlyProblemsDefault = bool(false)
 
 		pDefault = int64(0)
@@ -137,6 +147,7 @@ func (o *SearchTriggersParams) SetDefaults() {
 
 	val := SearchTriggersParams{
 		CreatePager:  &createPagerDefault,
+		CreatedBy:    &createdByDefault,
 		OnlyProblems: &onlyProblemsDefault,
 		P:            &pDefault,
 		PagerID:      &pagerIDDefault,
@@ -192,6 +203,17 @@ func (o *SearchTriggersParams) WithCreatePager(createPager *bool) *SearchTrigger
 // SetCreatePager adds the createPager to the search triggers params
 func (o *SearchTriggersParams) SetCreatePager(createPager *bool) {
 	o.CreatePager = createPager
+}
+
+// WithCreatedBy adds the createdBy to the search triggers params
+func (o *SearchTriggersParams) WithCreatedBy(createdBy *string) *SearchTriggersParams {
+	o.SetCreatedBy(createdBy)
+	return o
+}
+
+// SetCreatedBy adds the createdBy to the search triggers params
+func (o *SearchTriggersParams) SetCreatedBy(createdBy *string) {
+	o.CreatedBy = createdBy
 }
 
 // WithOnlyProblems adds the onlyProblems to the search triggers params
@@ -269,6 +291,23 @@ func (o *SearchTriggersParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		if qCreatePager != "" {
 
 			if err := r.SetQueryParam("createPager", qCreatePager); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.CreatedBy != nil {
+
+		// query param createdBy
+		var qrCreatedBy string
+
+		if o.CreatedBy != nil {
+			qrCreatedBy = *o.CreatedBy
+		}
+		qCreatedBy := qrCreatedBy
+		if qCreatedBy != "" {
+
+			if err := r.SetQueryParam("createdBy", qCreatedBy); err != nil {
 				return err
 			}
 		}

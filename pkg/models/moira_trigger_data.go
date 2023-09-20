@@ -45,6 +45,10 @@ type MoiraTriggerData struct {
 	// Example: ["devOps.my_server.hdd.freespace_mbytes"]
 	Targets []string `json:"targets"`
 
+	// trigger source
+	// Example: graphite_local
+	TriggerSource string `json:"trigger_source,omitempty"`
+
 	// warn value
 	// Example: 5000
 	WarnValue float64 `json:"warn_value,omitempty"`

@@ -43,10 +43,6 @@ type MoiraTrigger struct {
 	// Example: 292516ed-4924-4154-a62c-ebe312431fce
 	ID string `json:"id,omitempty"`
 
-	// is remote
-	// Example: false
-	IsRemote bool `json:"is_remote,omitempty"`
-
 	// mute new metrics
 	// Example: false
 	MuteNewMetrics bool `json:"mute_new_metrics,omitempty"`
@@ -74,6 +70,10 @@ type MoiraTrigger struct {
 	// targets
 	// Example: ["devOps.my_server.hdd.freespace_mbytes"]
 	Targets []string `json:"targets"`
+
+	// trigger source
+	// Example: graphite_local
+	TriggerSource string `json:"trigger_source,omitempty"`
 
 	// trigger type
 	// Example: rising

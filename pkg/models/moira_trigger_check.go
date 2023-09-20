@@ -46,10 +46,6 @@ type MoiraTriggerCheck struct {
 	// Example: 292516ed-4924-4154-a62c-ebe312431fce
 	ID string `json:"id,omitempty"`
 
-	// is remote
-	// Example: false
-	IsRemote bool `json:"is_remote,omitempty"`
-
 	// last check
 	LastCheck *MoiraCheckData `json:"last_check,omitempty"`
 
@@ -84,6 +80,10 @@ type MoiraTriggerCheck struct {
 	// throttling
 	// Example: 0
 	Throttling int64 `json:"throttling,omitempty"`
+
+	// trigger source
+	// Example: graphite_local
+	TriggerSource string `json:"trigger_source,omitempty"`
 
 	// trigger type
 	// Example: rising
