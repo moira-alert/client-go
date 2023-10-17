@@ -30,9 +30,9 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	DeleteTriggerPagersPagerID(params *DeleteTriggerPagersPagerIDParams, opts ...ClientOption) (*DeleteTriggerPagersPagerIDOK, error)
-
 	CreateTrigger(params *CreateTriggerParams, opts ...ClientOption) (*CreateTriggerOK, error)
+
+	DeletePager(params *DeletePagerParams, opts ...ClientOption) (*DeletePagerOK, error)
 
 	DeleteTriggerMetric(params *DeleteTriggerMetricParams, opts ...ClientOption) (*DeleteTriggerMetricOK, error)
 
@@ -70,44 +70,6 @@ type ClientService interface {
 }
 
 /*
-DeleteTriggerPagersPagerID deletes triggers pager
-*/
-func (a *Client) DeleteTriggerPagersPagerID(params *DeleteTriggerPagersPagerIDParams, opts ...ClientOption) (*DeleteTriggerPagersPagerIDOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteTriggerPagersPagerIDParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "DeleteTriggerPagersPagerID",
-		Method:             "DELETE",
-		PathPattern:        "/trigger/pagers/{pagerID}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"http"},
-		Params:             params,
-		Reader:             &DeleteTriggerPagersPagerIDReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*DeleteTriggerPagersPagerIDOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for DeleteTriggerPagersPagerID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 CreateTrigger creates a new trigger
 */
 func (a *Client) CreateTrigger(params *CreateTriggerParams, opts ...ClientOption) (*CreateTriggerOK, error) {
@@ -142,6 +104,44 @@ func (a *Client) CreateTrigger(params *CreateTriggerParams, opts ...ClientOption
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for create-trigger: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+DeletePager deletes triggers pager
+*/
+func (a *Client) DeletePager(params *DeletePagerParams, opts ...ClientOption) (*DeletePagerOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeletePagerParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "delete-pager",
+		Method:             "DELETE",
+		PathPattern:        "/trigger/search/pager",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeletePagerReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeletePagerOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for delete-pager: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
