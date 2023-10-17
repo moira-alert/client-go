@@ -18,6 +18,11 @@ import (
 // swagger:model moira.MetricState
 type MoiraMetricState struct {
 
+	// DeletedButKept controls whether the metric is shown to the user if the trigger has ttlState = Del
+	// and the metric is in Maintenance. The metric remains in the database
+	// Example: false
+	DeletedButKept bool `json:"deleted_but_kept,omitempty"`
+
 	// event timestamp
 	// Example: 1590741878
 	EventTimestamp int64 `json:"event_timestamp,omitempty"`
