@@ -29,6 +29,12 @@ func (o *GetWebConfigReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return result, nil
+	case 422:
+		result := NewGetWebConfigUnprocessableEntity()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[GET /config] get-web-config", response, response.Code())
 	}
@@ -45,7 +51,7 @@ GetWebConfigOK describes a response with status code 200, with default header va
 Configuration fetched successfully
 */
 type GetWebConfigOK struct {
-	Payload *models.HandlerConfigurationResponse
+	Payload *models.APIWebConfig
 }
 
 // IsSuccess returns true when this get web config o k response has a 2xx status code
@@ -86,13 +92,81 @@ func (o *GetWebConfigOK) String() string {
 	return fmt.Sprintf("[GET /config][%d] getWebConfigOK  %+v", 200, o.Payload)
 }
 
-func (o *GetWebConfigOK) GetPayload() *models.HandlerConfigurationResponse {
+func (o *GetWebConfigOK) GetPayload() *models.APIWebConfig {
 	return o.Payload
 }
 
 func (o *GetWebConfigOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.HandlerConfigurationResponse)
+	o.Payload = new(models.APIWebConfig)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetWebConfigUnprocessableEntity creates a GetWebConfigUnprocessableEntity with default headers values
+func NewGetWebConfigUnprocessableEntity() *GetWebConfigUnprocessableEntity {
+	return &GetWebConfigUnprocessableEntity{}
+}
+
+/*
+GetWebConfigUnprocessableEntity describes a response with status code 422, with default header values.
+
+Render error
+*/
+type GetWebConfigUnprocessableEntity struct {
+	Payload *models.APIErrorRenderExample
+}
+
+// IsSuccess returns true when this get web config unprocessable entity response has a 2xx status code
+func (o *GetWebConfigUnprocessableEntity) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get web config unprocessable entity response has a 3xx status code
+func (o *GetWebConfigUnprocessableEntity) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get web config unprocessable entity response has a 4xx status code
+func (o *GetWebConfigUnprocessableEntity) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get web config unprocessable entity response has a 5xx status code
+func (o *GetWebConfigUnprocessableEntity) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get web config unprocessable entity response a status code equal to that given
+func (o *GetWebConfigUnprocessableEntity) IsCode(code int) bool {
+	return code == 422
+}
+
+// Code gets the status code for the get web config unprocessable entity response
+func (o *GetWebConfigUnprocessableEntity) Code() int {
+	return 422
+}
+
+func (o *GetWebConfigUnprocessableEntity) Error() string {
+	return fmt.Sprintf("[GET /config][%d] getWebConfigUnprocessableEntity  %+v", 422, o.Payload)
+}
+
+func (o *GetWebConfigUnprocessableEntity) String() string {
+	return fmt.Sprintf("[GET /config][%d] getWebConfigUnprocessableEntity  %+v", 422, o.Payload)
+}
+
+func (o *GetWebConfigUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+	return o.Payload
+}
+
+func (o *GetWebConfigUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.APIErrorRenderExample)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -22,6 +22,10 @@ type DtoTrigger struct {
 	// Example: {"t1":true}
 	AloneMetrics map[string]bool `json:"alone_metrics,omitempty"`
 
+	// Shows the exact cluster from where the metrics are fetched
+	// Example: default
+	ClusterID string `json:"cluster_id,omitempty"`
+
 	// Datetime when the trigger was created
 	CreatedAt *string `json:"created_at,omitempty"`
 
@@ -78,7 +82,7 @@ type DtoTrigger struct {
 	// Example: 0
 	Throttling int64 `json:"throttling,omitempty"`
 
-	// Shows the source from where the metrics are fetched
+	// Shows the type of source from where the metrics are fetched
 	// Example: graphite_local
 	TriggerSource string `json:"trigger_source,omitempty"`
 

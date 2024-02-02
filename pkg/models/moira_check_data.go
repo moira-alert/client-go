@@ -23,7 +23,7 @@ type MoiraCheckData struct {
 	// Example: 1590741878
 	EventTimestamp int64 `json:"event_timestamp,omitempty"`
 
-	// last successful check timestamp
+	// LastSuccessfulCheckTimestamp - time of the last check of the trigger, during which there were no errors
 	// Example: 1590741916
 	LastSuccessfulCheckTimestamp int64 `json:"last_successful_check_timestamp,omitempty"`
 
@@ -61,7 +61,7 @@ type MoiraCheckData struct {
 	// suppressed state
 	SuppressedState string `json:"suppressed_state,omitempty"`
 
-	// timestamp
+	// Timestamp - time, which means when the checker last checked this trigger, this value stops updating if the trigger does not receive metrics
 	// Example: 1590741916
 	Timestamp int64 `json:"timestamp,omitempty"`
 }
