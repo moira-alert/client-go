@@ -21,6 +21,10 @@ type MoiraScheduledNotification struct {
 	// contact
 	Contact *MoiraContactData `json:"contact,omitempty"`
 
+	// created at
+	// Example: 1594471900
+	CreatedAt int64 `json:"created_at,omitempty"`
+
 	// event
 	Event *MoiraNotificationEvent `json:"event,omitempty"`
 

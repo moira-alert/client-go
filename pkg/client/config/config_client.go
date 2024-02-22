@@ -36,7 +36,7 @@ type ClientService interface {
 }
 
 /*
-GetWebConfig gets available configuration
+GetWebConfig gets web configuration
 */
 func (a *Client) GetWebConfig(params *GetWebConfigParams, opts ...ClientOption) (*GetWebConfigOK, error) {
 	// TODO: Validate the params before sending

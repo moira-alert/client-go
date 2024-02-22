@@ -21,6 +21,10 @@ type MoiraTriggerData struct {
 	// Example: ["server","disk"]
 	NotifierTriggerTags []string `json:"__notifier_trigger_tags"`
 
+	// cluster id
+	// Example: default
+	ClusterID string `json:"cluster_id,omitempty"`
+
 	// desc
 	// Example: check the size of /var/log
 	Desc string `json:"desc,omitempty"`

@@ -22,6 +22,10 @@ type MoiraTrigger struct {
 	// Example: {"t1":true}
 	AloneMetrics map[string]bool `json:"alone_metrics,omitempty"`
 
+	// cluster id
+	// Example: default
+	ClusterID string `json:"cluster_id,omitempty"`
+
 	// created at
 	CreatedAt *int64 `json:"created_at,omitempty"`
 
