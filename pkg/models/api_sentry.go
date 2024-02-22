@@ -20,6 +20,10 @@ type APISentry struct {
 	// dsn
 	// Example: https://secret@sentry.host
 	Dsn string `json:"dsn,omitempty"`
+
+	// platform
+	// Example: dev
+	Platform string `json:"platform,omitempty"`
 }
 
 // Validate validates this api sentry
