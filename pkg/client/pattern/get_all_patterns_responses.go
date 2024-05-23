@@ -29,6 +29,12 @@ func (o *GetAllPatternsReader) ReadResponse(response runtime.ClientResponse, con
 			return nil, err
 		}
 		return result, nil
+	case 403:
+		result := NewGetAllPatternsForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 422:
 		result := NewGetAllPatternsUnprocessableEntity()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -105,6 +111,74 @@ func (o *GetAllPatternsOK) GetPayload() *models.DtoPatternList {
 func (o *GetAllPatternsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.DtoPatternList)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetAllPatternsForbidden creates a GetAllPatternsForbidden with default headers values
+func NewGetAllPatternsForbidden() *GetAllPatternsForbidden {
+	return &GetAllPatternsForbidden{}
+}
+
+/*
+GetAllPatternsForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type GetAllPatternsForbidden struct {
+	Payload *models.APIErrorForbiddenExample
+}
+
+// IsSuccess returns true when this get all patterns forbidden response has a 2xx status code
+func (o *GetAllPatternsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get all patterns forbidden response has a 3xx status code
+func (o *GetAllPatternsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get all patterns forbidden response has a 4xx status code
+func (o *GetAllPatternsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get all patterns forbidden response has a 5xx status code
+func (o *GetAllPatternsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get all patterns forbidden response a status code equal to that given
+func (o *GetAllPatternsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get all patterns forbidden response
+func (o *GetAllPatternsForbidden) Code() int {
+	return 403
+}
+
+func (o *GetAllPatternsForbidden) Error() string {
+	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetAllPatternsForbidden) String() string {
+	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetAllPatternsForbidden) GetPayload() *models.APIErrorForbiddenExample {
+	return o.Payload
+}
+
+func (o *GetAllPatternsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.APIErrorForbiddenExample)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
