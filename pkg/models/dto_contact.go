@@ -21,6 +21,10 @@ type DtoContact struct {
 	// Example: 1dd38765-c5be-418d-81fa-7a5f879c2315
 	ID string `json:"id,omitempty"`
 
+	// name
+	// Example: Mail Alerts
+	Name string `json:"name,omitempty"`
+
 	// team id
 	TeamID string `json:"team_id,omitempty"`
 
