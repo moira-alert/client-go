@@ -17,9 +17,17 @@ import (
 // swagger:model dto.User
 type DtoUser struct {
 
+	// auth enabled
+	// Example: true
+	AuthEnabled bool `json:"auth_enabled,omitempty"`
+
 	// login
 	// Example: john
 	Login string `json:"login,omitempty"`
+
+	// role
+	// Example: user
+	Role string `json:"role,omitempty"`
 }
 
 // Validate validates this dto user

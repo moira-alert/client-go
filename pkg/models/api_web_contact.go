@@ -25,6 +25,10 @@ type APIWebContact struct {
 	// Example: Webhook
 	Label string `json:"label,omitempty"`
 
+	// logo uri
+	// Example: discord-logo.svg
+	LogoURI string `json:"logo_uri,omitempty"`
+
 	// placeholder
 	// Example: https://moira.ru/webhooks
 	Placeholder string `json:"placeholder,omitempty"`

@@ -32,6 +32,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	CreateSubscription(params *CreateSubscriptionParams, opts ...ClientOption) (*CreateSubscriptionOK, error)
 
+	GetSubscription(params *GetSubscriptionParams, opts ...ClientOption) (*GetSubscriptionOK, error)
+
 	GetUserSubscriptions(params *GetUserSubscriptionsParams, opts ...ClientOption) (*GetUserSubscriptionsOK, error)
 
 	RemoveSubscription(params *RemoveSubscriptionParams, opts ...ClientOption) (*RemoveSubscriptionOK, error)
@@ -78,6 +80,44 @@ func (a *Client) CreateSubscription(params *CreateSubscriptionParams, opts ...Cl
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for create-subscription: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetSubscription gets subscription by id
+*/
+func (a *Client) GetSubscription(params *GetSubscriptionParams, opts ...ClientOption) (*GetSubscriptionOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetSubscriptionParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "get-subscription",
+		Method:             "GET",
+		PathPattern:        "/subscription/{subscriptionID}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetSubscriptionReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetSubscriptionOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for get-subscription: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

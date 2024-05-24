@@ -35,6 +35,12 @@ func (o *DeletePatternReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
+	case 403:
+		result := NewDeletePatternForbidden()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewDeletePatternInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -161,6 +167,74 @@ func (o *DeletePatternBadRequest) GetPayload() *models.APIErrorInvalidRequestExa
 func (o *DeletePatternBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.APIErrorInvalidRequestExample)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeletePatternForbidden creates a DeletePatternForbidden with default headers values
+func NewDeletePatternForbidden() *DeletePatternForbidden {
+	return &DeletePatternForbidden{}
+}
+
+/*
+DeletePatternForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type DeletePatternForbidden struct {
+	Payload *models.APIErrorForbiddenExample
+}
+
+// IsSuccess returns true when this delete pattern forbidden response has a 2xx status code
+func (o *DeletePatternForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete pattern forbidden response has a 3xx status code
+func (o *DeletePatternForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete pattern forbidden response has a 4xx status code
+func (o *DeletePatternForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete pattern forbidden response has a 5xx status code
+func (o *DeletePatternForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete pattern forbidden response a status code equal to that given
+func (o *DeletePatternForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the delete pattern forbidden response
+func (o *DeletePatternForbidden) Code() int {
+	return 403
+}
+
+func (o *DeletePatternForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternForbidden  %+v", 403, o.Payload)
+}
+
+func (o *DeletePatternForbidden) String() string {
+	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternForbidden  %+v", 403, o.Payload)
+}
+
+func (o *DeletePatternForbidden) GetPayload() *models.APIErrorForbiddenExample {
+	return o.Payload
+}
+
+func (o *DeletePatternForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.APIErrorForbiddenExample)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

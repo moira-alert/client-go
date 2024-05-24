@@ -32,6 +32,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	GetNotifierState(params *GetNotifierStateParams, opts ...ClientOption) (*GetNotifierStateOK, error)
 
+	SetNotifierState(params *SetNotifierStateParams, opts ...ClientOption) (*SetNotifierStateOK, error)
+
 	SetTransport(transport runtime.ClientTransport)
 }
 
@@ -70,6 +72,44 @@ func (a *Client) GetNotifierState(params *GetNotifierStateParams, opts ...Client
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-notifier-state: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+SetNotifierState sets notifier state
+*/
+func (a *Client) SetNotifierState(params *SetNotifierStateParams, opts ...ClientOption) (*SetNotifierStateOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSetNotifierStateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "set-notifier-state",
+		Method:             "PUT",
+		PathPattern:        "/health/notifier",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &SetNotifierStateReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SetNotifierStateOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for set-notifier-state: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

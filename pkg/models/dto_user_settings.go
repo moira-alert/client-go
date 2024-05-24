@@ -19,12 +19,20 @@ import (
 // swagger:model dto.UserSettings
 type DtoUserSettings struct {
 
+	// auth enabled
+	// Example: true
+	AuthEnabled bool `json:"auth_enabled,omitempty"`
+
 	// contacts
 	Contacts []*MoiraContactData `json:"contacts"`
 
 	// login
 	// Example: john
 	Login string `json:"login,omitempty"`
+
+	// role
+	// Example: user
+	Role string `json:"role,omitempty"`
 
 	// subscriptions
 	Subscriptions []*MoiraSubscriptionData `json:"subscriptions"`
