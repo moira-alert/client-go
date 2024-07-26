@@ -6,6 +6,7 @@ package contact
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *UpdateContactOK) Code() int {
 }
 
 func (o *UpdateContactOK) Error() string {
-	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactOK %s", 200, payload)
 }
 
 func (o *UpdateContactOK) String() string {
-	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactOK %s", 200, payload)
 }
 
 func (o *UpdateContactOK) GetPayload() *models.DtoContact {
@@ -177,11 +180,13 @@ func (o *UpdateContactBadRequest) Code() int {
 }
 
 func (o *UpdateContactBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactBadRequest %s", 400, payload)
 }
 
 func (o *UpdateContactBadRequest) String() string {
-	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactBadRequest %s", 400, payload)
 }
 
 func (o *UpdateContactBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -245,11 +250,13 @@ func (o *UpdateContactForbidden) Code() int {
 }
 
 func (o *UpdateContactForbidden) Error() string {
-	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactForbidden %s", 403, payload)
 }
 
 func (o *UpdateContactForbidden) String() string {
-	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactForbidden %s", 403, payload)
 }
 
 func (o *UpdateContactForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -313,11 +320,13 @@ func (o *UpdateContactNotFound) Code() int {
 }
 
 func (o *UpdateContactNotFound) Error() string {
-	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactNotFound %s", 404, payload)
 }
 
 func (o *UpdateContactNotFound) String() string {
-	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactNotFound %s", 404, payload)
 }
 
 func (o *UpdateContactNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -381,11 +390,13 @@ func (o *UpdateContactUnprocessableEntity) Code() int {
 }
 
 func (o *UpdateContactUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactUnprocessableEntity %s", 422, payload)
 }
 
 func (o *UpdateContactUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactUnprocessableEntity %s", 422, payload)
 }
 
 func (o *UpdateContactUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -449,11 +460,13 @@ func (o *UpdateContactInternalServerError) Code() int {
 }
 
 func (o *UpdateContactInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateContactInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateContactInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

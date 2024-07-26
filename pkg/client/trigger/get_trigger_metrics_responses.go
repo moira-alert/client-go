@@ -6,6 +6,7 @@ package trigger
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *GetTriggerMetricsOK) Code() int {
 }
 
 func (o *GetTriggerMetricsOK) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsOK %s", 200, payload)
 }
 
 func (o *GetTriggerMetricsOK) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsOK %s", 200, payload)
 }
 
 func (o *GetTriggerMetricsOK) GetPayload() models.DtoTriggerMetrics {
@@ -169,11 +172,13 @@ func (o *GetTriggerMetricsBadRequest) Code() int {
 }
 
 func (o *GetTriggerMetricsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsBadRequest %s", 400, payload)
 }
 
 func (o *GetTriggerMetricsBadRequest) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsBadRequest %s", 400, payload)
 }
 
 func (o *GetTriggerMetricsBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -237,11 +242,13 @@ func (o *GetTriggerMetricsNotFound) Code() int {
 }
 
 func (o *GetTriggerMetricsNotFound) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsNotFound %s", 404, payload)
 }
 
 func (o *GetTriggerMetricsNotFound) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsNotFound %s", 404, payload)
 }
 
 func (o *GetTriggerMetricsNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -305,11 +312,13 @@ func (o *GetTriggerMetricsUnprocessableEntity) Code() int {
 }
 
 func (o *GetTriggerMetricsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetTriggerMetricsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetTriggerMetricsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -373,11 +382,13 @@ func (o *GetTriggerMetricsInternalServerError) Code() int {
 }
 
 func (o *GetTriggerMetricsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsInternalServerError %s", 500, payload)
 }
 
 func (o *GetTriggerMetricsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsInternalServerError %s", 500, payload)
 }
 
 func (o *GetTriggerMetricsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

@@ -6,6 +6,7 @@ package trigger
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -96,11 +97,11 @@ func (o *SetTriggerMaintenanceOK) Code() int {
 }
 
 func (o *SetTriggerMaintenanceOK) Error() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceOK ", 200)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceOK", 200)
 }
 
 func (o *SetTriggerMaintenanceOK) String() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceOK ", 200)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceOK", 200)
 }
 
 func (o *SetTriggerMaintenanceOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -153,11 +154,13 @@ func (o *SetTriggerMaintenanceBadRequest) Code() int {
 }
 
 func (o *SetTriggerMaintenanceBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceBadRequest %s", 400, payload)
 }
 
 func (o *SetTriggerMaintenanceBadRequest) String() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceBadRequest %s", 400, payload)
 }
 
 func (o *SetTriggerMaintenanceBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -221,11 +224,13 @@ func (o *SetTriggerMaintenanceNotFound) Code() int {
 }
 
 func (o *SetTriggerMaintenanceNotFound) Error() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceNotFound %s", 404, payload)
 }
 
 func (o *SetTriggerMaintenanceNotFound) String() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceNotFound %s", 404, payload)
 }
 
 func (o *SetTriggerMaintenanceNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -289,11 +294,13 @@ func (o *SetTriggerMaintenanceInternalServerError) Code() int {
 }
 
 func (o *SetTriggerMaintenanceInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceInternalServerError %s", 500, payload)
 }
 
 func (o *SetTriggerMaintenanceInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceInternalServerError %s", 500, payload)
 }
 
 func (o *SetTriggerMaintenanceInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

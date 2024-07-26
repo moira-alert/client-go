@@ -6,6 +6,7 @@ package trigger
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -90,11 +91,11 @@ func (o *RemoveTriggerOK) Code() int {
 }
 
 func (o *RemoveTriggerOK) Error() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}][%d] removeTriggerOK ", 200)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}][%d] removeTriggerOK", 200)
 }
 
 func (o *RemoveTriggerOK) String() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}][%d] removeTriggerOK ", 200)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}][%d] removeTriggerOK", 200)
 }
 
 func (o *RemoveTriggerOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -147,11 +148,13 @@ func (o *RemoveTriggerNotFound) Code() int {
 }
 
 func (o *RemoveTriggerNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}][%d] removeTriggerNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}][%d] removeTriggerNotFound %s", 404, payload)
 }
 
 func (o *RemoveTriggerNotFound) String() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}][%d] removeTriggerNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}][%d] removeTriggerNotFound %s", 404, payload)
 }
 
 func (o *RemoveTriggerNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -215,11 +218,13 @@ func (o *RemoveTriggerInternalServerError) Code() int {
 }
 
 func (o *RemoveTriggerInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}][%d] removeTriggerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}][%d] removeTriggerInternalServerError %s", 500, payload)
 }
 
 func (o *RemoveTriggerInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}][%d] removeTriggerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}][%d] removeTriggerInternalServerError %s", 500, payload)
 }
 
 func (o *RemoveTriggerInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

@@ -6,6 +6,7 @@ package team_contact
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *CreateNewTeamContactOK) Code() int {
 }
 
 func (o *CreateNewTeamContactOK) Error() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactOK %s", 200, payload)
 }
 
 func (o *CreateNewTeamContactOK) String() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactOK %s", 200, payload)
 }
 
 func (o *CreateNewTeamContactOK) GetPayload() *models.DtoContact {
@@ -177,11 +180,13 @@ func (o *CreateNewTeamContactBadRequest) Code() int {
 }
 
 func (o *CreateNewTeamContactBadRequest) Error() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactBadRequest %s", 400, payload)
 }
 
 func (o *CreateNewTeamContactBadRequest) String() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactBadRequest %s", 400, payload)
 }
 
 func (o *CreateNewTeamContactBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -245,11 +250,13 @@ func (o *CreateNewTeamContactForbidden) Code() int {
 }
 
 func (o *CreateNewTeamContactForbidden) Error() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactForbidden %s", 403, payload)
 }
 
 func (o *CreateNewTeamContactForbidden) String() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactForbidden %s", 403, payload)
 }
 
 func (o *CreateNewTeamContactForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -313,11 +320,13 @@ func (o *CreateNewTeamContactNotFound) Code() int {
 }
 
 func (o *CreateNewTeamContactNotFound) Error() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactNotFound %s", 404, payload)
 }
 
 func (o *CreateNewTeamContactNotFound) String() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactNotFound %s", 404, payload)
 }
 
 func (o *CreateNewTeamContactNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -381,11 +390,13 @@ func (o *CreateNewTeamContactUnprocessableEntity) Code() int {
 }
 
 func (o *CreateNewTeamContactUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactUnprocessableEntity %s", 422, payload)
 }
 
 func (o *CreateNewTeamContactUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactUnprocessableEntity %s", 422, payload)
 }
 
 func (o *CreateNewTeamContactUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -449,11 +460,13 @@ func (o *CreateNewTeamContactInternalServerError) Code() int {
 }
 
 func (o *CreateNewTeamContactInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactInternalServerError %s", 500, payload)
 }
 
 func (o *CreateNewTeamContactInternalServerError) String() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactInternalServerError %s", 500, payload)
 }
 
 func (o *CreateNewTeamContactInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

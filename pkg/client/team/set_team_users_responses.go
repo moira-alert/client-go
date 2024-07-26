@@ -6,6 +6,7 @@ package team
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *SetTeamUsersOK) Code() int {
 }
 
 func (o *SetTeamUsersOK) Error() string {
-	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersOK %s", 200, payload)
 }
 
 func (o *SetTeamUsersOK) String() string {
-	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersOK %s", 200, payload)
 }
 
 func (o *SetTeamUsersOK) GetPayload() *models.DtoTeamMembers {
@@ -177,11 +180,13 @@ func (o *SetTeamUsersBadRequest) Code() int {
 }
 
 func (o *SetTeamUsersBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersBadRequest %s", 400, payload)
 }
 
 func (o *SetTeamUsersBadRequest) String() string {
-	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersBadRequest %s", 400, payload)
 }
 
 func (o *SetTeamUsersBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -245,11 +250,13 @@ func (o *SetTeamUsersForbidden) Code() int {
 }
 
 func (o *SetTeamUsersForbidden) Error() string {
-	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersForbidden %s", 403, payload)
 }
 
 func (o *SetTeamUsersForbidden) String() string {
-	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersForbidden %s", 403, payload)
 }
 
 func (o *SetTeamUsersForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -313,11 +320,13 @@ func (o *SetTeamUsersNotFound) Code() int {
 }
 
 func (o *SetTeamUsersNotFound) Error() string {
-	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersNotFound %s", 404, payload)
 }
 
 func (o *SetTeamUsersNotFound) String() string {
-	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersNotFound %s", 404, payload)
 }
 
 func (o *SetTeamUsersNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -381,11 +390,13 @@ func (o *SetTeamUsersUnprocessableEntity) Code() int {
 }
 
 func (o *SetTeamUsersUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersUnprocessableEntity %s", 422, payload)
 }
 
 func (o *SetTeamUsersUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersUnprocessableEntity %s", 422, payload)
 }
 
 func (o *SetTeamUsersUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -449,11 +460,13 @@ func (o *SetTeamUsersInternalServerError) Code() int {
 }
 
 func (o *SetTeamUsersInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersInternalServerError %s", 500, payload)
 }
 
 func (o *SetTeamUsersInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /teams/{teamID}/users][%d] setTeamUsersInternalServerError %s", 500, payload)
 }
 
 func (o *SetTeamUsersInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

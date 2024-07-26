@@ -6,6 +6,7 @@ package notification
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *GetNotificationsOK) Code() int {
 }
 
 func (o *GetNotificationsOK) Error() string {
-	return fmt.Sprintf("[GET /notification][%d] getNotificationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /notification][%d] getNotificationsOK %s", 200, payload)
 }
 
 func (o *GetNotificationsOK) String() string {
-	return fmt.Sprintf("[GET /notification][%d] getNotificationsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /notification][%d] getNotificationsOK %s", 200, payload)
 }
 
 func (o *GetNotificationsOK) GetPayload() *models.DtoNotificationsList {
@@ -165,11 +168,13 @@ func (o *GetNotificationsBadRequest) Code() int {
 }
 
 func (o *GetNotificationsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /notification][%d] getNotificationsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /notification][%d] getNotificationsBadRequest %s", 400, payload)
 }
 
 func (o *GetNotificationsBadRequest) String() string {
-	return fmt.Sprintf("[GET /notification][%d] getNotificationsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /notification][%d] getNotificationsBadRequest %s", 400, payload)
 }
 
 func (o *GetNotificationsBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -233,11 +238,13 @@ func (o *GetNotificationsUnprocessableEntity) Code() int {
 }
 
 func (o *GetNotificationsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /notification][%d] getNotificationsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /notification][%d] getNotificationsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetNotificationsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /notification][%d] getNotificationsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /notification][%d] getNotificationsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetNotificationsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -301,11 +308,13 @@ func (o *GetNotificationsInternalServerError) Code() int {
 }
 
 func (o *GetNotificationsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /notification][%d] getNotificationsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /notification][%d] getNotificationsInternalServerError %s", 500, payload)
 }
 
 func (o *GetNotificationsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /notification][%d] getNotificationsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /notification][%d] getNotificationsInternalServerError %s", 500, payload)
 }
 
 func (o *GetNotificationsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

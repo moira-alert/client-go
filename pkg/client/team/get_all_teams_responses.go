@@ -6,6 +6,7 @@ package team
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *GetAllTeamsOK) Code() int {
 }
 
 func (o *GetAllTeamsOK) Error() string {
-	return fmt.Sprintf("[GET /teams][%d] getAllTeamsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams][%d] getAllTeamsOK %s", 200, payload)
 }
 
 func (o *GetAllTeamsOK) String() string {
-	return fmt.Sprintf("[GET /teams][%d] getAllTeamsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams][%d] getAllTeamsOK %s", 200, payload)
 }
 
 func (o *GetAllTeamsOK) GetPayload() *models.DtoUserTeams {
@@ -159,11 +162,13 @@ func (o *GetAllTeamsUnprocessableEntity) Code() int {
 }
 
 func (o *GetAllTeamsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /teams][%d] getAllTeamsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams][%d] getAllTeamsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetAllTeamsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /teams][%d] getAllTeamsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams][%d] getAllTeamsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetAllTeamsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -227,11 +232,13 @@ func (o *GetAllTeamsInternalServerError) Code() int {
 }
 
 func (o *GetAllTeamsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /teams][%d] getAllTeamsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams][%d] getAllTeamsInternalServerError %s", 500, payload)
 }
 
 func (o *GetAllTeamsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /teams][%d] getAllTeamsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams][%d] getAllTeamsInternalServerError %s", 500, payload)
 }
 
 func (o *GetAllTeamsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

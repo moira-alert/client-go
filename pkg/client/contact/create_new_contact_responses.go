@@ -6,6 +6,7 @@ package contact
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *CreateNewContactOK) Code() int {
 }
 
 func (o *CreateNewContactOK) Error() string {
-	return fmt.Sprintf("[PUT /contact][%d] createNewContactOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact][%d] createNewContactOK %s", 200, payload)
 }
 
 func (o *CreateNewContactOK) String() string {
-	return fmt.Sprintf("[PUT /contact][%d] createNewContactOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact][%d] createNewContactOK %s", 200, payload)
 }
 
 func (o *CreateNewContactOK) GetPayload() *models.DtoContact {
@@ -165,11 +168,13 @@ func (o *CreateNewContactBadRequest) Code() int {
 }
 
 func (o *CreateNewContactBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /contact][%d] createNewContactBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact][%d] createNewContactBadRequest %s", 400, payload)
 }
 
 func (o *CreateNewContactBadRequest) String() string {
-	return fmt.Sprintf("[PUT /contact][%d] createNewContactBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact][%d] createNewContactBadRequest %s", 400, payload)
 }
 
 func (o *CreateNewContactBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -233,11 +238,13 @@ func (o *CreateNewContactUnprocessableEntity) Code() int {
 }
 
 func (o *CreateNewContactUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /contact][%d] createNewContactUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact][%d] createNewContactUnprocessableEntity %s", 422, payload)
 }
 
 func (o *CreateNewContactUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /contact][%d] createNewContactUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact][%d] createNewContactUnprocessableEntity %s", 422, payload)
 }
 
 func (o *CreateNewContactUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -301,11 +308,13 @@ func (o *CreateNewContactInternalServerError) Code() int {
 }
 
 func (o *CreateNewContactInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /contact][%d] createNewContactInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact][%d] createNewContactInternalServerError %s", 500, payload)
 }
 
 func (o *CreateNewContactInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /contact][%d] createNewContactInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /contact][%d] createNewContactInternalServerError %s", 500, payload)
 }
 
 func (o *CreateNewContactInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

@@ -6,6 +6,7 @@ package team
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *CreateTeamOK) Code() int {
 }
 
 func (o *CreateTeamOK) Error() string {
-	return fmt.Sprintf("[POST /teams][%d] createTeamOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams][%d] createTeamOK %s", 200, payload)
 }
 
 func (o *CreateTeamOK) String() string {
-	return fmt.Sprintf("[POST /teams][%d] createTeamOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams][%d] createTeamOK %s", 200, payload)
 }
 
 func (o *CreateTeamOK) GetPayload() *models.DtoSaveTeamResponse {
@@ -165,11 +168,13 @@ func (o *CreateTeamBadRequest) Code() int {
 }
 
 func (o *CreateTeamBadRequest) Error() string {
-	return fmt.Sprintf("[POST /teams][%d] createTeamBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams][%d] createTeamBadRequest %s", 400, payload)
 }
 
 func (o *CreateTeamBadRequest) String() string {
-	return fmt.Sprintf("[POST /teams][%d] createTeamBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams][%d] createTeamBadRequest %s", 400, payload)
 }
 
 func (o *CreateTeamBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -233,11 +238,13 @@ func (o *CreateTeamUnprocessableEntity) Code() int {
 }
 
 func (o *CreateTeamUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /teams][%d] createTeamUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams][%d] createTeamUnprocessableEntity %s", 422, payload)
 }
 
 func (o *CreateTeamUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /teams][%d] createTeamUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams][%d] createTeamUnprocessableEntity %s", 422, payload)
 }
 
 func (o *CreateTeamUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -301,11 +308,13 @@ func (o *CreateTeamInternalServerError) Code() int {
 }
 
 func (o *CreateTeamInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /teams][%d] createTeamInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams][%d] createTeamInternalServerError %s", 500, payload)
 }
 
 func (o *CreateTeamInternalServerError) String() string {
-	return fmt.Sprintf("[POST /teams][%d] createTeamInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams][%d] createTeamInternalServerError %s", 500, payload)
 }
 
 func (o *CreateTeamInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

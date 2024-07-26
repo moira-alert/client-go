@@ -6,6 +6,7 @@ package event
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -84,11 +85,11 @@ func (o *DeleteAllEventsOK) Code() int {
 }
 
 func (o *DeleteAllEventsOK) Error() string {
-	return fmt.Sprintf("[DELETE /event/all][%d] deleteAllEventsOK ", 200)
+	return fmt.Sprintf("[DELETE /event/all][%d] deleteAllEventsOK", 200)
 }
 
 func (o *DeleteAllEventsOK) String() string {
-	return fmt.Sprintf("[DELETE /event/all][%d] deleteAllEventsOK ", 200)
+	return fmt.Sprintf("[DELETE /event/all][%d] deleteAllEventsOK", 200)
 }
 
 func (o *DeleteAllEventsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -141,11 +142,13 @@ func (o *DeleteAllEventsInternalServerError) Code() int {
 }
 
 func (o *DeleteAllEventsInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /event/all][%d] deleteAllEventsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /event/all][%d] deleteAllEventsInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteAllEventsInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /event/all][%d] deleteAllEventsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /event/all][%d] deleteAllEventsInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteAllEventsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

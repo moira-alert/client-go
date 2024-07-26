@@ -6,6 +6,7 @@ package tag
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *RemoveTagOK) Code() int {
 }
 
 func (o *RemoveTagOK) Error() string {
-	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagOK %s", 200, payload)
 }
 
 func (o *RemoveTagOK) String() string {
-	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagOK %s", 200, payload)
 }
 
 func (o *RemoveTagOK) GetPayload() *models.DtoMessageResponse {
@@ -165,11 +168,13 @@ func (o *RemoveTagBadRequest) Code() int {
 }
 
 func (o *RemoveTagBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagBadRequest %s", 400, payload)
 }
 
 func (o *RemoveTagBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagBadRequest %s", 400, payload)
 }
 
 func (o *RemoveTagBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -233,11 +238,13 @@ func (o *RemoveTagUnprocessableEntity) Code() int {
 }
 
 func (o *RemoveTagUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagUnprocessableEntity %s", 422, payload)
 }
 
 func (o *RemoveTagUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagUnprocessableEntity %s", 422, payload)
 }
 
 func (o *RemoveTagUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -301,11 +308,13 @@ func (o *RemoveTagInternalServerError) Code() int {
 }
 
 func (o *RemoveTagInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagInternalServerError %s", 500, payload)
 }
 
 func (o *RemoveTagInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagInternalServerError %s", 500, payload)
 }
 
 func (o *RemoveTagInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

@@ -6,6 +6,7 @@ package trigger
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -96,11 +97,11 @@ func (o *RenderTriggerMetricsOK) Code() int {
 }
 
 func (o *RenderTriggerMetricsOK) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/render][%d] renderTriggerMetricsOK ", 200)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/render][%d] renderTriggerMetricsOK", 200)
 }
 
 func (o *RenderTriggerMetricsOK) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/render][%d] renderTriggerMetricsOK ", 200)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/render][%d] renderTriggerMetricsOK", 200)
 }
 
 func (o *RenderTriggerMetricsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -153,11 +154,13 @@ func (o *RenderTriggerMetricsBadRequest) Code() int {
 }
 
 func (o *RenderTriggerMetricsBadRequest) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/render][%d] renderTriggerMetricsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/render][%d] renderTriggerMetricsBadRequest %s", 400, payload)
 }
 
 func (o *RenderTriggerMetricsBadRequest) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/render][%d] renderTriggerMetricsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/render][%d] renderTriggerMetricsBadRequest %s", 400, payload)
 }
 
 func (o *RenderTriggerMetricsBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -221,11 +224,13 @@ func (o *RenderTriggerMetricsNotFound) Code() int {
 }
 
 func (o *RenderTriggerMetricsNotFound) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/render][%d] renderTriggerMetricsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/render][%d] renderTriggerMetricsNotFound %s", 404, payload)
 }
 
 func (o *RenderTriggerMetricsNotFound) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/render][%d] renderTriggerMetricsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/render][%d] renderTriggerMetricsNotFound %s", 404, payload)
 }
 
 func (o *RenderTriggerMetricsNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -289,11 +294,13 @@ func (o *RenderTriggerMetricsInternalServerError) Code() int {
 }
 
 func (o *RenderTriggerMetricsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/render][%d] renderTriggerMetricsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/render][%d] renderTriggerMetricsInternalServerError %s", 500, payload)
 }
 
 func (o *RenderTriggerMetricsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/render][%d] renderTriggerMetricsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/render][%d] renderTriggerMetricsInternalServerError %s", 500, payload)
 }
 
 func (o *RenderTriggerMetricsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

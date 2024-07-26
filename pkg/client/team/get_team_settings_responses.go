@@ -6,6 +6,7 @@ package team
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *GetTeamSettingsOK) Code() int {
 }
 
 func (o *GetTeamSettingsOK) Error() string {
-	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsOK %s", 200, payload)
 }
 
 func (o *GetTeamSettingsOK) String() string {
-	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsOK %s", 200, payload)
 }
 
 func (o *GetTeamSettingsOK) GetPayload() *models.DtoTeamSettings {
@@ -171,11 +174,13 @@ func (o *GetTeamSettingsForbidden) Code() int {
 }
 
 func (o *GetTeamSettingsForbidden) Error() string {
-	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsForbidden %s", 403, payload)
 }
 
 func (o *GetTeamSettingsForbidden) String() string {
-	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsForbidden %s", 403, payload)
 }
 
 func (o *GetTeamSettingsForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -239,11 +244,13 @@ func (o *GetTeamSettingsNotFound) Code() int {
 }
 
 func (o *GetTeamSettingsNotFound) Error() string {
-	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsNotFound %s", 404, payload)
 }
 
 func (o *GetTeamSettingsNotFound) String() string {
-	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsNotFound %s", 404, payload)
 }
 
 func (o *GetTeamSettingsNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -307,11 +314,13 @@ func (o *GetTeamSettingsUnprocessableEntity) Code() int {
 }
 
 func (o *GetTeamSettingsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetTeamSettingsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetTeamSettingsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -375,11 +384,13 @@ func (o *GetTeamSettingsInternalServerError) Code() int {
 }
 
 func (o *GetTeamSettingsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsInternalServerError %s", 500, payload)
 }
 
 func (o *GetTeamSettingsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsInternalServerError %s", 500, payload)
 }
 
 func (o *GetTeamSettingsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

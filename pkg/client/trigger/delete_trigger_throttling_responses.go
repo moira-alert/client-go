@@ -6,6 +6,7 @@ package trigger
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -90,11 +91,11 @@ func (o *DeleteTriggerThrottlingOK) Code() int {
 }
 
 func (o *DeleteTriggerThrottlingOK) Error() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}/throttling][%d] deleteTriggerThrottlingOK ", 200)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}/throttling][%d] deleteTriggerThrottlingOK", 200)
 }
 
 func (o *DeleteTriggerThrottlingOK) String() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}/throttling][%d] deleteTriggerThrottlingOK ", 200)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}/throttling][%d] deleteTriggerThrottlingOK", 200)
 }
 
 func (o *DeleteTriggerThrottlingOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -147,11 +148,13 @@ func (o *DeleteTriggerThrottlingNotFound) Code() int {
 }
 
 func (o *DeleteTriggerThrottlingNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}/throttling][%d] deleteTriggerThrottlingNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}/throttling][%d] deleteTriggerThrottlingNotFound %s", 404, payload)
 }
 
 func (o *DeleteTriggerThrottlingNotFound) String() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}/throttling][%d] deleteTriggerThrottlingNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}/throttling][%d] deleteTriggerThrottlingNotFound %s", 404, payload)
 }
 
 func (o *DeleteTriggerThrottlingNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -215,11 +218,13 @@ func (o *DeleteTriggerThrottlingInternalServerError) Code() int {
 }
 
 func (o *DeleteTriggerThrottlingInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}/throttling][%d] deleteTriggerThrottlingInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}/throttling][%d] deleteTriggerThrottlingInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteTriggerThrottlingInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}/throttling][%d] deleteTriggerThrottlingInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}/throttling][%d] deleteTriggerThrottlingInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteTriggerThrottlingInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

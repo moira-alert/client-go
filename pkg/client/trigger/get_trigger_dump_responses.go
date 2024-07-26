@@ -6,6 +6,7 @@ package trigger
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *GetTriggerDumpOK) Code() int {
 }
 
 func (o *GetTriggerDumpOK) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/dump][%d] getTriggerDumpOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/dump][%d] getTriggerDumpOK %s", 200, payload)
 }
 
 func (o *GetTriggerDumpOK) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/dump][%d] getTriggerDumpOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/dump][%d] getTriggerDumpOK %s", 200, payload)
 }
 
 func (o *GetTriggerDumpOK) GetPayload() *models.DtoTriggerDump {
@@ -159,11 +162,13 @@ func (o *GetTriggerDumpNotFound) Code() int {
 }
 
 func (o *GetTriggerDumpNotFound) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/dump][%d] getTriggerDumpNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/dump][%d] getTriggerDumpNotFound %s", 404, payload)
 }
 
 func (o *GetTriggerDumpNotFound) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/dump][%d] getTriggerDumpNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/dump][%d] getTriggerDumpNotFound %s", 404, payload)
 }
 
 func (o *GetTriggerDumpNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -227,11 +232,13 @@ func (o *GetTriggerDumpInternalServerError) Code() int {
 }
 
 func (o *GetTriggerDumpInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/dump][%d] getTriggerDumpInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/dump][%d] getTriggerDumpInternalServerError %s", 500, payload)
 }
 
 func (o *GetTriggerDumpInternalServerError) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/dump][%d] getTriggerDumpInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/dump][%d] getTriggerDumpInternalServerError %s", 500, payload)
 }
 
 func (o *GetTriggerDumpInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

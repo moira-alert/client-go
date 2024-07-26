@@ -6,6 +6,7 @@ package subscription
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *UpdateSubscriptionOK) Code() int {
 }
 
 func (o *UpdateSubscriptionOK) Error() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionOK %s", 200, payload)
 }
 
 func (o *UpdateSubscriptionOK) String() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionOK %s", 200, payload)
 }
 
 func (o *UpdateSubscriptionOK) GetPayload() *models.DtoSubscription {
@@ -177,11 +180,13 @@ func (o *UpdateSubscriptionBadRequest) Code() int {
 }
 
 func (o *UpdateSubscriptionBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionBadRequest %s", 400, payload)
 }
 
 func (o *UpdateSubscriptionBadRequest) String() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionBadRequest %s", 400, payload)
 }
 
 func (o *UpdateSubscriptionBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -245,11 +250,13 @@ func (o *UpdateSubscriptionForbidden) Code() int {
 }
 
 func (o *UpdateSubscriptionForbidden) Error() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionForbidden %s", 403, payload)
 }
 
 func (o *UpdateSubscriptionForbidden) String() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionForbidden %s", 403, payload)
 }
 
 func (o *UpdateSubscriptionForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -313,11 +320,13 @@ func (o *UpdateSubscriptionNotFound) Code() int {
 }
 
 func (o *UpdateSubscriptionNotFound) Error() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionNotFound %s", 404, payload)
 }
 
 func (o *UpdateSubscriptionNotFound) String() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionNotFound %s", 404, payload)
 }
 
 func (o *UpdateSubscriptionNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -381,11 +390,13 @@ func (o *UpdateSubscriptionUnprocessableEntity) Code() int {
 }
 
 func (o *UpdateSubscriptionUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionUnprocessableEntity %s", 422, payload)
 }
 
 func (o *UpdateSubscriptionUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionUnprocessableEntity %s", 422, payload)
 }
 
 func (o *UpdateSubscriptionUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -449,11 +460,13 @@ func (o *UpdateSubscriptionInternalServerError) Code() int {
 }
 
 func (o *UpdateSubscriptionInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateSubscriptionInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateSubscriptionInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

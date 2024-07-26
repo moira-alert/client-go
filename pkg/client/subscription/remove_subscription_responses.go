@@ -6,6 +6,7 @@ package subscription
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -96,11 +97,11 @@ func (o *RemoveSubscriptionOK) Code() int {
 }
 
 func (o *RemoveSubscriptionOK) Error() string {
-	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionOK ", 200)
+	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionOK", 200)
 }
 
 func (o *RemoveSubscriptionOK) String() string {
-	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionOK ", 200)
+	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionOK", 200)
 }
 
 func (o *RemoveSubscriptionOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -153,11 +154,13 @@ func (o *RemoveSubscriptionForbidden) Code() int {
 }
 
 func (o *RemoveSubscriptionForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionForbidden %s", 403, payload)
 }
 
 func (o *RemoveSubscriptionForbidden) String() string {
-	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionForbidden %s", 403, payload)
 }
 
 func (o *RemoveSubscriptionForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -221,11 +224,13 @@ func (o *RemoveSubscriptionNotFound) Code() int {
 }
 
 func (o *RemoveSubscriptionNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionNotFound %s", 404, payload)
 }
 
 func (o *RemoveSubscriptionNotFound) String() string {
-	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionNotFound %s", 404, payload)
 }
 
 func (o *RemoveSubscriptionNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -289,11 +294,13 @@ func (o *RemoveSubscriptionInternalServerError) Code() int {
 }
 
 func (o *RemoveSubscriptionInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionInternalServerError %s", 500, payload)
 }
 
 func (o *RemoveSubscriptionInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionInternalServerError %s", 500, payload)
 }
 
 func (o *RemoveSubscriptionInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
