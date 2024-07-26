@@ -6,6 +6,7 @@ package pattern
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *GetAllPatternsOK) Code() int {
 }
 
 func (o *GetAllPatternsOK) Error() string {
-	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsOK %s", 200, payload)
 }
 
 func (o *GetAllPatternsOK) String() string {
-	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsOK %s", 200, payload)
 }
 
 func (o *GetAllPatternsOK) GetPayload() *models.DtoPatternList {
@@ -165,11 +168,13 @@ func (o *GetAllPatternsForbidden) Code() int {
 }
 
 func (o *GetAllPatternsForbidden) Error() string {
-	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsForbidden %s", 403, payload)
 }
 
 func (o *GetAllPatternsForbidden) String() string {
-	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsForbidden %s", 403, payload)
 }
 
 func (o *GetAllPatternsForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -233,11 +238,13 @@ func (o *GetAllPatternsUnprocessableEntity) Code() int {
 }
 
 func (o *GetAllPatternsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetAllPatternsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetAllPatternsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -301,11 +308,13 @@ func (o *GetAllPatternsInternalServerError) Code() int {
 }
 
 func (o *GetAllPatternsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsInternalServerError %s", 500, payload)
 }
 
 func (o *GetAllPatternsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsInternalServerError %s", 500, payload)
 }
 
 func (o *GetAllPatternsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

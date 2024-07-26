@@ -6,6 +6,7 @@ package trigger
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *CreateTriggerOK) Code() int {
 }
 
 func (o *CreateTriggerOK) Error() string {
-	return fmt.Sprintf("[PUT /trigger][%d] createTriggerOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger][%d] createTriggerOK %s", 200, payload)
 }
 
 func (o *CreateTriggerOK) String() string {
-	return fmt.Sprintf("[PUT /trigger][%d] createTriggerOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger][%d] createTriggerOK %s", 200, payload)
 }
 
 func (o *CreateTriggerOK) GetPayload() *models.DtoSaveTriggerResponse {
@@ -171,11 +174,13 @@ func (o *CreateTriggerBadRequest) Code() int {
 }
 
 func (o *CreateTriggerBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /trigger][%d] createTriggerBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger][%d] createTriggerBadRequest %s", 400, payload)
 }
 
 func (o *CreateTriggerBadRequest) String() string {
-	return fmt.Sprintf("[PUT /trigger][%d] createTriggerBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger][%d] createTriggerBadRequest %s", 400, payload)
 }
 
 func (o *CreateTriggerBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -239,11 +244,13 @@ func (o *CreateTriggerUnprocessableEntity) Code() int {
 }
 
 func (o *CreateTriggerUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /trigger][%d] createTriggerUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger][%d] createTriggerUnprocessableEntity %s", 422, payload)
 }
 
 func (o *CreateTriggerUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /trigger][%d] createTriggerUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger][%d] createTriggerUnprocessableEntity %s", 422, payload)
 }
 
 func (o *CreateTriggerUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -307,11 +314,13 @@ func (o *CreateTriggerInternalServerError) Code() int {
 }
 
 func (o *CreateTriggerInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /trigger][%d] createTriggerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger][%d] createTriggerInternalServerError %s", 500, payload)
 }
 
 func (o *CreateTriggerInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /trigger][%d] createTriggerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger][%d] createTriggerInternalServerError %s", 500, payload)
 }
 
 func (o *CreateTriggerInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
@@ -375,11 +384,13 @@ func (o *CreateTriggerServiceUnavailable) Code() int {
 }
 
 func (o *CreateTriggerServiceUnavailable) Error() string {
-	return fmt.Sprintf("[PUT /trigger][%d] createTriggerServiceUnavailable  %+v", 503, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger][%d] createTriggerServiceUnavailable %s", 503, payload)
 }
 
 func (o *CreateTriggerServiceUnavailable) String() string {
-	return fmt.Sprintf("[PUT /trigger][%d] createTriggerServiceUnavailable  %+v", 503, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger][%d] createTriggerServiceUnavailable %s", 503, payload)
 }
 
 func (o *CreateTriggerServiceUnavailable) GetPayload() *models.APIErrorRemoteServerUnavailableExample {

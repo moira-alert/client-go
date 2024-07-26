@@ -6,6 +6,7 @@ package tag
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -96,11 +97,11 @@ func (o *CreateTagsOK) Code() int {
 }
 
 func (o *CreateTagsOK) Error() string {
-	return fmt.Sprintf("[POST /tag][%d] createTagsOK ", 200)
+	return fmt.Sprintf("[POST /tag][%d] createTagsOK", 200)
 }
 
 func (o *CreateTagsOK) String() string {
-	return fmt.Sprintf("[POST /tag][%d] createTagsOK ", 200)
+	return fmt.Sprintf("[POST /tag][%d] createTagsOK", 200)
 }
 
 func (o *CreateTagsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -153,11 +154,13 @@ func (o *CreateTagsBadRequest) Code() int {
 }
 
 func (o *CreateTagsBadRequest) Error() string {
-	return fmt.Sprintf("[POST /tag][%d] createTagsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /tag][%d] createTagsBadRequest %s", 400, payload)
 }
 
 func (o *CreateTagsBadRequest) String() string {
-	return fmt.Sprintf("[POST /tag][%d] createTagsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /tag][%d] createTagsBadRequest %s", 400, payload)
 }
 
 func (o *CreateTagsBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -221,11 +224,13 @@ func (o *CreateTagsUnprocessableEntity) Code() int {
 }
 
 func (o *CreateTagsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /tag][%d] createTagsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /tag][%d] createTagsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *CreateTagsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /tag][%d] createTagsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /tag][%d] createTagsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *CreateTagsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -289,11 +294,13 @@ func (o *CreateTagsInternalServerError) Code() int {
 }
 
 func (o *CreateTagsInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /tag][%d] createTagsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /tag][%d] createTagsInternalServerError %s", 500, payload)
 }
 
 func (o *CreateTagsInternalServerError) String() string {
-	return fmt.Sprintf("[POST /tag][%d] createTagsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /tag][%d] createTagsInternalServerError %s", 500, payload)
 }
 
 func (o *CreateTagsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

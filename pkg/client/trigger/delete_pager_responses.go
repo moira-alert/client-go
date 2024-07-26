@@ -6,6 +6,7 @@ package trigger
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *DeletePagerOK) Code() int {
 }
 
 func (o *DeletePagerOK) Error() string {
-	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerOK %s", 200, payload)
 }
 
 func (o *DeletePagerOK) String() string {
-	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerOK %s", 200, payload)
 }
 
 func (o *DeletePagerOK) GetPayload() *models.DtoTriggersSearchResultDeleteResponse {
@@ -165,11 +168,13 @@ func (o *DeletePagerNotFound) Code() int {
 }
 
 func (o *DeletePagerNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerNotFound %s", 404, payload)
 }
 
 func (o *DeletePagerNotFound) String() string {
-	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerNotFound %s", 404, payload)
 }
 
 func (o *DeletePagerNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -233,11 +238,13 @@ func (o *DeletePagerUnprocessableEntity) Code() int {
 }
 
 func (o *DeletePagerUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerUnprocessableEntity %s", 422, payload)
 }
 
 func (o *DeletePagerUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerUnprocessableEntity %s", 422, payload)
 }
 
 func (o *DeletePagerUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -301,11 +308,13 @@ func (o *DeletePagerInternalServerError) Code() int {
 }
 
 func (o *DeletePagerInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerInternalServerError %s", 500, payload)
 }
 
 func (o *DeletePagerInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerInternalServerError %s", 500, payload)
 }
 
 func (o *DeletePagerInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

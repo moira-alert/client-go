@@ -6,6 +6,7 @@ package trigger
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *GetTriggerThrottlingOK) Code() int {
 }
 
 func (o *GetTriggerThrottlingOK) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/throttling][%d] getTriggerThrottlingOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/throttling][%d] getTriggerThrottlingOK %s", 200, payload)
 }
 
 func (o *GetTriggerThrottlingOK) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/throttling][%d] getTriggerThrottlingOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/throttling][%d] getTriggerThrottlingOK %s", 200, payload)
 }
 
 func (o *GetTriggerThrottlingOK) GetPayload() *models.DtoThrottlingResponse {
@@ -159,11 +162,13 @@ func (o *GetTriggerThrottlingNotFound) Code() int {
 }
 
 func (o *GetTriggerThrottlingNotFound) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/throttling][%d] getTriggerThrottlingNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/throttling][%d] getTriggerThrottlingNotFound %s", 404, payload)
 }
 
 func (o *GetTriggerThrottlingNotFound) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/throttling][%d] getTriggerThrottlingNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/throttling][%d] getTriggerThrottlingNotFound %s", 404, payload)
 }
 
 func (o *GetTriggerThrottlingNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -227,11 +232,13 @@ func (o *GetTriggerThrottlingUnprocessableEntity) Code() int {
 }
 
 func (o *GetTriggerThrottlingUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/throttling][%d] getTriggerThrottlingUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/throttling][%d] getTriggerThrottlingUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetTriggerThrottlingUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}/throttling][%d] getTriggerThrottlingUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}/throttling][%d] getTriggerThrottlingUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetTriggerThrottlingUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {

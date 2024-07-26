@@ -6,6 +6,7 @@ package team
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *UpdateTeamOK) Code() int {
 }
 
 func (o *UpdateTeamOK) Error() string {
-	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamOK %s", 200, payload)
 }
 
 func (o *UpdateTeamOK) String() string {
-	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamOK %s", 200, payload)
 }
 
 func (o *UpdateTeamOK) GetPayload() *models.DtoSaveTeamResponse {
@@ -177,11 +180,13 @@ func (o *UpdateTeamBadRequest) Code() int {
 }
 
 func (o *UpdateTeamBadRequest) Error() string {
-	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamBadRequest %s", 400, payload)
 }
 
 func (o *UpdateTeamBadRequest) String() string {
-	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamBadRequest %s", 400, payload)
 }
 
 func (o *UpdateTeamBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -245,11 +250,13 @@ func (o *UpdateTeamForbidden) Code() int {
 }
 
 func (o *UpdateTeamForbidden) Error() string {
-	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamForbidden %s", 403, payload)
 }
 
 func (o *UpdateTeamForbidden) String() string {
-	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamForbidden %s", 403, payload)
 }
 
 func (o *UpdateTeamForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -313,11 +320,13 @@ func (o *UpdateTeamNotFound) Code() int {
 }
 
 func (o *UpdateTeamNotFound) Error() string {
-	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamNotFound %s", 404, payload)
 }
 
 func (o *UpdateTeamNotFound) String() string {
-	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamNotFound %s", 404, payload)
 }
 
 func (o *UpdateTeamNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -381,11 +390,13 @@ func (o *UpdateTeamUnprocessableEntity) Code() int {
 }
 
 func (o *UpdateTeamUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamUnprocessableEntity %s", 422, payload)
 }
 
 func (o *UpdateTeamUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamUnprocessableEntity %s", 422, payload)
 }
 
 func (o *UpdateTeamUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -449,11 +460,13 @@ func (o *UpdateTeamInternalServerError) Code() int {
 }
 
 func (o *UpdateTeamInternalServerError) Error() string {
-	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateTeamInternalServerError) String() string {
-	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateTeamInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

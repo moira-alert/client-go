@@ -6,6 +6,7 @@ package trigger
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *TriggerCheckOK) Code() int {
 }
 
 func (o *TriggerCheckOK) Error() string {
-	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckOK %s", 200, payload)
 }
 
 func (o *TriggerCheckOK) String() string {
-	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckOK %s", 200, payload)
 }
 
 func (o *TriggerCheckOK) GetPayload() *models.DtoTriggerCheckResponse {
@@ -159,11 +162,13 @@ func (o *TriggerCheckBadRequest) Code() int {
 }
 
 func (o *TriggerCheckBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckBadRequest %s", 400, payload)
 }
 
 func (o *TriggerCheckBadRequest) String() string {
-	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckBadRequest %s", 400, payload)
 }
 
 func (o *TriggerCheckBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -227,11 +232,13 @@ func (o *TriggerCheckInternalServerError) Code() int {
 }
 
 func (o *TriggerCheckInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckInternalServerError %s", 500, payload)
 }
 
 func (o *TriggerCheckInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckInternalServerError %s", 500, payload)
 }
 
 func (o *TriggerCheckInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

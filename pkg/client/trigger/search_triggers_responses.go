@@ -6,6 +6,7 @@ package trigger
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *SearchTriggersOK) Code() int {
 }
 
 func (o *SearchTriggersOK) Error() string {
-	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersOK %s", 200, payload)
 }
 
 func (o *SearchTriggersOK) String() string {
-	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersOK %s", 200, payload)
 }
 
 func (o *SearchTriggersOK) GetPayload() *models.DtoTriggersList {
@@ -171,11 +174,13 @@ func (o *SearchTriggersBadRequest) Code() int {
 }
 
 func (o *SearchTriggersBadRequest) Error() string {
-	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersBadRequest %s", 400, payload)
 }
 
 func (o *SearchTriggersBadRequest) String() string {
-	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersBadRequest %s", 400, payload)
 }
 
 func (o *SearchTriggersBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -239,11 +244,13 @@ func (o *SearchTriggersNotFound) Code() int {
 }
 
 func (o *SearchTriggersNotFound) Error() string {
-	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersNotFound %s", 404, payload)
 }
 
 func (o *SearchTriggersNotFound) String() string {
-	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersNotFound %s", 404, payload)
 }
 
 func (o *SearchTriggersNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -307,11 +314,13 @@ func (o *SearchTriggersUnprocessableEntity) Code() int {
 }
 
 func (o *SearchTriggersUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersUnprocessableEntity %s", 422, payload)
 }
 
 func (o *SearchTriggersUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersUnprocessableEntity %s", 422, payload)
 }
 
 func (o *SearchTriggersUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -375,11 +384,13 @@ func (o *SearchTriggersInternalServerError) Code() int {
 }
 
 func (o *SearchTriggersInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersInternalServerError %s", 500, payload)
 }
 
 func (o *SearchTriggersInternalServerError) String() string {
-	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersInternalServerError %s", 500, payload)
 }
 
 func (o *SearchTriggersInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

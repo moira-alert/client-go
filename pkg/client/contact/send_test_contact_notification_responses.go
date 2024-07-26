@@ -6,6 +6,7 @@ package contact
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -96,11 +97,11 @@ func (o *SendTestContactNotificationOK) Code() int {
 }
 
 func (o *SendTestContactNotificationOK) Error() string {
-	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationOK ", 200)
+	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationOK", 200)
 }
 
 func (o *SendTestContactNotificationOK) String() string {
-	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationOK ", 200)
+	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationOK", 200)
 }
 
 func (o *SendTestContactNotificationOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -153,11 +154,13 @@ func (o *SendTestContactNotificationForbidden) Code() int {
 }
 
 func (o *SendTestContactNotificationForbidden) Error() string {
-	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationForbidden %s", 403, payload)
 }
 
 func (o *SendTestContactNotificationForbidden) String() string {
-	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationForbidden %s", 403, payload)
 }
 
 func (o *SendTestContactNotificationForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -221,11 +224,13 @@ func (o *SendTestContactNotificationNotFound) Code() int {
 }
 
 func (o *SendTestContactNotificationNotFound) Error() string {
-	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationNotFound %s", 404, payload)
 }
 
 func (o *SendTestContactNotificationNotFound) String() string {
-	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationNotFound %s", 404, payload)
 }
 
 func (o *SendTestContactNotificationNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -289,11 +294,13 @@ func (o *SendTestContactNotificationInternalServerError) Code() int {
 }
 
 func (o *SendTestContactNotificationInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationInternalServerError %s", 500, payload)
 }
 
 func (o *SendTestContactNotificationInternalServerError) String() string {
-	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationInternalServerError %s", 500, payload)
 }
 
 func (o *SendTestContactNotificationInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

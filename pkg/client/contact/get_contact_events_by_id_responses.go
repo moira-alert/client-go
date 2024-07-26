@@ -6,6 +6,7 @@ package contact
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *GetContactEventsByIDOK) Code() int {
 }
 
 func (o *GetContactEventsByIDOK) Error() string {
-	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdOK %s", 200, payload)
 }
 
 func (o *GetContactEventsByIDOK) String() string {
-	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdOK %s", 200, payload)
 }
 
 func (o *GetContactEventsByIDOK) GetPayload() *models.DtoContactEventItemList {
@@ -177,11 +180,13 @@ func (o *GetContactEventsByIDBadRequest) Code() int {
 }
 
 func (o *GetContactEventsByIDBadRequest) Error() string {
-	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdBadRequest %s", 400, payload)
 }
 
 func (o *GetContactEventsByIDBadRequest) String() string {
-	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdBadRequest %s", 400, payload)
 }
 
 func (o *GetContactEventsByIDBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -245,11 +250,13 @@ func (o *GetContactEventsByIDForbidden) Code() int {
 }
 
 func (o *GetContactEventsByIDForbidden) Error() string {
-	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdForbidden %s", 403, payload)
 }
 
 func (o *GetContactEventsByIDForbidden) String() string {
-	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdForbidden %s", 403, payload)
 }
 
 func (o *GetContactEventsByIDForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -313,11 +320,13 @@ func (o *GetContactEventsByIDNotFound) Code() int {
 }
 
 func (o *GetContactEventsByIDNotFound) Error() string {
-	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdNotFound %s", 404, payload)
 }
 
 func (o *GetContactEventsByIDNotFound) String() string {
-	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdNotFound %s", 404, payload)
 }
 
 func (o *GetContactEventsByIDNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -381,11 +390,13 @@ func (o *GetContactEventsByIDUnprocessableEntity) Code() int {
 }
 
 func (o *GetContactEventsByIDUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetContactEventsByIDUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetContactEventsByIDUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -449,11 +460,13 @@ func (o *GetContactEventsByIDInternalServerError) Code() int {
 }
 
 func (o *GetContactEventsByIDInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdInternalServerError %s", 500, payload)
 }
 
 func (o *GetContactEventsByIDInternalServerError) String() string {
-	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdInternalServerError %s", 500, payload)
 }
 
 func (o *GetContactEventsByIDInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

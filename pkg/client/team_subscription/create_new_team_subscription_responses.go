@@ -6,6 +6,7 @@ package team_subscription
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *CreateNewTeamSubscriptionOK) Code() int {
 }
 
 func (o *CreateNewTeamSubscriptionOK) Error() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionOK %s", 200, payload)
 }
 
 func (o *CreateNewTeamSubscriptionOK) String() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionOK %s", 200, payload)
 }
 
 func (o *CreateNewTeamSubscriptionOK) GetPayload() *models.DtoSubscription {
@@ -177,11 +180,13 @@ func (o *CreateNewTeamSubscriptionBadRequest) Code() int {
 }
 
 func (o *CreateNewTeamSubscriptionBadRequest) Error() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionBadRequest %s", 400, payload)
 }
 
 func (o *CreateNewTeamSubscriptionBadRequest) String() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionBadRequest %s", 400, payload)
 }
 
 func (o *CreateNewTeamSubscriptionBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -245,11 +250,13 @@ func (o *CreateNewTeamSubscriptionForbidden) Code() int {
 }
 
 func (o *CreateNewTeamSubscriptionForbidden) Error() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionForbidden %s", 403, payload)
 }
 
 func (o *CreateNewTeamSubscriptionForbidden) String() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionForbidden %s", 403, payload)
 }
 
 func (o *CreateNewTeamSubscriptionForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -313,11 +320,13 @@ func (o *CreateNewTeamSubscriptionNotFound) Code() int {
 }
 
 func (o *CreateNewTeamSubscriptionNotFound) Error() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionNotFound %s", 404, payload)
 }
 
 func (o *CreateNewTeamSubscriptionNotFound) String() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionNotFound %s", 404, payload)
 }
 
 func (o *CreateNewTeamSubscriptionNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -381,11 +390,13 @@ func (o *CreateNewTeamSubscriptionUnprocessableEntity) Code() int {
 }
 
 func (o *CreateNewTeamSubscriptionUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionUnprocessableEntity %s", 422, payload)
 }
 
 func (o *CreateNewTeamSubscriptionUnprocessableEntity) String() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionUnprocessableEntity %s", 422, payload)
 }
 
 func (o *CreateNewTeamSubscriptionUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -449,11 +460,13 @@ func (o *CreateNewTeamSubscriptionInternalServerError) Code() int {
 }
 
 func (o *CreateNewTeamSubscriptionInternalServerError) Error() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionInternalServerError %s", 500, payload)
 }
 
 func (o *CreateNewTeamSubscriptionInternalServerError) String() string {
-	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionInternalServerError %s", 500, payload)
 }
 
 func (o *CreateNewTeamSubscriptionInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

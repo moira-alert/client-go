@@ -6,6 +6,7 @@ package event
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *GetEventsListOK) Code() int {
 }
 
 func (o *GetEventsListOK) Error() string {
-	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListOK %s", 200, payload)
 }
 
 func (o *GetEventsListOK) String() string {
-	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListOK %s", 200, payload)
 }
 
 func (o *GetEventsListOK) GetPayload() *models.DtoEventsList {
@@ -171,11 +174,13 @@ func (o *GetEventsListBadRequest) Code() int {
 }
 
 func (o *GetEventsListBadRequest) Error() string {
-	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListBadRequest %s", 400, payload)
 }
 
 func (o *GetEventsListBadRequest) String() string {
-	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListBadRequest %s", 400, payload)
 }
 
 func (o *GetEventsListBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -239,11 +244,13 @@ func (o *GetEventsListNotFound) Code() int {
 }
 
 func (o *GetEventsListNotFound) Error() string {
-	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListNotFound %s", 404, payload)
 }
 
 func (o *GetEventsListNotFound) String() string {
-	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListNotFound %s", 404, payload)
 }
 
 func (o *GetEventsListNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -307,11 +314,13 @@ func (o *GetEventsListUnprocessableEntity) Code() int {
 }
 
 func (o *GetEventsListUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetEventsListUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetEventsListUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -375,11 +384,13 @@ func (o *GetEventsListInternalServerError) Code() int {
 }
 
 func (o *GetEventsListInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListInternalServerError %s", 500, payload)
 }
 
 func (o *GetEventsListInternalServerError) String() string {
-	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListInternalServerError %s", 500, payload)
 }
 
 func (o *GetEventsListInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

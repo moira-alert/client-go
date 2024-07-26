@@ -6,6 +6,7 @@ package subscription
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *GetUserSubscriptionsOK) Code() int {
 }
 
 func (o *GetUserSubscriptionsOK) Error() string {
-	return fmt.Sprintf("[GET /subscription][%d] getUserSubscriptionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /subscription][%d] getUserSubscriptionsOK %s", 200, payload)
 }
 
 func (o *GetUserSubscriptionsOK) String() string {
-	return fmt.Sprintf("[GET /subscription][%d] getUserSubscriptionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /subscription][%d] getUserSubscriptionsOK %s", 200, payload)
 }
 
 func (o *GetUserSubscriptionsOK) GetPayload() *models.DtoSubscriptionList {
@@ -159,11 +162,13 @@ func (o *GetUserSubscriptionsUnprocessableEntity) Code() int {
 }
 
 func (o *GetUserSubscriptionsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /subscription][%d] getUserSubscriptionsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /subscription][%d] getUserSubscriptionsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetUserSubscriptionsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /subscription][%d] getUserSubscriptionsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /subscription][%d] getUserSubscriptionsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetUserSubscriptionsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -227,11 +232,13 @@ func (o *GetUserSubscriptionsInternalServerError) Code() int {
 }
 
 func (o *GetUserSubscriptionsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /subscription][%d] getUserSubscriptionsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /subscription][%d] getUserSubscriptionsInternalServerError %s", 500, payload)
 }
 
 func (o *GetUserSubscriptionsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /subscription][%d] getUserSubscriptionsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /subscription][%d] getUserSubscriptionsInternalServerError %s", 500, payload)
 }
 
 func (o *GetUserSubscriptionsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

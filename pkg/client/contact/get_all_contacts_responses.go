@@ -6,6 +6,7 @@ package contact
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *GetAllContactsOK) Code() int {
 }
 
 func (o *GetAllContactsOK) Error() string {
-	return fmt.Sprintf("[GET /contact][%d] getAllContactsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact][%d] getAllContactsOK %s", 200, payload)
 }
 
 func (o *GetAllContactsOK) String() string {
-	return fmt.Sprintf("[GET /contact][%d] getAllContactsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact][%d] getAllContactsOK %s", 200, payload)
 }
 
 func (o *GetAllContactsOK) GetPayload() *models.DtoContactList {
@@ -159,11 +162,13 @@ func (o *GetAllContactsUnprocessableEntity) Code() int {
 }
 
 func (o *GetAllContactsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /contact][%d] getAllContactsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact][%d] getAllContactsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetAllContactsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /contact][%d] getAllContactsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact][%d] getAllContactsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetAllContactsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -227,11 +232,13 @@ func (o *GetAllContactsInternalServerError) Code() int {
 }
 
 func (o *GetAllContactsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /contact][%d] getAllContactsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact][%d] getAllContactsInternalServerError %s", 500, payload)
 }
 
 func (o *GetAllContactsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /contact][%d] getAllContactsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact][%d] getAllContactsInternalServerError %s", 500, payload)
 }
 
 func (o *GetAllContactsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

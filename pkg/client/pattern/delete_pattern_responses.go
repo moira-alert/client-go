@@ -6,6 +6,7 @@ package pattern
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -96,11 +97,11 @@ func (o *DeletePatternOK) Code() int {
 }
 
 func (o *DeletePatternOK) Error() string {
-	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternOK ", 200)
+	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternOK", 200)
 }
 
 func (o *DeletePatternOK) String() string {
-	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternOK ", 200)
+	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternOK", 200)
 }
 
 func (o *DeletePatternOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -153,11 +154,13 @@ func (o *DeletePatternBadRequest) Code() int {
 }
 
 func (o *DeletePatternBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternBadRequest %s", 400, payload)
 }
 
 func (o *DeletePatternBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternBadRequest %s", 400, payload)
 }
 
 func (o *DeletePatternBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -221,11 +224,13 @@ func (o *DeletePatternForbidden) Code() int {
 }
 
 func (o *DeletePatternForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternForbidden %s", 403, payload)
 }
 
 func (o *DeletePatternForbidden) String() string {
-	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternForbidden %s", 403, payload)
 }
 
 func (o *DeletePatternForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -289,11 +294,13 @@ func (o *DeletePatternInternalServerError) Code() int {
 }
 
 func (o *DeletePatternInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternInternalServerError %s", 500, payload)
 }
 
 func (o *DeletePatternInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternInternalServerError %s", 500, payload)
 }
 
 func (o *DeletePatternInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

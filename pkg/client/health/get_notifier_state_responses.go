@@ -6,6 +6,7 @@ package health
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *GetNotifierStateOK) Code() int {
 }
 
 func (o *GetNotifierStateOK) Error() string {
-	return fmt.Sprintf("[GET /health/notifier][%d] getNotifierStateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /health/notifier][%d] getNotifierStateOK %s", 200, payload)
 }
 
 func (o *GetNotifierStateOK) String() string {
-	return fmt.Sprintf("[GET /health/notifier][%d] getNotifierStateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /health/notifier][%d] getNotifierStateOK %s", 200, payload)
 }
 
 func (o *GetNotifierStateOK) GetPayload() *models.DtoNotifierState {
@@ -159,11 +162,13 @@ func (o *GetNotifierStateUnprocessableEntity) Code() int {
 }
 
 func (o *GetNotifierStateUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /health/notifier][%d] getNotifierStateUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /health/notifier][%d] getNotifierStateUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetNotifierStateUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /health/notifier][%d] getNotifierStateUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /health/notifier][%d] getNotifierStateUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetNotifierStateUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -227,11 +232,13 @@ func (o *GetNotifierStateInternalServerError) Code() int {
 }
 
 func (o *GetNotifierStateInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /health/notifier][%d] getNotifierStateInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /health/notifier][%d] getNotifierStateInternalServerError %s", 500, payload)
 }
 
 func (o *GetNotifierStateInternalServerError) String() string {
-	return fmt.Sprintf("[GET /health/notifier][%d] getNotifierStateInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /health/notifier][%d] getNotifierStateInternalServerError %s", 500, payload)
 }
 
 func (o *GetNotifierStateInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

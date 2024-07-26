@@ -6,6 +6,7 @@ package config
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *GetWebConfigOK) Code() int {
 }
 
 func (o *GetWebConfigOK) Error() string {
-	return fmt.Sprintf("[GET /config][%d] getWebConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /config][%d] getWebConfigOK %s", 200, payload)
 }
 
 func (o *GetWebConfigOK) String() string {
-	return fmt.Sprintf("[GET /config][%d] getWebConfigOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /config][%d] getWebConfigOK %s", 200, payload)
 }
 
 func (o *GetWebConfigOK) GetPayload() *models.APIWebConfig {
@@ -153,11 +156,13 @@ func (o *GetWebConfigUnprocessableEntity) Code() int {
 }
 
 func (o *GetWebConfigUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /config][%d] getWebConfigUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /config][%d] getWebConfigUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetWebConfigUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /config][%d] getWebConfigUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /config][%d] getWebConfigUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetWebConfigUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {

@@ -6,6 +6,7 @@ package user
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -85,11 +86,13 @@ func (o *GetUserNameOK) Code() int {
 }
 
 func (o *GetUserNameOK) Error() string {
-	return fmt.Sprintf("[GET /user][%d] getUserNameOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /user][%d] getUserNameOK %s", 200, payload)
 }
 
 func (o *GetUserNameOK) String() string {
-	return fmt.Sprintf("[GET /user][%d] getUserNameOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /user][%d] getUserNameOK %s", 200, payload)
 }
 
 func (o *GetUserNameOK) GetPayload() *models.DtoUser {
@@ -153,11 +156,13 @@ func (o *GetUserNameUnprocessableEntity) Code() int {
 }
 
 func (o *GetUserNameUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /user][%d] getUserNameUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /user][%d] getUserNameUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetUserNameUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /user][%d] getUserNameUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /user][%d] getUserNameUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetUserNameUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {

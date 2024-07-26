@@ -6,6 +6,7 @@ package tag
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *GetAllTagsAndSubscriptionsOK) Code() int {
 }
 
 func (o *GetAllTagsAndSubscriptionsOK) Error() string {
-	return fmt.Sprintf("[GET /tag/stats][%d] getAllTagsAndSubscriptionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tag/stats][%d] getAllTagsAndSubscriptionsOK %s", 200, payload)
 }
 
 func (o *GetAllTagsAndSubscriptionsOK) String() string {
-	return fmt.Sprintf("[GET /tag/stats][%d] getAllTagsAndSubscriptionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tag/stats][%d] getAllTagsAndSubscriptionsOK %s", 200, payload)
 }
 
 func (o *GetAllTagsAndSubscriptionsOK) GetPayload() *models.DtoTagsStatistics {
@@ -159,11 +162,13 @@ func (o *GetAllTagsAndSubscriptionsUnprocessableEntity) Code() int {
 }
 
 func (o *GetAllTagsAndSubscriptionsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /tag/stats][%d] getAllTagsAndSubscriptionsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tag/stats][%d] getAllTagsAndSubscriptionsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetAllTagsAndSubscriptionsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /tag/stats][%d] getAllTagsAndSubscriptionsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tag/stats][%d] getAllTagsAndSubscriptionsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetAllTagsAndSubscriptionsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -227,11 +232,13 @@ func (o *GetAllTagsAndSubscriptionsInternalServerError) Code() int {
 }
 
 func (o *GetAllTagsAndSubscriptionsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /tag/stats][%d] getAllTagsAndSubscriptionsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tag/stats][%d] getAllTagsAndSubscriptionsInternalServerError %s", 500, payload)
 }
 
 func (o *GetAllTagsAndSubscriptionsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /tag/stats][%d] getAllTagsAndSubscriptionsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tag/stats][%d] getAllTagsAndSubscriptionsInternalServerError %s", 500, payload)
 }
 
 func (o *GetAllTagsAndSubscriptionsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

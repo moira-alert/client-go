@@ -6,6 +6,7 @@ package subscription
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *CreateSubscriptionOK) Code() int {
 }
 
 func (o *CreateSubscriptionOK) Error() string {
-	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionOK %s", 200, payload)
 }
 
 func (o *CreateSubscriptionOK) String() string {
-	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionOK %s", 200, payload)
 }
 
 func (o *CreateSubscriptionOK) GetPayload() *models.DtoSubscription {
@@ -165,11 +168,13 @@ func (o *CreateSubscriptionBadRequest) Code() int {
 }
 
 func (o *CreateSubscriptionBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionBadRequest %s", 400, payload)
 }
 
 func (o *CreateSubscriptionBadRequest) String() string {
-	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionBadRequest %s", 400, payload)
 }
 
 func (o *CreateSubscriptionBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -233,11 +238,13 @@ func (o *CreateSubscriptionUnprocessableEntity) Code() int {
 }
 
 func (o *CreateSubscriptionUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionUnprocessableEntity %s", 422, payload)
 }
 
 func (o *CreateSubscriptionUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionUnprocessableEntity %s", 422, payload)
 }
 
 func (o *CreateSubscriptionUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -301,11 +308,13 @@ func (o *CreateSubscriptionInternalServerError) Code() int {
 }
 
 func (o *CreateSubscriptionInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionInternalServerError %s", 500, payload)
 }
 
 func (o *CreateSubscriptionInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionInternalServerError %s", 500, payload)
 }
 
 func (o *CreateSubscriptionInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

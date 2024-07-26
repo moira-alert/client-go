@@ -6,6 +6,7 @@ package trigger
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *GetTriggerOK) Code() int {
 }
 
 func (o *GetTriggerOK) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}][%d] getTriggerOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}][%d] getTriggerOK %s", 200, payload)
 }
 
 func (o *GetTriggerOK) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}][%d] getTriggerOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}][%d] getTriggerOK %s", 200, payload)
 }
 
 func (o *GetTriggerOK) GetPayload() *models.DtoTrigger {
@@ -165,11 +168,13 @@ func (o *GetTriggerNotFound) Code() int {
 }
 
 func (o *GetTriggerNotFound) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}][%d] getTriggerNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}][%d] getTriggerNotFound %s", 404, payload)
 }
 
 func (o *GetTriggerNotFound) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}][%d] getTriggerNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}][%d] getTriggerNotFound %s", 404, payload)
 }
 
 func (o *GetTriggerNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -233,11 +238,13 @@ func (o *GetTriggerUnprocessableEntity) Code() int {
 }
 
 func (o *GetTriggerUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}][%d] getTriggerUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}][%d] getTriggerUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetTriggerUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}][%d] getTriggerUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}][%d] getTriggerUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetTriggerUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -301,11 +308,13 @@ func (o *GetTriggerInternalServerError) Code() int {
 }
 
 func (o *GetTriggerInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}][%d] getTriggerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}][%d] getTriggerInternalServerError %s", 500, payload)
 }
 
 func (o *GetTriggerInternalServerError) String() string {
-	return fmt.Sprintf("[GET /trigger/{triggerID}][%d] getTriggerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /trigger/{triggerID}][%d] getTriggerInternalServerError %s", 500, payload)
 }
 
 func (o *GetTriggerInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

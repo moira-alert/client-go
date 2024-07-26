@@ -6,6 +6,7 @@ package contact
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -102,11 +103,11 @@ func (o *RemoveContactOK) Code() int {
 }
 
 func (o *RemoveContactOK) Error() string {
-	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactOK ", 200)
+	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactOK", 200)
 }
 
 func (o *RemoveContactOK) String() string {
-	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactOK ", 200)
+	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactOK", 200)
 }
 
 func (o *RemoveContactOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -159,11 +160,13 @@ func (o *RemoveContactBadRequest) Code() int {
 }
 
 func (o *RemoveContactBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactBadRequest %s", 400, payload)
 }
 
 func (o *RemoveContactBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactBadRequest %s", 400, payload)
 }
 
 func (o *RemoveContactBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -227,11 +230,13 @@ func (o *RemoveContactForbidden) Code() int {
 }
 
 func (o *RemoveContactForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactForbidden %s", 403, payload)
 }
 
 func (o *RemoveContactForbidden) String() string {
-	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactForbidden %s", 403, payload)
 }
 
 func (o *RemoveContactForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -295,11 +300,13 @@ func (o *RemoveContactNotFound) Code() int {
 }
 
 func (o *RemoveContactNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactNotFound %s", 404, payload)
 }
 
 func (o *RemoveContactNotFound) String() string {
-	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactNotFound %s", 404, payload)
 }
 
 func (o *RemoveContactNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -363,11 +370,13 @@ func (o *RemoveContactInternalServerError) Code() int {
 }
 
 func (o *RemoveContactInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactInternalServerError %s", 500, payload)
 }
 
 func (o *RemoveContactInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactInternalServerError %s", 500, payload)
 }
 
 func (o *RemoveContactInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

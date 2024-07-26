@@ -6,6 +6,7 @@ package subscription
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -96,11 +97,11 @@ func (o *SendTestNotificationOK) Code() int {
 }
 
 func (o *SendTestNotificationOK) Error() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationOK ", 200)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationOK", 200)
 }
 
 func (o *SendTestNotificationOK) String() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationOK ", 200)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationOK", 200)
 }
 
 func (o *SendTestNotificationOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -153,11 +154,13 @@ func (o *SendTestNotificationForbidden) Code() int {
 }
 
 func (o *SendTestNotificationForbidden) Error() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationForbidden %s", 403, payload)
 }
 
 func (o *SendTestNotificationForbidden) String() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationForbidden %s", 403, payload)
 }
 
 func (o *SendTestNotificationForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -221,11 +224,13 @@ func (o *SendTestNotificationNotFound) Code() int {
 }
 
 func (o *SendTestNotificationNotFound) Error() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationNotFound %s", 404, payload)
 }
 
 func (o *SendTestNotificationNotFound) String() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationNotFound %s", 404, payload)
 }
 
 func (o *SendTestNotificationNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -289,11 +294,13 @@ func (o *SendTestNotificationInternalServerError) Code() int {
 }
 
 func (o *SendTestNotificationInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationInternalServerError %s", 500, payload)
 }
 
 func (o *SendTestNotificationInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationInternalServerError %s", 500, payload)
 }
 
 func (o *SendTestNotificationInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

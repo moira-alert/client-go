@@ -6,6 +6,7 @@ package user
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *GetUserSettingsOK) Code() int {
 }
 
 func (o *GetUserSettingsOK) Error() string {
-	return fmt.Sprintf("[GET /user/settings][%d] getUserSettingsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /user/settings][%d] getUserSettingsOK %s", 200, payload)
 }
 
 func (o *GetUserSettingsOK) String() string {
-	return fmt.Sprintf("[GET /user/settings][%d] getUserSettingsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /user/settings][%d] getUserSettingsOK %s", 200, payload)
 }
 
 func (o *GetUserSettingsOK) GetPayload() *models.DtoUserSettings {
@@ -159,11 +162,13 @@ func (o *GetUserSettingsUnprocessableEntity) Code() int {
 }
 
 func (o *GetUserSettingsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /user/settings][%d] getUserSettingsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /user/settings][%d] getUserSettingsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetUserSettingsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /user/settings][%d] getUserSettingsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /user/settings][%d] getUserSettingsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetUserSettingsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -227,11 +232,13 @@ func (o *GetUserSettingsInternalServerError) Code() int {
 }
 
 func (o *GetUserSettingsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /user/settings][%d] getUserSettingsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /user/settings][%d] getUserSettingsInternalServerError %s", 500, payload)
 }
 
 func (o *GetUserSettingsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /user/settings][%d] getUserSettingsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /user/settings][%d] getUserSettingsInternalServerError %s", 500, payload)
 }
 
 func (o *GetUserSettingsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

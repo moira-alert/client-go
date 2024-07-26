@@ -6,6 +6,7 @@ package trigger
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -109,11 +110,13 @@ func (o *UpdateTriggerOK) Code() int {
 }
 
 func (o *UpdateTriggerOK) Error() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerOK %s", 200, payload)
 }
 
 func (o *UpdateTriggerOK) String() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerOK %s", 200, payload)
 }
 
 func (o *UpdateTriggerOK) GetPayload() *models.DtoSaveTriggerResponse {
@@ -177,11 +180,13 @@ func (o *UpdateTriggerBadRequest) Code() int {
 }
 
 func (o *UpdateTriggerBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerBadRequest %s", 400, payload)
 }
 
 func (o *UpdateTriggerBadRequest) String() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerBadRequest %s", 400, payload)
 }
 
 func (o *UpdateTriggerBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -245,11 +250,13 @@ func (o *UpdateTriggerNotFound) Code() int {
 }
 
 func (o *UpdateTriggerNotFound) Error() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerNotFound %s", 404, payload)
 }
 
 func (o *UpdateTriggerNotFound) String() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerNotFound %s", 404, payload)
 }
 
 func (o *UpdateTriggerNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -313,11 +320,13 @@ func (o *UpdateTriggerUnprocessableEntity) Code() int {
 }
 
 func (o *UpdateTriggerUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerUnprocessableEntity %s", 422, payload)
 }
 
 func (o *UpdateTriggerUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerUnprocessableEntity %s", 422, payload)
 }
 
 func (o *UpdateTriggerUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -381,11 +390,13 @@ func (o *UpdateTriggerInternalServerError) Code() int {
 }
 
 func (o *UpdateTriggerInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateTriggerInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateTriggerInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
@@ -449,11 +460,13 @@ func (o *UpdateTriggerServiceUnavailable) Code() int {
 }
 
 func (o *UpdateTriggerServiceUnavailable) Error() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerServiceUnavailable  %+v", 503, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerServiceUnavailable %s", 503, payload)
 }
 
 func (o *UpdateTriggerServiceUnavailable) String() string {
-	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerServiceUnavailable  %+v", 503, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerServiceUnavailable %s", 503, payload)
 }
 
 func (o *UpdateTriggerServiceUnavailable) GetPayload() *models.APIErrorRemoteServerUnavailableExample {

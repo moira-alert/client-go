@@ -6,6 +6,7 @@ package health
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -97,11 +98,13 @@ func (o *SetNotifierStateOK) Code() int {
 }
 
 func (o *SetNotifierStateOK) Error() string {
-	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateOK %s", 200, payload)
 }
 
 func (o *SetNotifierStateOK) String() string {
-	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateOK %s", 200, payload)
 }
 
 func (o *SetNotifierStateOK) GetPayload() *models.DtoNotifierState {
@@ -165,11 +168,13 @@ func (o *SetNotifierStateForbidden) Code() int {
 }
 
 func (o *SetNotifierStateForbidden) Error() string {
-	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateForbidden %s", 403, payload)
 }
 
 func (o *SetNotifierStateForbidden) String() string {
-	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateForbidden %s", 403, payload)
 }
 
 func (o *SetNotifierStateForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -233,11 +238,13 @@ func (o *SetNotifierStateUnprocessableEntity) Code() int {
 }
 
 func (o *SetNotifierStateUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateUnprocessableEntity %s", 422, payload)
 }
 
 func (o *SetNotifierStateUnprocessableEntity) String() string {
-	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateUnprocessableEntity %s", 422, payload)
 }
 
 func (o *SetNotifierStateUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -301,11 +308,13 @@ func (o *SetNotifierStateInternalServerError) Code() int {
 }
 
 func (o *SetNotifierStateInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateInternalServerError %s", 500, payload)
 }
 
 func (o *SetNotifierStateInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateInternalServerError %s", 500, payload)
 }
 
 func (o *SetNotifierStateInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

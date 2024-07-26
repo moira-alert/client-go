@@ -6,6 +6,7 @@ package trigger
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -96,11 +97,11 @@ func (o *DeleteTriggerNodataMetricsOK) Code() int {
 }
 
 func (o *DeleteTriggerNodataMetricsOK) Error() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics/nodata][%d] deleteTriggerNodataMetricsOK ", 200)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics/nodata][%d] deleteTriggerNodataMetricsOK", 200)
 }
 
 func (o *DeleteTriggerNodataMetricsOK) String() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics/nodata][%d] deleteTriggerNodataMetricsOK ", 200)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics/nodata][%d] deleteTriggerNodataMetricsOK", 200)
 }
 
 func (o *DeleteTriggerNodataMetricsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -153,11 +154,13 @@ func (o *DeleteTriggerNodataMetricsBadRequest) Code() int {
 }
 
 func (o *DeleteTriggerNodataMetricsBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics/nodata][%d] deleteTriggerNodataMetricsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics/nodata][%d] deleteTriggerNodataMetricsBadRequest %s", 400, payload)
 }
 
 func (o *DeleteTriggerNodataMetricsBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics/nodata][%d] deleteTriggerNodataMetricsBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics/nodata][%d] deleteTriggerNodataMetricsBadRequest %s", 400, payload)
 }
 
 func (o *DeleteTriggerNodataMetricsBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -221,11 +224,13 @@ func (o *DeleteTriggerNodataMetricsNotFound) Code() int {
 }
 
 func (o *DeleteTriggerNodataMetricsNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics/nodata][%d] deleteTriggerNodataMetricsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics/nodata][%d] deleteTriggerNodataMetricsNotFound %s", 404, payload)
 }
 
 func (o *DeleteTriggerNodataMetricsNotFound) String() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics/nodata][%d] deleteTriggerNodataMetricsNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics/nodata][%d] deleteTriggerNodataMetricsNotFound %s", 404, payload)
 }
 
 func (o *DeleteTriggerNodataMetricsNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -289,11 +294,13 @@ func (o *DeleteTriggerNodataMetricsInternalServerError) Code() int {
 }
 
 func (o *DeleteTriggerNodataMetricsInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics/nodata][%d] deleteTriggerNodataMetricsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics/nodata][%d] deleteTriggerNodataMetricsInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteTriggerNodataMetricsInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics/nodata][%d] deleteTriggerNodataMetricsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics/nodata][%d] deleteTriggerNodataMetricsInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteTriggerNodataMetricsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

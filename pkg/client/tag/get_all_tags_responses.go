@@ -6,6 +6,7 @@ package tag
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,11 +92,13 @@ func (o *GetAllTagsOK) Code() int {
 }
 
 func (o *GetAllTagsOK) Error() string {
-	return fmt.Sprintf("[GET /tag][%d] getAllTagsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tag][%d] getAllTagsOK %s", 200, payload)
 }
 
 func (o *GetAllTagsOK) String() string {
-	return fmt.Sprintf("[GET /tag][%d] getAllTagsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tag][%d] getAllTagsOK %s", 200, payload)
 }
 
 func (o *GetAllTagsOK) GetPayload() *models.DtoTagsData {
@@ -159,11 +162,13 @@ func (o *GetAllTagsUnprocessableEntity) Code() int {
 }
 
 func (o *GetAllTagsUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /tag][%d] getAllTagsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tag][%d] getAllTagsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetAllTagsUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /tag][%d] getAllTagsUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tag][%d] getAllTagsUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetAllTagsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -227,11 +232,13 @@ func (o *GetAllTagsInternalServerError) Code() int {
 }
 
 func (o *GetAllTagsInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /tag][%d] getAllTagsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tag][%d] getAllTagsInternalServerError %s", 500, payload)
 }
 
 func (o *GetAllTagsInternalServerError) String() string {
-	return fmt.Sprintf("[GET /tag][%d] getAllTagsInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tag][%d] getAllTagsInternalServerError %s", 500, payload)
 }
 
 func (o *GetAllTagsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

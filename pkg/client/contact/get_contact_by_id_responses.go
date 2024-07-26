@@ -6,6 +6,7 @@ package contact
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -103,11 +104,13 @@ func (o *GetContactByIDOK) Code() int {
 }
 
 func (o *GetContactByIDOK) Error() string {
-	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdOK %s", 200, payload)
 }
 
 func (o *GetContactByIDOK) String() string {
-	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdOK %s", 200, payload)
 }
 
 func (o *GetContactByIDOK) GetPayload() *models.DtoContact {
@@ -171,11 +174,13 @@ func (o *GetContactByIDForbidden) Code() int {
 }
 
 func (o *GetContactByIDForbidden) Error() string {
-	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdForbidden %s", 403, payload)
 }
 
 func (o *GetContactByIDForbidden) String() string {
-	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdForbidden  %+v", 403, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdForbidden %s", 403, payload)
 }
 
 func (o *GetContactByIDForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -239,11 +244,13 @@ func (o *GetContactByIDNotFound) Code() int {
 }
 
 func (o *GetContactByIDNotFound) Error() string {
-	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdNotFound %s", 404, payload)
 }
 
 func (o *GetContactByIDNotFound) String() string {
-	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdNotFound  %+v", 404, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdNotFound %s", 404, payload)
 }
 
 func (o *GetContactByIDNotFound) GetPayload() *models.APIErrorNotFoundExample {
@@ -307,11 +314,13 @@ func (o *GetContactByIDUnprocessableEntity) Code() int {
 }
 
 func (o *GetContactByIDUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetContactByIDUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdUnprocessableEntity %s", 422, payload)
 }
 
 func (o *GetContactByIDUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -375,11 +384,13 @@ func (o *GetContactByIDInternalServerError) Code() int {
 }
 
 func (o *GetContactByIDInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdInternalServerError %s", 500, payload)
 }
 
 func (o *GetContactByIDInternalServerError) String() string {
-	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /contact/{contactID}][%d] getContactByIdInternalServerError %s", 500, payload)
 }
 
 func (o *GetContactByIDInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
