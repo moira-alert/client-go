@@ -32,7 +32,7 @@ import (
 func main() {
 	config := client.DefaultTransportConfig().
 		WithBasePath("api").
-		WithHost("moira.skbkontur.ru").
+		WithHost("moira.example.com").
 		WithSchemes([]string{"https"})
 
 	transport := httptransport.New(config.Host, config.BasePath, config.Schemes)
