@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewGetContactEventsByIDParams creates a new GetContactEventsByIDParams object,
@@ -77,6 +78,20 @@ type GetContactEventsByIDParams struct {
 	*/
 	From *string
 
+	/* P.
+
+	   Defines the index of data portion (combined with size). E.g, p=2, size=100 will return records from 200 (including), to 300 (not including)
+	*/
+	P *int64
+
+	/* Size.
+
+	   Number of items to return or all items if size == -1 (if size == -1 p should be zero for correct work)
+
+	   Default: 100
+	*/
+	Size *int64
+
 	/* To.
 
 	   End time of the time range
@@ -107,12 +122,18 @@ func (o *GetContactEventsByIDParams) SetDefaults() {
 
 		fromDefault = string("-3hour")
 
+		pDefault = int64(0)
+
+		sizeDefault = int64(100)
+
 		toDefault = string("now")
 	)
 
 	val := GetContactEventsByIDParams{
 		ContactID: contactIDDefault,
 		From:      &fromDefault,
+		P:         &pDefault,
+		Size:      &sizeDefault,
 		To:        &toDefault,
 	}
 
@@ -177,6 +198,28 @@ func (o *GetContactEventsByIDParams) SetFrom(from *string) {
 	o.From = from
 }
 
+// WithP adds the p to the get contact events by id params
+func (o *GetContactEventsByIDParams) WithP(p *int64) *GetContactEventsByIDParams {
+	o.SetP(p)
+	return o
+}
+
+// SetP adds the p to the get contact events by id params
+func (o *GetContactEventsByIDParams) SetP(p *int64) {
+	o.P = p
+}
+
+// WithSize adds the size to the get contact events by id params
+func (o *GetContactEventsByIDParams) WithSize(size *int64) *GetContactEventsByIDParams {
+	o.SetSize(size)
+	return o
+}
+
+// SetSize adds the size to the get contact events by id params
+func (o *GetContactEventsByIDParams) SetSize(size *int64) {
+	o.Size = size
+}
+
 // WithTo adds the to to the get contact events by id params
 func (o *GetContactEventsByIDParams) WithTo(to *string) *GetContactEventsByIDParams {
 	o.SetTo(to)
@@ -213,6 +256,40 @@ func (o *GetContactEventsByIDParams) WriteToRequest(r runtime.ClientRequest, reg
 		if qFrom != "" {
 
 			if err := r.SetQueryParam("from", qFrom); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.P != nil {
+
+		// query param p
+		var qrP int64
+
+		if o.P != nil {
+			qrP = *o.P
+		}
+		qP := swag.FormatInt64(qrP)
+		if qP != "" {
+
+			if err := r.SetQueryParam("p", qP); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Size != nil {
+
+		// query param size
+		var qrSize int64
+
+		if o.Size != nil {
+			qrSize = *o.Size
+		}
+		qSize := swag.FormatInt64(qrSize)
+		if qSize != "" {
+
+			if err := r.SetQueryParam("size", qSize); err != nil {
 				return err
 			}
 		}

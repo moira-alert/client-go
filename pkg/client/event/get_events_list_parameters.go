@@ -62,6 +62,22 @@ GetEventsListParams contains all the parameters to send to the API endpoint
 */
 type GetEventsListParams struct {
 
+	/* From.
+
+	   Start time of the time range
+
+	   Default: "-3hours"
+	*/
+	From *string
+
+	/* Metric.
+
+	   Regular expression that will be used to filter events
+
+	   Default: ".*"
+	*/
+	Metric *string
+
 	/* P.
 
 	   Defines the number of the displayed page. E.g, p=2 would display the 2nd page
@@ -70,11 +86,25 @@ type GetEventsListParams struct {
 
 	/* Size.
 
-	   Number of items to be displayed on one page
+	   Number of items to be displayed on one page. if size = -1 then all events returned
 
 	   Default: 100
 	*/
 	Size *int64
+
+	/* States.
+
+	   String of ',' separated state names. If empty then all states will be used.
+	*/
+	States []string
+
+	/* To.
+
+	   End time of the time range
+
+	   Default: "now"
+	*/
+	To *string
 
 	/* TriggerID.
 
@@ -102,16 +132,25 @@ func (o *GetEventsListParams) WithDefaults() *GetEventsListParams {
 // All values with no default are reset to their zero value.
 func (o *GetEventsListParams) SetDefaults() {
 	var (
+		fromDefault = string("-3hours")
+
+		metricDefault = string(".*")
+
 		pDefault = int64(0)
 
 		sizeDefault = int64(100)
+
+		toDefault = string("now")
 
 		triggerIDDefault = string("bcba82f5-48cf-44c0-b7d6-e1d32c64a88c")
 	)
 
 	val := GetEventsListParams{
+		From:      &fromDefault,
+		Metric:    &metricDefault,
 		P:         &pDefault,
 		Size:      &sizeDefault,
+		To:        &toDefault,
 		TriggerID: triggerIDDefault,
 	}
 
@@ -154,6 +193,28 @@ func (o *GetEventsListParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithFrom adds the from to the get events list params
+func (o *GetEventsListParams) WithFrom(from *string) *GetEventsListParams {
+	o.SetFrom(from)
+	return o
+}
+
+// SetFrom adds the from to the get events list params
+func (o *GetEventsListParams) SetFrom(from *string) {
+	o.From = from
+}
+
+// WithMetric adds the metric to the get events list params
+func (o *GetEventsListParams) WithMetric(metric *string) *GetEventsListParams {
+	o.SetMetric(metric)
+	return o
+}
+
+// SetMetric adds the metric to the get events list params
+func (o *GetEventsListParams) SetMetric(metric *string) {
+	o.Metric = metric
+}
+
 // WithP adds the p to the get events list params
 func (o *GetEventsListParams) WithP(p *int64) *GetEventsListParams {
 	o.SetP(p)
@@ -176,6 +237,28 @@ func (o *GetEventsListParams) SetSize(size *int64) {
 	o.Size = size
 }
 
+// WithStates adds the states to the get events list params
+func (o *GetEventsListParams) WithStates(states []string) *GetEventsListParams {
+	o.SetStates(states)
+	return o
+}
+
+// SetStates adds the states to the get events list params
+func (o *GetEventsListParams) SetStates(states []string) {
+	o.States = states
+}
+
+// WithTo adds the to to the get events list params
+func (o *GetEventsListParams) WithTo(to *string) *GetEventsListParams {
+	o.SetTo(to)
+	return o
+}
+
+// SetTo adds the to to the get events list params
+func (o *GetEventsListParams) SetTo(to *string) {
+	o.To = to
+}
+
 // WithTriggerID adds the triggerID to the get events list params
 func (o *GetEventsListParams) WithTriggerID(triggerID string) *GetEventsListParams {
 	o.SetTriggerID(triggerID)
@@ -194,6 +277,40 @@ func (o *GetEventsListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
+
+	if o.From != nil {
+
+		// query param from
+		var qrFrom string
+
+		if o.From != nil {
+			qrFrom = *o.From
+		}
+		qFrom := qrFrom
+		if qFrom != "" {
+
+			if err := r.SetQueryParam("from", qFrom); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Metric != nil {
+
+		// query param metric
+		var qrMetric string
+
+		if o.Metric != nil {
+			qrMetric = *o.Metric
+		}
+		qMetric := qrMetric
+		if qMetric != "" {
+
+			if err := r.SetQueryParam("metric", qMetric); err != nil {
+				return err
+			}
+		}
+	}
 
 	if o.P != nil {
 
@@ -229,6 +346,34 @@ func (o *GetEventsListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		}
 	}
 
+	if o.States != nil {
+
+		// binding items for states
+		joinedStates := o.bindParamStates(reg)
+
+		// query array param states
+		if err := r.SetQueryParam("states", joinedStates...); err != nil {
+			return err
+		}
+	}
+
+	if o.To != nil {
+
+		// query param to
+		var qrTo string
+
+		if o.To != nil {
+			qrTo = *o.To
+		}
+		qTo := qrTo
+		if qTo != "" {
+
+			if err := r.SetQueryParam("to", qTo); err != nil {
+				return err
+			}
+		}
+	}
+
 	// path param triggerID
 	if err := r.SetPathParam("triggerID", o.TriggerID); err != nil {
 		return err
@@ -238,4 +383,21 @@ func (o *GetEventsListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
+}
+
+// bindParamGetEventsList binds the parameter states
+func (o *GetEventsListParams) bindParamStates(formats strfmt.Registry) []string {
+	statesIR := o.States
+
+	var statesIC []string
+	for _, statesIIR := range statesIR { // explode []string
+
+		statesIIV := statesIIR // string as string
+		statesIC = append(statesIC, statesIIV)
+	}
+
+	// items.CollectionFormat: "csv"
+	statesIS := swag.JoinByFormat(statesIC, "csv")
+
+	return statesIS
 }
