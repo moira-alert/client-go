@@ -25,7 +25,7 @@ import (
 	"github.com/moira-alert/client-go/pkg/client/user"
 )
 
-// Default moira alert HTTP client.
+// Default moira API HTTP client.
 var Default = NewHTTPClient(nil)
 
 const (
@@ -40,14 +40,14 @@ const (
 // DefaultSchemes are the default schemes found in Meta (info) section of spec file
 var DefaultSchemes = []string{"http"}
 
-// NewHTTPClient creates a new moira alert HTTP client.
-func NewHTTPClient(formats strfmt.Registry) *MoiraAlert {
+// NewHTTPClient creates a new moira API HTTP client.
+func NewHTTPClient(formats strfmt.Registry) *MoiraAPI {
 	return NewHTTPClientWithConfig(formats, nil)
 }
 
-// NewHTTPClientWithConfig creates a new moira alert HTTP client,
+// NewHTTPClientWithConfig creates a new moira API HTTP client,
 // using a customizable transport config.
-func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *MoiraAlert {
+func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *MoiraAPI {
 	// ensure nullable parameters have default
 	if cfg == nil {
 		cfg = DefaultTransportConfig()
@@ -58,14 +58,14 @@ func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *Moi
 	return New(transport, formats)
 }
 
-// New creates a new moira alert client
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *MoiraAlert {
+// New creates a new moira API client
+func New(transport runtime.ClientTransport, formats strfmt.Registry) *MoiraAPI {
 	// ensure nullable parameters have default
 	if formats == nil {
 		formats = strfmt.Default
 	}
 
-	cli := new(MoiraAlert)
+	cli := new(MoiraAPI)
 	cli.Transport = transport
 	cli.Config = config.New(transport, formats)
 	cli.Contact = contact.New(transport, formats)
@@ -122,8 +122,8 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 	return cfg
 }
 
-// MoiraAlert is a client for moira alert
-type MoiraAlert struct {
+// MoiraAPI is a client for moira API
+type MoiraAPI struct {
 	Config config.ClientService
 
 	Contact contact.ClientService
@@ -154,7 +154,7 @@ type MoiraAlert struct {
 }
 
 // SetTransport changes the transport on the client and all its subresources
-func (c *MoiraAlert) SetTransport(transport runtime.ClientTransport) {
+func (c *MoiraAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.Config.SetTransport(transport)
 	c.Contact.SetTransport(transport)
