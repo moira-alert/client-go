@@ -42,6 +42,12 @@ func (o *TriggerCheckReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
+	case 503:
+		result := NewTriggerCheckServiceUnavailable()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
 		return nil, runtime.NewAPIError("[PUT /trigger/check] trigger-check", response, response.Code())
 	}
@@ -248,6 +254,76 @@ func (o *TriggerCheckInternalServerError) GetPayload() *models.APIErrorInternalS
 func (o *TriggerCheckInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.APIErrorInternalServerExample)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewTriggerCheckServiceUnavailable creates a TriggerCheckServiceUnavailable with default headers values
+func NewTriggerCheckServiceUnavailable() *TriggerCheckServiceUnavailable {
+	return &TriggerCheckServiceUnavailable{}
+}
+
+/*
+TriggerCheckServiceUnavailable describes a response with status code 503, with default header values.
+
+Remote server unavailable
+*/
+type TriggerCheckServiceUnavailable struct {
+	Payload *models.APIErrorRemoteServerUnavailableExample
+}
+
+// IsSuccess returns true when this trigger check service unavailable response has a 2xx status code
+func (o *TriggerCheckServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this trigger check service unavailable response has a 3xx status code
+func (o *TriggerCheckServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this trigger check service unavailable response has a 4xx status code
+func (o *TriggerCheckServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this trigger check service unavailable response has a 5xx status code
+func (o *TriggerCheckServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this trigger check service unavailable response a status code equal to that given
+func (o *TriggerCheckServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the trigger check service unavailable response
+func (o *TriggerCheckServiceUnavailable) Code() int {
+	return 503
+}
+
+func (o *TriggerCheckServiceUnavailable) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckServiceUnavailable %s", 503, payload)
+}
+
+func (o *TriggerCheckServiceUnavailable) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckServiceUnavailable %s", 503, payload)
+}
+
+func (o *TriggerCheckServiceUnavailable) GetPayload() *models.APIErrorRemoteServerUnavailableExample {
+	return o.Payload
+}
+
+func (o *TriggerCheckServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.APIErrorRemoteServerUnavailableExample)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

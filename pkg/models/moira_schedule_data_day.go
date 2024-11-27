@@ -7,9 +7,12 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // MoiraScheduleDataDay moira schedule data day
@@ -23,16 +26,74 @@ type MoiraScheduleDataDay struct {
 
 	// name
 	// Example: Mon
-	Name string `json:"name,omitempty"`
+	// Enum: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
+	Name struct {
+		MoiraDayName
+	} `json:"name,omitempty"`
 }
 
 // Validate validates this moira schedule data day
 func (m *MoiraScheduleDataDay) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this moira schedule data day based on context it is used
+var moiraScheduleDataDayTypeNamePropEnum []interface{}
+
+func init() {
+	var res []struct {
+		MoiraDayName
+	}
+	if err := json.Unmarshal([]byte(`["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		moiraScheduleDataDayTypeNamePropEnum = append(moiraScheduleDataDayTypeNamePropEnum, v)
+	}
+}
+
+// prop value enum
+func (m *MoiraScheduleDataDay) validateNameEnum(path, location string, value *struct {
+	MoiraDayName
+}) error {
+	if err := validate.EnumCase(path, location, value, moiraScheduleDataDayTypeNamePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *MoiraScheduleDataDay) validateName(formats strfmt.Registry) error {
+	if swag.IsZero(m.Name) { // not required
+		return nil
+	}
+
+	return nil
+}
+
+// ContextValidate validate this moira schedule data day based on the context it is used
 func (m *MoiraScheduleDataDay) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateName(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *MoiraScheduleDataDay) contextValidateName(ctx context.Context, formats strfmt.Registry) error {
+
 	return nil
 }
 

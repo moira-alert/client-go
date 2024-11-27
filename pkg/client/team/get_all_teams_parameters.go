@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewGetAllTeamsParams creates a new GetAllTeamsParams object,
@@ -60,6 +61,37 @@ GetAllTeamsParams contains all the parameters to send to the API endpoint
 	Typically these are written to a http.Request.
 */
 type GetAllTeamsParams struct {
+
+	/* P.
+
+	   Defines the number of the displayed page. E.g, p=2 would display the 2nd page
+	*/
+	P *int64
+
+	/* SearchText.
+
+	   Regular expression which will be applied to team id or team name than filtering teams
+
+	   Default: ".*"
+	*/
+	SearchText *string
+
+	/* Size.
+
+	   Number of items to be displayed on one page. if size = -1 then all teams returned
+
+	   Default: -1
+	*/
+	Size *int64
+
+	/* Sort.
+
+	   String to set sort order (by name). On empty - no order, asc - ascending, desc - descending
+
+	   Default: "asc"
+	*/
+	Sort *string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -77,7 +109,27 @@ func (o *GetAllTeamsParams) WithDefaults() *GetAllTeamsParams {
 //
 // All values with no default are reset to their zero value.
 func (o *GetAllTeamsParams) SetDefaults() {
-	// no default values defined for this parameter
+	var (
+		pDefault = int64(0)
+
+		searchTextDefault = string(".*")
+
+		sizeDefault = int64(-1)
+
+		sortDefault = string("asc")
+	)
+
+	val := GetAllTeamsParams{
+		P:          &pDefault,
+		SearchText: &searchTextDefault,
+		Size:       &sizeDefault,
+		Sort:       &sortDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the get all teams params
@@ -113,6 +165,50 @@ func (o *GetAllTeamsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithP adds the p to the get all teams params
+func (o *GetAllTeamsParams) WithP(p *int64) *GetAllTeamsParams {
+	o.SetP(p)
+	return o
+}
+
+// SetP adds the p to the get all teams params
+func (o *GetAllTeamsParams) SetP(p *int64) {
+	o.P = p
+}
+
+// WithSearchText adds the searchText to the get all teams params
+func (o *GetAllTeamsParams) WithSearchText(searchText *string) *GetAllTeamsParams {
+	o.SetSearchText(searchText)
+	return o
+}
+
+// SetSearchText adds the searchText to the get all teams params
+func (o *GetAllTeamsParams) SetSearchText(searchText *string) {
+	o.SearchText = searchText
+}
+
+// WithSize adds the size to the get all teams params
+func (o *GetAllTeamsParams) WithSize(size *int64) *GetAllTeamsParams {
+	o.SetSize(size)
+	return o
+}
+
+// SetSize adds the size to the get all teams params
+func (o *GetAllTeamsParams) SetSize(size *int64) {
+	o.Size = size
+}
+
+// WithSort adds the sort to the get all teams params
+func (o *GetAllTeamsParams) WithSort(sort *string) *GetAllTeamsParams {
+	o.SetSort(sort)
+	return o
+}
+
+// SetSort adds the sort to the get all teams params
+func (o *GetAllTeamsParams) SetSort(sort *string) {
+	o.Sort = sort
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetAllTeamsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -120,6 +216,74 @@ func (o *GetAllTeamsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		return err
 	}
 	var res []error
+
+	if o.P != nil {
+
+		// query param p
+		var qrP int64
+
+		if o.P != nil {
+			qrP = *o.P
+		}
+		qP := swag.FormatInt64(qrP)
+		if qP != "" {
+
+			if err := r.SetQueryParam("p", qP); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.SearchText != nil {
+
+		// query param searchText
+		var qrSearchText string
+
+		if o.SearchText != nil {
+			qrSearchText = *o.SearchText
+		}
+		qSearchText := qrSearchText
+		if qSearchText != "" {
+
+			if err := r.SetQueryParam("searchText", qSearchText); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Size != nil {
+
+		// query param size
+		var qrSize int64
+
+		if o.Size != nil {
+			qrSize = *o.Size
+		}
+		qSize := swag.FormatInt64(qrSize)
+		if qSize != "" {
+
+			if err := r.SetQueryParam("size", qSize); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Sort != nil {
+
+		// query param sort
+		var qrSort string
+
+		if o.Sort != nil {
+			qrSort = *o.Sort
+		}
+		qSort := qrSort
+		if qSort != "" {
+
+			if err := r.SetQueryParam("sort", qSort); err != nil {
+				return err
+			}
+		}
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
