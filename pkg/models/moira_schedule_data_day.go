@@ -27,9 +27,7 @@ type MoiraScheduleDataDay struct {
 	// name
 	// Example: Mon
 	// Enum: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
-	Name struct {
-		MoiraDayName
-	} `json:"name,omitempty"`
+	Name string `json:"name,omitempty"`
 }
 
 // Validate validates this moira schedule data day
@@ -49,9 +47,7 @@ func (m *MoiraScheduleDataDay) Validate(formats strfmt.Registry) error {
 var moiraScheduleDataDayTypeNamePropEnum []interface{}
 
 func init() {
-	var res []struct {
-		MoiraDayName
-	}
+	var res []string
 	if err := json.Unmarshal([]byte(`["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]`), &res); err != nil {
 		panic(err)
 	}
@@ -60,10 +56,32 @@ func init() {
 	}
 }
 
+const (
+
+	// MoiraScheduleDataDayNameMon captures enum value "Mon"
+	MoiraScheduleDataDayNameMon string = "Mon"
+
+	// MoiraScheduleDataDayNameTue captures enum value "Tue"
+	MoiraScheduleDataDayNameTue string = "Tue"
+
+	// MoiraScheduleDataDayNameWed captures enum value "Wed"
+	MoiraScheduleDataDayNameWed string = "Wed"
+
+	// MoiraScheduleDataDayNameThu captures enum value "Thu"
+	MoiraScheduleDataDayNameThu string = "Thu"
+
+	// MoiraScheduleDataDayNameFri captures enum value "Fri"
+	MoiraScheduleDataDayNameFri string = "Fri"
+
+	// MoiraScheduleDataDayNameSat captures enum value "Sat"
+	MoiraScheduleDataDayNameSat string = "Sat"
+
+	// MoiraScheduleDataDayNameSun captures enum value "Sun"
+	MoiraScheduleDataDayNameSun string = "Sun"
+)
+
 // prop value enum
-func (m *MoiraScheduleDataDay) validateNameEnum(path, location string, value *struct {
-	MoiraDayName
-}) error {
+func (m *MoiraScheduleDataDay) validateNameEnum(path, location string, value string) error {
 	if err := validate.EnumCase(path, location, value, moiraScheduleDataDayTypeNamePropEnum, true); err != nil {
 		return err
 	}
@@ -75,25 +93,16 @@ func (m *MoiraScheduleDataDay) validateName(formats strfmt.Registry) error {
 		return nil
 	}
 
+	// value enum
+	if err := m.validateNameEnum("name", "body", m.Name); err != nil {
+		return err
+	}
+
 	return nil
 }
 
-// ContextValidate validate this moira schedule data day based on the context it is used
+// ContextValidate validates this moira schedule data day based on context it is used
 func (m *MoiraScheduleDataDay) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateName(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *MoiraScheduleDataDay) contextValidateName(ctx context.Context, formats strfmt.Registry) error {
-
 	return nil
 }
 
