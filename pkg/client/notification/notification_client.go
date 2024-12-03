@@ -58,6 +58,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	DeleteAllNotifications(params *DeleteAllNotificationsParams, opts ...ClientOption) (*DeleteAllNotificationsOK, error)
 
+	DeleteNotification(params *DeleteNotificationParams, opts ...ClientOption) (*DeleteNotificationOK, error)
+
 	GetNotifications(params *GetNotificationsParams, opts ...ClientOption) (*GetNotificationsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
@@ -74,7 +76,7 @@ func (a *Client) DeleteAllNotifications(params *DeleteAllNotificationsParams, op
 	op := &runtime.ClientOperation{
 		ID:                 "delete-all-notifications",
 		Method:             "DELETE",
-		PathPattern:        "/notification",
+		PathPattern:        "/notification/all",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -98,6 +100,44 @@ func (a *Client) DeleteAllNotifications(params *DeleteAllNotificationsParams, op
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for delete-all-notifications: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+DeleteNotification deletes a notification by id
+*/
+func (a *Client) DeleteNotification(params *DeleteNotificationParams, opts ...ClientOption) (*DeleteNotificationOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteNotificationParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "delete-notification",
+		Method:             "DELETE",
+		PathPattern:        "/notification",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteNotificationReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteNotificationOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for delete-notification: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
