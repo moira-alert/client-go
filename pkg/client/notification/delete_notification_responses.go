@@ -6,6 +6,7 @@ package notification
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -31,6 +32,12 @@ func (o *DeleteNotificationReader) ReadResponse(response runtime.ClientResponse,
 		return result, nil
 	case 400:
 		result := NewDeleteNotificationBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 403:
+		result := NewDeleteNotificationForbidden()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -97,11 +104,13 @@ func (o *DeleteNotificationOK) Code() int {
 }
 
 func (o *DeleteNotificationOK) Error() string {
-	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationOK %s", 200, payload)
 }
 
 func (o *DeleteNotificationOK) String() string {
-	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationOK %s", 200, payload)
 }
 
 func (o *DeleteNotificationOK) GetPayload() *models.DtoNotificationDeleteResponse {
@@ -165,11 +174,13 @@ func (o *DeleteNotificationBadRequest) Code() int {
 }
 
 func (o *DeleteNotificationBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationBadRequest %s", 400, payload)
 }
 
 func (o *DeleteNotificationBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationBadRequest  %+v", 400, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationBadRequest %s", 400, payload)
 }
 
 func (o *DeleteNotificationBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
@@ -179,6 +190,76 @@ func (o *DeleteNotificationBadRequest) GetPayload() *models.APIErrorInvalidReque
 func (o *DeleteNotificationBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.APIErrorInvalidRequestExample)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteNotificationForbidden creates a DeleteNotificationForbidden with default headers values
+func NewDeleteNotificationForbidden() *DeleteNotificationForbidden {
+	return &DeleteNotificationForbidden{}
+}
+
+/*
+DeleteNotificationForbidden describes a response with status code 403, with default header values.
+
+Forbidden
+*/
+type DeleteNotificationForbidden struct {
+	Payload *models.APIErrorForbiddenExample
+}
+
+// IsSuccess returns true when this delete notification forbidden response has a 2xx status code
+func (o *DeleteNotificationForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete notification forbidden response has a 3xx status code
+func (o *DeleteNotificationForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete notification forbidden response has a 4xx status code
+func (o *DeleteNotificationForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete notification forbidden response has a 5xx status code
+func (o *DeleteNotificationForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete notification forbidden response a status code equal to that given
+func (o *DeleteNotificationForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the delete notification forbidden response
+func (o *DeleteNotificationForbidden) Code() int {
+	return 403
+}
+
+func (o *DeleteNotificationForbidden) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationForbidden %s", 403, payload)
+}
+
+func (o *DeleteNotificationForbidden) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationForbidden %s", 403, payload)
+}
+
+func (o *DeleteNotificationForbidden) GetPayload() *models.APIErrorForbiddenExample {
+	return o.Payload
+}
+
+func (o *DeleteNotificationForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.APIErrorForbiddenExample)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -233,11 +314,13 @@ func (o *DeleteNotificationUnprocessableEntity) Code() int {
 }
 
 func (o *DeleteNotificationUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationUnprocessableEntity %s", 422, payload)
 }
 
 func (o *DeleteNotificationUnprocessableEntity) String() string {
-	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationUnprocessableEntity %s", 422, payload)
 }
 
 func (o *DeleteNotificationUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
@@ -301,11 +384,13 @@ func (o *DeleteNotificationInternalServerError) Code() int {
 }
 
 func (o *DeleteNotificationInternalServerError) Error() string {
-	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteNotificationInternalServerError) String() string {
-	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationInternalServerError  %+v", 500, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteNotificationInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

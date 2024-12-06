@@ -7,9 +7,12 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // MoiraScheduleDataDay moira schedule data day
@@ -23,11 +26,78 @@ type MoiraScheduleDataDay struct {
 
 	// name
 	// Example: Mon
+	// Enum: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
 	Name string `json:"name,omitempty"`
 }
 
 // Validate validates this moira schedule data day
 func (m *MoiraScheduleDataDay) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+var moiraScheduleDataDayTypeNamePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		moiraScheduleDataDayTypeNamePropEnum = append(moiraScheduleDataDayTypeNamePropEnum, v)
+	}
+}
+
+const (
+
+	// MoiraScheduleDataDayNameMon captures enum value "Mon"
+	MoiraScheduleDataDayNameMon string = "Mon"
+
+	// MoiraScheduleDataDayNameTue captures enum value "Tue"
+	MoiraScheduleDataDayNameTue string = "Tue"
+
+	// MoiraScheduleDataDayNameWed captures enum value "Wed"
+	MoiraScheduleDataDayNameWed string = "Wed"
+
+	// MoiraScheduleDataDayNameThu captures enum value "Thu"
+	MoiraScheduleDataDayNameThu string = "Thu"
+
+	// MoiraScheduleDataDayNameFri captures enum value "Fri"
+	MoiraScheduleDataDayNameFri string = "Fri"
+
+	// MoiraScheduleDataDayNameSat captures enum value "Sat"
+	MoiraScheduleDataDayNameSat string = "Sat"
+
+	// MoiraScheduleDataDayNameSun captures enum value "Sun"
+	MoiraScheduleDataDayNameSun string = "Sun"
+)
+
+// prop value enum
+func (m *MoiraScheduleDataDay) validateNameEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, moiraScheduleDataDayTypeNamePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *MoiraScheduleDataDay) validateName(formats strfmt.Registry) error {
+	if swag.IsZero(m.Name) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateNameEnum("name", "body", m.Name); err != nil {
+		return err
+	}
+
 	return nil
 }
 

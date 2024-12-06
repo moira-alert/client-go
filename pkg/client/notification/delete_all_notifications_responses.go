@@ -43,7 +43,7 @@ func (o *DeleteAllNotificationsReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[DELETE /notification] delete-all-notifications", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /notification/all] delete-all-notifications", response, response.Code())
 	}
 }
 
@@ -93,12 +93,12 @@ func (o *DeleteAllNotificationsOK) Code() int {
 
 func (o *DeleteAllNotificationsOK) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /notification][%d] deleteAllNotificationsOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /notification/all][%d] deleteAllNotificationsOK %s", 200, payload)
 }
 
 func (o *DeleteAllNotificationsOK) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /notification][%d] deleteAllNotificationsOK %s", 200, payload)
+	return fmt.Sprintf("[DELETE /notification/all][%d] deleteAllNotificationsOK %s", 200, payload)
 }
 
 func (o *DeleteAllNotificationsOK) GetPayload() *models.DtoNotificationsList {
@@ -163,12 +163,12 @@ func (o *DeleteAllNotificationsForbidden) Code() int {
 
 func (o *DeleteAllNotificationsForbidden) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /notification][%d] deleteAllNotificationsForbidden %s", 403, payload)
+	return fmt.Sprintf("[DELETE /notification/all][%d] deleteAllNotificationsForbidden %s", 403, payload)
 }
 
 func (o *DeleteAllNotificationsForbidden) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /notification][%d] deleteAllNotificationsForbidden %s", 403, payload)
+	return fmt.Sprintf("[DELETE /notification/all][%d] deleteAllNotificationsForbidden %s", 403, payload)
 }
 
 func (o *DeleteAllNotificationsForbidden) GetPayload() *models.APIErrorForbiddenExample {
@@ -233,12 +233,12 @@ func (o *DeleteAllNotificationsInternalServerError) Code() int {
 
 func (o *DeleteAllNotificationsInternalServerError) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /notification][%d] deleteAllNotificationsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[DELETE /notification/all][%d] deleteAllNotificationsInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteAllNotificationsInternalServerError) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[DELETE /notification][%d] deleteAllNotificationsInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[DELETE /notification/all][%d] deleteAllNotificationsInternalServerError %s", 500, payload)
 }
 
 func (o *DeleteAllNotificationsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {

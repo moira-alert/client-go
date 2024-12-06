@@ -66,6 +66,8 @@ type ClientService interface {
 
 	GetAllTeams(params *GetAllTeamsParams, opts ...ClientOption) (*GetAllTeamsOK, error)
 
+	GetAllTeamsForUser(params *GetAllTeamsForUserParams, opts ...ClientOption) (*GetAllTeamsForUserOK, error)
+
 	GetTeam(params *GetTeamParams, opts ...ClientOption) (*GetTeamOK, error)
 
 	GetTeamSettings(params *GetTeamSettingsParams, opts ...ClientOption) (*GetTeamSettingsOK, error)
@@ -232,7 +234,7 @@ func (a *Client) DeleteTeamUser(params *DeleteTeamUserParams, opts ...ClientOpti
 }
 
 /*
-GetAllTeams gets all teams
+GetAllTeams gets all moira teams
 */
 func (a *Client) GetAllTeams(params *GetAllTeamsParams, opts ...ClientOption) (*GetAllTeamsOK, error) {
 	// TODO: Validate the params before sending
@@ -242,7 +244,7 @@ func (a *Client) GetAllTeams(params *GetAllTeamsParams, opts ...ClientOption) (*
 	op := &runtime.ClientOperation{
 		ID:                 "get-all-teams",
 		Method:             "GET",
-		PathPattern:        "/teams",
+		PathPattern:        "/teams/all",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http"},
@@ -266,6 +268,44 @@ func (a *Client) GetAllTeams(params *GetAllTeamsParams, opts ...ClientOption) (*
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-all-teams: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAllTeamsForUser gets all teams for user
+*/
+func (a *Client) GetAllTeamsForUser(params *GetAllTeamsForUserParams, opts ...ClientOption) (*GetAllTeamsForUserOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAllTeamsForUserParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "get-all-teams-for-user",
+		Method:             "GET",
+		PathPattern:        "/teams",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAllTeamsForUserReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAllTeamsForUserOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for get-all-teams-for-user: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

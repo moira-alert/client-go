@@ -17,6 +17,10 @@ import (
 // swagger:model api.FeatureFlags
 type APIFeatureFlags struct {
 
+	// celebration mode
+	// Example: new_year
+	CelebrationMode string `json:"celebrationMode,omitempty"`
+
 	// is plotting available
 	// Example: true
 	IsPlottingAvailable bool `json:"isPlottingAvailable,omitempty"`
