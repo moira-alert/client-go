@@ -8,7 +8,6 @@ package trigger
 import (
 	"context"
 	"net/http"
-	"strconv"
 	"time"
 
 	"github.com/go-openapi/errors"
@@ -401,10 +400,12 @@ func (o *SearchTriggersParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 
 	if o.Tags != nil {
 
-		for i, tag := range o.Tags {
-			if err := r.SetQueryParam("tags["+strconv.Itoa(i)+"]", tag); err != nil {
-				return err
-			}
+		// binding items for tags
+		joinedTags := o.bindParamTags(reg)
+
+		// query array param tags
+		if err := r.SetQueryParam("tags", joinedTags...); err != nil {
+			return err
 		}
 	}
 
@@ -442,8 +443,8 @@ func (o *SearchTriggersParams) bindParamTags(formats strfmt.Registry) []string {
 		tagsIC = append(tagsIC, tagsIIV)
 	}
 
-	// items.CollectionFormat: "csv"
-	tagsIS := swag.JoinByFormat(tagsIC, "csv")
+	// items.CollectionFormat: "multi"
+	tagsIS := swag.JoinByFormat(tagsIC, "multi")
 
 	return tagsIS
 }
