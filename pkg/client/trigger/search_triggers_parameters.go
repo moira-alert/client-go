@@ -400,7 +400,7 @@ func (o *SearchTriggersParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 	}
 
 	if o.Tags != nil {
-
+		// WAS NOT GENERATED because spec does not support our query param format !!!
 		for i, tag := range o.Tags {
 			if err := r.SetQueryParam("tags["+strconv.Itoa(i)+"]", tag); err != nil {
 				return err
