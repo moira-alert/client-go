@@ -8,6 +8,7 @@ package trigger
 import (
 	"context"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/go-openapi/errors"
@@ -103,6 +104,12 @@ type SearchTriggersParams struct {
 	   Default: 10
 	*/
 	Size *int64
+
+	/* Tags.
+
+	   Tags
+	*/
+	Tags []string
 
 	/* Text.
 
@@ -260,6 +267,17 @@ func (o *SearchTriggersParams) SetSize(size *int64) {
 	o.Size = size
 }
 
+// WithTags adds the tags to the search triggers params
+func (o *SearchTriggersParams) WithTags(tags []string) *SearchTriggersParams {
+	o.SetTags(tags)
+	return o
+}
+
+// SetTags adds the tags to the search triggers params
+func (o *SearchTriggersParams) SetTags(tags []string) {
+	o.Tags = tags
+}
+
 // WithText adds the text to the search triggers params
 func (o *SearchTriggersParams) WithText(text *string) *SearchTriggersParams {
 	o.SetText(text)
@@ -381,6 +399,15 @@ func (o *SearchTriggersParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		}
 	}
 
+	if o.Tags != nil {
+		// WAS NOT GENERATED because spec does not support our query param format !!!
+		for i, tag := range o.Tags {
+			if err := r.SetQueryParam("tags["+strconv.Itoa(i)+"]", tag); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.Text != nil {
 
 		// query param text
@@ -402,4 +429,21 @@ func (o *SearchTriggersParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
+}
+
+// bindParamSearchTriggers binds the parameter tags
+func (o *SearchTriggersParams) bindParamTags(formats strfmt.Registry) []string {
+	tagsIR := o.Tags
+
+	var tagsIC []string
+	for _, tagsIIR := range tagsIR { // explode []string
+
+		tagsIIV := tagsIIR // string as string
+		tagsIC = append(tagsIC, tagsIIV)
+	}
+
+	// items.CollectionFormat: "csv"
+	tagsIS := swag.JoinByFormat(tagsIC, "csv")
+
+	return tagsIS
 }
