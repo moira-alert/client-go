@@ -36,9 +36,7 @@ type DtoProblemOfTarget struct {
 
 	// type
 	// Example: warn
-	Type struct {
-		DtoTypeOfProblem
-	} `json:"type,omitempty"`
+	Type string `json:"type,omitempty"`
 }
 
 // Validate validates this dto problem of target
@@ -46,10 +44,6 @@ func (m *DtoProblemOfTarget) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateProblems(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -85,23 +79,11 @@ func (m *DtoProblemOfTarget) validateProblems(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *DtoProblemOfTarget) validateType(formats strfmt.Registry) error {
-	if swag.IsZero(m.Type) { // not required
-		return nil
-	}
-
-	return nil
-}
-
 // ContextValidate validate this dto problem of target based on the context it is used
 func (m *DtoProblemOfTarget) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateProblems(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -132,11 +114,6 @@ func (m *DtoProblemOfTarget) contextValidateProblems(ctx context.Context, format
 		}
 
 	}
-
-	return nil
-}
-
-func (m *DtoProblemOfTarget) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	return nil
 }
