@@ -102,6 +102,8 @@ type ClientService interface {
 
 	GetTriggerThrottling(params *GetTriggerThrottlingParams, opts ...ClientOption) (*GetTriggerThrottlingOK, error)
 
+	GetTriggersNoisiness(params *GetTriggersNoisinessParams, opts ...ClientOption) (*GetTriggersNoisinessOK, error)
+
 	GetUnusedTriggers(params *GetUnusedTriggersParams, opts ...ClientOption) (*GetUnusedTriggersOK, error)
 
 	RemoveTrigger(params *RemoveTriggerParams, opts ...ClientOption) (*RemoveTriggerOK, error)
@@ -534,6 +536,44 @@ func (a *Client) GetTriggerThrottling(params *GetTriggerThrottlingParams, opts .
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-trigger-throttling: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetTriggersNoisiness gets triggers noisiness
+*/
+func (a *Client) GetTriggersNoisiness(params *GetTriggersNoisinessParams, opts ...ClientOption) (*GetTriggersNoisinessOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetTriggersNoisinessParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "get-triggers-noisiness",
+		Method:             "GET",
+		PathPattern:        "/trigger/noisiness",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetTriggersNoisinessReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetTriggersNoisinessOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for get-triggers-noisiness: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
