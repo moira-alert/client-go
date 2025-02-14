@@ -20,7 +20,7 @@ import (
 type DtoContactList struct {
 
 	// list
-	List []*MoiraContactData `json:"list"`
+	List []*DtoTeamContact `json:"list"`
 }
 
 // Validate validates this dto contact list

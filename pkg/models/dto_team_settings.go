@@ -20,7 +20,7 @@ import (
 type DtoTeamSettings struct {
 
 	// contacts
-	Contacts []*MoiraContactData `json:"contacts"`
+	Contacts []*DtoTeamContact `json:"contacts"`
 
 	// subscriptions
 	Subscriptions []*MoiraSubscriptionData `json:"subscriptions"`
