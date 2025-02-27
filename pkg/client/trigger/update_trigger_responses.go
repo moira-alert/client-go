@@ -146,7 +146,7 @@ UpdateTriggerBadRequest describes a response with status code 400, with default 
 Bad request from client
 */
 type UpdateTriggerBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload interface{}
 }
 
 // IsSuccess returns true when this update trigger bad request response has a 2xx status code
@@ -189,16 +189,14 @@ func (o *UpdateTriggerBadRequest) String() string {
 	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerBadRequest %s", 400, payload)
 }
 
-func (o *UpdateTriggerBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *UpdateTriggerBadRequest) GetPayload() interface{} {
 	return o.Payload
 }
 
 func (o *UpdateTriggerBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
-
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
