@@ -137,7 +137,7 @@ func NewCreateTriggerBadRequest() *CreateTriggerBadRequest {
 /*
 CreateTriggerBadRequest describes a response with status code 400, with default header values.
 
-Bad request from client
+Bad request from client. Could be api.ErrorInvalidRequestExample or dto.SaveTriggerResponse
 */
 type CreateTriggerBadRequest struct {
 	Payload interface{}
