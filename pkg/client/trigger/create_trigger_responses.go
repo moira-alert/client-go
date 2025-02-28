@@ -137,10 +137,10 @@ func NewCreateTriggerBadRequest() *CreateTriggerBadRequest {
 /*
 CreateTriggerBadRequest describes a response with status code 400, with default header values.
 
-Bad request from client
+Bad request from client. Could be api.ErrorInvalidRequestExample or dto.SaveTriggerResponse
 */
 type CreateTriggerBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload interface{}
 }
 
 // IsSuccess returns true when this create trigger bad request response has a 2xx status code
@@ -183,16 +183,14 @@ func (o *CreateTriggerBadRequest) String() string {
 	return fmt.Sprintf("[PUT /trigger][%d] createTriggerBadRequest %s", 400, payload)
 }
 
-func (o *CreateTriggerBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *CreateTriggerBadRequest) GetPayload() interface{} {
 	return o.Payload
 }
 
 func (o *CreateTriggerBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
-
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

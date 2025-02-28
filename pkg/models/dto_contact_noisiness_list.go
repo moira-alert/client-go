@@ -14,13 +14,13 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// DtoTriggerNoisinessList dto trigger noisiness list
+// DtoContactNoisinessList dto contact noisiness list
 //
-// swagger:model dto.TriggerNoisinessList
-type DtoTriggerNoisinessList struct {
+// swagger:model dto.ContactNoisinessList
+type DtoContactNoisinessList struct {
 
 	// List of entities.
-	List []*DtoTriggerNoisiness `json:"list"`
+	List []*DtoContactNoisiness `json:"list"`
 
 	// Page number.
 	// Example: 0
@@ -35,8 +35,8 @@ type DtoTriggerNoisinessList struct {
 	Total int64 `json:"total,omitempty"`
 }
 
-// Validate validates this dto trigger noisiness list
-func (m *DtoTriggerNoisinessList) Validate(formats strfmt.Registry) error {
+// Validate validates this dto contact noisiness list
+func (m *DtoContactNoisinessList) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateList(formats); err != nil {
@@ -49,7 +49,7 @@ func (m *DtoTriggerNoisinessList) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *DtoTriggerNoisinessList) validateList(formats strfmt.Registry) error {
+func (m *DtoContactNoisinessList) validateList(formats strfmt.Registry) error {
 	if swag.IsZero(m.List) { // not required
 		return nil
 	}
@@ -75,8 +75,8 @@ func (m *DtoTriggerNoisinessList) validateList(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validate this dto trigger noisiness list based on the context it is used
-func (m *DtoTriggerNoisinessList) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this dto contact noisiness list based on the context it is used
+func (m *DtoContactNoisinessList) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateList(ctx, formats); err != nil {
@@ -89,7 +89,7 @@ func (m *DtoTriggerNoisinessList) ContextValidate(ctx context.Context, formats s
 	return nil
 }
 
-func (m *DtoTriggerNoisinessList) contextValidateList(ctx context.Context, formats strfmt.Registry) error {
+func (m *DtoContactNoisinessList) contextValidateList(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.List); i++ {
 
@@ -115,7 +115,7 @@ func (m *DtoTriggerNoisinessList) contextValidateList(ctx context.Context, forma
 }
 
 // MarshalBinary interface implementation
-func (m *DtoTriggerNoisinessList) MarshalBinary() ([]byte, error) {
+func (m *DtoContactNoisinessList) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -123,8 +123,8 @@ func (m *DtoTriggerNoisinessList) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *DtoTriggerNoisinessList) UnmarshalBinary(b []byte) error {
-	var res DtoTriggerNoisinessList
+func (m *DtoContactNoisinessList) UnmarshalBinary(b []byte) error {
+	var res DtoContactNoisinessList
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

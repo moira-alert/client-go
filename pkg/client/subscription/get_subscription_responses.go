@@ -36,6 +36,12 @@ func (o *GetSubscriptionReader) ReadResponse(response runtime.ClientResponse, co
 			return nil, err
 		}
 		return nil, result
+	case 404:
+		result := NewGetSubscriptionNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 422:
 		result := NewGetSubscriptionUnprocessableEntity()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -184,6 +190,76 @@ func (o *GetSubscriptionForbidden) GetPayload() *models.APIErrorForbiddenExample
 func (o *GetSubscriptionForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.APIErrorForbiddenExample)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetSubscriptionNotFound creates a GetSubscriptionNotFound with default headers values
+func NewGetSubscriptionNotFound() *GetSubscriptionNotFound {
+	return &GetSubscriptionNotFound{}
+}
+
+/*
+GetSubscriptionNotFound describes a response with status code 404, with default header values.
+
+Resource not found
+*/
+type GetSubscriptionNotFound struct {
+	Payload *models.APIErrorNotFoundExample
+}
+
+// IsSuccess returns true when this get subscription not found response has a 2xx status code
+func (o *GetSubscriptionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get subscription not found response has a 3xx status code
+func (o *GetSubscriptionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get subscription not found response has a 4xx status code
+func (o *GetSubscriptionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get subscription not found response has a 5xx status code
+func (o *GetSubscriptionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get subscription not found response a status code equal to that given
+func (o *GetSubscriptionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get subscription not found response
+func (o *GetSubscriptionNotFound) Code() int {
+	return 404
+}
+
+func (o *GetSubscriptionNotFound) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /subscription/{subscriptionID}][%d] getSubscriptionNotFound %s", 404, payload)
+}
+
+func (o *GetSubscriptionNotFound) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /subscription/{subscriptionID}][%d] getSubscriptionNotFound %s", 404, payload)
+}
+
+func (o *GetSubscriptionNotFound) GetPayload() *models.APIErrorNotFoundExample {
+	return o.Payload
+}
+
+func (o *GetSubscriptionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.APIErrorNotFoundExample)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
