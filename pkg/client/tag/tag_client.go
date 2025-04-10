@@ -58,6 +58,8 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	CreateTags(params *CreateTagsParams, opts ...ClientOption) (*CreateTagsOK, error)
 
+	GetAllSystemTags(params *GetAllSystemTagsParams, opts ...ClientOption) (*GetAllSystemTagsOK, error)
+
 	GetAllTags(params *GetAllTagsParams, opts ...ClientOption) (*GetAllTagsOK, error)
 
 	GetAllTagsAndSubscriptions(params *GetAllTagsAndSubscriptionsParams, opts ...ClientOption) (*GetAllTagsAndSubscriptionsOK, error)
@@ -102,6 +104,44 @@ func (a *Client) CreateTags(params *CreateTagsParams, opts ...ClientOption) (*Cr
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for create-tags: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAllSystemTags gets all system tags
+*/
+func (a *Client) GetAllSystemTags(params *GetAllSystemTagsParams, opts ...ClientOption) (*GetAllSystemTagsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAllSystemTagsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "get-all-system-tags",
+		Method:             "GET",
+		PathPattern:        "/system-tag",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAllSystemTagsReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAllSystemTagsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for get-all-system-tags: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
