@@ -1,6 +1,0 @@
-{
-  "packageName": "pkg",
-  "modelPackage": "models",
-  "apiPackage": "api",
-  "invokerPackage": "internal"
-}
