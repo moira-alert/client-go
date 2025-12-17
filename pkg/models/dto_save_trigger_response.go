@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoSaveTriggerResponse dto save trigger response
@@ -23,11 +24,13 @@ type DtoSaveTriggerResponse struct {
 
 	// id
 	// Example: trigger_id
-	ID string `json:"id,omitempty"`
+	// Required: true
+	ID *string `json:"id"`
 
 	// message
 	// Example: trigger created
-	Message string `json:"message,omitempty"`
+	// Required: true
+	Message *string `json:"message"`
 }
 
 // Validate validates this dto save trigger response
@@ -35,6 +38,14 @@ func (m *DtoSaveTriggerResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCheckResult(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMessage(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -58,6 +69,24 @@ func (m *DtoSaveTriggerResponse) validateCheckResult(formats strfmt.Registry) er
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *DtoSaveTriggerResponse) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoSaveTriggerResponse) validateMessage(formats strfmt.Registry) error {
+
+	if err := validate.Required("message", "body", m.Message); err != nil {
+		return err
 	}
 
 	return nil

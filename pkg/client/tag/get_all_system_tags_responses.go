@@ -128,7 +128,7 @@ GetAllSystemTagsUnprocessableEntity describes a response with status code 422, w
 Render error
 */
 type GetAllSystemTagsUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get all system tags unprocessable entity response has a 2xx status code
@@ -171,13 +171,13 @@ func (o *GetAllSystemTagsUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /system-tag][%d] getAllSystemTagsUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetAllSystemTagsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetAllSystemTagsUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetAllSystemTagsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -198,7 +198,7 @@ GetAllSystemTagsInternalServerError describes a response with status code 500, w
 Internal server error
 */
 type GetAllSystemTagsInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get all system tags internal server error response has a 2xx status code
@@ -241,13 +241,13 @@ func (o *GetAllSystemTagsInternalServerError) String() string {
 	return fmt.Sprintf("[GET /system-tag][%d] getAllSystemTagsInternalServerError %s", 500, payload)
 }
 
-func (o *GetAllSystemTagsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetAllSystemTagsInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetAllSystemTagsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

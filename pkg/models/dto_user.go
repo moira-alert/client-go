@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoUser dto user
@@ -23,7 +25,8 @@ type DtoUser struct {
 
 	// login
 	// Example: john
-	Login string `json:"login,omitempty"`
+	// Required: true
+	Login *string `json:"login"`
 
 	// role
 	// Example: user
@@ -32,6 +35,24 @@ type DtoUser struct {
 
 // Validate validates this dto user
 func (m *DtoUser) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLogin(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DtoUser) validateLogin(formats strfmt.Registry) error {
+
+	if err := validate.Required("login", "body", m.Login); err != nil {
+		return err
+	}
+
 	return nil
 }
 

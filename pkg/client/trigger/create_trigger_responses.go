@@ -208,7 +208,7 @@ CreateTriggerUnprocessableEntity describes a response with status code 422, with
 Render error
 */
 type CreateTriggerUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create trigger unprocessable entity response has a 2xx status code
@@ -251,13 +251,13 @@ func (o *CreateTriggerUnprocessableEntity) String() string {
 	return fmt.Sprintf("[PUT /trigger][%d] createTriggerUnprocessableEntity %s", 422, payload)
 }
 
-func (o *CreateTriggerUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *CreateTriggerUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateTriggerUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -278,7 +278,7 @@ CreateTriggerInternalServerError describes a response with status code 500, with
 Internal server error
 */
 type CreateTriggerInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create trigger internal server error response has a 2xx status code
@@ -321,13 +321,13 @@ func (o *CreateTriggerInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /trigger][%d] createTriggerInternalServerError %s", 500, payload)
 }
 
-func (o *CreateTriggerInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *CreateTriggerInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateTriggerInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -348,7 +348,7 @@ CreateTriggerServiceUnavailable describes a response with status code 503, with 
 Remote server unavailable
 */
 type CreateTriggerServiceUnavailable struct {
-	Payload *models.APIErrorRemoteServerUnavailableExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create trigger service unavailable response has a 2xx status code
@@ -391,13 +391,13 @@ func (o *CreateTriggerServiceUnavailable) String() string {
 	return fmt.Sprintf("[PUT /trigger][%d] createTriggerServiceUnavailable %s", 503, payload)
 }
 
-func (o *CreateTriggerServiceUnavailable) GetPayload() *models.APIErrorRemoteServerUnavailableExample {
+func (o *CreateTriggerServiceUnavailable) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateTriggerServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRemoteServerUnavailableExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

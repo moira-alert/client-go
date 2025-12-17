@@ -140,7 +140,7 @@ GetSubscriptionForbidden describes a response with status code 403, with default
 Forbidden
 */
 type GetSubscriptionForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get subscription forbidden response has a 2xx status code
@@ -183,13 +183,13 @@ func (o *GetSubscriptionForbidden) String() string {
 	return fmt.Sprintf("[GET /subscription/{subscriptionID}][%d] getSubscriptionForbidden %s", 403, payload)
 }
 
-func (o *GetSubscriptionForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *GetSubscriptionForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetSubscriptionForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -210,7 +210,7 @@ GetSubscriptionNotFound describes a response with status code 404, with default 
 Resource not found
 */
 type GetSubscriptionNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get subscription not found response has a 2xx status code
@@ -253,13 +253,13 @@ func (o *GetSubscriptionNotFound) String() string {
 	return fmt.Sprintf("[GET /subscription/{subscriptionID}][%d] getSubscriptionNotFound %s", 404, payload)
 }
 
-func (o *GetSubscriptionNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *GetSubscriptionNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetSubscriptionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -280,7 +280,7 @@ GetSubscriptionUnprocessableEntity describes a response with status code 422, wi
 Render error
 */
 type GetSubscriptionUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get subscription unprocessable entity response has a 2xx status code
@@ -323,13 +323,13 @@ func (o *GetSubscriptionUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /subscription/{subscriptionID}][%d] getSubscriptionUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetSubscriptionUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetSubscriptionUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetSubscriptionUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -350,7 +350,7 @@ GetSubscriptionInternalServerError describes a response with status code 500, wi
 Internal server error
 */
 type GetSubscriptionInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get subscription internal server error response has a 2xx status code
@@ -393,13 +393,13 @@ func (o *GetSubscriptionInternalServerError) String() string {
 	return fmt.Sprintf("[GET /subscription/{subscriptionID}][%d] getSubscriptionInternalServerError %s", 500, payload)
 }
 
-func (o *GetSubscriptionInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetSubscriptionInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetSubscriptionInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

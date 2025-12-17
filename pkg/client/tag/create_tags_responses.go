@@ -64,6 +64,7 @@ CreateTagsOK describes a response with status code 200, with default header valu
 Create tags successfully
 */
 type CreateTagsOK struct {
+	Payload string
 }
 
 // IsSuccess returns true when this create tags o k response has a 2xx status code
@@ -97,14 +98,25 @@ func (o *CreateTagsOK) Code() int {
 }
 
 func (o *CreateTagsOK) Error() string {
-	return fmt.Sprintf("[POST /tag][%d] createTagsOK", 200)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /tag][%d] createTagsOK %s", 200, payload)
 }
 
 func (o *CreateTagsOK) String() string {
-	return fmt.Sprintf("[POST /tag][%d] createTagsOK", 200)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /tag][%d] createTagsOK %s", 200, payload)
+}
+
+func (o *CreateTagsOK) GetPayload() string {
+	return o.Payload
 }
 
 func (o *CreateTagsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// response payload
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
@@ -120,7 +132,7 @@ CreateTagsBadRequest describes a response with status code 400, with default hea
 Bad request from client
 */
 type CreateTagsBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create tags bad request response has a 2xx status code
@@ -163,13 +175,13 @@ func (o *CreateTagsBadRequest) String() string {
 	return fmt.Sprintf("[POST /tag][%d] createTagsBadRequest %s", 400, payload)
 }
 
-func (o *CreateTagsBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *CreateTagsBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateTagsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -190,7 +202,7 @@ CreateTagsUnprocessableEntity describes a response with status code 422, with de
 Render error
 */
 type CreateTagsUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create tags unprocessable entity response has a 2xx status code
@@ -233,13 +245,13 @@ func (o *CreateTagsUnprocessableEntity) String() string {
 	return fmt.Sprintf("[POST /tag][%d] createTagsUnprocessableEntity %s", 422, payload)
 }
 
-func (o *CreateTagsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *CreateTagsUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateTagsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -260,7 +272,7 @@ CreateTagsInternalServerError describes a response with status code 500, with de
 Internal server error
 */
 type CreateTagsInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create tags internal server error response has a 2xx status code
@@ -303,13 +315,13 @@ func (o *CreateTagsInternalServerError) String() string {
 	return fmt.Sprintf("[POST /tag][%d] createTagsInternalServerError %s", 500, payload)
 }
 
-func (o *CreateTagsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *CreateTagsInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateTagsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

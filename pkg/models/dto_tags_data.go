@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoTagsData dto tags data
@@ -19,11 +21,30 @@ type DtoTagsData struct {
 
 	// list
 	// Example: ["cpu"]
+	// Required: true
 	List []string `json:"list"`
 }
 
 // Validate validates this dto tags data
 func (m *DtoTagsData) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateList(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DtoTagsData) validateList(formats strfmt.Registry) error {
+
+	if err := validate.Required("list", "body", m.List); err != nil {
+		return err
+	}
+
 	return nil
 }
 

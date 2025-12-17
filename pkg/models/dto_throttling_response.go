@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoThrottlingResponse dto throttling response
@@ -19,11 +21,30 @@ type DtoThrottlingResponse struct {
 
 	// throttling
 	// Example: 0
-	Throttling int64 `json:"throttling,omitempty"`
+	// Required: true
+	Throttling *int64 `json:"throttling"`
 }
 
 // Validate validates this dto throttling response
 func (m *DtoThrottlingResponse) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateThrottling(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DtoThrottlingResponse) validateThrottling(formats strfmt.Registry) error {
+
+	if err := validate.Required("throttling", "body", m.Throttling); err != nil {
+		return err
+	}
+
 	return nil
 }
 

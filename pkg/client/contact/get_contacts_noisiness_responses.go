@@ -134,7 +134,7 @@ GetContactsNoisinessBadRequest describes a response with status code 400, with d
 Bad request from client
 */
 type GetContactsNoisinessBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get contacts noisiness bad request response has a 2xx status code
@@ -177,13 +177,13 @@ func (o *GetContactsNoisinessBadRequest) String() string {
 	return fmt.Sprintf("[GET /contact/noisiness][%d] getContactsNoisinessBadRequest %s", 400, payload)
 }
 
-func (o *GetContactsNoisinessBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *GetContactsNoisinessBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetContactsNoisinessBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -204,7 +204,7 @@ GetContactsNoisinessUnprocessableEntity describes a response with status code 42
 Render error
 */
 type GetContactsNoisinessUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get contacts noisiness unprocessable entity response has a 2xx status code
@@ -247,13 +247,13 @@ func (o *GetContactsNoisinessUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /contact/noisiness][%d] getContactsNoisinessUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetContactsNoisinessUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetContactsNoisinessUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetContactsNoisinessUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -274,7 +274,7 @@ GetContactsNoisinessInternalServerError describes a response with status code 50
 Internal server error
 */
 type GetContactsNoisinessInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get contacts noisiness internal server error response has a 2xx status code
@@ -317,13 +317,13 @@ func (o *GetContactsNoisinessInternalServerError) String() string {
 	return fmt.Sprintf("[GET /contact/noisiness][%d] getContactsNoisinessInternalServerError %s", 500, payload)
 }
 
-func (o *GetContactsNoisinessInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetContactsNoisinessInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetContactsNoisinessInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoTeamContact dto team contact
@@ -17,9 +19,13 @@ import (
 // swagger:model dto.TeamContact
 type DtoTeamContact struct {
 
+	// extra message
+	ExtraMessage string `json:"extra_message,omitempty"`
+
 	// id
 	// Example: 1dd38765-c5be-418d-81fa-7a5f879c2315
-	ID string `json:"id,omitempty"`
+	// Required: true
+	ID *string `json:"id"`
 
 	// name
 	// Example: Mail Alerts
@@ -33,18 +39,64 @@ type DtoTeamContact struct {
 
 	// type
 	// Example: mail
-	Type string `json:"type,omitempty"`
+	// Required: true
+	Type *string `json:"type"`
 
 	// user
 	User string `json:"user,omitempty"`
 
 	// value
 	// Example: devops@example.com
-	Value string `json:"value,omitempty"`
+	// Required: true
+	Value *string `json:"value"`
 }
 
 // Validate validates this dto team contact
 func (m *DtoTeamContact) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateValue(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DtoTeamContact) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTeamContact) validateType(formats strfmt.Registry) error {
+
+	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTeamContact) validateValue(formats strfmt.Registry) error {
+
+	if err := validate.Required("value", "body", m.Value); err != nil {
+		return err
+	}
+
 	return nil
 }
 

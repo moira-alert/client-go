@@ -140,7 +140,7 @@ GetTeamForbidden describes a response with status code 403, with default header 
 Forbidden
 */
 type GetTeamForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get team forbidden response has a 2xx status code
@@ -183,13 +183,13 @@ func (o *GetTeamForbidden) String() string {
 	return fmt.Sprintf("[GET /teams/{teamID}][%d] getTeamForbidden %s", 403, payload)
 }
 
-func (o *GetTeamForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *GetTeamForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTeamForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -210,7 +210,7 @@ GetTeamNotFound describes a response with status code 404, with default header v
 Resource not found
 */
 type GetTeamNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get team not found response has a 2xx status code
@@ -253,13 +253,13 @@ func (o *GetTeamNotFound) String() string {
 	return fmt.Sprintf("[GET /teams/{teamID}][%d] getTeamNotFound %s", 404, payload)
 }
 
-func (o *GetTeamNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *GetTeamNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTeamNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -280,7 +280,7 @@ GetTeamUnprocessableEntity describes a response with status code 422, with defau
 Render error
 */
 type GetTeamUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get team unprocessable entity response has a 2xx status code
@@ -323,13 +323,13 @@ func (o *GetTeamUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /teams/{teamID}][%d] getTeamUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetTeamUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetTeamUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTeamUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -350,7 +350,7 @@ GetTeamInternalServerError describes a response with status code 500, with defau
 Internal server error
 */
 type GetTeamInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get team internal server error response has a 2xx status code
@@ -393,13 +393,13 @@ func (o *GetTeamInternalServerError) String() string {
 	return fmt.Sprintf("[GET /teams/{teamID}][%d] getTeamInternalServerError %s", 500, payload)
 }
 
-func (o *GetTeamInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetTeamInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTeamInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

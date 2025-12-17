@@ -128,7 +128,7 @@ GetTriggerDumpNotFound describes a response with status code 404, with default h
 Resource not found
 */
 type GetTriggerDumpNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get trigger dump not found response has a 2xx status code
@@ -171,13 +171,13 @@ func (o *GetTriggerDumpNotFound) String() string {
 	return fmt.Sprintf("[GET /trigger/{triggerID}/dump][%d] getTriggerDumpNotFound %s", 404, payload)
 }
 
-func (o *GetTriggerDumpNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *GetTriggerDumpNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTriggerDumpNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -198,7 +198,7 @@ GetTriggerDumpInternalServerError describes a response with status code 500, wit
 Internal server error
 */
 type GetTriggerDumpInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get trigger dump internal server error response has a 2xx status code
@@ -241,13 +241,13 @@ func (o *GetTriggerDumpInternalServerError) String() string {
 	return fmt.Sprintf("[GET /trigger/{triggerID}/dump][%d] getTriggerDumpInternalServerError %s", 500, payload)
 }
 
-func (o *GetTriggerDumpInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetTriggerDumpInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTriggerDumpInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

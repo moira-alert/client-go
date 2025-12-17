@@ -120,7 +120,7 @@ RemoveSubscriptionForbidden describes a response with status code 403, with defa
 Forbidden
 */
 type RemoveSubscriptionForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this remove subscription forbidden response has a 2xx status code
@@ -163,13 +163,13 @@ func (o *RemoveSubscriptionForbidden) String() string {
 	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionForbidden %s", 403, payload)
 }
 
-func (o *RemoveSubscriptionForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *RemoveSubscriptionForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *RemoveSubscriptionForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -190,7 +190,7 @@ RemoveSubscriptionNotFound describes a response with status code 404, with defau
 Resource not found
 */
 type RemoveSubscriptionNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this remove subscription not found response has a 2xx status code
@@ -233,13 +233,13 @@ func (o *RemoveSubscriptionNotFound) String() string {
 	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionNotFound %s", 404, payload)
 }
 
-func (o *RemoveSubscriptionNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *RemoveSubscriptionNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *RemoveSubscriptionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -260,7 +260,7 @@ RemoveSubscriptionInternalServerError describes a response with status code 500,
 Internal server error
 */
 type RemoveSubscriptionInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this remove subscription internal server error response has a 2xx status code
@@ -303,13 +303,13 @@ func (o *RemoveSubscriptionInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /subscription/{subscriptionID}][%d] removeSubscriptionInternalServerError %s", 500, payload)
 }
 
-func (o *RemoveSubscriptionInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *RemoveSubscriptionInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *RemoveSubscriptionInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

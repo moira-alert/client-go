@@ -134,7 +134,7 @@ RemoveTagBadRequest describes a response with status code 400, with default head
 Bad request from client
 */
 type RemoveTagBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this remove tag bad request response has a 2xx status code
@@ -177,13 +177,13 @@ func (o *RemoveTagBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagBadRequest %s", 400, payload)
 }
 
-func (o *RemoveTagBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *RemoveTagBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *RemoveTagBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -204,7 +204,7 @@ RemoveTagUnprocessableEntity describes a response with status code 422, with def
 Render error
 */
 type RemoveTagUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this remove tag unprocessable entity response has a 2xx status code
@@ -247,13 +247,13 @@ func (o *RemoveTagUnprocessableEntity) String() string {
 	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagUnprocessableEntity %s", 422, payload)
 }
 
-func (o *RemoveTagUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *RemoveTagUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *RemoveTagUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -274,7 +274,7 @@ RemoveTagInternalServerError describes a response with status code 500, with def
 Internal server error
 */
 type RemoveTagInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this remove tag internal server error response has a 2xx status code
@@ -317,13 +317,13 @@ func (o *RemoveTagInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /tag/{tag}][%d] removeTagInternalServerError %s", 500, payload)
 }
 
-func (o *RemoveTagInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *RemoveTagInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *RemoveTagInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

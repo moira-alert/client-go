@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // MoiraScheduleData moira schedule data
@@ -20,19 +21,23 @@ import (
 type MoiraScheduleData struct {
 
 	// days
+	// Required: true
 	Days []*MoiraScheduleDataDay `json:"days"`
 
 	// end offset
 	// Example: 1439
-	EndOffset int64 `json:"endOffset,omitempty"`
+	// Required: true
+	EndOffset *int64 `json:"endOffset"`
 
 	// start offset
 	// Example: 0
-	StartOffset int64 `json:"startOffset,omitempty"`
+	// Required: true
+	StartOffset *int64 `json:"startOffset"`
 
 	// tz offset
 	// Example: -60
-	TzOffset int64 `json:"tzOffset,omitempty"`
+	// Required: true
+	TzOffset *int64 `json:"tzOffset"`
 }
 
 // Validate validates this moira schedule data
@@ -43,6 +48,18 @@ func (m *MoiraScheduleData) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateEndOffset(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStartOffset(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTzOffset(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -50,8 +67,9 @@ func (m *MoiraScheduleData) Validate(formats strfmt.Registry) error {
 }
 
 func (m *MoiraScheduleData) validateDays(formats strfmt.Registry) error {
-	if swag.IsZero(m.Days) { // not required
-		return nil
+
+	if err := validate.Required("days", "body", m.Days); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Days); i++ {
@@ -70,6 +88,33 @@ func (m *MoiraScheduleData) validateDays(formats strfmt.Registry) error {
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *MoiraScheduleData) validateEndOffset(formats strfmt.Registry) error {
+
+	if err := validate.Required("endOffset", "body", m.EndOffset); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraScheduleData) validateStartOffset(formats strfmt.Registry) error {
+
+	if err := validate.Required("startOffset", "body", m.StartOffset); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraScheduleData) validateTzOffset(formats strfmt.Registry) error {
+
+	if err := validate.Required("tzOffset", "body", m.TzOffset); err != nil {
+		return err
 	}
 
 	return nil

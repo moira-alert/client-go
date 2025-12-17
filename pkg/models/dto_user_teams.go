@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoUserTeams dto user teams
@@ -20,6 +21,7 @@ import (
 type DtoUserTeams struct {
 
 	// teams
+	// Required: true
 	Teams []*DtoTeamModel `json:"teams"`
 }
 
@@ -38,8 +40,9 @@ func (m *DtoUserTeams) Validate(formats strfmt.Registry) error {
 }
 
 func (m *DtoUserTeams) validateTeams(formats strfmt.Registry) error {
-	if swag.IsZero(m.Teams) { // not required
-		return nil
+
+	if err := validate.Required("teams", "body", m.Teams); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Teams); i++ {

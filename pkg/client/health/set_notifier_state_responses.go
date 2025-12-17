@@ -134,7 +134,7 @@ SetNotifierStateForbidden describes a response with status code 403, with defaul
 Forbidden
 */
 type SetNotifierStateForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this set notifier state forbidden response has a 2xx status code
@@ -177,13 +177,13 @@ func (o *SetNotifierStateForbidden) String() string {
 	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateForbidden %s", 403, payload)
 }
 
-func (o *SetNotifierStateForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *SetNotifierStateForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *SetNotifierStateForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -204,7 +204,7 @@ SetNotifierStateUnprocessableEntity describes a response with status code 422, w
 Render error
 */
 type SetNotifierStateUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this set notifier state unprocessable entity response has a 2xx status code
@@ -247,13 +247,13 @@ func (o *SetNotifierStateUnprocessableEntity) String() string {
 	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateUnprocessableEntity %s", 422, payload)
 }
 
-func (o *SetNotifierStateUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *SetNotifierStateUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *SetNotifierStateUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -274,7 +274,7 @@ SetNotifierStateInternalServerError describes a response with status code 500, w
 Internal server error
 */
 type SetNotifierStateInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this set notifier state internal server error response has a 2xx status code
@@ -317,13 +317,13 @@ func (o *SetNotifierStateInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /health/notifier][%d] setNotifierStateInternalServerError %s", 500, payload)
 }
 
-func (o *SetNotifierStateInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *SetNotifierStateInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *SetNotifierStateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

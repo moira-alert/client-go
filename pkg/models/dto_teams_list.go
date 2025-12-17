@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoTeamsList dto teams list
@@ -20,19 +21,23 @@ import (
 type DtoTeamsList struct {
 
 	// list
+	// Required: true
 	List []*DtoTeamModel `json:"list"`
 
 	// page
 	// Example: 0
-	Page int64 `json:"page,omitempty"`
+	// Required: true
+	Page *int64 `json:"page"`
 
 	// size
 	// Example: 100
-	Size int64 `json:"size,omitempty"`
+	// Required: true
+	Size *int64 `json:"size"`
 
 	// total
 	// Example: 10
-	Total int64 `json:"total,omitempty"`
+	// Required: true
+	Total *int64 `json:"total"`
 }
 
 // Validate validates this dto teams list
@@ -43,6 +48,18 @@ func (m *DtoTeamsList) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validatePage(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSize(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTotal(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -50,8 +67,9 @@ func (m *DtoTeamsList) Validate(formats strfmt.Registry) error {
 }
 
 func (m *DtoTeamsList) validateList(formats strfmt.Registry) error {
-	if swag.IsZero(m.List) { // not required
-		return nil
+
+	if err := validate.Required("list", "body", m.List); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.List); i++ {
@@ -70,6 +88,33 @@ func (m *DtoTeamsList) validateList(formats strfmt.Registry) error {
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *DtoTeamsList) validatePage(formats strfmt.Registry) error {
+
+	if err := validate.Required("page", "body", m.Page); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTeamsList) validateSize(formats strfmt.Registry) error {
+
+	if err := validate.Required("size", "body", m.Size); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTeamsList) validateTotal(formats strfmt.Registry) error {
+
+	if err := validate.Required("total", "body", m.Total); err != nil {
+		return err
 	}
 
 	return nil

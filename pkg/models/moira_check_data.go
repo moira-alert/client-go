@@ -25,34 +25,40 @@ type MoiraCheckData struct {
 
 	// LastSuccessfulCheckTimestamp - time of the last check of the trigger, during which there were no errors
 	// Example: 1590741916
-	LastSuccessfulCheckTimestamp int64 `json:"last_successful_check_timestamp,omitempty"`
+	// Required: true
+	LastSuccessfulCheckTimestamp *int64 `json:"last_successful_check_timestamp"`
 
 	// maintenance
 	// Example: 0
 	Maintenance int64 `json:"maintenance,omitempty"`
 
 	// maintenance info
-	MaintenanceInfo *MoiraMaintenanceInfo `json:"maintenance_info,omitempty"`
+	// Required: true
+	MaintenanceInfo *MoiraMaintenanceInfo `json:"maintenance_info"`
 
 	// metrics
-	Metrics map[string]MoiraMetricState `json:"metrics,omitempty"`
+	// Required: true
+	Metrics map[string]MoiraMetricState `json:"metrics"`
 
 	// MetricsToTargetRelation is a map that holds relation between metric names that was alone during last
 	// check and targets that fetched this metric
 	// 	{"t1": "metric.name.1", "t2": "metric.name.2"}
 	// Example: {"t1":"metric.name.1","t2":"metric.name.2"}
-	MetricsToTargetRelation map[string]string `json:"metrics_to_target_relation,omitempty"`
+	// Required: true
+	MetricsToTargetRelation map[string]string `json:"metrics_to_target_relation"`
 
 	// msg
 	Msg string `json:"msg,omitempty"`
 
 	// score
 	// Example: 100
-	Score int64 `json:"score,omitempty"`
+	// Required: true
+	Score *int64 `json:"score"`
 
 	// state
 	// Example: OK
-	State string `json:"state,omitempty"`
+	// Required: true
+	State *string `json:"state"`
 
 	// suppressed
 	// Example: true
@@ -70,11 +76,27 @@ type MoiraCheckData struct {
 func (m *MoiraCheckData) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateLastSuccessfulCheckTimestamp(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateMaintenanceInfo(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateMetrics(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMetricsToTargetRelation(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateScore(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateState(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -84,9 +106,19 @@ func (m *MoiraCheckData) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *MoiraCheckData) validateLastSuccessfulCheckTimestamp(formats strfmt.Registry) error {
+
+	if err := validate.Required("last_successful_check_timestamp", "body", m.LastSuccessfulCheckTimestamp); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *MoiraCheckData) validateMaintenanceInfo(formats strfmt.Registry) error {
-	if swag.IsZero(m.MaintenanceInfo) { // not required
-		return nil
+
+	if err := validate.Required("maintenance_info", "body", m.MaintenanceInfo); err != nil {
+		return err
 	}
 
 	if m.MaintenanceInfo != nil {
@@ -104,8 +136,9 @@ func (m *MoiraCheckData) validateMaintenanceInfo(formats strfmt.Registry) error 
 }
 
 func (m *MoiraCheckData) validateMetrics(formats strfmt.Registry) error {
-	if swag.IsZero(m.Metrics) { // not required
-		return nil
+
+	if err := validate.Required("metrics", "body", m.Metrics); err != nil {
+		return err
 	}
 
 	for k := range m.Metrics {
@@ -124,6 +157,33 @@ func (m *MoiraCheckData) validateMetrics(formats strfmt.Registry) error {
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *MoiraCheckData) validateMetricsToTargetRelation(formats strfmt.Registry) error {
+
+	if err := validate.Required("metrics_to_target_relation", "body", m.MetricsToTargetRelation); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraCheckData) validateScore(formats strfmt.Registry) error {
+
+	if err := validate.Required("score", "body", m.Score); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraCheckData) validateState(formats strfmt.Registry) error {
+
+	if err := validate.Required("state", "body", m.State); err != nil {
+		return err
 	}
 
 	return nil
@@ -151,10 +211,6 @@ func (m *MoiraCheckData) contextValidateMaintenanceInfo(ctx context.Context, for
 
 	if m.MaintenanceInfo != nil {
 
-		if swag.IsZero(m.MaintenanceInfo) { // not required
-			return nil
-		}
-
 		if err := m.MaintenanceInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("maintenance_info")
@@ -169,6 +225,10 @@ func (m *MoiraCheckData) contextValidateMaintenanceInfo(ctx context.Context, for
 }
 
 func (m *MoiraCheckData) contextValidateMetrics(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.Required("metrics", "body", m.Metrics); err != nil {
+		return err
+	}
 
 	for k := range m.Metrics {
 

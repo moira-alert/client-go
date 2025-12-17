@@ -140,7 +140,7 @@ GetEventsListBadRequest describes a response with status code 400, with default 
 Bad request from client
 */
 type GetEventsListBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get events list bad request response has a 2xx status code
@@ -183,13 +183,13 @@ func (o *GetEventsListBadRequest) String() string {
 	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListBadRequest %s", 400, payload)
 }
 
-func (o *GetEventsListBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *GetEventsListBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetEventsListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -210,7 +210,7 @@ GetEventsListNotFound describes a response with status code 404, with default he
 Resource not found
 */
 type GetEventsListNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get events list not found response has a 2xx status code
@@ -253,13 +253,13 @@ func (o *GetEventsListNotFound) String() string {
 	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListNotFound %s", 404, payload)
 }
 
-func (o *GetEventsListNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *GetEventsListNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetEventsListNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -280,7 +280,7 @@ GetEventsListUnprocessableEntity describes a response with status code 422, with
 Render error
 */
 type GetEventsListUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get events list unprocessable entity response has a 2xx status code
@@ -323,13 +323,13 @@ func (o *GetEventsListUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetEventsListUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetEventsListUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetEventsListUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -350,7 +350,7 @@ GetEventsListInternalServerError describes a response with status code 500, with
 Internal server error
 */
 type GetEventsListInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get events list internal server error response has a 2xx status code
@@ -393,13 +393,13 @@ func (o *GetEventsListInternalServerError) String() string {
 	return fmt.Sprintf("[GET /event/{triggerID}][%d] getEventsListInternalServerError %s", 500, payload)
 }
 
-func (o *GetEventsListInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetEventsListInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetEventsListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

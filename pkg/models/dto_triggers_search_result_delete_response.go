@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoTriggersSearchResultDeleteResponse dto triggers search result delete response
@@ -19,11 +21,30 @@ type DtoTriggersSearchResultDeleteResponse struct {
 
 	// pager id
 	// Example: 292516ed-4924-4154-a62c-ebe312431fce
-	PagerID string `json:"pager_id,omitempty"`
+	// Required: true
+	PagerID *string `json:"pager_id"`
 }
 
 // Validate validates this dto triggers search result delete response
 func (m *DtoTriggersSearchResultDeleteResponse) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validatePagerID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DtoTriggersSearchResultDeleteResponse) validatePagerID(formats strfmt.Registry) error {
+
+	if err := validate.Required("pager_id", "body", m.PagerID); err != nil {
+		return err
+	}
+
 	return nil
 }
 

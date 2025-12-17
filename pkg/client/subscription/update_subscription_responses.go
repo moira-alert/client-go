@@ -146,7 +146,7 @@ UpdateSubscriptionBadRequest describes a response with status code 400, with def
 Bad request from client
 */
 type UpdateSubscriptionBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this update subscription bad request response has a 2xx status code
@@ -189,13 +189,13 @@ func (o *UpdateSubscriptionBadRequest) String() string {
 	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionBadRequest %s", 400, payload)
 }
 
-func (o *UpdateSubscriptionBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *UpdateSubscriptionBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateSubscriptionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -216,7 +216,7 @@ UpdateSubscriptionForbidden describes a response with status code 403, with defa
 Forbidden
 */
 type UpdateSubscriptionForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this update subscription forbidden response has a 2xx status code
@@ -259,13 +259,13 @@ func (o *UpdateSubscriptionForbidden) String() string {
 	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionForbidden %s", 403, payload)
 }
 
-func (o *UpdateSubscriptionForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *UpdateSubscriptionForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateSubscriptionForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -286,7 +286,7 @@ UpdateSubscriptionNotFound describes a response with status code 404, with defau
 Resource not found
 */
 type UpdateSubscriptionNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this update subscription not found response has a 2xx status code
@@ -329,13 +329,13 @@ func (o *UpdateSubscriptionNotFound) String() string {
 	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionNotFound %s", 404, payload)
 }
 
-func (o *UpdateSubscriptionNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *UpdateSubscriptionNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateSubscriptionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -356,7 +356,7 @@ UpdateSubscriptionUnprocessableEntity describes a response with status code 422,
 Render error
 */
 type UpdateSubscriptionUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this update subscription unprocessable entity response has a 2xx status code
@@ -399,13 +399,13 @@ func (o *UpdateSubscriptionUnprocessableEntity) String() string {
 	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionUnprocessableEntity %s", 422, payload)
 }
 
-func (o *UpdateSubscriptionUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *UpdateSubscriptionUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateSubscriptionUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -426,7 +426,7 @@ UpdateSubscriptionInternalServerError describes a response with status code 500,
 Internal server error
 */
 type UpdateSubscriptionInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this update subscription internal server error response has a 2xx status code
@@ -469,13 +469,13 @@ func (o *UpdateSubscriptionInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /subscription/{subscriptionID}][%d] updateSubscriptionInternalServerError %s", 500, payload)
 }
 
-func (o *UpdateSubscriptionInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *UpdateSubscriptionInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateSubscriptionInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

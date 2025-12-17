@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // MoiraContactData moira contact data
@@ -17,31 +19,109 @@ import (
 // swagger:model moira.ContactData
 type MoiraContactData struct {
 
+	// extra message
+	ExtraMessage string `json:"extra_message,omitempty"`
+
 	// id
 	// Example: 1dd38765-c5be-418d-81fa-7a5f879c2315
-	ID string `json:"id,omitempty"`
+	// Required: true
+	ID *string `json:"id"`
 
 	// name
 	// Example: Mail Alerts
 	Name string `json:"name,omitempty"`
 
 	// team
-	Team string `json:"team,omitempty"`
+	// Required: true
+	Team *string `json:"team"`
 
 	// type
 	// Example: mail
-	Type string `json:"type,omitempty"`
+	// Required: true
+	Type *string `json:"type"`
 
 	// user
-	User string `json:"user,omitempty"`
+	// Required: true
+	User *string `json:"user"`
 
 	// value
 	// Example: devops@example.com
-	Value string `json:"value,omitempty"`
+	// Required: true
+	Value *string `json:"value"`
 }
 
 // Validate validates this moira contact data
 func (m *MoiraContactData) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTeam(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUser(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateValue(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *MoiraContactData) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraContactData) validateTeam(formats strfmt.Registry) error {
+
+	if err := validate.Required("team", "body", m.Team); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraContactData) validateType(formats strfmt.Registry) error {
+
+	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraContactData) validateUser(formats strfmt.Registry) error {
+
+	if err := validate.Required("user", "body", m.User); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraContactData) validateValue(formats strfmt.Registry) error {
+
+	if err := validate.Required("value", "body", m.Value); err != nil {
+		return err
+	}
+
 	return nil
 }
 

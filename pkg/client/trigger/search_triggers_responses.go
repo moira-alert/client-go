@@ -140,7 +140,7 @@ SearchTriggersBadRequest describes a response with status code 400, with default
 Bad request from client
 */
 type SearchTriggersBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this search triggers bad request response has a 2xx status code
@@ -183,13 +183,13 @@ func (o *SearchTriggersBadRequest) String() string {
 	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersBadRequest %s", 400, payload)
 }
 
-func (o *SearchTriggersBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *SearchTriggersBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *SearchTriggersBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -210,7 +210,7 @@ SearchTriggersNotFound describes a response with status code 404, with default h
 Resource not found
 */
 type SearchTriggersNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this search triggers not found response has a 2xx status code
@@ -253,13 +253,13 @@ func (o *SearchTriggersNotFound) String() string {
 	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersNotFound %s", 404, payload)
 }
 
-func (o *SearchTriggersNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *SearchTriggersNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *SearchTriggersNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -280,7 +280,7 @@ SearchTriggersUnprocessableEntity describes a response with status code 422, wit
 Render error
 */
 type SearchTriggersUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this search triggers unprocessable entity response has a 2xx status code
@@ -323,13 +323,13 @@ func (o *SearchTriggersUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersUnprocessableEntity %s", 422, payload)
 }
 
-func (o *SearchTriggersUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *SearchTriggersUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *SearchTriggersUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -350,7 +350,7 @@ SearchTriggersInternalServerError describes a response with status code 500, wit
 Internal server error
 */
 type SearchTriggersInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this search triggers internal server error response has a 2xx status code
@@ -393,13 +393,13 @@ func (o *SearchTriggersInternalServerError) String() string {
 	return fmt.Sprintf("[GET /trigger/search][%d] searchTriggersInternalServerError %s", 500, payload)
 }
 
-func (o *SearchTriggersInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *SearchTriggersInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *SearchTriggersInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

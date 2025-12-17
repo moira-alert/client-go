@@ -114,7 +114,7 @@ RemoveTriggerNotFound describes a response with status code 404, with default he
 Resource not found
 */
 type RemoveTriggerNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this remove trigger not found response has a 2xx status code
@@ -157,13 +157,13 @@ func (o *RemoveTriggerNotFound) String() string {
 	return fmt.Sprintf("[DELETE /trigger/{triggerID}][%d] removeTriggerNotFound %s", 404, payload)
 }
 
-func (o *RemoveTriggerNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *RemoveTriggerNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *RemoveTriggerNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -184,7 +184,7 @@ RemoveTriggerInternalServerError describes a response with status code 500, with
 Internal server error
 */
 type RemoveTriggerInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this remove trigger internal server error response has a 2xx status code
@@ -227,13 +227,13 @@ func (o *RemoveTriggerInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /trigger/{triggerID}][%d] removeTriggerInternalServerError %s", 500, payload)
 }
 
-func (o *RemoveTriggerInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *RemoveTriggerInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *RemoveTriggerInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

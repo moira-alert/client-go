@@ -140,7 +140,7 @@ DeleteNotificationBadRequest describes a response with status code 400, with def
 Bad request from client
 */
 type DeleteNotificationBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete notification bad request response has a 2xx status code
@@ -183,13 +183,13 @@ func (o *DeleteNotificationBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationBadRequest %s", 400, payload)
 }
 
-func (o *DeleteNotificationBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *DeleteNotificationBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteNotificationBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -210,7 +210,7 @@ DeleteNotificationForbidden describes a response with status code 403, with defa
 Forbidden
 */
 type DeleteNotificationForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete notification forbidden response has a 2xx status code
@@ -253,13 +253,13 @@ func (o *DeleteNotificationForbidden) String() string {
 	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationForbidden %s", 403, payload)
 }
 
-func (o *DeleteNotificationForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *DeleteNotificationForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteNotificationForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -280,7 +280,7 @@ DeleteNotificationUnprocessableEntity describes a response with status code 422,
 Render error
 */
 type DeleteNotificationUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete notification unprocessable entity response has a 2xx status code
@@ -323,13 +323,13 @@ func (o *DeleteNotificationUnprocessableEntity) String() string {
 	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationUnprocessableEntity %s", 422, payload)
 }
 
-func (o *DeleteNotificationUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *DeleteNotificationUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteNotificationUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -350,7 +350,7 @@ DeleteNotificationInternalServerError describes a response with status code 500,
 Internal server error
 */
 type DeleteNotificationInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete notification internal server error response has a 2xx status code
@@ -393,13 +393,13 @@ func (o *DeleteNotificationInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /notification][%d] deleteNotificationInternalServerError %s", 500, payload)
 }
 
-func (o *DeleteNotificationInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *DeleteNotificationInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteNotificationInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

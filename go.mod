@@ -1,6 +1,6 @@
 module github.com/moira-alert/client-go
 
-go 1.20
+go 1.24
 
 require (
 	github.com/go-openapi/errors v0.20.4

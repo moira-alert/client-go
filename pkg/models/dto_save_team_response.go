@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoSaveTeamResponse dto save team response
@@ -19,11 +21,30 @@ type DtoSaveTeamResponse struct {
 
 	// id
 	// Example: d5d98eb3-ee18-4f75-9364-244f67e23b54
-	ID string `json:"id,omitempty"`
+	// Required: true
+	ID *string `json:"id"`
 }
 
 // Validate validates this dto save team response
 func (m *DtoSaveTeamResponse) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DtoSaveTeamResponse) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
 	return nil
 }
 

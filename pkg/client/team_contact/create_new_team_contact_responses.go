@@ -146,7 +146,7 @@ CreateNewTeamContactBadRequest describes a response with status code 400, with d
 Bad request from client
 */
 type CreateNewTeamContactBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create new team contact bad request response has a 2xx status code
@@ -189,13 +189,13 @@ func (o *CreateNewTeamContactBadRequest) String() string {
 	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactBadRequest %s", 400, payload)
 }
 
-func (o *CreateNewTeamContactBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *CreateNewTeamContactBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateNewTeamContactBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -216,7 +216,7 @@ CreateNewTeamContactForbidden describes a response with status code 403, with de
 Forbidden
 */
 type CreateNewTeamContactForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create new team contact forbidden response has a 2xx status code
@@ -259,13 +259,13 @@ func (o *CreateNewTeamContactForbidden) String() string {
 	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactForbidden %s", 403, payload)
 }
 
-func (o *CreateNewTeamContactForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *CreateNewTeamContactForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateNewTeamContactForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -286,7 +286,7 @@ CreateNewTeamContactNotFound describes a response with status code 404, with def
 Resource not found
 */
 type CreateNewTeamContactNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create new team contact not found response has a 2xx status code
@@ -329,13 +329,13 @@ func (o *CreateNewTeamContactNotFound) String() string {
 	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactNotFound %s", 404, payload)
 }
 
-func (o *CreateNewTeamContactNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *CreateNewTeamContactNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateNewTeamContactNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -356,7 +356,7 @@ CreateNewTeamContactUnprocessableEntity describes a response with status code 42
 Render error
 */
 type CreateNewTeamContactUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create new team contact unprocessable entity response has a 2xx status code
@@ -399,13 +399,13 @@ func (o *CreateNewTeamContactUnprocessableEntity) String() string {
 	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactUnprocessableEntity %s", 422, payload)
 }
 
-func (o *CreateNewTeamContactUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *CreateNewTeamContactUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateNewTeamContactUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -426,7 +426,7 @@ CreateNewTeamContactInternalServerError describes a response with status code 50
 Internal server error
 */
 type CreateNewTeamContactInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create new team contact internal server error response has a 2xx status code
@@ -469,13 +469,13 @@ func (o *CreateNewTeamContactInternalServerError) String() string {
 	return fmt.Sprintf("[POST /teams/{teamID}/contacts][%d] createNewTeamContactInternalServerError %s", 500, payload)
 }
 
-func (o *CreateNewTeamContactInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *CreateNewTeamContactInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateNewTeamContactInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

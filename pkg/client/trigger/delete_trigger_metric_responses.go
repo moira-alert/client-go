@@ -120,7 +120,7 @@ DeleteTriggerMetricBadRequest describes a response with status code 400, with de
 Bad request from client
 */
 type DeleteTriggerMetricBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete trigger metric bad request response has a 2xx status code
@@ -163,13 +163,13 @@ func (o *DeleteTriggerMetricBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics][%d] deleteTriggerMetricBadRequest %s", 400, payload)
 }
 
-func (o *DeleteTriggerMetricBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *DeleteTriggerMetricBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteTriggerMetricBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -190,7 +190,7 @@ DeleteTriggerMetricNotFound describes a response with status code 404, with defa
 Resource not found
 */
 type DeleteTriggerMetricNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete trigger metric not found response has a 2xx status code
@@ -233,13 +233,13 @@ func (o *DeleteTriggerMetricNotFound) String() string {
 	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics][%d] deleteTriggerMetricNotFound %s", 404, payload)
 }
 
-func (o *DeleteTriggerMetricNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *DeleteTriggerMetricNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteTriggerMetricNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -260,7 +260,7 @@ DeleteTriggerMetricInternalServerError describes a response with status code 500
 Internal server error
 */
 type DeleteTriggerMetricInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete trigger metric internal server error response has a 2xx status code
@@ -303,13 +303,13 @@ func (o *DeleteTriggerMetricInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /trigger/{triggerID}/metrics][%d] deleteTriggerMetricInternalServerError %s", 500, payload)
 }
 
-func (o *DeleteTriggerMetricInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *DeleteTriggerMetricInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteTriggerMetricInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

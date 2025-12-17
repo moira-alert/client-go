@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoTreeOfProblems dto tree of problems
@@ -20,7 +21,8 @@ type DtoTreeOfProblems struct {
 
 	// syntax ok
 	// Example: true
-	SyntaxOk bool `json:"syntax_ok,omitempty"`
+	// Required: true
+	SyntaxOk *bool `json:"syntax_ok"`
 
 	// tree of problems
 	TreeOfProblems struct {
@@ -32,6 +34,10 @@ type DtoTreeOfProblems struct {
 func (m *DtoTreeOfProblems) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateSyntaxOk(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateTreeOfProblems(formats); err != nil {
 		res = append(res, err)
 	}
@@ -39,6 +45,15 @@ func (m *DtoTreeOfProblems) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *DtoTreeOfProblems) validateSyntaxOk(formats strfmt.Registry) error {
+
+	if err := validate.Required("syntax_ok", "body", m.SyntaxOk); err != nil {
+		return err
+	}
+
 	return nil
 }
 

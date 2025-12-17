@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoTriggerDump dto trigger dump
@@ -20,21 +21,29 @@ import (
 type DtoTriggerDump struct {
 
 	// created
-	Created string `json:"created,omitempty"`
+	// Required: true
+	Created *string `json:"created"`
 
 	// last check
-	LastCheck *MoiraCheckData `json:"last_check,omitempty"`
+	// Required: true
+	LastCheck *MoiraCheckData `json:"last_check"`
 
 	// metrics
+	// Required: true
 	Metrics []*DtoPatternMetrics `json:"metrics"`
 
 	// trigger
-	Trigger *MoiraTrigger `json:"trigger,omitempty"`
+	// Required: true
+	Trigger *MoiraTrigger `json:"trigger"`
 }
 
 // Validate validates this dto trigger dump
 func (m *DtoTriggerDump) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateCreated(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateLastCheck(formats); err != nil {
 		res = append(res, err)
@@ -54,9 +63,19 @@ func (m *DtoTriggerDump) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *DtoTriggerDump) validateCreated(formats strfmt.Registry) error {
+
+	if err := validate.Required("created", "body", m.Created); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *DtoTriggerDump) validateLastCheck(formats strfmt.Registry) error {
-	if swag.IsZero(m.LastCheck) { // not required
-		return nil
+
+	if err := validate.Required("last_check", "body", m.LastCheck); err != nil {
+		return err
 	}
 
 	if m.LastCheck != nil {
@@ -74,8 +93,9 @@ func (m *DtoTriggerDump) validateLastCheck(formats strfmt.Registry) error {
 }
 
 func (m *DtoTriggerDump) validateMetrics(formats strfmt.Registry) error {
-	if swag.IsZero(m.Metrics) { // not required
-		return nil
+
+	if err := validate.Required("metrics", "body", m.Metrics); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Metrics); i++ {
@@ -100,8 +120,9 @@ func (m *DtoTriggerDump) validateMetrics(formats strfmt.Registry) error {
 }
 
 func (m *DtoTriggerDump) validateTrigger(formats strfmt.Registry) error {
-	if swag.IsZero(m.Trigger) { // not required
-		return nil
+
+	if err := validate.Required("trigger", "body", m.Trigger); err != nil {
+		return err
 	}
 
 	if m.Trigger != nil {
@@ -144,10 +165,6 @@ func (m *DtoTriggerDump) contextValidateLastCheck(ctx context.Context, formats s
 
 	if m.LastCheck != nil {
 
-		if swag.IsZero(m.LastCheck) { // not required
-			return nil
-		}
-
 		if err := m.LastCheck.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("last_check")
@@ -189,10 +206,6 @@ func (m *DtoTriggerDump) contextValidateMetrics(ctx context.Context, formats str
 func (m *DtoTriggerDump) contextValidateTrigger(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Trigger != nil {
-
-		if swag.IsZero(m.Trigger) { // not required
-			return nil
-		}
 
 		if err := m.Trigger.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {

@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoTagStatistics dto tag statistics
@@ -21,13 +22,16 @@ type DtoTagStatistics struct {
 
 	// name
 	// Example: cpu
-	Name string `json:"name,omitempty"`
+	// Required: true
+	Name *string `json:"name"`
 
 	// subscriptions
+	// Required: true
 	Subscriptions []*MoiraSubscriptionData `json:"subscriptions"`
 
 	// triggers
 	// Example: ["bcba82f5-48cf-44c0-b7d6-e1d32c64a88c"]
+	// Required: true
 	Triggers []string `json:"triggers"`
 }
 
@@ -35,7 +39,15 @@ type DtoTagStatistics struct {
 func (m *DtoTagStatistics) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSubscriptions(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTriggers(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -45,9 +57,19 @@ func (m *DtoTagStatistics) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *DtoTagStatistics) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *DtoTagStatistics) validateSubscriptions(formats strfmt.Registry) error {
-	if swag.IsZero(m.Subscriptions) { // not required
-		return nil
+
+	if err := validate.Required("subscriptions", "body", m.Subscriptions); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Subscriptions); i++ {
@@ -66,6 +88,15 @@ func (m *DtoTagStatistics) validateSubscriptions(formats strfmt.Registry) error 
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *DtoTagStatistics) validateTriggers(formats strfmt.Registry) error {
+
+	if err := validate.Required("triggers", "body", m.Triggers); err != nil {
+		return err
 	}
 
 	return nil

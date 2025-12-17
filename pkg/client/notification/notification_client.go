@@ -60,6 +60,8 @@ type ClientService interface {
 
 	DeleteNotification(params *DeleteNotificationParams, opts ...ClientOption) (*DeleteNotificationOK, error)
 
+	DeleteNotificationsFiltered(params *DeleteNotificationsFilteredParams, opts ...ClientOption) (*DeleteNotificationsFilteredOK, error)
+
 	GetNotifications(params *GetNotificationsParams, opts ...ClientOption) (*GetNotificationsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
@@ -138,6 +140,44 @@ func (a *Client) DeleteNotification(params *DeleteNotificationParams, opts ...Cl
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for delete-notification: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+DeleteNotificationsFiltered deletes notifications filtered by tags and timestamps
+*/
+func (a *Client) DeleteNotificationsFiltered(params *DeleteNotificationsFilteredParams, opts ...ClientOption) (*DeleteNotificationsFilteredOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteNotificationsFilteredParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "delete-notifications-filtered",
+		Method:             "DELETE",
+		PathPattern:        "/notification/filtered",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteNotificationsFilteredReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteNotificationsFilteredOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for delete-notifications-filtered: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

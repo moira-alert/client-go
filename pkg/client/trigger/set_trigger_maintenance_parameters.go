@@ -63,12 +63,6 @@ SetTriggerMaintenanceParams contains all the parameters to send to the API endpo
 */
 type SetTriggerMaintenanceParams struct {
 
-	/* Body.
-
-	   Maintenance data
-	*/
-	Body *models.DtoTriggerMaintenance
-
 	/* TriggerID.
 
 	   Trigger ID
@@ -76,6 +70,12 @@ type SetTriggerMaintenanceParams struct {
 	   Default: "bcba82f5-48cf-44c0-b7d6-e1d32c64a88c"
 	*/
 	TriggerID string
+
+	/* TriggerMaintenance.
+
+	   Maintenance data
+	*/
+	TriggerMaintenance *models.DtoTriggerMaintenance
 
 	timeout    time.Duration
 	Context    context.Context
@@ -141,17 +141,6 @@ func (o *SetTriggerMaintenanceParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the set trigger maintenance params
-func (o *SetTriggerMaintenanceParams) WithBody(body *models.DtoTriggerMaintenance) *SetTriggerMaintenanceParams {
-	o.SetBody(body)
-	return o
-}
-
-// SetBody adds the body to the set trigger maintenance params
-func (o *SetTriggerMaintenanceParams) SetBody(body *models.DtoTriggerMaintenance) {
-	o.Body = body
-}
-
 // WithTriggerID adds the triggerID to the set trigger maintenance params
 func (o *SetTriggerMaintenanceParams) WithTriggerID(triggerID string) *SetTriggerMaintenanceParams {
 	o.SetTriggerID(triggerID)
@@ -163,6 +152,17 @@ func (o *SetTriggerMaintenanceParams) SetTriggerID(triggerID string) {
 	o.TriggerID = triggerID
 }
 
+// WithTriggerMaintenance adds the triggerMaintenance to the set trigger maintenance params
+func (o *SetTriggerMaintenanceParams) WithTriggerMaintenance(triggerMaintenance *models.DtoTriggerMaintenance) *SetTriggerMaintenanceParams {
+	o.SetTriggerMaintenance(triggerMaintenance)
+	return o
+}
+
+// SetTriggerMaintenance adds the triggerMaintenance to the set trigger maintenance params
+func (o *SetTriggerMaintenanceParams) SetTriggerMaintenance(triggerMaintenance *models.DtoTriggerMaintenance) {
+	o.TriggerMaintenance = triggerMaintenance
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *SetTriggerMaintenanceParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -170,15 +170,15 @@ func (o *SetTriggerMaintenanceParams) WriteToRequest(r runtime.ClientRequest, re
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
-			return err
-		}
-	}
 
 	// path param triggerID
 	if err := r.SetPathParam("triggerID", o.TriggerID); err != nil {
 		return err
+	}
+	if o.TriggerMaintenance != nil {
+		if err := r.SetBodyParam(o.TriggerMaintenance); err != nil {
+			return err
+		}
 	}
 
 	if len(res) > 0 {

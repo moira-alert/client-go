@@ -146,7 +146,7 @@ UpdateTeamBadRequest describes a response with status code 400, with default hea
 Bad request from client
 */
 type UpdateTeamBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this update team bad request response has a 2xx status code
@@ -189,13 +189,13 @@ func (o *UpdateTeamBadRequest) String() string {
 	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamBadRequest %s", 400, payload)
 }
 
-func (o *UpdateTeamBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *UpdateTeamBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateTeamBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -216,7 +216,7 @@ UpdateTeamForbidden describes a response with status code 403, with default head
 Forbidden
 */
 type UpdateTeamForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this update team forbidden response has a 2xx status code
@@ -259,13 +259,13 @@ func (o *UpdateTeamForbidden) String() string {
 	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamForbidden %s", 403, payload)
 }
 
-func (o *UpdateTeamForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *UpdateTeamForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateTeamForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -286,7 +286,7 @@ UpdateTeamNotFound describes a response with status code 404, with default heade
 Resource not found
 */
 type UpdateTeamNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this update team not found response has a 2xx status code
@@ -329,13 +329,13 @@ func (o *UpdateTeamNotFound) String() string {
 	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamNotFound %s", 404, payload)
 }
 
-func (o *UpdateTeamNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *UpdateTeamNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateTeamNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -356,7 +356,7 @@ UpdateTeamUnprocessableEntity describes a response with status code 422, with de
 Render error
 */
 type UpdateTeamUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this update team unprocessable entity response has a 2xx status code
@@ -399,13 +399,13 @@ func (o *UpdateTeamUnprocessableEntity) String() string {
 	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamUnprocessableEntity %s", 422, payload)
 }
 
-func (o *UpdateTeamUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *UpdateTeamUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateTeamUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -426,7 +426,7 @@ UpdateTeamInternalServerError describes a response with status code 500, with de
 Internal server error
 */
 type UpdateTeamInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this update team internal server error response has a 2xx status code
@@ -469,13 +469,13 @@ func (o *UpdateTeamInternalServerError) String() string {
 	return fmt.Sprintf("[PATCH /teams/{teamID}][%d] updateTeamInternalServerError %s", 500, payload)
 }
 
-func (o *UpdateTeamInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *UpdateTeamInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateTeamInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

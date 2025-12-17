@@ -140,7 +140,7 @@ GetTeamSettingsForbidden describes a response with status code 403, with default
 Forbidden
 */
 type GetTeamSettingsForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get team settings forbidden response has a 2xx status code
@@ -183,13 +183,13 @@ func (o *GetTeamSettingsForbidden) String() string {
 	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsForbidden %s", 403, payload)
 }
 
-func (o *GetTeamSettingsForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *GetTeamSettingsForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTeamSettingsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -210,7 +210,7 @@ GetTeamSettingsNotFound describes a response with status code 404, with default 
 Resource not found
 */
 type GetTeamSettingsNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get team settings not found response has a 2xx status code
@@ -253,13 +253,13 @@ func (o *GetTeamSettingsNotFound) String() string {
 	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsNotFound %s", 404, payload)
 }
 
-func (o *GetTeamSettingsNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *GetTeamSettingsNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTeamSettingsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -280,7 +280,7 @@ GetTeamSettingsUnprocessableEntity describes a response with status code 422, wi
 Render error
 */
 type GetTeamSettingsUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get team settings unprocessable entity response has a 2xx status code
@@ -323,13 +323,13 @@ func (o *GetTeamSettingsUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetTeamSettingsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetTeamSettingsUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTeamSettingsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -350,7 +350,7 @@ GetTeamSettingsInternalServerError describes a response with status code 500, wi
 Internal server error
 */
 type GetTeamSettingsInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get team settings internal server error response has a 2xx status code
@@ -393,13 +393,13 @@ func (o *GetTeamSettingsInternalServerError) String() string {
 	return fmt.Sprintf("[GET /teams/{teamID}/settings][%d] getTeamSettingsInternalServerError %s", 500, payload)
 }
 
-func (o *GetTeamSettingsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetTeamSettingsInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTeamSettingsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -128,7 +128,7 @@ GetAllTagsUnprocessableEntity describes a response with status code 422, with de
 Render error
 */
 type GetAllTagsUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get all tags unprocessable entity response has a 2xx status code
@@ -171,13 +171,13 @@ func (o *GetAllTagsUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /tag][%d] getAllTagsUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetAllTagsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetAllTagsUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetAllTagsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -198,7 +198,7 @@ GetAllTagsInternalServerError describes a response with status code 500, with de
 Internal server error
 */
 type GetAllTagsInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get all tags internal server error response has a 2xx status code
@@ -241,13 +241,13 @@ func (o *GetAllTagsInternalServerError) String() string {
 	return fmt.Sprintf("[GET /tag][%d] getAllTagsInternalServerError %s", 500, payload)
 }
 
-func (o *GetAllTagsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetAllTagsInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetAllTagsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

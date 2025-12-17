@@ -120,7 +120,7 @@ SetTriggerMaintenanceBadRequest describes a response with status code 400, with 
 Bad request from client
 */
 type SetTriggerMaintenanceBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this set trigger maintenance bad request response has a 2xx status code
@@ -163,13 +163,13 @@ func (o *SetTriggerMaintenanceBadRequest) String() string {
 	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceBadRequest %s", 400, payload)
 }
 
-func (o *SetTriggerMaintenanceBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *SetTriggerMaintenanceBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *SetTriggerMaintenanceBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -190,7 +190,7 @@ SetTriggerMaintenanceNotFound describes a response with status code 404, with de
 Resource not found
 */
 type SetTriggerMaintenanceNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this set trigger maintenance not found response has a 2xx status code
@@ -233,13 +233,13 @@ func (o *SetTriggerMaintenanceNotFound) String() string {
 	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceNotFound %s", 404, payload)
 }
 
-func (o *SetTriggerMaintenanceNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *SetTriggerMaintenanceNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *SetTriggerMaintenanceNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -260,7 +260,7 @@ SetTriggerMaintenanceInternalServerError describes a response with status code 5
 Internal server error
 */
 type SetTriggerMaintenanceInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this set trigger maintenance internal server error response has a 2xx status code
@@ -303,13 +303,13 @@ func (o *SetTriggerMaintenanceInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /trigger/{triggerID}/setMaintenance][%d] setTriggerMaintenanceInternalServerError %s", 500, payload)
 }
 
-func (o *SetTriggerMaintenanceInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *SetTriggerMaintenanceInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *SetTriggerMaintenanceInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

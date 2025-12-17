@@ -64,8 +64,6 @@ type RemoveTagParams struct {
 	/* Tag.
 
 	   Name of the tag to remove
-
-	   Default: "cpu"
 	*/
 	Tag string
 
@@ -86,18 +84,7 @@ func (o *RemoveTagParams) WithDefaults() *RemoveTagParams {
 //
 // All values with no default are reset to their zero value.
 func (o *RemoveTagParams) SetDefaults() {
-	var (
-		tagDefault = string("cpu")
-	)
-
-	val := RemoveTagParams{
-		Tag: tagDefault,
-	}
-
-	val.timeout = o.timeout
-	val.Context = o.Context
-	val.HTTPClient = o.HTTPClient
-	*o = val
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the remove tag params

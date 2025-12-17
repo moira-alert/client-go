@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // MoiraMetricState moira metric state
@@ -25,29 +26,34 @@ type MoiraMetricState struct {
 
 	// event timestamp
 	// Example: 1590741878
-	EventTimestamp int64 `json:"event_timestamp,omitempty"`
+	// Required: true
+	EventTimestamp *int64 `json:"event_timestamp"`
 
 	// maintenance
 	// Example: 0
 	Maintenance int64 `json:"maintenance,omitempty"`
 
 	// maintenance info
-	MaintenanceInfo *MoiraMaintenanceInfo `json:"maintenance_info,omitempty"`
+	// Required: true
+	MaintenanceInfo *MoiraMaintenanceInfo `json:"maintenance_info"`
 
 	// state
 	// Example: OK
-	State string `json:"state,omitempty"`
+	// Required: true
+	State *string `json:"state"`
 
 	// suppressed
 	// Example: false
-	Suppressed bool `json:"suppressed,omitempty"`
+	// Required: true
+	Suppressed *bool `json:"suppressed"`
 
 	// suppressed state
 	SuppressedState string `json:"suppressed_state,omitempty"`
 
 	// timestamp
 	// Example: 1590741878
-	Timestamp int64 `json:"timestamp,omitempty"`
+	// Required: true
+	Timestamp *int64 `json:"timestamp"`
 
 	// value
 	// Example: 70
@@ -61,7 +67,23 @@ type MoiraMetricState struct {
 func (m *MoiraMetricState) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateEventTimestamp(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateMaintenanceInfo(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateState(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSuppressed(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTimestamp(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -71,9 +93,19 @@ func (m *MoiraMetricState) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *MoiraMetricState) validateEventTimestamp(formats strfmt.Registry) error {
+
+	if err := validate.Required("event_timestamp", "body", m.EventTimestamp); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *MoiraMetricState) validateMaintenanceInfo(formats strfmt.Registry) error {
-	if swag.IsZero(m.MaintenanceInfo) { // not required
-		return nil
+
+	if err := validate.Required("maintenance_info", "body", m.MaintenanceInfo); err != nil {
+		return err
 	}
 
 	if m.MaintenanceInfo != nil {
@@ -85,6 +117,33 @@ func (m *MoiraMetricState) validateMaintenanceInfo(formats strfmt.Registry) erro
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *MoiraMetricState) validateState(formats strfmt.Registry) error {
+
+	if err := validate.Required("state", "body", m.State); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraMetricState) validateSuppressed(formats strfmt.Registry) error {
+
+	if err := validate.Required("suppressed", "body", m.Suppressed); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraMetricState) validateTimestamp(formats strfmt.Registry) error {
+
+	if err := validate.Required("timestamp", "body", m.Timestamp); err != nil {
+		return err
 	}
 
 	return nil
@@ -107,10 +166,6 @@ func (m *MoiraMetricState) ContextValidate(ctx context.Context, formats strfmt.R
 func (m *MoiraMetricState) contextValidateMaintenanceInfo(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MaintenanceInfo != nil {
-
-		if swag.IsZero(m.MaintenanceInfo) { // not required
-			return nil
-		}
 
 		if err := m.MaintenanceInfo.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {

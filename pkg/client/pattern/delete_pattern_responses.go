@@ -120,7 +120,7 @@ DeletePatternBadRequest describes a response with status code 400, with default 
 Bad request from client
 */
 type DeletePatternBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete pattern bad request response has a 2xx status code
@@ -163,13 +163,13 @@ func (o *DeletePatternBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternBadRequest %s", 400, payload)
 }
 
-func (o *DeletePatternBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *DeletePatternBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeletePatternBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -190,7 +190,7 @@ DeletePatternForbidden describes a response with status code 403, with default h
 Forbidden
 */
 type DeletePatternForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete pattern forbidden response has a 2xx status code
@@ -233,13 +233,13 @@ func (o *DeletePatternForbidden) String() string {
 	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternForbidden %s", 403, payload)
 }
 
-func (o *DeletePatternForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *DeletePatternForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeletePatternForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -260,7 +260,7 @@ DeletePatternInternalServerError describes a response with status code 500, with
 Internal server error
 */
 type DeletePatternInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete pattern internal server error response has a 2xx status code
@@ -303,13 +303,13 @@ func (o *DeletePatternInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /pattern/{pattern}][%d] deletePatternInternalServerError %s", 500, payload)
 }
 
-func (o *DeletePatternInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *DeletePatternInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeletePatternInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

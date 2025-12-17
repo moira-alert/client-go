@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoNotifierState dto notifier state
@@ -17,17 +19,54 @@ import (
 // swagger:model dto.NotifierState
 type DtoNotifierState struct {
 
+	// actor
+	// Example: AUTO
+	// Required: true
+	Actor *string `json:"actor"`
+
 	// message
 	// Example: Moira has been turned off for maintenance
 	Message string `json:"message,omitempty"`
 
 	// state
 	// Example: ERROR
-	State string `json:"state,omitempty"`
+	// Required: true
+	State *string `json:"state"`
 }
 
 // Validate validates this dto notifier state
 func (m *DtoNotifierState) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateActor(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateState(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DtoNotifierState) validateActor(formats strfmt.Registry) error {
+
+	if err := validate.Required("actor", "body", m.Actor); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoNotifierState) validateState(formats strfmt.Registry) error {
+
+	if err := validate.Required("state", "body", m.State); err != nil {
+		return err
+	}
+
 	return nil
 }
 

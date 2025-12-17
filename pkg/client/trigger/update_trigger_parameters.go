@@ -64,11 +64,11 @@ UpdateTriggerParams contains all the parameters to send to the API endpoint
 */
 type UpdateTriggerParams struct {
 
-	/* Body.
+	/* Trigger.
 
 	   Trigger data
 	*/
-	Body *models.DtoTrigger
+	Trigger *models.DtoTrigger
 
 	/* TriggerID.
 
@@ -148,15 +148,15 @@ func (o *UpdateTriggerParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
-// WithBody adds the body to the update trigger params
-func (o *UpdateTriggerParams) WithBody(body *models.DtoTrigger) *UpdateTriggerParams {
-	o.SetBody(body)
+// WithTrigger adds the trigger to the update trigger params
+func (o *UpdateTriggerParams) WithTrigger(trigger *models.DtoTrigger) *UpdateTriggerParams {
+	o.SetTrigger(trigger)
 	return o
 }
 
-// SetBody adds the body to the update trigger params
-func (o *UpdateTriggerParams) SetBody(body *models.DtoTrigger) {
-	o.Body = body
+// SetTrigger adds the trigger to the update trigger params
+func (o *UpdateTriggerParams) SetTrigger(trigger *models.DtoTrigger) {
+	o.Trigger = trigger
 }
 
 // WithTriggerID adds the triggerID to the update trigger params
@@ -188,8 +188,8 @@ func (o *UpdateTriggerParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
-	if o.Body != nil {
-		if err := r.SetBodyParam(o.Body); err != nil {
+	if o.Trigger != nil {
+		if err := r.SetBodyParam(o.Trigger); err != nil {
 			return err
 		}
 	}

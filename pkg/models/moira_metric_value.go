@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // MoiraMetricValue moira metric value
@@ -21,14 +23,47 @@ type MoiraMetricValue struct {
 	Step int64 `json:"step,omitempty"`
 
 	// ts
-	Ts int64 `json:"ts,omitempty"`
+	// Required: true
+	Ts *int64 `json:"ts"`
 
 	// value
-	Value float64 `json:"value,omitempty"`
+	// Required: true
+	Value *float64 `json:"value"`
 }
 
 // Validate validates this moira metric value
 func (m *MoiraMetricValue) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateTs(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateValue(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *MoiraMetricValue) validateTs(formats strfmt.Registry) error {
+
+	if err := validate.Required("ts", "body", m.Ts); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraMetricValue) validateValue(formats strfmt.Registry) error {
+
+	if err := validate.Required("value", "body", m.Value); err != nil {
+		return err
+	}
+
 	return nil
 }
 

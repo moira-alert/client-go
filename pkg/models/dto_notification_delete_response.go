@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoNotificationDeleteResponse dto notification delete response
@@ -19,11 +21,30 @@ type DtoNotificationDeleteResponse struct {
 
 	// result
 	// Example: 0
-	Result int64 `json:"result,omitempty"`
+	// Required: true
+	Result *int64 `json:"result"`
 }
 
 // Validate validates this dto notification delete response
 func (m *DtoNotificationDeleteResponse) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateResult(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DtoNotificationDeleteResponse) validateResult(formats strfmt.Registry) error {
+
+	if err := validate.Required("result", "body", m.Result); err != nil {
+		return err
+	}
+
 	return nil
 }
 

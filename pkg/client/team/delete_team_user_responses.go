@@ -146,7 +146,7 @@ DeleteTeamUserBadRequest describes a response with status code 400, with default
 Bad request from client
 */
 type DeleteTeamUserBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete team user bad request response has a 2xx status code
@@ -189,13 +189,13 @@ func (o *DeleteTeamUserBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /teams/{teamID}/users/{teamUserID}][%d] deleteTeamUserBadRequest %s", 400, payload)
 }
 
-func (o *DeleteTeamUserBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *DeleteTeamUserBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteTeamUserBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -216,7 +216,7 @@ DeleteTeamUserForbidden describes a response with status code 403, with default 
 Forbidden
 */
 type DeleteTeamUserForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete team user forbidden response has a 2xx status code
@@ -259,13 +259,13 @@ func (o *DeleteTeamUserForbidden) String() string {
 	return fmt.Sprintf("[DELETE /teams/{teamID}/users/{teamUserID}][%d] deleteTeamUserForbidden %s", 403, payload)
 }
 
-func (o *DeleteTeamUserForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *DeleteTeamUserForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteTeamUserForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -286,7 +286,7 @@ DeleteTeamUserNotFound describes a response with status code 404, with default h
 Resource not found
 */
 type DeleteTeamUserNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete team user not found response has a 2xx status code
@@ -329,13 +329,13 @@ func (o *DeleteTeamUserNotFound) String() string {
 	return fmt.Sprintf("[DELETE /teams/{teamID}/users/{teamUserID}][%d] deleteTeamUserNotFound %s", 404, payload)
 }
 
-func (o *DeleteTeamUserNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *DeleteTeamUserNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteTeamUserNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -356,7 +356,7 @@ DeleteTeamUserUnprocessableEntity describes a response with status code 422, wit
 Render error
 */
 type DeleteTeamUserUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete team user unprocessable entity response has a 2xx status code
@@ -399,13 +399,13 @@ func (o *DeleteTeamUserUnprocessableEntity) String() string {
 	return fmt.Sprintf("[DELETE /teams/{teamID}/users/{teamUserID}][%d] deleteTeamUserUnprocessableEntity %s", 422, payload)
 }
 
-func (o *DeleteTeamUserUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *DeleteTeamUserUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteTeamUserUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -426,7 +426,7 @@ DeleteTeamUserInternalServerError describes a response with status code 500, wit
 Internal server error
 */
 type DeleteTeamUserInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete team user internal server error response has a 2xx status code
@@ -469,13 +469,13 @@ func (o *DeleteTeamUserInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /teams/{teamID}/users/{teamUserID}][%d] deleteTeamUserInternalServerError %s", 500, payload)
 }
 
-func (o *DeleteTeamUserInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *DeleteTeamUserInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteTeamUserInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

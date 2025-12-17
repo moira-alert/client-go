@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // MoiraScheduledNotification moira scheduled notification
@@ -19,32 +20,39 @@ import (
 type MoiraScheduledNotification struct {
 
 	// contact
-	Contact *MoiraContactData `json:"contact,omitempty"`
+	// Required: true
+	Contact *MoiraContactData `json:"contact"`
 
 	// created at
 	// Example: 1594471900
 	CreatedAt int64 `json:"created_at,omitempty"`
 
 	// event
-	Event *MoiraNotificationEvent `json:"event,omitempty"`
+	// Required: true
+	Event *MoiraNotificationEvent `json:"event"`
 
 	// plotting
-	Plotting *MoiraPlottingData `json:"plotting,omitempty"`
+	// Required: true
+	Plotting *MoiraPlottingData `json:"plotting"`
 
 	// send fail
 	// Example: 0
-	SendFail int64 `json:"send_fail,omitempty"`
+	// Required: true
+	SendFail *int64 `json:"send_fail"`
 
 	// throttled
 	// Example: false
-	Throttled bool `json:"throttled,omitempty"`
+	// Required: true
+	Throttled *bool `json:"throttled"`
 
 	// timestamp
 	// Example: 1594471927
-	Timestamp int64 `json:"timestamp,omitempty"`
+	// Required: true
+	Timestamp *int64 `json:"timestamp"`
 
 	// trigger
-	Trigger *MoiraTriggerData `json:"trigger,omitempty"`
+	// Required: true
+	Trigger *MoiraTriggerData `json:"trigger"`
 }
 
 // Validate validates this moira scheduled notification
@@ -63,6 +71,18 @@ func (m *MoiraScheduledNotification) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateSendFail(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateThrottled(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTimestamp(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateTrigger(formats); err != nil {
 		res = append(res, err)
 	}
@@ -74,8 +94,9 @@ func (m *MoiraScheduledNotification) Validate(formats strfmt.Registry) error {
 }
 
 func (m *MoiraScheduledNotification) validateContact(formats strfmt.Registry) error {
-	if swag.IsZero(m.Contact) { // not required
-		return nil
+
+	if err := validate.Required("contact", "body", m.Contact); err != nil {
+		return err
 	}
 
 	if m.Contact != nil {
@@ -93,8 +114,9 @@ func (m *MoiraScheduledNotification) validateContact(formats strfmt.Registry) er
 }
 
 func (m *MoiraScheduledNotification) validateEvent(formats strfmt.Registry) error {
-	if swag.IsZero(m.Event) { // not required
-		return nil
+
+	if err := validate.Required("event", "body", m.Event); err != nil {
+		return err
 	}
 
 	if m.Event != nil {
@@ -112,8 +134,9 @@ func (m *MoiraScheduledNotification) validateEvent(formats strfmt.Registry) erro
 }
 
 func (m *MoiraScheduledNotification) validatePlotting(formats strfmt.Registry) error {
-	if swag.IsZero(m.Plotting) { // not required
-		return nil
+
+	if err := validate.Required("plotting", "body", m.Plotting); err != nil {
+		return err
 	}
 
 	if m.Plotting != nil {
@@ -130,9 +153,37 @@ func (m *MoiraScheduledNotification) validatePlotting(formats strfmt.Registry) e
 	return nil
 }
 
+func (m *MoiraScheduledNotification) validateSendFail(formats strfmt.Registry) error {
+
+	if err := validate.Required("send_fail", "body", m.SendFail); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraScheduledNotification) validateThrottled(formats strfmt.Registry) error {
+
+	if err := validate.Required("throttled", "body", m.Throttled); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraScheduledNotification) validateTimestamp(formats strfmt.Registry) error {
+
+	if err := validate.Required("timestamp", "body", m.Timestamp); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *MoiraScheduledNotification) validateTrigger(formats strfmt.Registry) error {
-	if swag.IsZero(m.Trigger) { // not required
-		return nil
+
+	if err := validate.Required("trigger", "body", m.Trigger); err != nil {
+		return err
 	}
 
 	if m.Trigger != nil {
@@ -179,10 +230,6 @@ func (m *MoiraScheduledNotification) contextValidateContact(ctx context.Context,
 
 	if m.Contact != nil {
 
-		if swag.IsZero(m.Contact) { // not required
-			return nil
-		}
-
 		if err := m.Contact.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("contact")
@@ -199,10 +246,6 @@ func (m *MoiraScheduledNotification) contextValidateContact(ctx context.Context,
 func (m *MoiraScheduledNotification) contextValidateEvent(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Event != nil {
-
-		if swag.IsZero(m.Event) { // not required
-			return nil
-		}
 
 		if err := m.Event.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
@@ -221,10 +264,6 @@ func (m *MoiraScheduledNotification) contextValidatePlotting(ctx context.Context
 
 	if m.Plotting != nil {
 
-		if swag.IsZero(m.Plotting) { // not required
-			return nil
-		}
-
 		if err := m.Plotting.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("plotting")
@@ -241,10 +280,6 @@ func (m *MoiraScheduledNotification) contextValidatePlotting(ctx context.Context
 func (m *MoiraScheduledNotification) contextValidateTrigger(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Trigger != nil {
-
-		if swag.IsZero(m.Trigger) { // not required
-			return nil
-		}
 
 		if err := m.Trigger.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {

@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoTriggerNoisiness dto trigger noisiness
@@ -20,17 +21,21 @@ type DtoTriggerNoisiness struct {
 
 	// A list of targets that have only alone metrics
 	// Example: {"t1":true}
-	AloneMetrics map[string]bool `json:"alone_metrics,omitempty"`
+	// Required: true
+	AloneMetrics map[string]bool `json:"alone_metrics"`
 
 	// Shows the exact cluster from where the metrics are fetched
 	// Example: default
-	ClusterID string `json:"cluster_id,omitempty"`
+	// Required: true
+	ClusterID *string `json:"cluster_id"`
 
 	// Datetime when the trigger was created
-	CreatedAt *string `json:"created_at,omitempty"`
+	// Required: true
+	CreatedAt *string `json:"created_at"`
 
 	// Username who created trigger
-	CreatedBy string `json:"created_by,omitempty"`
+	// Required: true
+	CreatedBy *string `json:"created_by"`
 
 	// Description string
 	// Example: check the size of /var/log
@@ -38,34 +43,42 @@ type DtoTriggerNoisiness struct {
 
 	// ERROR threshold
 	// Example: 1000
-	ErrorValue *float64 `json:"error_value,omitempty"`
+	// Required: true
+	ErrorValue *float64 `json:"error_value"`
 
 	// EventsCount for the trigger.
-	EventsCount int64 `json:"events_count,omitempty"`
+	// Required: true
+	EventsCount *int64 `json:"events_count"`
 
 	// Used if you need more complex logic than provided by WARN/ERROR values
-	Expression string `json:"expression,omitempty"`
+	// Required: true
+	Expression *string `json:"expression"`
 
 	// Trigger unique ID
 	// Example: 292516ed-4924-4154-a62c-ebe312431fce
-	ID string `json:"id,omitempty"`
+	// Required: true
+	ID *string `json:"id"`
 
 	// Shows if trigger is remote (graphite-backend) based or stored inside Moira-Redis DB
 	//
 	// Deprecated: Use TriggerSource field instead
 	// Example: false
-	IsRemote bool `json:"is_remote,omitempty"`
+	// Required: true
+	IsRemote *bool `json:"is_remote"`
 
 	// If true, first event NODATA → OK will be omitted
 	// Example: false
-	MuteNewMetrics bool `json:"mute_new_metrics,omitempty"`
+	// Required: true
+	MuteNewMetrics *bool `json:"mute_new_metrics"`
 
 	// Trigger name
 	// Example: Not enough disk space left
-	Name string `json:"name,omitempty"`
+	// Required: true
+	Name *string `json:"name"`
 
 	// Graphite patterns for trigger
 	// Example: [""]
+	// Required: true
 	Patterns []string `json:"patterns"`
 
 	// Determines when Moira should monitor trigger
@@ -75,23 +88,28 @@ type DtoTriggerNoisiness struct {
 
 	// Set of tags to manipulate subscriptions
 	// Example: ["server","disk"]
+	// Required: true
 	Tags []string `json:"tags"`
 
 	// Graphite-like targets: t1, t2, ...
 	// Example: ["devOps.my_server.hdd.freespace_mbytes"]
+	// Required: true
 	Targets []string `json:"targets"`
 
 	// throttling
 	// Example: 0
-	Throttling int64 `json:"throttling,omitempty"`
+	// Required: true
+	Throttling *int64 `json:"throttling"`
 
 	// Shows the type of source from where the metrics are fetched
 	// Example: graphite_local
-	TriggerSource string `json:"trigger_source,omitempty"`
+	// Required: true
+	TriggerSource *string `json:"trigger_source"`
 
 	// Could be: rising, falling, expression
 	// Example: rising
-	TriggerType string `json:"trigger_type,omitempty"`
+	// Required: true
+	TriggerType *string `json:"trigger_type"`
 
 	// When there are no metrics for trigger, Moira will switch metric to TTLState state after TTL seconds
 	// Example: 600
@@ -102,21 +120,104 @@ type DtoTriggerNoisiness struct {
 	TTLState *string `json:"ttl_state,omitempty"`
 
 	// Datetime  when the trigger was updated
-	UpdatedAt *string `json:"updated_at,omitempty"`
+	// Required: true
+	UpdatedAt *string `json:"updated_at"`
 
 	// Username who updated trigger
-	UpdatedBy string `json:"updated_by,omitempty"`
+	// Required: true
+	UpdatedBy *string `json:"updated_by"`
 
 	// WARN threshold
 	// Example: 500
-	WarnValue *float64 `json:"warn_value,omitempty"`
+	// Required: true
+	WarnValue *float64 `json:"warn_value"`
 }
 
 // Validate validates this dto trigger noisiness
 func (m *DtoTriggerNoisiness) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAloneMetrics(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateClusterID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCreatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCreatedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateErrorValue(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateEventsCount(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateExpression(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIsRemote(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMuteNewMetrics(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePatterns(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSched(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTags(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTargets(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateThrottling(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTriggerSource(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTriggerType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUpdatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUpdatedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWarnValue(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -126,9 +227,189 @@ func (m *DtoTriggerNoisiness) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *DtoTriggerNoisiness) validateAloneMetrics(formats strfmt.Registry) error {
+
+	if err := validate.Required("alone_metrics", "body", m.AloneMetrics); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateClusterID(formats strfmt.Registry) error {
+
+	if err := validate.Required("cluster_id", "body", m.ClusterID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateCreatedAt(formats strfmt.Registry) error {
+
+	if err := validate.Required("created_at", "body", m.CreatedAt); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateCreatedBy(formats strfmt.Registry) error {
+
+	if err := validate.Required("created_by", "body", m.CreatedBy); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateErrorValue(formats strfmt.Registry) error {
+
+	if err := validate.Required("error_value", "body", m.ErrorValue); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateEventsCount(formats strfmt.Registry) error {
+
+	if err := validate.Required("events_count", "body", m.EventsCount); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateExpression(formats strfmt.Registry) error {
+
+	if err := validate.Required("expression", "body", m.Expression); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateIsRemote(formats strfmt.Registry) error {
+
+	if err := validate.Required("is_remote", "body", m.IsRemote); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateMuteNewMetrics(formats strfmt.Registry) error {
+
+	if err := validate.Required("mute_new_metrics", "body", m.MuteNewMetrics); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validatePatterns(formats strfmt.Registry) error {
+
+	if err := validate.Required("patterns", "body", m.Patterns); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *DtoTriggerNoisiness) validateSched(formats strfmt.Registry) error {
 	if swag.IsZero(m.Sched) { // not required
 		return nil
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateTags(formats strfmt.Registry) error {
+
+	if err := validate.Required("tags", "body", m.Tags); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateTargets(formats strfmt.Registry) error {
+
+	if err := validate.Required("targets", "body", m.Targets); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateThrottling(formats strfmt.Registry) error {
+
+	if err := validate.Required("throttling", "body", m.Throttling); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateTriggerSource(formats strfmt.Registry) error {
+
+	if err := validate.Required("trigger_source", "body", m.TriggerSource); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateTriggerType(formats strfmt.Registry) error {
+
+	if err := validate.Required("trigger_type", "body", m.TriggerType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateUpdatedAt(formats strfmt.Registry) error {
+
+	if err := validate.Required("updated_at", "body", m.UpdatedAt); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateUpdatedBy(formats strfmt.Registry) error {
+
+	if err := validate.Required("updated_by", "body", m.UpdatedBy); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoTriggerNoisiness) validateWarnValue(formats strfmt.Registry) error {
+
+	if err := validate.Required("warn_value", "body", m.WarnValue); err != nil {
+		return err
 	}
 
 	return nil

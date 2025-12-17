@@ -128,7 +128,7 @@ DeleteAllNotificationsForbidden describes a response with status code 403, with 
 Forbidden
 */
 type DeleteAllNotificationsForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete all notifications forbidden response has a 2xx status code
@@ -171,13 +171,13 @@ func (o *DeleteAllNotificationsForbidden) String() string {
 	return fmt.Sprintf("[DELETE /notification/all][%d] deleteAllNotificationsForbidden %s", 403, payload)
 }
 
-func (o *DeleteAllNotificationsForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *DeleteAllNotificationsForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteAllNotificationsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -198,7 +198,7 @@ DeleteAllNotificationsInternalServerError describes a response with status code 
 Internal server error
 */
 type DeleteAllNotificationsInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete all notifications internal server error response has a 2xx status code
@@ -241,13 +241,13 @@ func (o *DeleteAllNotificationsInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /notification/all][%d] deleteAllNotificationsInternalServerError %s", 500, payload)
 }
 
-func (o *DeleteAllNotificationsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *DeleteAllNotificationsInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteAllNotificationsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
