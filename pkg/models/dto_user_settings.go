@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoUserSettings dto user settings
@@ -24,18 +25,21 @@ type DtoUserSettings struct {
 	AuthEnabled bool `json:"auth_enabled,omitempty"`
 
 	// contacts
-	Contacts []*MoiraContactData `json:"contacts"`
+	// Required: true
+	Contacts []*DtoContactWithScore `json:"contacts"`
 
 	// login
 	// Example: john
-	Login string `json:"login,omitempty"`
+	// Required: true
+	Login *string `json:"login"`
 
 	// role
 	// Example: user
 	Role string `json:"role,omitempty"`
 
 	// subscriptions
-	Subscriptions []*MoiraSubscriptionData `json:"subscriptions"`
+	// Required: true
+	Subscriptions []*DtoSubscription `json:"subscriptions"`
 }
 
 // Validate validates this dto user settings
@@ -43,6 +47,10 @@ func (m *DtoUserSettings) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateContacts(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLogin(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -57,8 +65,9 @@ func (m *DtoUserSettings) Validate(formats strfmt.Registry) error {
 }
 
 func (m *DtoUserSettings) validateContacts(formats strfmt.Registry) error {
-	if swag.IsZero(m.Contacts) { // not required
-		return nil
+
+	if err := validate.Required("contacts", "body", m.Contacts); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Contacts); i++ {
@@ -82,9 +91,19 @@ func (m *DtoUserSettings) validateContacts(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *DtoUserSettings) validateLogin(formats strfmt.Registry) error {
+
+	if err := validate.Required("login", "body", m.Login); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *DtoUserSettings) validateSubscriptions(formats strfmt.Registry) error {
-	if swag.IsZero(m.Subscriptions) { // not required
-		return nil
+
+	if err := validate.Required("subscriptions", "body", m.Subscriptions); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Subscriptions); i++ {

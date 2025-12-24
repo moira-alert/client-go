@@ -134,7 +134,7 @@ CreateSubscriptionBadRequest describes a response with status code 400, with def
 Bad request from client
 */
 type CreateSubscriptionBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create subscription bad request response has a 2xx status code
@@ -177,13 +177,13 @@ func (o *CreateSubscriptionBadRequest) String() string {
 	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionBadRequest %s", 400, payload)
 }
 
-func (o *CreateSubscriptionBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *CreateSubscriptionBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateSubscriptionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -204,7 +204,7 @@ CreateSubscriptionUnprocessableEntity describes a response with status code 422,
 Render error
 */
 type CreateSubscriptionUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create subscription unprocessable entity response has a 2xx status code
@@ -247,13 +247,13 @@ func (o *CreateSubscriptionUnprocessableEntity) String() string {
 	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionUnprocessableEntity %s", 422, payload)
 }
 
-func (o *CreateSubscriptionUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *CreateSubscriptionUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateSubscriptionUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -274,7 +274,7 @@ CreateSubscriptionInternalServerError describes a response with status code 500,
 Internal server error
 */
 type CreateSubscriptionInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create subscription internal server error response has a 2xx status code
@@ -317,13 +317,13 @@ func (o *CreateSubscriptionInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /subscription][%d] createSubscriptionInternalServerError %s", 500, payload)
 }
 
-func (o *CreateSubscriptionInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *CreateSubscriptionInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateSubscriptionInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

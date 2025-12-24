@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoPatternList dto pattern list
@@ -20,6 +21,7 @@ import (
 type DtoPatternList struct {
 
 	// list
+	// Required: true
 	List []*DtoPatternData `json:"list"`
 }
 
@@ -38,8 +40,9 @@ func (m *DtoPatternList) Validate(formats strfmt.Registry) error {
 }
 
 func (m *DtoPatternList) validateList(formats strfmt.Registry) error {
-	if swag.IsZero(m.List) { // not required
-		return nil
+
+	if err := validate.Required("list", "body", m.List); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.List); i++ {

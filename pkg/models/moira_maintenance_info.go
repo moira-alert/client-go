@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // MoiraMaintenanceInfo moira maintenance info
@@ -19,21 +21,82 @@ type MoiraMaintenanceInfo struct {
 
 	// remove time
 	// Example: 0
-	RemoveTime *int64 `json:"remove_time,omitempty"`
+	// Required: true
+	RemoveTime *int64 `json:"remove_time"`
 
 	// remove user
-	RemoveUser *string `json:"remove_user,omitempty"`
+	// Required: true
+	RemoveUser *string `json:"remove_user"`
 
 	// setup time
 	// Example: 0
-	SetupTime *int64 `json:"setup_time,omitempty"`
+	// Required: true
+	SetupTime *int64 `json:"setup_time"`
 
 	// setup user
-	SetupUser *string `json:"setup_user,omitempty"`
+	// Required: true
+	SetupUser *string `json:"setup_user"`
 }
 
 // Validate validates this moira maintenance info
 func (m *MoiraMaintenanceInfo) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateRemoveTime(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRemoveUser(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSetupTime(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSetupUser(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *MoiraMaintenanceInfo) validateRemoveTime(formats strfmt.Registry) error {
+
+	if err := validate.Required("remove_time", "body", m.RemoveTime); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraMaintenanceInfo) validateRemoveUser(formats strfmt.Registry) error {
+
+	if err := validate.Required("remove_user", "body", m.RemoveUser); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraMaintenanceInfo) validateSetupTime(formats strfmt.Registry) error {
+
+	if err := validate.Required("setup_time", "body", m.SetupTime); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraMaintenanceInfo) validateSetupUser(formats strfmt.Registry) error {
+
+	if err := validate.Required("setup_user", "body", m.SetupUser); err != nil {
+		return err
+	}
+
 	return nil
 }
 

@@ -122,7 +122,7 @@ GetUserNameUnprocessableEntity describes a response with status code 422, with d
 Render error
 */
 type GetUserNameUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get user name unprocessable entity response has a 2xx status code
@@ -165,13 +165,13 @@ func (o *GetUserNameUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /user][%d] getUserNameUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetUserNameUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetUserNameUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetUserNameUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

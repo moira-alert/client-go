@@ -108,7 +108,7 @@ DeleteAllEventsInternalServerError describes a response with status code 500, wi
 Internal server error
 */
 type DeleteAllEventsInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete all events internal server error response has a 2xx status code
@@ -151,13 +151,13 @@ func (o *DeleteAllEventsInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /event/all][%d] deleteAllEventsInternalServerError %s", 500, payload)
 }
 
-func (o *DeleteAllEventsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *DeleteAllEventsInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteAllEventsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

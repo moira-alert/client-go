@@ -120,7 +120,7 @@ SendTestContactNotificationForbidden describes a response with status code 403, 
 Forbidden
 */
 type SendTestContactNotificationForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this send test contact notification forbidden response has a 2xx status code
@@ -163,13 +163,13 @@ func (o *SendTestContactNotificationForbidden) String() string {
 	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationForbidden %s", 403, payload)
 }
 
-func (o *SendTestContactNotificationForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *SendTestContactNotificationForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *SendTestContactNotificationForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -190,7 +190,7 @@ SendTestContactNotificationNotFound describes a response with status code 404, w
 Resource not found
 */
 type SendTestContactNotificationNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this send test contact notification not found response has a 2xx status code
@@ -233,13 +233,13 @@ func (o *SendTestContactNotificationNotFound) String() string {
 	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationNotFound %s", 404, payload)
 }
 
-func (o *SendTestContactNotificationNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *SendTestContactNotificationNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *SendTestContactNotificationNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -260,7 +260,7 @@ SendTestContactNotificationInternalServerError describes a response with status 
 Internal server error
 */
 type SendTestContactNotificationInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this send test contact notification internal server error response has a 2xx status code
@@ -303,13 +303,13 @@ func (o *SendTestContactNotificationInternalServerError) String() string {
 	return fmt.Sprintf("[POST /contact/{contactID}/test][%d] sendTestContactNotificationInternalServerError %s", 500, payload)
 }
 
-func (o *SendTestContactNotificationInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *SendTestContactNotificationInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *SendTestContactNotificationInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

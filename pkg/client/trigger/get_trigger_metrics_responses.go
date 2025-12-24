@@ -138,7 +138,7 @@ GetTriggerMetricsBadRequest describes a response with status code 400, with defa
 Bad request from client
 */
 type GetTriggerMetricsBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get trigger metrics bad request response has a 2xx status code
@@ -181,13 +181,13 @@ func (o *GetTriggerMetricsBadRequest) String() string {
 	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsBadRequest %s", 400, payload)
 }
 
-func (o *GetTriggerMetricsBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *GetTriggerMetricsBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTriggerMetricsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -208,7 +208,7 @@ GetTriggerMetricsNotFound describes a response with status code 404, with defaul
 Resource not found
 */
 type GetTriggerMetricsNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get trigger metrics not found response has a 2xx status code
@@ -251,13 +251,13 @@ func (o *GetTriggerMetricsNotFound) String() string {
 	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsNotFound %s", 404, payload)
 }
 
-func (o *GetTriggerMetricsNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *GetTriggerMetricsNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTriggerMetricsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -278,7 +278,7 @@ GetTriggerMetricsUnprocessableEntity describes a response with status code 422, 
 Render error
 */
 type GetTriggerMetricsUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get trigger metrics unprocessable entity response has a 2xx status code
@@ -321,13 +321,13 @@ func (o *GetTriggerMetricsUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetTriggerMetricsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetTriggerMetricsUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTriggerMetricsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -348,7 +348,7 @@ GetTriggerMetricsInternalServerError describes a response with status code 500, 
 Internal server error
 */
 type GetTriggerMetricsInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get trigger metrics internal server error response has a 2xx status code
@@ -391,13 +391,13 @@ func (o *GetTriggerMetricsInternalServerError) String() string {
 	return fmt.Sprintf("[GET /trigger/{triggerID}/metrics][%d] getTriggerMetricsInternalServerError %s", 500, payload)
 }
 
-func (o *GetTriggerMetricsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetTriggerMetricsInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTriggerMetricsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

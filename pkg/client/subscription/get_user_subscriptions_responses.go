@@ -128,7 +128,7 @@ GetUserSubscriptionsUnprocessableEntity describes a response with status code 42
 Render error
 */
 type GetUserSubscriptionsUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get user subscriptions unprocessable entity response has a 2xx status code
@@ -171,13 +171,13 @@ func (o *GetUserSubscriptionsUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /subscription][%d] getUserSubscriptionsUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetUserSubscriptionsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetUserSubscriptionsUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetUserSubscriptionsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -198,7 +198,7 @@ GetUserSubscriptionsInternalServerError describes a response with status code 50
 Internal server error
 */
 type GetUserSubscriptionsInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get user subscriptions internal server error response has a 2xx status code
@@ -241,13 +241,13 @@ func (o *GetUserSubscriptionsInternalServerError) String() string {
 	return fmt.Sprintf("[GET /subscription][%d] getUserSubscriptionsInternalServerError %s", 500, payload)
 }
 
-func (o *GetUserSubscriptionsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetUserSubscriptionsInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetUserSubscriptionsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

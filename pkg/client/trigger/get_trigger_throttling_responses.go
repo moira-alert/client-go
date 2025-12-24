@@ -128,7 +128,7 @@ GetTriggerThrottlingNotFound describes a response with status code 404, with def
 Resource not found
 */
 type GetTriggerThrottlingNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get trigger throttling not found response has a 2xx status code
@@ -171,13 +171,13 @@ func (o *GetTriggerThrottlingNotFound) String() string {
 	return fmt.Sprintf("[GET /trigger/{triggerID}/throttling][%d] getTriggerThrottlingNotFound %s", 404, payload)
 }
 
-func (o *GetTriggerThrottlingNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *GetTriggerThrottlingNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTriggerThrottlingNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -198,7 +198,7 @@ GetTriggerThrottlingUnprocessableEntity describes a response with status code 42
 Render error
 */
 type GetTriggerThrottlingUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get trigger throttling unprocessable entity response has a 2xx status code
@@ -241,13 +241,13 @@ func (o *GetTriggerThrottlingUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /trigger/{triggerID}/throttling][%d] getTriggerThrottlingUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetTriggerThrottlingUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetTriggerThrottlingUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTriggerThrottlingUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

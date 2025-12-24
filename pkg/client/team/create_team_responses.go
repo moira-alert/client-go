@@ -134,7 +134,7 @@ CreateTeamBadRequest describes a response with status code 400, with default hea
 Bad request from client
 */
 type CreateTeamBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create team bad request response has a 2xx status code
@@ -177,13 +177,13 @@ func (o *CreateTeamBadRequest) String() string {
 	return fmt.Sprintf("[POST /teams][%d] createTeamBadRequest %s", 400, payload)
 }
 
-func (o *CreateTeamBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *CreateTeamBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateTeamBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -204,7 +204,7 @@ CreateTeamUnprocessableEntity describes a response with status code 422, with de
 Render error
 */
 type CreateTeamUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create team unprocessable entity response has a 2xx status code
@@ -247,13 +247,13 @@ func (o *CreateTeamUnprocessableEntity) String() string {
 	return fmt.Sprintf("[POST /teams][%d] createTeamUnprocessableEntity %s", 422, payload)
 }
 
-func (o *CreateTeamUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *CreateTeamUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateTeamUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -274,7 +274,7 @@ CreateTeamInternalServerError describes a response with status code 500, with de
 Internal server error
 */
 type CreateTeamInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create team internal server error response has a 2xx status code
@@ -317,13 +317,13 @@ func (o *CreateTeamInternalServerError) String() string {
 	return fmt.Sprintf("[POST /teams][%d] createTeamInternalServerError %s", 500, payload)
 }
 
-func (o *CreateTeamInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *CreateTeamInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateTeamInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

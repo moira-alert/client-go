@@ -134,7 +134,7 @@ GetTriggerStateNotFound describes a response with status code 404, with default 
 Resource not found
 */
 type GetTriggerStateNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get trigger state not found response has a 2xx status code
@@ -177,13 +177,13 @@ func (o *GetTriggerStateNotFound) String() string {
 	return fmt.Sprintf("[GET /trigger/{triggerID}/state][%d] getTriggerStateNotFound %s", 404, payload)
 }
 
-func (o *GetTriggerStateNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *GetTriggerStateNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTriggerStateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -204,7 +204,7 @@ GetTriggerStateUnprocessableEntity describes a response with status code 422, wi
 Render error
 */
 type GetTriggerStateUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get trigger state unprocessable entity response has a 2xx status code
@@ -247,13 +247,13 @@ func (o *GetTriggerStateUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /trigger/{triggerID}/state][%d] getTriggerStateUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetTriggerStateUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetTriggerStateUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTriggerStateUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -274,7 +274,7 @@ GetTriggerStateInternalServerError describes a response with status code 500, wi
 Internal server error
 */
 type GetTriggerStateInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get trigger state internal server error response has a 2xx status code
@@ -317,13 +317,13 @@ func (o *GetTriggerStateInternalServerError) String() string {
 	return fmt.Sprintf("[GET /trigger/{triggerID}/state][%d] getTriggerStateInternalServerError %s", 500, payload)
 }
 
-func (o *GetTriggerStateInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetTriggerStateInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTriggerStateInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

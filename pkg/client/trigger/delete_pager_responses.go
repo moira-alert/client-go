@@ -134,7 +134,7 @@ DeletePagerNotFound describes a response with status code 404, with default head
 Resource not found
 */
 type DeletePagerNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete pager not found response has a 2xx status code
@@ -177,13 +177,13 @@ func (o *DeletePagerNotFound) String() string {
 	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerNotFound %s", 404, payload)
 }
 
-func (o *DeletePagerNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *DeletePagerNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeletePagerNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -204,7 +204,7 @@ DeletePagerUnprocessableEntity describes a response with status code 422, with d
 Render error
 */
 type DeletePagerUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete pager unprocessable entity response has a 2xx status code
@@ -247,13 +247,13 @@ func (o *DeletePagerUnprocessableEntity) String() string {
 	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerUnprocessableEntity %s", 422, payload)
 }
 
-func (o *DeletePagerUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *DeletePagerUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeletePagerUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -274,7 +274,7 @@ DeletePagerInternalServerError describes a response with status code 500, with d
 Internal server error
 */
 type DeletePagerInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete pager internal server error response has a 2xx status code
@@ -317,13 +317,13 @@ func (o *DeletePagerInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /trigger/search/pager][%d] deletePagerInternalServerError %s", 500, payload)
 }
 
-func (o *DeletePagerInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *DeletePagerInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeletePagerInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

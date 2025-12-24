@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoTagsStatistics dto tags statistics
@@ -20,6 +21,7 @@ import (
 type DtoTagsStatistics struct {
 
 	// list
+	// Required: true
 	List []*DtoTagStatistics `json:"list"`
 }
 
@@ -38,8 +40,9 @@ func (m *DtoTagsStatistics) Validate(formats strfmt.Registry) error {
 }
 
 func (m *DtoTagsStatistics) validateList(formats strfmt.Registry) error {
-	if swag.IsZero(m.List) { // not required
-		return nil
+
+	if err := validate.Required("list", "body", m.List); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.List); i++ {

@@ -126,7 +126,7 @@ RemoveContactBadRequest describes a response with status code 400, with default 
 Bad request from client
 */
 type RemoveContactBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this remove contact bad request response has a 2xx status code
@@ -169,13 +169,13 @@ func (o *RemoveContactBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactBadRequest %s", 400, payload)
 }
 
-func (o *RemoveContactBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *RemoveContactBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *RemoveContactBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -196,7 +196,7 @@ RemoveContactForbidden describes a response with status code 403, with default h
 Forbidden
 */
 type RemoveContactForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this remove contact forbidden response has a 2xx status code
@@ -239,13 +239,13 @@ func (o *RemoveContactForbidden) String() string {
 	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactForbidden %s", 403, payload)
 }
 
-func (o *RemoveContactForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *RemoveContactForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *RemoveContactForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -266,7 +266,7 @@ RemoveContactNotFound describes a response with status code 404, with default he
 Resource not found
 */
 type RemoveContactNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this remove contact not found response has a 2xx status code
@@ -309,13 +309,13 @@ func (o *RemoveContactNotFound) String() string {
 	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactNotFound %s", 404, payload)
 }
 
-func (o *RemoveContactNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *RemoveContactNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *RemoveContactNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -336,7 +336,7 @@ RemoveContactInternalServerError describes a response with status code 500, with
 Internal server error
 */
 type RemoveContactInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this remove contact internal server error response has a 2xx status code
@@ -379,13 +379,13 @@ func (o *RemoveContactInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /contact/{contactID}][%d] removeContactInternalServerError %s", 500, payload)
 }
 
-func (o *RemoveContactInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *RemoveContactInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *RemoveContactInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

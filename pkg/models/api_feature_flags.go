@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // APIFeatureFlags api feature flags
@@ -19,27 +21,102 @@ type APIFeatureFlags struct {
 
 	// celebration mode
 	// Example: new_year
-	CelebrationMode string `json:"celebrationMode,omitempty"`
+	// Required: true
+	CelebrationMode *string `json:"celebrationMode"`
 
 	// is plotting available
 	// Example: true
-	IsPlottingAvailable bool `json:"isPlottingAvailable,omitempty"`
+	// Required: true
+	IsPlottingAvailable *bool `json:"isPlottingAvailable"`
 
 	// is plotting default on
 	// Example: false
-	IsPlottingDefaultOn bool `json:"isPlottingDefaultOn,omitempty"`
+	// Required: true
+	IsPlottingDefaultOn *bool `json:"isPlottingDefaultOn"`
 
 	// is readonly enabled
 	// Example: false
-	IsReadonlyEnabled bool `json:"isReadonlyEnabled,omitempty"`
+	// Required: true
+	IsReadonlyEnabled *bool `json:"isReadonlyEnabled"`
 
 	// is subscription to all tags available
 	// Example: false
-	IsSubscriptionToAllTagsAvailable bool `json:"isSubscriptionToAllTagsAvailable,omitempty"`
+	// Required: true
+	IsSubscriptionToAllTagsAvailable *bool `json:"isSubscriptionToAllTagsAvailable"`
 }
 
 // Validate validates this api feature flags
 func (m *APIFeatureFlags) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateCelebrationMode(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIsPlottingAvailable(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIsPlottingDefaultOn(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIsReadonlyEnabled(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIsSubscriptionToAllTagsAvailable(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *APIFeatureFlags) validateCelebrationMode(formats strfmt.Registry) error {
+
+	if err := validate.Required("celebrationMode", "body", m.CelebrationMode); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *APIFeatureFlags) validateIsPlottingAvailable(formats strfmt.Registry) error {
+
+	if err := validate.Required("isPlottingAvailable", "body", m.IsPlottingAvailable); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *APIFeatureFlags) validateIsPlottingDefaultOn(formats strfmt.Registry) error {
+
+	if err := validate.Required("isPlottingDefaultOn", "body", m.IsPlottingDefaultOn); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *APIFeatureFlags) validateIsReadonlyEnabled(formats strfmt.Registry) error {
+
+	if err := validate.Required("isReadonlyEnabled", "body", m.IsReadonlyEnabled); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *APIFeatureFlags) validateIsSubscriptionToAllTagsAvailable(formats strfmt.Registry) error {
+
+	if err := validate.Required("isSubscriptionToAllTagsAvailable", "body", m.IsSubscriptionToAllTagsAvailable); err != nil {
+		return err
+	}
+
 	return nil
 }
 

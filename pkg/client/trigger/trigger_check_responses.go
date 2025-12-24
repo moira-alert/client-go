@@ -134,7 +134,7 @@ TriggerCheckBadRequest describes a response with status code 400, with default h
 Bad request from client
 */
 type TriggerCheckBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this trigger check bad request response has a 2xx status code
@@ -177,13 +177,13 @@ func (o *TriggerCheckBadRequest) String() string {
 	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckBadRequest %s", 400, payload)
 }
 
-func (o *TriggerCheckBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *TriggerCheckBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *TriggerCheckBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -204,7 +204,7 @@ TriggerCheckInternalServerError describes a response with status code 500, with 
 Internal server error
 */
 type TriggerCheckInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this trigger check internal server error response has a 2xx status code
@@ -247,13 +247,13 @@ func (o *TriggerCheckInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckInternalServerError %s", 500, payload)
 }
 
-func (o *TriggerCheckInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *TriggerCheckInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *TriggerCheckInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -274,7 +274,7 @@ TriggerCheckServiceUnavailable describes a response with status code 503, with d
 Remote server unavailable
 */
 type TriggerCheckServiceUnavailable struct {
-	Payload *models.APIErrorRemoteServerUnavailableExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this trigger check service unavailable response has a 2xx status code
@@ -317,13 +317,13 @@ func (o *TriggerCheckServiceUnavailable) String() string {
 	return fmt.Sprintf("[PUT /trigger/check][%d] triggerCheckServiceUnavailable %s", 503, payload)
 }
 
-func (o *TriggerCheckServiceUnavailable) GetPayload() *models.APIErrorRemoteServerUnavailableExample {
+func (o *TriggerCheckServiceUnavailable) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *TriggerCheckServiceUnavailable) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRemoteServerUnavailableExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

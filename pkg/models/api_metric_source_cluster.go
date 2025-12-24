@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // APIMetricSourceCluster api metric source cluster
@@ -19,19 +21,84 @@ type APIMetricSourceCluster struct {
 
 	// cluster id
 	// Example: default
-	ClusterID string `json:"cluster_id,omitempty"`
+	// Required: true
+	ClusterID *string `json:"cluster_id"`
 
 	// cluster name
 	// Example: Graphite Remote Prod
-	ClusterName string `json:"cluster_name,omitempty"`
+	// Required: true
+	ClusterName *string `json:"cluster_name"`
+
+	// metrics ttl
+	// Example: 604800
+	// Required: true
+	MetricsTTL *int64 `json:"metrics_ttl"`
 
 	// trigger source
 	// Example: graphite_remote
-	TriggerSource string `json:"trigger_source,omitempty"`
+	// Required: true
+	TriggerSource *string `json:"trigger_source"`
 }
 
 // Validate validates this api metric source cluster
 func (m *APIMetricSourceCluster) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateClusterID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateClusterName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMetricsTTL(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTriggerSource(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *APIMetricSourceCluster) validateClusterID(formats strfmt.Registry) error {
+
+	if err := validate.Required("cluster_id", "body", m.ClusterID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *APIMetricSourceCluster) validateClusterName(formats strfmt.Registry) error {
+
+	if err := validate.Required("cluster_name", "body", m.ClusterName); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *APIMetricSourceCluster) validateMetricsTTL(formats strfmt.Registry) error {
+
+	if err := validate.Required("metrics_ttl", "body", m.MetricsTTL); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *APIMetricSourceCluster) validateTriggerSource(formats strfmt.Registry) error {
+
+	if err := validate.Required("trigger_source", "body", m.TriggerSource); err != nil {
+		return err
+	}
+
 	return nil
 }
 

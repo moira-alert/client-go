@@ -107,7 +107,7 @@ type SearchTriggersParams struct {
 
 	/* Tags.
 
-	   Tags
+	   Search tag
 	*/
 	Tags []string
 

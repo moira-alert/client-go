@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoTeamSettings dto team settings
@@ -20,14 +21,17 @@ import (
 type DtoTeamSettings struct {
 
 	// contacts
-	Contacts []*DtoTeamContact `json:"contacts"`
+	// Required: true
+	Contacts []*DtoTeamContactWithScore `json:"contacts"`
 
 	// subscriptions
+	// Required: true
 	Subscriptions []*MoiraSubscriptionData `json:"subscriptions"`
 
 	// team id
 	// Example: d5d98eb3-ee18-4f75-9364-244f67e23b54
-	TeamID string `json:"team_id,omitempty"`
+	// Required: true
+	TeamID *string `json:"team_id"`
 }
 
 // Validate validates this dto team settings
@@ -42,6 +46,10 @@ func (m *DtoTeamSettings) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateTeamID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -49,8 +57,9 @@ func (m *DtoTeamSettings) Validate(formats strfmt.Registry) error {
 }
 
 func (m *DtoTeamSettings) validateContacts(formats strfmt.Registry) error {
-	if swag.IsZero(m.Contacts) { // not required
-		return nil
+
+	if err := validate.Required("contacts", "body", m.Contacts); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Contacts); i++ {
@@ -75,8 +84,9 @@ func (m *DtoTeamSettings) validateContacts(formats strfmt.Registry) error {
 }
 
 func (m *DtoTeamSettings) validateSubscriptions(formats strfmt.Registry) error {
-	if swag.IsZero(m.Subscriptions) { // not required
-		return nil
+
+	if err := validate.Required("subscriptions", "body", m.Subscriptions); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Subscriptions); i++ {
@@ -95,6 +105,15 @@ func (m *DtoTeamSettings) validateSubscriptions(formats strfmt.Registry) error {
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *DtoTeamSettings) validateTeamID(formats strfmt.Registry) error {
+
+	if err := validate.Required("team_id", "body", m.TeamID); err != nil {
+		return err
 	}
 
 	return nil

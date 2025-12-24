@@ -128,7 +128,7 @@ GetUnusedTriggersUnprocessableEntity describes a response with status code 422, 
 Render error
 */
 type GetUnusedTriggersUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get unused triggers unprocessable entity response has a 2xx status code
@@ -171,13 +171,13 @@ func (o *GetUnusedTriggersUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /trigger/unused][%d] getUnusedTriggersUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetUnusedTriggersUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetUnusedTriggersUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetUnusedTriggersUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -198,7 +198,7 @@ GetUnusedTriggersInternalServerError describes a response with status code 500, 
 Internal server error
 */
 type GetUnusedTriggersInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get unused triggers internal server error response has a 2xx status code
@@ -241,13 +241,13 @@ func (o *GetUnusedTriggersInternalServerError) String() string {
 	return fmt.Sprintf("[GET /trigger/unused][%d] getUnusedTriggersInternalServerError %s", 500, payload)
 }
 
-func (o *GetUnusedTriggersInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetUnusedTriggersInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetUnusedTriggersInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

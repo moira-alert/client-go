@@ -122,7 +122,7 @@ GetWebConfigUnprocessableEntity describes a response with status code 422, with 
 Render error
 */
 type GetWebConfigUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get web config unprocessable entity response has a 2xx status code
@@ -165,13 +165,13 @@ func (o *GetWebConfigUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /config][%d] getWebConfigUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetWebConfigUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetWebConfigUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetWebConfigUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

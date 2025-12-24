@@ -21,13 +21,16 @@ import (
 type DtoPatternMetrics struct {
 
 	// metrics
-	Metrics map[string][]MoiraMetricValue `json:"metrics,omitempty"`
+	// Required: true
+	Metrics map[string][]MoiraMetricValue `json:"metrics"`
 
 	// pattern
-	Pattern string `json:"pattern,omitempty"`
+	// Required: true
+	Pattern *string `json:"pattern"`
 
 	// retention
-	Retention map[string]int64 `json:"retention,omitempty"`
+	// Required: true
+	Retention map[string]int64 `json:"retention"`
 }
 
 // Validate validates this dto pattern metrics
@@ -38,6 +41,14 @@ func (m *DtoPatternMetrics) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validatePattern(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateRetention(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -45,8 +56,9 @@ func (m *DtoPatternMetrics) Validate(formats strfmt.Registry) error {
 }
 
 func (m *DtoPatternMetrics) validateMetrics(formats strfmt.Registry) error {
-	if swag.IsZero(m.Metrics) { // not required
-		return nil
+
+	if err := validate.Required("metrics", "body", m.Metrics); err != nil {
+		return err
 	}
 
 	for k := range m.Metrics {
@@ -73,6 +85,24 @@ func (m *DtoPatternMetrics) validateMetrics(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *DtoPatternMetrics) validatePattern(formats strfmt.Registry) error {
+
+	if err := validate.Required("pattern", "body", m.Pattern); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoPatternMetrics) validateRetention(formats strfmt.Registry) error {
+
+	if err := validate.Required("retention", "body", m.Retention); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // ContextValidate validate this dto pattern metrics based on the context it is used
 func (m *DtoPatternMetrics) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -88,6 +118,10 @@ func (m *DtoPatternMetrics) ContextValidate(ctx context.Context, formats strfmt.
 }
 
 func (m *DtoPatternMetrics) contextValidateMetrics(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.Required("metrics", "body", m.Metrics); err != nil {
+		return err
+	}
 
 	for k := range m.Metrics {
 

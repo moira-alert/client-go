@@ -134,7 +134,7 @@ GetAllPatternsForbidden describes a response with status code 403, with default 
 Forbidden
 */
 type GetAllPatternsForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get all patterns forbidden response has a 2xx status code
@@ -177,13 +177,13 @@ func (o *GetAllPatternsForbidden) String() string {
 	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsForbidden %s", 403, payload)
 }
 
-func (o *GetAllPatternsForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *GetAllPatternsForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetAllPatternsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -204,7 +204,7 @@ GetAllPatternsUnprocessableEntity describes a response with status code 422, wit
 Render error
 */
 type GetAllPatternsUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get all patterns unprocessable entity response has a 2xx status code
@@ -247,13 +247,13 @@ func (o *GetAllPatternsUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetAllPatternsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetAllPatternsUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetAllPatternsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -274,7 +274,7 @@ GetAllPatternsInternalServerError describes a response with status code 500, wit
 Internal server error
 */
 type GetAllPatternsInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get all patterns internal server error response has a 2xx status code
@@ -317,13 +317,13 @@ func (o *GetAllPatternsInternalServerError) String() string {
 	return fmt.Sprintf("[GET /pattern][%d] getAllPatternsInternalServerError %s", 500, payload)
 }
 
-func (o *GetAllPatternsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetAllPatternsInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetAllPatternsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

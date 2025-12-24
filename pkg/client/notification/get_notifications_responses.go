@@ -134,7 +134,7 @@ GetNotificationsBadRequest describes a response with status code 400, with defau
 Bad request from client
 */
 type GetNotificationsBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get notifications bad request response has a 2xx status code
@@ -177,13 +177,13 @@ func (o *GetNotificationsBadRequest) String() string {
 	return fmt.Sprintf("[GET /notification][%d] getNotificationsBadRequest %s", 400, payload)
 }
 
-func (o *GetNotificationsBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *GetNotificationsBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetNotificationsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -204,7 +204,7 @@ GetNotificationsUnprocessableEntity describes a response with status code 422, w
 Render error
 */
 type GetNotificationsUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get notifications unprocessable entity response has a 2xx status code
@@ -247,13 +247,13 @@ func (o *GetNotificationsUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /notification][%d] getNotificationsUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetNotificationsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetNotificationsUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetNotificationsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -274,7 +274,7 @@ GetNotificationsInternalServerError describes a response with status code 500, w
 Internal server error
 */
 type GetNotificationsInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get notifications internal server error response has a 2xx status code
@@ -317,13 +317,13 @@ func (o *GetNotificationsInternalServerError) String() string {
 	return fmt.Sprintf("[GET /notification][%d] getNotificationsInternalServerError %s", 500, payload)
 }
 
-func (o *GetNotificationsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetNotificationsInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetNotificationsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

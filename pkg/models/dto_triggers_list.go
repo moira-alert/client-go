@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoTriggersList dto triggers list
@@ -20,6 +21,7 @@ import (
 type DtoTriggersList struct {
 
 	// list
+	// Required: true
 	List []*MoiraTriggerCheck `json:"list"`
 
 	// page
@@ -50,8 +52,9 @@ func (m *DtoTriggersList) Validate(formats strfmt.Registry) error {
 }
 
 func (m *DtoTriggersList) validateList(formats strfmt.Registry) error {
-	if swag.IsZero(m.List) { // not required
-		return nil
+
+	if err := validate.Required("list", "body", m.List); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.List); i++ {

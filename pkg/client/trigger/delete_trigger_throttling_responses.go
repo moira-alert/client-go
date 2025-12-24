@@ -114,7 +114,7 @@ DeleteTriggerThrottlingNotFound describes a response with status code 404, with 
 Resource not found
 */
 type DeleteTriggerThrottlingNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete trigger throttling not found response has a 2xx status code
@@ -157,13 +157,13 @@ func (o *DeleteTriggerThrottlingNotFound) String() string {
 	return fmt.Sprintf("[DELETE /trigger/{triggerID}/throttling][%d] deleteTriggerThrottlingNotFound %s", 404, payload)
 }
 
-func (o *DeleteTriggerThrottlingNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *DeleteTriggerThrottlingNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteTriggerThrottlingNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -184,7 +184,7 @@ DeleteTriggerThrottlingInternalServerError describes a response with status code
 Internal server error
 */
 type DeleteTriggerThrottlingInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this delete trigger throttling internal server error response has a 2xx status code
@@ -227,13 +227,13 @@ func (o *DeleteTriggerThrottlingInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /trigger/{triggerID}/throttling][%d] deleteTriggerThrottlingInternalServerError %s", 500, payload)
 }
 
-func (o *DeleteTriggerThrottlingInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *DeleteTriggerThrottlingInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *DeleteTriggerThrottlingInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

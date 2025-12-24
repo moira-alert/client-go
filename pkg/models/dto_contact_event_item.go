@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoContactEventItem dto contact event item
@@ -18,23 +20,98 @@ import (
 type DtoContactEventItem struct {
 
 	// metric
-	Metric string `json:"metric,omitempty"`
+	// Required: true
+	Metric *string `json:"metric"`
 
 	// old state
-	OldState string `json:"old_state,omitempty"`
+	// Required: true
+	OldState *string `json:"old_state"`
 
 	// state
-	State string `json:"state,omitempty"`
+	// Required: true
+	State *string `json:"state"`
 
 	// timestamp
-	Timestamp int64 `json:"timestamp,omitempty"`
+	// Required: true
+	Timestamp *int64 `json:"timestamp"`
 
 	// trigger id
-	TriggerID string `json:"trigger_id,omitempty"`
+	// Required: true
+	TriggerID *string `json:"trigger_id"`
 }
 
 // Validate validates this dto contact event item
 func (m *DtoContactEventItem) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateMetric(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOldState(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateState(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTimestamp(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTriggerID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DtoContactEventItem) validateMetric(formats strfmt.Registry) error {
+
+	if err := validate.Required("metric", "body", m.Metric); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoContactEventItem) validateOldState(formats strfmt.Registry) error {
+
+	if err := validate.Required("old_state", "body", m.OldState); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoContactEventItem) validateState(formats strfmt.Registry) error {
+
+	if err := validate.Required("state", "body", m.State); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoContactEventItem) validateTimestamp(formats strfmt.Registry) error {
+
+	if err := validate.Required("timestamp", "body", m.Timestamp); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoContactEventItem) validateTriggerID(formats strfmt.Registry) error {
+
+	if err := validate.Required("trigger_id", "body", m.TriggerID); err != nil {
+		return err
+	}
+
 	return nil
 }
 

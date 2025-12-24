@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // APIWebContact api web contact
@@ -23,7 +25,8 @@ type APIWebContact struct {
 
 	// label
 	// Example: Webhook
-	Label string `json:"label,omitempty"`
+	// Required: true
+	Label *string `json:"label"`
 
 	// logo uri
 	// Example: discord-logo.svg
@@ -35,7 +38,8 @@ type APIWebContact struct {
 
 	// type
 	// Example: webhook
-	Type string `json:"type,omitempty"`
+	// Required: true
+	Type *string `json:"type"`
 
 	// validation
 	// Example: ^(http|https):\\/\\/.*(moira.ru)(:[0-9]{2,5})?\\/
@@ -44,6 +48,37 @@ type APIWebContact struct {
 
 // Validate validates this api web contact
 func (m *APIWebContact) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLabel(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *APIWebContact) validateLabel(formats strfmt.Registry) error {
+
+	if err := validate.Required("label", "body", m.Label); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *APIWebContact) validateType(formats strfmt.Registry) error {
+
+	if err := validate.Required("type", "body", m.Type); err != nil {
+		return err
+	}
+
 	return nil
 }
 

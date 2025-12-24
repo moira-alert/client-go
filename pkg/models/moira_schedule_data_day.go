@@ -22,7 +22,8 @@ type MoiraScheduleDataDay struct {
 
 	// enabled
 	// Example: true
-	Enabled bool `json:"enabled,omitempty"`
+	// Required: true
+	Enabled *bool `json:"enabled"`
 
 	// name
 	// Example: Mon
@@ -34,6 +35,10 @@ type MoiraScheduleDataDay struct {
 func (m *MoiraScheduleDataDay) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateEnabled(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateName(formats); err != nil {
 		res = append(res, err)
 	}
@@ -41,6 +46,15 @@ func (m *MoiraScheduleDataDay) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *MoiraScheduleDataDay) validateEnabled(formats strfmt.Registry) error {
+
+	if err := validate.Required("enabled", "body", m.Enabled); err != nil {
+		return err
+	}
+
 	return nil
 }
 

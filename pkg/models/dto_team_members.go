@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoTeamMembers dto team members
@@ -19,11 +21,30 @@ type DtoTeamMembers struct {
 
 	// usernames
 	// Example: ["anonymous"]
+	// Required: true
 	Usernames []string `json:"usernames"`
 }
 
 // Validate validates this dto team members
 func (m *DtoTeamMembers) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateUsernames(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DtoTeamMembers) validateUsernames(formats strfmt.Registry) error {
+
+	if err := validate.Required("usernames", "body", m.Usernames); err != nil {
+		return err
+	}
+
 	return nil
 }
 

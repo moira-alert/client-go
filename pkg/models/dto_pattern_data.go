@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoPatternData dto pattern data
@@ -21,19 +22,30 @@ type DtoPatternData struct {
 
 	// metrics
 	// Example: ["DevOps.my_server.hdd.freespace_mbytes"," DevOps.my_server.hdd.freespace_mbytes"," DevOps.my_server.db.*"]
+	// Required: true
 	Metrics []string `json:"metrics"`
 
 	// pattern
 	// Example: Devops.my_server.*
-	Pattern string `json:"pattern,omitempty"`
+	// Required: true
+	Pattern *string `json:"pattern"`
 
 	// triggers
+	// Required: true
 	Triggers []*DtoTriggerModel `json:"triggers"`
 }
 
 // Validate validates this dto pattern data
 func (m *DtoPatternData) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateMetrics(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePattern(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateTriggers(formats); err != nil {
 		res = append(res, err)
@@ -45,9 +57,28 @@ func (m *DtoPatternData) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *DtoPatternData) validateMetrics(formats strfmt.Registry) error {
+
+	if err := validate.Required("metrics", "body", m.Metrics); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoPatternData) validatePattern(formats strfmt.Registry) error {
+
+	if err := validate.Required("pattern", "body", m.Pattern); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *DtoPatternData) validateTriggers(formats strfmt.Registry) error {
-	if swag.IsZero(m.Triggers) { // not required
-		return nil
+
+	if err := validate.Required("triggers", "body", m.Triggers); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Triggers); i++ {

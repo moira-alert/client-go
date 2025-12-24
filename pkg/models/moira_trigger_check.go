@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // MoiraTriggerCheck moira trigger check
@@ -20,17 +21,20 @@ type MoiraTriggerCheck struct {
 
 	// alone metrics
 	// Example: {"t1":true}
-	AloneMetrics map[string]bool `json:"alone_metrics,omitempty"`
+	// Required: true
+	AloneMetrics map[string]bool `json:"alone_metrics"`
 
 	// cluster id
 	// Example: default
 	ClusterID string `json:"cluster_id,omitempty"`
 
 	// created at
-	CreatedAt *int64 `json:"created_at,omitempty"`
+	// Required: true
+	CreatedAt *int64 `json:"created_at"`
 
 	// created by
-	CreatedBy string `json:"created_by,omitempty"`
+	// Required: true
+	CreatedBy *string `json:"created_by"`
 
 	// desc
 	// Example: check the size of /var/log
@@ -38,31 +42,38 @@ type MoiraTriggerCheck struct {
 
 	// error value
 	// Example: 1000
-	ErrorValue *float64 `json:"error_value,omitempty"`
+	// Required: true
+	ErrorValue *float64 `json:"error_value"`
 
 	// expression
 	Expression *string `json:"expression,omitempty"`
 
 	// highlights
-	Highlights map[string]string `json:"highlights,omitempty"`
+	// Required: true
+	Highlights map[string]string `json:"highlights"`
 
 	// id
 	// Example: 292516ed-4924-4154-a62c-ebe312431fce
-	ID string `json:"id,omitempty"`
+	// Required: true
+	ID *string `json:"id"`
 
 	// last check
-	LastCheck *MoiraCheckData `json:"last_check,omitempty"`
+	// Required: true
+	LastCheck *MoiraCheckData `json:"last_check"`
 
 	// mute new metrics
 	// Example: false
-	MuteNewMetrics bool `json:"mute_new_metrics,omitempty"`
+	// Required: true
+	MuteNewMetrics *bool `json:"mute_new_metrics"`
 
 	// name
 	// Example: Not enough disk space left
-	Name string `json:"name,omitempty"`
+	// Required: true
+	Name *string `json:"name"`
 
 	// patterns
 	// Example: [""]
+	// Required: true
 	Patterns []string `json:"patterns"`
 
 	// python expression
@@ -75,15 +86,18 @@ type MoiraTriggerCheck struct {
 
 	// tags
 	// Example: ["server","disk"]
+	// Required: true
 	Tags []string `json:"tags"`
 
 	// targets
 	// Example: ["devOps.my_server.hdd.freespace_mbytes"]
+	// Required: true
 	Targets []string `json:"targets"`
 
 	// throttling
 	// Example: 0
-	Throttling int64 `json:"throttling,omitempty"`
+	// Required: true
+	Throttling *int64 `json:"throttling"`
 
 	// trigger source
 	// Example: graphite_local
@@ -91,7 +105,8 @@ type MoiraTriggerCheck struct {
 
 	// trigger type
 	// Example: rising
-	TriggerType string `json:"trigger_type,omitempty"`
+	// Required: true
+	TriggerType *string `json:"trigger_type"`
 
 	// ttl
 	// Example: 600
@@ -102,25 +117,92 @@ type MoiraTriggerCheck struct {
 	TTLState *string `json:"ttl_state,omitempty"`
 
 	// updated at
-	UpdatedAt *int64 `json:"updated_at,omitempty"`
+	// Required: true
+	UpdatedAt *int64 `json:"updated_at"`
 
 	// updated by
-	UpdatedBy string `json:"updated_by,omitempty"`
+	// Required: true
+	UpdatedBy *string `json:"updated_by"`
 
 	// warn value
 	// Example: 5000
-	WarnValue *float64 `json:"warn_value,omitempty"`
+	// Required: true
+	WarnValue *float64 `json:"warn_value"`
 }
 
 // Validate validates this moira trigger check
 func (m *MoiraTriggerCheck) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateAloneMetrics(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCreatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateCreatedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateErrorValue(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHighlights(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLastCheck(formats); err != nil {
 		res = append(res, err)
 	}
 
+	if err := m.validateMuteNewMetrics(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePatterns(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSched(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTags(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTargets(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateThrottling(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTriggerType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUpdatedAt(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUpdatedBy(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWarnValue(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -130,9 +212,64 @@ func (m *MoiraTriggerCheck) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *MoiraTriggerCheck) validateAloneMetrics(formats strfmt.Registry) error {
+
+	if err := validate.Required("alone_metrics", "body", m.AloneMetrics); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerCheck) validateCreatedAt(formats strfmt.Registry) error {
+
+	if err := validate.Required("created_at", "body", m.CreatedAt); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerCheck) validateCreatedBy(formats strfmt.Registry) error {
+
+	if err := validate.Required("created_by", "body", m.CreatedBy); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerCheck) validateErrorValue(formats strfmt.Registry) error {
+
+	if err := validate.Required("error_value", "body", m.ErrorValue); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerCheck) validateHighlights(formats strfmt.Registry) error {
+
+	if err := validate.Required("highlights", "body", m.Highlights); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerCheck) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *MoiraTriggerCheck) validateLastCheck(formats strfmt.Registry) error {
-	if swag.IsZero(m.LastCheck) { // not required
-		return nil
+
+	if err := validate.Required("last_check", "body", m.LastCheck); err != nil {
+		return err
 	}
 
 	if m.LastCheck != nil {
@@ -149,9 +286,99 @@ func (m *MoiraTriggerCheck) validateLastCheck(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *MoiraTriggerCheck) validateMuteNewMetrics(formats strfmt.Registry) error {
+
+	if err := validate.Required("mute_new_metrics", "body", m.MuteNewMetrics); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerCheck) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerCheck) validatePatterns(formats strfmt.Registry) error {
+
+	if err := validate.Required("patterns", "body", m.Patterns); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *MoiraTriggerCheck) validateSched(formats strfmt.Registry) error {
 	if swag.IsZero(m.Sched) { // not required
 		return nil
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerCheck) validateTags(formats strfmt.Registry) error {
+
+	if err := validate.Required("tags", "body", m.Tags); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerCheck) validateTargets(formats strfmt.Registry) error {
+
+	if err := validate.Required("targets", "body", m.Targets); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerCheck) validateThrottling(formats strfmt.Registry) error {
+
+	if err := validate.Required("throttling", "body", m.Throttling); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerCheck) validateTriggerType(formats strfmt.Registry) error {
+
+	if err := validate.Required("trigger_type", "body", m.TriggerType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerCheck) validateUpdatedAt(formats strfmt.Registry) error {
+
+	if err := validate.Required("updated_at", "body", m.UpdatedAt); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerCheck) validateUpdatedBy(formats strfmt.Registry) error {
+
+	if err := validate.Required("updated_by", "body", m.UpdatedBy); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerCheck) validateWarnValue(formats strfmt.Registry) error {
+
+	if err := validate.Required("warn_value", "body", m.WarnValue); err != nil {
+		return err
 	}
 
 	return nil
@@ -178,10 +405,6 @@ func (m *MoiraTriggerCheck) ContextValidate(ctx context.Context, formats strfmt.
 func (m *MoiraTriggerCheck) contextValidateLastCheck(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.LastCheck != nil {
-
-		if swag.IsZero(m.LastCheck) { // not required
-			return nil
-		}
 
 		if err := m.LastCheck.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {

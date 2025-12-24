@@ -140,7 +140,7 @@ GetTeamUsersForbidden describes a response with status code 403, with default he
 Forbidden
 */
 type GetTeamUsersForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get team users forbidden response has a 2xx status code
@@ -183,13 +183,13 @@ func (o *GetTeamUsersForbidden) String() string {
 	return fmt.Sprintf("[GET /teams/{teamID}/users][%d] getTeamUsersForbidden %s", 403, payload)
 }
 
-func (o *GetTeamUsersForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *GetTeamUsersForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTeamUsersForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -210,7 +210,7 @@ GetTeamUsersNotFound describes a response with status code 404, with default hea
 Resource not found
 */
 type GetTeamUsersNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get team users not found response has a 2xx status code
@@ -253,13 +253,13 @@ func (o *GetTeamUsersNotFound) String() string {
 	return fmt.Sprintf("[GET /teams/{teamID}/users][%d] getTeamUsersNotFound %s", 404, payload)
 }
 
-func (o *GetTeamUsersNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *GetTeamUsersNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTeamUsersNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -280,7 +280,7 @@ GetTeamUsersUnprocessableEntity describes a response with status code 422, with 
 Render error
 */
 type GetTeamUsersUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get team users unprocessable entity response has a 2xx status code
@@ -323,13 +323,13 @@ func (o *GetTeamUsersUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /teams/{teamID}/users][%d] getTeamUsersUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetTeamUsersUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetTeamUsersUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTeamUsersUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -350,7 +350,7 @@ GetTeamUsersInternalServerError describes a response with status code 500, with 
 Internal server error
 */
 type GetTeamUsersInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get team users internal server error response has a 2xx status code
@@ -393,13 +393,13 @@ func (o *GetTeamUsersInternalServerError) String() string {
 	return fmt.Sprintf("[GET /teams/{teamID}/users][%d] getTeamUsersInternalServerError %s", 500, payload)
 }
 
-func (o *GetTeamUsersInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetTeamUsersInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetTeamUsersInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

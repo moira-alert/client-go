@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // MoiraPlottingData moira plotting data
@@ -19,15 +21,48 @@ type MoiraPlottingData struct {
 
 	// enabled
 	// Example: true
-	Enabled bool `json:"enabled,omitempty"`
+	// Required: true
+	Enabled *bool `json:"enabled"`
 
 	// theme
 	// Example: dark
-	Theme string `json:"theme,omitempty"`
+	// Required: true
+	Theme *string `json:"theme"`
 }
 
 // Validate validates this moira plotting data
 func (m *MoiraPlottingData) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateEnabled(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTheme(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *MoiraPlottingData) validateEnabled(formats strfmt.Registry) error {
+
+	if err := validate.Required("enabled", "body", m.Enabled); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraPlottingData) validateTheme(formats strfmt.Registry) error {
+
+	if err := validate.Required("theme", "body", m.Theme); err != nil {
+		return err
+	}
+
 	return nil
 }
 

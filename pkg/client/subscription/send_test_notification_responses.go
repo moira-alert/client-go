@@ -120,7 +120,7 @@ SendTestNotificationForbidden describes a response with status code 403, with de
 Forbidden
 */
 type SendTestNotificationForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this send test notification forbidden response has a 2xx status code
@@ -163,13 +163,13 @@ func (o *SendTestNotificationForbidden) String() string {
 	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationForbidden %s", 403, payload)
 }
 
-func (o *SendTestNotificationForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *SendTestNotificationForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *SendTestNotificationForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -190,7 +190,7 @@ SendTestNotificationNotFound describes a response with status code 404, with def
 Resource not found
 */
 type SendTestNotificationNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this send test notification not found response has a 2xx status code
@@ -233,13 +233,13 @@ func (o *SendTestNotificationNotFound) String() string {
 	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationNotFound %s", 404, payload)
 }
 
-func (o *SendTestNotificationNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *SendTestNotificationNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *SendTestNotificationNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -260,7 +260,7 @@ SendTestNotificationInternalServerError describes a response with status code 50
 Internal server error
 */
 type SendTestNotificationInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this send test notification internal server error response has a 2xx status code
@@ -303,13 +303,13 @@ func (o *SendTestNotificationInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /subscription/{subscriptionID}/test][%d] sendTestNotificationInternalServerError %s", 500, payload)
 }
 
-func (o *SendTestNotificationInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *SendTestNotificationInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *SendTestNotificationInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

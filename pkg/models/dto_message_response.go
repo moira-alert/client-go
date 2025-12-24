@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoMessageResponse dto message response
@@ -19,11 +21,30 @@ type DtoMessageResponse struct {
 
 	// message
 	// Example: tag deleted
-	Message string `json:"message,omitempty"`
+	// Required: true
+	Message *string `json:"message"`
 }
 
 // Validate validates this dto message response
 func (m *DtoMessageResponse) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateMessage(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DtoMessageResponse) validateMessage(formats strfmt.Registry) error {
+
+	if err := validate.Required("message", "body", m.Message); err != nil {
+		return err
+	}
+
 	return nil
 }
 

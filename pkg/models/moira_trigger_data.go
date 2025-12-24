@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // MoiraTriggerData moira trigger data
@@ -19,6 +21,7 @@ type MoiraTriggerData struct {
 
 	// notifier trigger tags
 	// Example: ["server","disk"]
+	// Required: true
 	NotifierTriggerTags []string `json:"__notifier_trigger_tags"`
 
 	// cluster id
@@ -27,26 +30,32 @@ type MoiraTriggerData struct {
 
 	// desc
 	// Example: check the size of /var/log
-	Desc string `json:"desc,omitempty"`
+	// Required: true
+	Desc *string `json:"desc"`
 
 	// error value
 	// Example: 1000
-	ErrorValue float64 `json:"error_value,omitempty"`
+	// Required: true
+	ErrorValue *float64 `json:"error_value"`
 
 	// id
 	// Example: 292516ed-4924-4154-a62c-ebe312431fce
-	ID string `json:"id,omitempty"`
+	// Required: true
+	ID *string `json:"id"`
 
 	// is remote
 	// Example: false
-	IsRemote bool `json:"is_remote,omitempty"`
+	// Required: true
+	IsRemote *bool `json:"is_remote"`
 
 	// name
 	// Example: Not enough disk space left
-	Name string `json:"name,omitempty"`
+	// Required: true
+	Name *string `json:"name"`
 
 	// targets
 	// Example: ["devOps.my_server.hdd.freespace_mbytes"]
+	// Required: true
 	Targets []string `json:"targets"`
 
 	// trigger source
@@ -55,11 +64,121 @@ type MoiraTriggerData struct {
 
 	// warn value
 	// Example: 5000
-	WarnValue float64 `json:"warn_value,omitempty"`
+	// Required: true
+	WarnValue *float64 `json:"warn_value"`
 }
 
 // Validate validates this moira trigger data
 func (m *MoiraTriggerData) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateNotifierTriggerTags(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDesc(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateErrorValue(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIsRemote(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTargets(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWarnValue(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *MoiraTriggerData) validateNotifierTriggerTags(formats strfmt.Registry) error {
+
+	if err := validate.Required("__notifier_trigger_tags", "body", m.NotifierTriggerTags); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerData) validateDesc(formats strfmt.Registry) error {
+
+	if err := validate.Required("desc", "body", m.Desc); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerData) validateErrorValue(formats strfmt.Registry) error {
+
+	if err := validate.Required("error_value", "body", m.ErrorValue); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerData) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerData) validateIsRemote(formats strfmt.Registry) error {
+
+	if err := validate.Required("is_remote", "body", m.IsRemote); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerData) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerData) validateTargets(formats strfmt.Registry) error {
+
+	if err := validate.Required("targets", "body", m.Targets); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraTriggerData) validateWarnValue(formats strfmt.Registry) error {
+
+	if err := validate.Required("warn_value", "body", m.WarnValue); err != nil {
+		return err
+	}
+
 	return nil
 }
 

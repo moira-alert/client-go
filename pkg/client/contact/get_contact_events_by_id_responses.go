@@ -146,7 +146,7 @@ GetContactEventsByIDBadRequest describes a response with status code 400, with d
 Bad request from client
 */
 type GetContactEventsByIDBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get contact events by Id bad request response has a 2xx status code
@@ -189,13 +189,13 @@ func (o *GetContactEventsByIDBadRequest) String() string {
 	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdBadRequest %s", 400, payload)
 }
 
-func (o *GetContactEventsByIDBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *GetContactEventsByIDBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetContactEventsByIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -216,7 +216,7 @@ GetContactEventsByIDForbidden describes a response with status code 403, with de
 Forbidden
 */
 type GetContactEventsByIDForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get contact events by Id forbidden response has a 2xx status code
@@ -259,13 +259,13 @@ func (o *GetContactEventsByIDForbidden) String() string {
 	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdForbidden %s", 403, payload)
 }
 
-func (o *GetContactEventsByIDForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *GetContactEventsByIDForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetContactEventsByIDForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -286,7 +286,7 @@ GetContactEventsByIDNotFound describes a response with status code 404, with def
 Resource not found
 */
 type GetContactEventsByIDNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get contact events by Id not found response has a 2xx status code
@@ -329,13 +329,13 @@ func (o *GetContactEventsByIDNotFound) String() string {
 	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdNotFound %s", 404, payload)
 }
 
-func (o *GetContactEventsByIDNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *GetContactEventsByIDNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetContactEventsByIDNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -356,7 +356,7 @@ GetContactEventsByIDUnprocessableEntity describes a response with status code 42
 Render error
 */
 type GetContactEventsByIDUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get contact events by Id unprocessable entity response has a 2xx status code
@@ -399,13 +399,13 @@ func (o *GetContactEventsByIDUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetContactEventsByIDUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetContactEventsByIDUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetContactEventsByIDUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -426,7 +426,7 @@ GetContactEventsByIDInternalServerError describes a response with status code 50
 Internal server error
 */
 type GetContactEventsByIDInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get contact events by Id internal server error response has a 2xx status code
@@ -469,13 +469,13 @@ func (o *GetContactEventsByIDInternalServerError) String() string {
 	return fmt.Sprintf("[GET /contact/{contactID}/events][%d] getContactEventsByIdInternalServerError %s", 500, payload)
 }
 
-func (o *GetContactEventsByIDInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetContactEventsByIDInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetContactEventsByIDInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

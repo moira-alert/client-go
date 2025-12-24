@@ -128,7 +128,7 @@ GetUserSettingsUnprocessableEntity describes a response with status code 422, wi
 Render error
 */
 type GetUserSettingsUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get user settings unprocessable entity response has a 2xx status code
@@ -171,13 +171,13 @@ func (o *GetUserSettingsUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /user/settings][%d] getUserSettingsUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetUserSettingsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetUserSettingsUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetUserSettingsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -198,7 +198,7 @@ GetUserSettingsInternalServerError describes a response with status code 500, wi
 Internal server error
 */
 type GetUserSettingsInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get user settings internal server error response has a 2xx status code
@@ -241,13 +241,13 @@ func (o *GetUserSettingsInternalServerError) String() string {
 	return fmt.Sprintf("[GET /user/settings][%d] getUserSettingsInternalServerError %s", 500, payload)
 }
 
-func (o *GetUserSettingsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetUserSettingsInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetUserSettingsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

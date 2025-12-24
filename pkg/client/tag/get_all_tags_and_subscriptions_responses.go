@@ -128,7 +128,7 @@ GetAllTagsAndSubscriptionsUnprocessableEntity describes a response with status c
 Render error
 */
 type GetAllTagsAndSubscriptionsUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get all tags and subscriptions unprocessable entity response has a 2xx status code
@@ -171,13 +171,13 @@ func (o *GetAllTagsAndSubscriptionsUnprocessableEntity) String() string {
 	return fmt.Sprintf("[GET /tag/stats][%d] getAllTagsAndSubscriptionsUnprocessableEntity %s", 422, payload)
 }
 
-func (o *GetAllTagsAndSubscriptionsUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *GetAllTagsAndSubscriptionsUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetAllTagsAndSubscriptionsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -198,7 +198,7 @@ GetAllTagsAndSubscriptionsInternalServerError describes a response with status c
 Internal server error
 */
 type GetAllTagsAndSubscriptionsInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this get all tags and subscriptions internal server error response has a 2xx status code
@@ -241,13 +241,13 @@ func (o *GetAllTagsAndSubscriptionsInternalServerError) String() string {
 	return fmt.Sprintf("[GET /tag/stats][%d] getAllTagsAndSubscriptionsInternalServerError %s", 500, payload)
 }
 
-func (o *GetAllTagsAndSubscriptionsInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *GetAllTagsAndSubscriptionsInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *GetAllTagsAndSubscriptionsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

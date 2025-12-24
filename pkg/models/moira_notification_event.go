@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // MoiraNotificationEvent moira notification event
@@ -22,31 +23,36 @@ type MoiraNotificationEvent struct {
 	ContactID string `json:"contact_id,omitempty"`
 
 	// event message
+	// Required: true
 	EventMessage struct {
 		MoiraEventInfo
-	} `json:"event_message,omitempty"`
+	} `json:"event_message"`
 
 	// metric
 	// Example: carbon.agents.*.metricsReceived
-	Metric string `json:"metric,omitempty"`
+	// Required: true
+	Metric *string `json:"metric"`
 
 	// msg
 	Msg *string `json:"msg,omitempty"`
 
 	// old state
 	// Example: ERROR
-	OldState string `json:"old_state,omitempty"`
+	// Required: true
+	OldState *string `json:"old_state"`
 
 	// state
 	// Example: OK
-	State string `json:"state,omitempty"`
+	// Required: true
+	State *string `json:"state"`
 
 	// sub id
 	SubID *string `json:"sub_id,omitempty"`
 
 	// timestamp
 	// Example: 1590741878
-	Timestamp int64 `json:"timestamp,omitempty"`
+	// Required: true
+	Timestamp *int64 `json:"timestamp"`
 
 	// trigger event
 	// Example: true
@@ -54,7 +60,8 @@ type MoiraNotificationEvent struct {
 
 	// trigger id
 	// Example: 5ff37996-8927-4cab-8987-970e80d8e0a8
-	TriggerID string `json:"trigger_id,omitempty"`
+	// Required: true
+	TriggerID *string `json:"trigger_id"`
 
 	// value
 	// Example: 70
@@ -72,6 +79,26 @@ func (m *MoiraNotificationEvent) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateMetric(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOldState(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateState(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTimestamp(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTriggerID(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -79,8 +106,50 @@ func (m *MoiraNotificationEvent) Validate(formats strfmt.Registry) error {
 }
 
 func (m *MoiraNotificationEvent) validateEventMessage(formats strfmt.Registry) error {
-	if swag.IsZero(m.EventMessage) { // not required
-		return nil
+
+	return nil
+}
+
+func (m *MoiraNotificationEvent) validateMetric(formats strfmt.Registry) error {
+
+	if err := validate.Required("metric", "body", m.Metric); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraNotificationEvent) validateOldState(formats strfmt.Registry) error {
+
+	if err := validate.Required("old_state", "body", m.OldState); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraNotificationEvent) validateState(formats strfmt.Registry) error {
+
+	if err := validate.Required("state", "body", m.State); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraNotificationEvent) validateTimestamp(formats strfmt.Registry) error {
+
+	if err := validate.Required("timestamp", "body", m.Timestamp); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MoiraNotificationEvent) validateTriggerID(formats strfmt.Registry) error {
+
+	if err := validate.Required("trigger_id", "body", m.TriggerID); err != nil {
+		return err
 	}
 
 	return nil

@@ -146,7 +146,7 @@ CreateNewTeamSubscriptionBadRequest describes a response with status code 400, w
 Bad request from client
 */
 type CreateNewTeamSubscriptionBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create new team subscription bad request response has a 2xx status code
@@ -189,13 +189,13 @@ func (o *CreateNewTeamSubscriptionBadRequest) String() string {
 	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionBadRequest %s", 400, payload)
 }
 
-func (o *CreateNewTeamSubscriptionBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *CreateNewTeamSubscriptionBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateNewTeamSubscriptionBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -216,7 +216,7 @@ CreateNewTeamSubscriptionForbidden describes a response with status code 403, wi
 Forbidden
 */
 type CreateNewTeamSubscriptionForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create new team subscription forbidden response has a 2xx status code
@@ -259,13 +259,13 @@ func (o *CreateNewTeamSubscriptionForbidden) String() string {
 	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionForbidden %s", 403, payload)
 }
 
-func (o *CreateNewTeamSubscriptionForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *CreateNewTeamSubscriptionForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateNewTeamSubscriptionForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -286,7 +286,7 @@ CreateNewTeamSubscriptionNotFound describes a response with status code 404, wit
 Resource not found
 */
 type CreateNewTeamSubscriptionNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create new team subscription not found response has a 2xx status code
@@ -329,13 +329,13 @@ func (o *CreateNewTeamSubscriptionNotFound) String() string {
 	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionNotFound %s", 404, payload)
 }
 
-func (o *CreateNewTeamSubscriptionNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *CreateNewTeamSubscriptionNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateNewTeamSubscriptionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -356,7 +356,7 @@ CreateNewTeamSubscriptionUnprocessableEntity describes a response with status co
 Render error
 */
 type CreateNewTeamSubscriptionUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create new team subscription unprocessable entity response has a 2xx status code
@@ -399,13 +399,13 @@ func (o *CreateNewTeamSubscriptionUnprocessableEntity) String() string {
 	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionUnprocessableEntity %s", 422, payload)
 }
 
-func (o *CreateNewTeamSubscriptionUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *CreateNewTeamSubscriptionUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateNewTeamSubscriptionUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -426,7 +426,7 @@ CreateNewTeamSubscriptionInternalServerError describes a response with status co
 Internal server error
 */
 type CreateNewTeamSubscriptionInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create new team subscription internal server error response has a 2xx status code
@@ -469,13 +469,13 @@ func (o *CreateNewTeamSubscriptionInternalServerError) String() string {
 	return fmt.Sprintf("[POST /teams/{teamID}/subscriptions][%d] createNewTeamSubscriptionInternalServerError %s", 500, payload)
 }
 
-func (o *CreateNewTeamSubscriptionInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *CreateNewTeamSubscriptionInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateNewTeamSubscriptionInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

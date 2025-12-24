@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoSubscription dto subscription
@@ -20,19 +21,23 @@ type DtoSubscription struct {
 
 	// any tags
 	// Example: false
-	AnyTags bool `json:"any_tags,omitempty"`
+	// Required: true
+	AnyTags *bool `json:"any_tags"`
 
 	// contacts
 	// Example: ["acd2db98-1659-4a2f-b227-52d71f6e3ba1"]
+	// Required: true
 	Contacts []string `json:"contacts"`
 
 	// enabled
 	// Example: true
-	Enabled bool `json:"enabled,omitempty"`
+	// Required: true
+	Enabled *bool `json:"enabled"`
 
 	// id
 	// Example: 292516ed-4924-4154-a62c-ebe312431fce
-	ID string `json:"id,omitempty"`
+	// Required: true
+	ID *string `json:"id"`
 
 	// ignore recoverings
 	// Example: false
@@ -43,30 +48,52 @@ type DtoSubscription struct {
 	IgnoreWarnings bool `json:"ignore_warnings,omitempty"`
 
 	// plotting
-	Plotting *MoiraPlottingData `json:"plotting,omitempty"`
+	// Required: true
+	Plotting *MoiraPlottingData `json:"plotting"`
 
 	// sched
-	Sched *MoiraScheduleData `json:"sched,omitempty"`
+	// Required: true
+	Sched *MoiraScheduleData `json:"sched"`
 
 	// tags
 	// Example: ["server","cpu"]
+	// Required: true
 	Tags []string `json:"tags"`
 
 	// team id
 	// Example: 324516ed-4924-4154-a62c-eb124234fce
-	TeamID string `json:"team_id,omitempty"`
+	// Required: true
+	TeamID *string `json:"team_id"`
 
 	// throttling
 	// Example: false
-	Throttling bool `json:"throttling,omitempty"`
+	// Required: true
+	Throttling *bool `json:"throttling"`
 
 	// user
-	User string `json:"user,omitempty"`
+	// Required: true
+	User *string `json:"user"`
 }
 
 // Validate validates this dto subscription
 func (m *DtoSubscription) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateAnyTags(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateContacts(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateEnabled(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validatePlotting(formats); err != nil {
 		res = append(res, err)
@@ -76,15 +103,68 @@ func (m *DtoSubscription) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateTags(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTeamID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateThrottling(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUser(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
 	return nil
 }
 
+func (m *DtoSubscription) validateAnyTags(formats strfmt.Registry) error {
+
+	if err := validate.Required("any_tags", "body", m.AnyTags); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoSubscription) validateContacts(formats strfmt.Registry) error {
+
+	if err := validate.Required("contacts", "body", m.Contacts); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoSubscription) validateEnabled(formats strfmt.Registry) error {
+
+	if err := validate.Required("enabled", "body", m.Enabled); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoSubscription) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *DtoSubscription) validatePlotting(formats strfmt.Registry) error {
-	if swag.IsZero(m.Plotting) { // not required
-		return nil
+
+	if err := validate.Required("plotting", "body", m.Plotting); err != nil {
+		return err
 	}
 
 	if m.Plotting != nil {
@@ -102,8 +182,9 @@ func (m *DtoSubscription) validatePlotting(formats strfmt.Registry) error {
 }
 
 func (m *DtoSubscription) validateSched(formats strfmt.Registry) error {
-	if swag.IsZero(m.Sched) { // not required
-		return nil
+
+	if err := validate.Required("sched", "body", m.Sched); err != nil {
+		return err
 	}
 
 	if m.Sched != nil {
@@ -115,6 +196,42 @@ func (m *DtoSubscription) validateSched(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *DtoSubscription) validateTags(formats strfmt.Registry) error {
+
+	if err := validate.Required("tags", "body", m.Tags); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoSubscription) validateTeamID(formats strfmt.Registry) error {
+
+	if err := validate.Required("team_id", "body", m.TeamID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoSubscription) validateThrottling(formats strfmt.Registry) error {
+
+	if err := validate.Required("throttling", "body", m.Throttling); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoSubscription) validateUser(formats strfmt.Registry) error {
+
+	if err := validate.Required("user", "body", m.User); err != nil {
+		return err
 	}
 
 	return nil
@@ -142,10 +259,6 @@ func (m *DtoSubscription) contextValidatePlotting(ctx context.Context, formats s
 
 	if m.Plotting != nil {
 
-		if swag.IsZero(m.Plotting) { // not required
-			return nil
-		}
-
 		if err := m.Plotting.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("plotting")
@@ -162,10 +275,6 @@ func (m *DtoSubscription) contextValidatePlotting(ctx context.Context, formats s
 func (m *DtoSubscription) contextValidateSched(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Sched != nil {
-
-		if swag.IsZero(m.Sched) { // not required
-			return nil
-		}
 
 		if err := m.Sched.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {

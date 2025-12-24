@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoTriggerMaintenance dto trigger maintenance
@@ -18,7 +20,8 @@ import (
 type DtoTriggerMaintenance struct {
 
 	// metrics
-	Metrics map[string]int64 `json:"metrics,omitempty"`
+	// Required: true
+	Metrics DtoMetricsMaintenance `json:"metrics"`
 
 	// trigger
 	// Example: 1594225165
@@ -27,11 +30,63 @@ type DtoTriggerMaintenance struct {
 
 // Validate validates this dto trigger maintenance
 func (m *DtoTriggerMaintenance) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateMetrics(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this dto trigger maintenance based on context it is used
+func (m *DtoTriggerMaintenance) validateMetrics(formats strfmt.Registry) error {
+
+	if err := validate.Required("metrics", "body", m.Metrics); err != nil {
+		return err
+	}
+
+	if m.Metrics != nil {
+		if err := m.Metrics.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metrics")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metrics")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this dto trigger maintenance based on the context it is used
 func (m *DtoTriggerMaintenance) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateMetrics(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DtoTriggerMaintenance) contextValidateMetrics(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.Metrics.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("metrics")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("metrics")
+		}
+		return err
+	}
+
 	return nil
 }
 

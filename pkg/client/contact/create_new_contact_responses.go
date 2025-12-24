@@ -134,7 +134,7 @@ CreateNewContactBadRequest describes a response with status code 400, with defau
 Bad request from client
 */
 type CreateNewContactBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create new contact bad request response has a 2xx status code
@@ -177,13 +177,13 @@ func (o *CreateNewContactBadRequest) String() string {
 	return fmt.Sprintf("[PUT /contact][%d] createNewContactBadRequest %s", 400, payload)
 }
 
-func (o *CreateNewContactBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *CreateNewContactBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateNewContactBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -204,7 +204,7 @@ CreateNewContactUnprocessableEntity describes a response with status code 422, w
 Render error
 */
 type CreateNewContactUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create new contact unprocessable entity response has a 2xx status code
@@ -247,13 +247,13 @@ func (o *CreateNewContactUnprocessableEntity) String() string {
 	return fmt.Sprintf("[PUT /contact][%d] createNewContactUnprocessableEntity %s", 422, payload)
 }
 
-func (o *CreateNewContactUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *CreateNewContactUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateNewContactUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -274,7 +274,7 @@ CreateNewContactInternalServerError describes a response with status code 500, w
 Internal server error
 */
 type CreateNewContactInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create new contact internal server error response has a 2xx status code
@@ -317,13 +317,13 @@ func (o *CreateNewContactInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /contact][%d] createNewContactInternalServerError %s", 500, payload)
 }
 
-func (o *CreateNewContactInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *CreateNewContactInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateNewContactInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

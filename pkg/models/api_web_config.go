@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // APIWebConfig api web config
@@ -20,23 +21,28 @@ import (
 type APIWebConfig struct {
 
 	// contacts
+	// Required: true
 	Contacts []*APIWebContact `json:"contacts"`
 
 	// feature flags
-	FeatureFlags *APIFeatureFlags `json:"featureFlags,omitempty"`
+	// Required: true
+	FeatureFlags *APIFeatureFlags `json:"featureFlags"`
 
 	// metric source clusters
+	// Required: true
 	MetricSourceClusters []*APIMetricSourceCluster `json:"metric_source_clusters"`
 
 	// remote allowed
 	// Example: true
-	RemoteAllowed bool `json:"remoteAllowed,omitempty"`
+	// Required: true
+	RemoteAllowed *bool `json:"remoteAllowed"`
 
 	// sentry
-	Sentry *APISentry `json:"sentry,omitempty"`
+	// Required: true
+	Sentry *APISentry `json:"sentry"`
 
 	// support email
-	// Example: opensource@skbkontur.com
+	// Example: kontur.moira.alert@gmail.com
 	SupportEmail string `json:"supportEmail,omitempty"`
 }
 
@@ -56,6 +62,10 @@ func (m *APIWebConfig) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateRemoteAllowed(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSentry(formats); err != nil {
 		res = append(res, err)
 	}
@@ -67,8 +77,9 @@ func (m *APIWebConfig) Validate(formats strfmt.Registry) error {
 }
 
 func (m *APIWebConfig) validateContacts(formats strfmt.Registry) error {
-	if swag.IsZero(m.Contacts) { // not required
-		return nil
+
+	if err := validate.Required("contacts", "body", m.Contacts); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.Contacts); i++ {
@@ -93,8 +104,9 @@ func (m *APIWebConfig) validateContacts(formats strfmt.Registry) error {
 }
 
 func (m *APIWebConfig) validateFeatureFlags(formats strfmt.Registry) error {
-	if swag.IsZero(m.FeatureFlags) { // not required
-		return nil
+
+	if err := validate.Required("featureFlags", "body", m.FeatureFlags); err != nil {
+		return err
 	}
 
 	if m.FeatureFlags != nil {
@@ -112,8 +124,9 @@ func (m *APIWebConfig) validateFeatureFlags(formats strfmt.Registry) error {
 }
 
 func (m *APIWebConfig) validateMetricSourceClusters(formats strfmt.Registry) error {
-	if swag.IsZero(m.MetricSourceClusters) { // not required
-		return nil
+
+	if err := validate.Required("metric_source_clusters", "body", m.MetricSourceClusters); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.MetricSourceClusters); i++ {
@@ -137,9 +150,19 @@ func (m *APIWebConfig) validateMetricSourceClusters(formats strfmt.Registry) err
 	return nil
 }
 
+func (m *APIWebConfig) validateRemoteAllowed(formats strfmt.Registry) error {
+
+	if err := validate.Required("remoteAllowed", "body", m.RemoteAllowed); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *APIWebConfig) validateSentry(formats strfmt.Registry) error {
-	if swag.IsZero(m.Sentry) { // not required
-		return nil
+
+	if err := validate.Required("sentry", "body", m.Sentry); err != nil {
+		return err
 	}
 
 	if m.Sentry != nil {
@@ -211,10 +234,6 @@ func (m *APIWebConfig) contextValidateFeatureFlags(ctx context.Context, formats 
 
 	if m.FeatureFlags != nil {
 
-		if swag.IsZero(m.FeatureFlags) { // not required
-			return nil
-		}
-
 		if err := m.FeatureFlags.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("featureFlags")
@@ -256,10 +275,6 @@ func (m *APIWebConfig) contextValidateMetricSourceClusters(ctx context.Context, 
 func (m *APIWebConfig) contextValidateSentry(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Sentry != nil {
-
-		if swag.IsZero(m.Sentry) { // not required
-			return nil
-		}
 
 		if err := m.Sentry.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {

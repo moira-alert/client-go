@@ -146,7 +146,7 @@ UpdateContactBadRequest describes a response with status code 400, with default 
 Bad request from client
 */
 type UpdateContactBadRequest struct {
-	Payload *models.APIErrorInvalidRequestExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this update contact bad request response has a 2xx status code
@@ -189,13 +189,13 @@ func (o *UpdateContactBadRequest) String() string {
 	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactBadRequest %s", 400, payload)
 }
 
-func (o *UpdateContactBadRequest) GetPayload() *models.APIErrorInvalidRequestExample {
+func (o *UpdateContactBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateContactBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInvalidRequestExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -216,7 +216,7 @@ UpdateContactForbidden describes a response with status code 403, with default h
 Forbidden
 */
 type UpdateContactForbidden struct {
-	Payload *models.APIErrorForbiddenExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this update contact forbidden response has a 2xx status code
@@ -259,13 +259,13 @@ func (o *UpdateContactForbidden) String() string {
 	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactForbidden %s", 403, payload)
 }
 
-func (o *UpdateContactForbidden) GetPayload() *models.APIErrorForbiddenExample {
+func (o *UpdateContactForbidden) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateContactForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorForbiddenExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -286,7 +286,7 @@ UpdateContactNotFound describes a response with status code 404, with default he
 Resource not found
 */
 type UpdateContactNotFound struct {
-	Payload *models.APIErrorNotFoundExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this update contact not found response has a 2xx status code
@@ -329,13 +329,13 @@ func (o *UpdateContactNotFound) String() string {
 	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactNotFound %s", 404, payload)
 }
 
-func (o *UpdateContactNotFound) GetPayload() *models.APIErrorNotFoundExample {
+func (o *UpdateContactNotFound) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateContactNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorNotFoundExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -356,7 +356,7 @@ UpdateContactUnprocessableEntity describes a response with status code 422, with
 Render error
 */
 type UpdateContactUnprocessableEntity struct {
-	Payload *models.APIErrorRenderExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this update contact unprocessable entity response has a 2xx status code
@@ -399,13 +399,13 @@ func (o *UpdateContactUnprocessableEntity) String() string {
 	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactUnprocessableEntity %s", 422, payload)
 }
 
-func (o *UpdateContactUnprocessableEntity) GetPayload() *models.APIErrorRenderExample {
+func (o *UpdateContactUnprocessableEntity) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateContactUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorRenderExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -426,7 +426,7 @@ UpdateContactInternalServerError describes a response with status code 500, with
 Internal server error
 */
 type UpdateContactInternalServerError struct {
-	Payload *models.APIErrorInternalServerExample
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this update contact internal server error response has a 2xx status code
@@ -469,13 +469,13 @@ func (o *UpdateContactInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /contact/{contactID}][%d] updateContactInternalServerError %s", 500, payload)
 }
 
-func (o *UpdateContactInternalServerError) GetPayload() *models.APIErrorInternalServerExample {
+func (o *UpdateContactInternalServerError) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *UpdateContactInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.APIErrorInternalServerExample)
+	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoNotificationsList dto notifications list
@@ -20,11 +21,13 @@ import (
 type DtoNotificationsList struct {
 
 	// list
+	// Required: true
 	List []*MoiraScheduledNotification `json:"list"`
 
 	// total
 	// Example: 0
-	Total int64 `json:"total,omitempty"`
+	// Required: true
+	Total *int64 `json:"total"`
 }
 
 // Validate validates this dto notifications list
@@ -35,6 +38,10 @@ func (m *DtoNotificationsList) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateTotal(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -42,8 +49,9 @@ func (m *DtoNotificationsList) Validate(formats strfmt.Registry) error {
 }
 
 func (m *DtoNotificationsList) validateList(formats strfmt.Registry) error {
-	if swag.IsZero(m.List) { // not required
-		return nil
+
+	if err := validate.Required("list", "body", m.List); err != nil {
+		return err
 	}
 
 	for i := 0; i < len(m.List); i++ {
@@ -62,6 +70,15 @@ func (m *DtoNotificationsList) validateList(formats strfmt.Registry) error {
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *DtoNotificationsList) validateTotal(formats strfmt.Registry) error {
+
+	if err := validate.Required("total", "body", m.Total); err != nil {
+		return err
 	}
 
 	return nil

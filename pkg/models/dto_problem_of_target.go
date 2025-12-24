@@ -12,6 +12,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // DtoProblemOfTarget dto problem of target
@@ -21,7 +22,8 @@ type DtoProblemOfTarget struct {
 
 	// argument
 	// Example: consolidateBy
-	Argument string `json:"argument,omitempty"`
+	// Required: true
+	Argument *string `json:"argument"`
 
 	// description
 	// Example: This function affects only visual graph representation. It is meaningless in Moira
@@ -29,7 +31,8 @@ type DtoProblemOfTarget struct {
 
 	// position
 	// Example: 0
-	Position int64 `json:"position,omitempty"`
+	// Required: true
+	Position *int64 `json:"position"`
 
 	// problems
 	Problems []*DtoProblemOfTarget `json:"problems"`
@@ -43,6 +46,14 @@ type DtoProblemOfTarget struct {
 func (m *DtoProblemOfTarget) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateArgument(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePosition(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateProblems(formats); err != nil {
 		res = append(res, err)
 	}
@@ -50,6 +61,24 @@ func (m *DtoProblemOfTarget) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *DtoProblemOfTarget) validateArgument(formats strfmt.Registry) error {
+
+	if err := validate.Required("argument", "body", m.Argument); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *DtoProblemOfTarget) validatePosition(formats strfmt.Registry) error {
+
+	if err := validate.Required("position", "body", m.Position); err != nil {
+		return err
+	}
+
 	return nil
 }
 
