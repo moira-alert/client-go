@@ -58,7 +58,7 @@ func (m *MoiraScheduleDataDay) validateEnabled(formats strfmt.Registry) error {
 	return nil
 }
 
-var moiraScheduleDataDayTypeNamePropEnum []interface{}
+var moiraScheduleDataDayTypeNamePropEnum []any
 
 func init() {
 	var res []string

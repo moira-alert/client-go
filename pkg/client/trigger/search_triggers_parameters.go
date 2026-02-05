@@ -8,7 +8,6 @@ package trigger
 import (
 	"context"
 	"net/http"
-	"strconv"
 	"time"
 
 	"github.com/go-openapi/errors"
@@ -400,11 +399,13 @@ func (o *SearchTriggersParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 	}
 
 	if o.Tags != nil {
-		// WAS NOT GENERATED because spec does not support our query param format !!!
-		for i, tag := range o.Tags {
-			if err := r.SetQueryParam("tags["+strconv.Itoa(i)+"]", tag); err != nil {
-				return err
-			}
+
+		// binding items for tags
+		joinedTags := o.bindParamTags(reg)
+
+		// query array param tags
+		if err := r.SetQueryParam("tags", joinedTags...); err != nil {
+			return err
 		}
 	}
 

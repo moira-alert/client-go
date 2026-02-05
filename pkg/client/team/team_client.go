@@ -85,7 +85,7 @@ type ClientService interface {
 AddTeamUsers adds users to a team
 */
 func (a *Client) AddTeamUsers(params *AddTeamUsersParams, opts ...ClientOption) (*AddTeamUsersOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewAddTeamUsersParams()
 	}
@@ -104,17 +104,22 @@ func (a *Client) AddTeamUsers(params *AddTeamUsersParams, opts ...ClientOption) 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*AddTeamUsersOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for add-team-users: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -123,7 +128,7 @@ func (a *Client) AddTeamUsers(params *AddTeamUsersParams, opts ...ClientOption) 
 CreateTeam creates a new team
 */
 func (a *Client) CreateTeam(params *CreateTeamParams, opts ...ClientOption) (*CreateTeamOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateTeamParams()
 	}
@@ -142,17 +147,22 @@ func (a *Client) CreateTeam(params *CreateTeamParams, opts ...ClientOption) (*Cr
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateTeamOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for create-team: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -161,7 +171,7 @@ func (a *Client) CreateTeam(params *CreateTeamParams, opts ...ClientOption) (*Cr
 DeleteTeam deletes a team
 */
 func (a *Client) DeleteTeam(params *DeleteTeamParams, opts ...ClientOption) (*DeleteTeamOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteTeamParams()
 	}
@@ -180,17 +190,22 @@ func (a *Client) DeleteTeam(params *DeleteTeamParams, opts ...ClientOption) (*De
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteTeamOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for delete-team: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -199,7 +214,7 @@ func (a *Client) DeleteTeam(params *DeleteTeamParams, opts ...ClientOption) (*De
 DeleteTeamUser deletes a user from a team
 */
 func (a *Client) DeleteTeamUser(params *DeleteTeamUserParams, opts ...ClientOption) (*DeleteTeamUserOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteTeamUserParams()
 	}
@@ -218,17 +233,22 @@ func (a *Client) DeleteTeamUser(params *DeleteTeamUserParams, opts ...ClientOpti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteTeamUserOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for delete-team-user: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -237,7 +257,7 @@ func (a *Client) DeleteTeamUser(params *DeleteTeamUserParams, opts ...ClientOpti
 GetAllTeams gets all moira teams
 */
 func (a *Client) GetAllTeams(params *GetAllTeamsParams, opts ...ClientOption) (*GetAllTeamsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAllTeamsParams()
 	}
@@ -256,17 +276,22 @@ func (a *Client) GetAllTeams(params *GetAllTeamsParams, opts ...ClientOption) (*
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAllTeamsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-all-teams: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -275,7 +300,7 @@ func (a *Client) GetAllTeams(params *GetAllTeamsParams, opts ...ClientOption) (*
 GetAllTeamsForUser gets all teams for user
 */
 func (a *Client) GetAllTeamsForUser(params *GetAllTeamsForUserParams, opts ...ClientOption) (*GetAllTeamsForUserOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAllTeamsForUserParams()
 	}
@@ -294,17 +319,22 @@ func (a *Client) GetAllTeamsForUser(params *GetAllTeamsForUserParams, opts ...Cl
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAllTeamsForUserOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-all-teams-for-user: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -313,7 +343,7 @@ func (a *Client) GetAllTeamsForUser(params *GetAllTeamsForUserParams, opts ...Cl
 GetTeam gets a team by ID
 */
 func (a *Client) GetTeam(params *GetTeamParams, opts ...ClientOption) (*GetTeamOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTeamParams()
 	}
@@ -332,17 +362,22 @@ func (a *Client) GetTeam(params *GetTeamParams, opts ...ClientOption) (*GetTeamO
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTeamOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-team: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -351,7 +386,7 @@ func (a *Client) GetTeam(params *GetTeamParams, opts ...ClientOption) (*GetTeamO
 GetTeamSettings gets team settings
 */
 func (a *Client) GetTeamSettings(params *GetTeamSettingsParams, opts ...ClientOption) (*GetTeamSettingsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTeamSettingsParams()
 	}
@@ -370,17 +405,22 @@ func (a *Client) GetTeamSettings(params *GetTeamSettingsParams, opts ...ClientOp
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTeamSettingsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-team-settings: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -389,7 +429,7 @@ func (a *Client) GetTeamSettings(params *GetTeamSettingsParams, opts ...ClientOp
 GetTeamUsers gets users of a team
 */
 func (a *Client) GetTeamUsers(params *GetTeamUsersParams, opts ...ClientOption) (*GetTeamUsersOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTeamUsersParams()
 	}
@@ -408,17 +448,22 @@ func (a *Client) GetTeamUsers(params *GetTeamUsersParams, opts ...ClientOption) 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTeamUsersOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-team-users: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -427,7 +472,7 @@ func (a *Client) GetTeamUsers(params *GetTeamUsersParams, opts ...ClientOption) 
 SetTeamUsers sets users of a team
 */
 func (a *Client) SetTeamUsers(params *SetTeamUsersParams, opts ...ClientOption) (*SetTeamUsersOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewSetTeamUsersParams()
 	}
@@ -446,17 +491,22 @@ func (a *Client) SetTeamUsers(params *SetTeamUsersParams, opts ...ClientOption) 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*SetTeamUsersOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for set-team-users: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -465,7 +515,7 @@ func (a *Client) SetTeamUsers(params *SetTeamUsersParams, opts ...ClientOption) 
 UpdateTeam updates existing team
 */
 func (a *Client) UpdateTeam(params *UpdateTeamParams, opts ...ClientOption) (*UpdateTeamOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateTeamParams()
 	}
@@ -484,17 +534,22 @@ func (a *Client) UpdateTeam(params *UpdateTeamParams, opts ...ClientOption) (*Up
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateTeamOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for update-team: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

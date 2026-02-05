@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -79,11 +80,15 @@ func (m *DtoTagStatistics) validateSubscriptions(formats strfmt.Registry) error 
 
 		if m.Subscriptions[i] != nil {
 			if err := m.Subscriptions[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("subscriptions" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("subscriptions" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -127,11 +132,15 @@ func (m *DtoTagStatistics) contextValidateSubscriptions(ctx context.Context, for
 			}
 
 			if err := m.Subscriptions[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("subscriptions" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("subscriptions" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}

@@ -75,7 +75,7 @@ type ClientService interface {
 CreateSubscription creates a new subscription
 */
 func (a *Client) CreateSubscription(params *CreateSubscriptionParams, opts ...ClientOption) (*CreateSubscriptionOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateSubscriptionParams()
 	}
@@ -94,17 +94,22 @@ func (a *Client) CreateSubscription(params *CreateSubscriptionParams, opts ...Cl
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateSubscriptionOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for create-subscription: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -113,7 +118,7 @@ func (a *Client) CreateSubscription(params *CreateSubscriptionParams, opts ...Cl
 GetSubscription gets subscription by id
 */
 func (a *Client) GetSubscription(params *GetSubscriptionParams, opts ...ClientOption) (*GetSubscriptionOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetSubscriptionParams()
 	}
@@ -132,17 +137,22 @@ func (a *Client) GetSubscription(params *GetSubscriptionParams, opts ...ClientOp
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetSubscriptionOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-subscription: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -151,7 +161,7 @@ func (a *Client) GetSubscription(params *GetSubscriptionParams, opts ...ClientOp
 GetUserSubscriptions gets all subscriptions
 */
 func (a *Client) GetUserSubscriptions(params *GetUserSubscriptionsParams, opts ...ClientOption) (*GetUserSubscriptionsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetUserSubscriptionsParams()
 	}
@@ -170,17 +180,22 @@ func (a *Client) GetUserSubscriptions(params *GetUserSubscriptionsParams, opts .
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetUserSubscriptionsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-user-subscriptions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -189,7 +204,7 @@ func (a *Client) GetUserSubscriptions(params *GetUserSubscriptionsParams, opts .
 RemoveSubscription deletes a subscription
 */
 func (a *Client) RemoveSubscription(params *RemoveSubscriptionParams, opts ...ClientOption) (*RemoveSubscriptionOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewRemoveSubscriptionParams()
 	}
@@ -208,17 +223,22 @@ func (a *Client) RemoveSubscription(params *RemoveSubscriptionParams, opts ...Cl
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*RemoveSubscriptionOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for remove-subscription: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -227,7 +247,7 @@ func (a *Client) RemoveSubscription(params *RemoveSubscriptionParams, opts ...Cl
 SendTestNotification sends a test notification for a subscription
 */
 func (a *Client) SendTestNotification(params *SendTestNotificationParams, opts ...ClientOption) (*SendTestNotificationOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewSendTestNotificationParams()
 	}
@@ -246,17 +266,22 @@ func (a *Client) SendTestNotification(params *SendTestNotificationParams, opts .
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*SendTestNotificationOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for send-test-notification: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -265,7 +290,7 @@ func (a *Client) SendTestNotification(params *SendTestNotificationParams, opts .
 UpdateSubscription updates a subscription
 */
 func (a *Client) UpdateSubscription(params *UpdateSubscriptionParams, opts ...ClientOption) (*UpdateSubscriptionOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateSubscriptionParams()
 	}
@@ -284,17 +309,22 @@ func (a *Client) UpdateSubscription(params *UpdateSubscriptionParams, opts ...Cl
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateSubscriptionOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for update-subscription: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

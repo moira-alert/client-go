@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -35,11 +36,15 @@ func (m DtoTriggerMetrics) Validate(formats strfmt.Registry) error {
 			for i := 0; i < len(m[k][kk]); i++ {
 
 				if err := m[k][kk][i].Validate(formats); err != nil {
-					if ve, ok := err.(*errors.Validation); ok {
+					ve := new(errors.Validation)
+					if stderrors.As(err, &ve) {
 						return ve.ValidateName(k + "." + kk + "." + strconv.Itoa(i))
-					} else if ce, ok := err.(*errors.CompositeError); ok {
+					}
+					ce := new(errors.CompositeError)
+					if stderrors.As(err, &ce) {
 						return ce.ValidateName(k + "." + kk + "." + strconv.Itoa(i))
 					}
+
 					return err
 				}
 
@@ -70,11 +75,15 @@ func (m DtoTriggerMetrics) ContextValidate(ctx context.Context, formats strfmt.R
 				}
 
 				if err := m[k][kk][i].ContextValidate(ctx, formats); err != nil {
-					if ve, ok := err.(*errors.Validation); ok {
+					ve := new(errors.Validation)
+					if stderrors.As(err, &ve) {
 						return ve.ValidateName(k + "." + kk + "." + strconv.Itoa(i))
-					} else if ce, ok := err.(*errors.CompositeError); ok {
+					}
+					ce := new(errors.CompositeError)
+					if stderrors.As(err, &ce) {
 						return ce.ValidateName(k + "." + kk + "." + strconv.Itoa(i))
 					}
+
 					return err
 				}
 
