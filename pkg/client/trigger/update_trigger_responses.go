@@ -7,6 +7,7 @@ package trigger
 
 import (
 	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -22,7 +23,7 @@ type UpdateTriggerReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *UpdateTriggerReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *UpdateTriggerReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewUpdateTriggerOK()
@@ -38,6 +39,12 @@ func (o *UpdateTriggerReader) ReadResponse(response runtime.ClientResponse, cons
 		return nil, result
 	case 404:
 		result := NewUpdateTriggerNotFound()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+	case 418:
+		result := NewUpdateTriggerIMATeapot()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -128,7 +135,7 @@ func (o *UpdateTriggerOK) readResponse(response runtime.ClientResponse, consumer
 	o.Payload = new(models.DtoSaveTriggerResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -198,7 +205,7 @@ func (o *UpdateTriggerBadRequest) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -268,7 +275,77 @@ func (o *UpdateTriggerNotFound) readResponse(response runtime.ClientResponse, co
 	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+		return err
+	}
+
+	return nil
+}
+
+// NewUpdateTriggerIMATeapot creates a UpdateTriggerIMATeapot with default headers values
+func NewUpdateTriggerIMATeapot() *UpdateTriggerIMATeapot {
+	return &UpdateTriggerIMATeapot{}
+}
+
+/*
+UpdateTriggerIMATeapot describes a response with status code 418, with default header values.
+
+Target Validation failed
+*/
+type UpdateTriggerIMATeapot struct {
+	Payload *models.DtoSaveTriggerResponse
+}
+
+// IsSuccess returns true when this update trigger i m a teapot response has a 2xx status code
+func (o *UpdateTriggerIMATeapot) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update trigger i m a teapot response has a 3xx status code
+func (o *UpdateTriggerIMATeapot) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update trigger i m a teapot response has a 4xx status code
+func (o *UpdateTriggerIMATeapot) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update trigger i m a teapot response has a 5xx status code
+func (o *UpdateTriggerIMATeapot) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update trigger i m a teapot response a status code equal to that given
+func (o *UpdateTriggerIMATeapot) IsCode(code int) bool {
+	return code == 418
+}
+
+// Code gets the status code for the update trigger i m a teapot response
+func (o *UpdateTriggerIMATeapot) Code() int {
+	return 418
+}
+
+func (o *UpdateTriggerIMATeapot) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerIMATeapot %s", 418, payload)
+}
+
+func (o *UpdateTriggerIMATeapot) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger/{triggerID}][%d] updateTriggerIMATeapot %s", 418, payload)
+}
+
+func (o *UpdateTriggerIMATeapot) GetPayload() *models.DtoSaveTriggerResponse {
+	return o.Payload
+}
+
+func (o *UpdateTriggerIMATeapot) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.DtoSaveTriggerResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -338,7 +415,7 @@ func (o *UpdateTriggerUnprocessableEntity) readResponse(response runtime.ClientR
 	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -408,7 +485,7 @@ func (o *UpdateTriggerInternalServerError) readResponse(response runtime.ClientR
 	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -478,7 +555,7 @@ func (o *UpdateTriggerServiceUnavailable) readResponse(response runtime.ClientRe
 	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

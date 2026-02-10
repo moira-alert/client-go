@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -89,11 +90,15 @@ func (m *APIWebConfig) validateContacts(formats strfmt.Registry) error {
 
 		if m.Contacts[i] != nil {
 			if err := m.Contacts[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("contacts" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("contacts" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -111,11 +116,15 @@ func (m *APIWebConfig) validateFeatureFlags(formats strfmt.Registry) error {
 
 	if m.FeatureFlags != nil {
 		if err := m.FeatureFlags.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("featureFlags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("featureFlags")
 			}
+
 			return err
 		}
 	}
@@ -136,11 +145,15 @@ func (m *APIWebConfig) validateMetricSourceClusters(formats strfmt.Registry) err
 
 		if m.MetricSourceClusters[i] != nil {
 			if err := m.MetricSourceClusters[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("metric_source_clusters" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("metric_source_clusters" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -167,11 +180,15 @@ func (m *APIWebConfig) validateSentry(formats strfmt.Registry) error {
 
 	if m.Sentry != nil {
 		if err := m.Sentry.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sentry")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sentry")
 			}
+
 			return err
 		}
 	}
@@ -216,11 +233,15 @@ func (m *APIWebConfig) contextValidateContacts(ctx context.Context, formats strf
 			}
 
 			if err := m.Contacts[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("contacts" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("contacts" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -235,11 +256,15 @@ func (m *APIWebConfig) contextValidateFeatureFlags(ctx context.Context, formats 
 	if m.FeatureFlags != nil {
 
 		if err := m.FeatureFlags.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("featureFlags")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("featureFlags")
 			}
+
 			return err
 		}
 	}
@@ -258,11 +283,15 @@ func (m *APIWebConfig) contextValidateMetricSourceClusters(ctx context.Context, 
 			}
 
 			if err := m.MetricSourceClusters[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("metric_source_clusters" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("metric_source_clusters" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -277,11 +306,15 @@ func (m *APIWebConfig) contextValidateSentry(ctx context.Context, formats strfmt
 	if m.Sentry != nil {
 
 		if err := m.Sentry.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sentry")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sentry")
 			}
+
 			return err
 		}
 	}

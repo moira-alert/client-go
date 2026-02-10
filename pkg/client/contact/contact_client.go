@@ -79,7 +79,7 @@ type ClientService interface {
 CreateNewContact creates a new contact notification for the current user
 */
 func (a *Client) CreateNewContact(params *CreateNewContactParams, opts ...ClientOption) (*CreateNewContactOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateNewContactParams()
 	}
@@ -98,17 +98,22 @@ func (a *Client) CreateNewContact(params *CreateNewContactParams, opts ...Client
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateNewContactOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for create-new-contact: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -117,7 +122,7 @@ func (a *Client) CreateNewContact(params *CreateNewContactParams, opts ...Client
 GetAllContacts gets all moira contacts
 */
 func (a *Client) GetAllContacts(params *GetAllContactsParams, opts ...ClientOption) (*GetAllContactsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAllContactsParams()
 	}
@@ -136,17 +141,22 @@ func (a *Client) GetAllContacts(params *GetAllContactsParams, opts ...ClientOpti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAllContactsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-all-contacts: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -155,7 +165,7 @@ func (a *Client) GetAllContacts(params *GetAllContactsParams, opts ...ClientOpti
 GetContactByID gets contact by ID
 */
 func (a *Client) GetContactByID(params *GetContactByIDParams, opts ...ClientOption) (*GetContactByIDOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetContactByIDParams()
 	}
@@ -174,17 +184,22 @@ func (a *Client) GetContactByID(params *GetContactByIDParams, opts ...ClientOpti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetContactByIDOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-contact-by-id: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -193,7 +208,7 @@ func (a *Client) GetContactByID(params *GetContactByIDParams, opts ...ClientOpti
 GetContactEventsByID gets contact events by ID with time range
 */
 func (a *Client) GetContactEventsByID(params *GetContactEventsByIDParams, opts ...ClientOption) (*GetContactEventsByIDOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetContactEventsByIDParams()
 	}
@@ -212,17 +227,22 @@ func (a *Client) GetContactEventsByID(params *GetContactEventsByIDParams, opts .
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetContactEventsByIDOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-contact-events-by-id: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -231,7 +251,7 @@ func (a *Client) GetContactEventsByID(params *GetContactEventsByIDParams, opts .
 GetContactsNoisiness gets contacts noisiness
 */
 func (a *Client) GetContactsNoisiness(params *GetContactsNoisinessParams, opts ...ClientOption) (*GetContactsNoisinessOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetContactsNoisinessParams()
 	}
@@ -250,17 +270,22 @@ func (a *Client) GetContactsNoisiness(params *GetContactsNoisinessParams, opts .
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetContactsNoisinessOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-contacts-noisiness: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -269,7 +294,7 @@ func (a *Client) GetContactsNoisiness(params *GetContactsNoisinessParams, opts .
 RemoveContact deletes notification contact for the current user and remove the contact ID from all subscriptions
 */
 func (a *Client) RemoveContact(params *RemoveContactParams, opts ...ClientOption) (*RemoveContactOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewRemoveContactParams()
 	}
@@ -288,17 +313,22 @@ func (a *Client) RemoveContact(params *RemoveContactParams, opts ...ClientOption
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*RemoveContactOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for remove-contact: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -307,7 +337,7 @@ func (a *Client) RemoveContact(params *RemoveContactParams, opts ...ClientOption
 SendTestContactNotification pushes a test notification to verify that the contact is properly set up
 */
 func (a *Client) SendTestContactNotification(params *SendTestContactNotificationParams, opts ...ClientOption) (*SendTestContactNotificationOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewSendTestContactNotificationParams()
 	}
@@ -326,17 +356,22 @@ func (a *Client) SendTestContactNotification(params *SendTestContactNotification
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*SendTestContactNotificationOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for send-test-contact-notification: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -345,7 +380,7 @@ func (a *Client) SendTestContactNotification(params *SendTestContactNotification
 UpdateContact updates an existing notification contact to the values passed in the request body
 */
 func (a *Client) UpdateContact(params *UpdateContactParams, opts ...ClientOption) (*UpdateContactOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateContactParams()
 	}
@@ -364,17 +399,22 @@ func (a *Client) UpdateContact(params *UpdateContactParams, opts ...ClientOption
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateContactOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for update-contact: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

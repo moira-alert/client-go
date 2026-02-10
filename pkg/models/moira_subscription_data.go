@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -169,11 +170,15 @@ func (m *MoiraSubscriptionData) validatePlotting(formats strfmt.Registry) error 
 
 	if m.Plotting != nil {
 		if err := m.Plotting.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("plotting")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("plotting")
 			}
+
 			return err
 		}
 	}
@@ -189,11 +194,15 @@ func (m *MoiraSubscriptionData) validateSched(formats strfmt.Registry) error {
 
 	if m.Sched != nil {
 		if err := m.Sched.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sched")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sched")
 			}
+
 			return err
 		}
 	}
@@ -260,11 +269,15 @@ func (m *MoiraSubscriptionData) contextValidatePlotting(ctx context.Context, for
 	if m.Plotting != nil {
 
 		if err := m.Plotting.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("plotting")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("plotting")
 			}
+
 			return err
 		}
 	}
@@ -277,11 +290,15 @@ func (m *MoiraSubscriptionData) contextValidateSched(ctx context.Context, format
 	if m.Sched != nil {
 
 		if err := m.Sched.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("sched")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("sched")
 			}
+
 			return err
 		}
 	}

@@ -73,7 +73,7 @@ type ClientService interface {
 CreateTags creates new tags
 */
 func (a *Client) CreateTags(params *CreateTagsParams, opts ...ClientOption) (*CreateTagsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateTagsParams()
 	}
@@ -92,17 +92,22 @@ func (a *Client) CreateTags(params *CreateTagsParams, opts ...ClientOption) (*Cr
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateTagsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for create-tags: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -111,7 +116,7 @@ func (a *Client) CreateTags(params *CreateTagsParams, opts ...ClientOption) (*Cr
 GetAllSystemTags gets all system tags
 */
 func (a *Client) GetAllSystemTags(params *GetAllSystemTagsParams, opts ...ClientOption) (*GetAllSystemTagsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAllSystemTagsParams()
 	}
@@ -130,17 +135,22 @@ func (a *Client) GetAllSystemTags(params *GetAllSystemTagsParams, opts ...Client
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAllSystemTagsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-all-system-tags: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -149,7 +159,7 @@ func (a *Client) GetAllSystemTags(params *GetAllSystemTagsParams, opts ...Client
 GetAllTags gets all tags
 */
 func (a *Client) GetAllTags(params *GetAllTagsParams, opts ...ClientOption) (*GetAllTagsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAllTagsParams()
 	}
@@ -168,17 +178,22 @@ func (a *Client) GetAllTags(params *GetAllTagsParams, opts ...ClientOption) (*Ge
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAllTagsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-all-tags: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -187,7 +202,7 @@ func (a *Client) GetAllTags(params *GetAllTagsParams, opts ...ClientOption) (*Ge
 GetAllTagsAndSubscriptions gets all tags and their subscriptions
 */
 func (a *Client) GetAllTagsAndSubscriptions(params *GetAllTagsAndSubscriptionsParams, opts ...ClientOption) (*GetAllTagsAndSubscriptionsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAllTagsAndSubscriptionsParams()
 	}
@@ -206,17 +221,22 @@ func (a *Client) GetAllTagsAndSubscriptions(params *GetAllTagsAndSubscriptionsPa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAllTagsAndSubscriptionsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-all-tags-and-subscriptions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -225,7 +245,7 @@ func (a *Client) GetAllTagsAndSubscriptions(params *GetAllTagsAndSubscriptionsPa
 RemoveTag removes a tag
 */
 func (a *Client) RemoveTag(params *RemoveTagParams, opts ...ClientOption) (*RemoveTagOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewRemoveTagParams()
 	}
@@ -244,17 +264,22 @@ func (a *Client) RemoveTag(params *RemoveTagParams, opts ...ClientOption) (*Remo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*RemoveTagOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for remove-tag: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
