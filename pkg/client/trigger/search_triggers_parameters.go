@@ -9,6 +9,7 @@ import (
 	"context"
 	"net/http"
 	"time"
+	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
@@ -398,6 +399,8 @@ func (o *SearchTriggersParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		}
 	}
 
+
+
 	if o.Size != nil {
 
 		// query param size
@@ -416,13 +419,12 @@ func (o *SearchTriggersParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 	}
 
 	if o.Tags != nil {
-
-		// binding items for tags
-		joinedTags := o.bindParamTags(reg)
-
-		// query array param tags
-		if err := r.SetQueryParam("tags", joinedTags...); err != nil {
-			return err
+		
+		// WAS NOT GENERATED because spec does not support our query param format !!!
+		for i, tag := range o.Tags {
+			if err := r.SetQueryParam("tags["+strconv.Itoa(i)+"]", tag); err != nil {
+				return err
+			}
 		}
 	}
 
