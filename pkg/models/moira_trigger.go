@@ -86,6 +86,10 @@ type MoiraTrigger struct {
 	// Required: true
 	Targets []string `json:"targets"`
 
+	// team id
+	// Example: d844f26b-4646-4fca-b43c-a871cc21169a
+	TeamID *string `json:"team_id,omitempty"`
+
 	// trigger source
 	// Example: graphite_local
 	TriggerSource string `json:"trigger_source,omitempty"`

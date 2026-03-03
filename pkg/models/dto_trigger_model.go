@@ -92,6 +92,10 @@ type DtoTriggerModel struct {
 	// Required: true
 	Targets []string `json:"targets"`
 
+	// ID of a Team that owns this trigger
+	// Example: d844f26b-4646-4fca-b43c-a871cc21169a
+	TeamID *string `json:"team_id,omitempty"`
+
 	// Shows the type of source from where the metrics are fetched
 	// Example: graphite_local
 	// Required: true

@@ -109,6 +109,12 @@ type SearchTriggersParams struct {
 	*/
 	Tags []string
 
+	/* TeamID.
+
+	   Search for triggers with this team ID
+	*/
+	TeamID *string
+
 	/* Text.
 
 	   Search text
@@ -276,6 +282,17 @@ func (o *SearchTriggersParams) SetTags(tags []string) {
 	o.Tags = tags
 }
 
+// WithTeamID adds the teamID to the search triggers params
+func (o *SearchTriggersParams) WithTeamID(teamID *string) *SearchTriggersParams {
+	o.SetTeamID(teamID)
+	return o
+}
+
+// SetTeamID adds the teamId to the search triggers params
+func (o *SearchTriggersParams) SetTeamID(teamID *string) {
+	o.TeamID = teamID
+}
+
 // WithText adds the text to the search triggers params
 func (o *SearchTriggersParams) WithText(text *string) *SearchTriggersParams {
 	o.SetText(text)
@@ -398,9 +415,27 @@ func (o *SearchTriggersParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 	}
 
 	if o.Tags != nil {
+
 		// WAS NOT GENERATED because spec does not support our query param format !!!
 		for i, tag := range o.Tags {
 			if err := r.SetQueryParam("tags["+strconv.Itoa(i)+"]", tag); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.TeamID != nil {
+
+		// query param teamID
+		var qrTeamID string
+
+		if o.TeamID != nil {
+			qrTeamID = *o.TeamID
+		}
+		qTeamID := qrTeamID
+		if qTeamID != "" {
+
+			if err := r.SetQueryParam("teamID", qTeamID); err != nil {
 				return err
 			}
 		}

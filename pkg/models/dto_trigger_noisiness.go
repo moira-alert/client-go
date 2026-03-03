@@ -96,6 +96,10 @@ type DtoTriggerNoisiness struct {
 	// Required: true
 	Targets []string `json:"targets"`
 
+	// ID of a Team that owns this trigger
+	// Example: d844f26b-4646-4fca-b43c-a871cc21169a
+	TeamID *string `json:"team_id,omitempty"`
+
 	// throttling
 	// Example: 0
 	// Required: true

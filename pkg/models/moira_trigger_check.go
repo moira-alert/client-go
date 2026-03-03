@@ -95,6 +95,10 @@ type MoiraTriggerCheck struct {
 	// Required: true
 	Targets []string `json:"targets"`
 
+	// team id
+	// Example: d844f26b-4646-4fca-b43c-a871cc21169a
+	TeamID *string `json:"team_id,omitempty"`
+
 	// throttling
 	// Example: 0
 	// Required: true
