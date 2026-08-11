@@ -28,6 +28,10 @@ type DtoTeamModel struct {
 	// Required: true
 	ID *string `json:"id"`
 
+	// metadata
+	// Example: {\"meta_id\":\"example_id\"}
+	Metadata string `json:"metadata,omitempty"`
+
 	// name
 	// Example: Infrastructure Team
 	// Required: true
