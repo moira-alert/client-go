@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -62,11 +63,15 @@ func (m *DtoSaveTriggerResponse) validateCheckResult(formats strfmt.Registry) er
 
 	if m.CheckResult != nil {
 		if err := m.CheckResult.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("checkResult")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("checkResult")
 			}
+
 			return err
 		}
 	}
@@ -115,11 +120,15 @@ func (m *DtoSaveTriggerResponse) contextValidateCheckResult(ctx context.Context,
 		}
 
 		if err := m.CheckResult.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("checkResult")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("checkResult")
 			}
+
 			return err
 		}
 	}

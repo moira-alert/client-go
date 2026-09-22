@@ -67,7 +67,7 @@ type ClientService interface {
 GetUserName gets the username of the authenticated user if it is available
 */
 func (a *Client) GetUserName(params *GetUserNameParams, opts ...ClientOption) (*GetUserNameOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetUserNameParams()
 	}
@@ -86,17 +86,22 @@ func (a *Client) GetUserName(params *GetUserNameParams, opts ...ClientOption) (*
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetUserNameOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-user-name: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -105,7 +110,7 @@ func (a *Client) GetUserName(params *GetUserNameParams, opts ...ClientOption) (*
 GetUserSettings gets the user s contacts and subscriptions
 */
 func (a *Client) GetUserSettings(params *GetUserSettingsParams, opts ...ClientOption) (*GetUserSettingsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetUserSettingsParams()
 	}
@@ -124,17 +129,22 @@ func (a *Client) GetUserSettings(params *GetUserSettingsParams, opts ...ClientOp
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetUserSettingsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-user-settings: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

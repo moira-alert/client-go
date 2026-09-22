@@ -127,7 +127,7 @@ type ClientService interface {
 CreateTrigger creates a new trigger
 */
 func (a *Client) CreateTrigger(params *CreateTriggerParams, opts ...ClientOption) (*CreateTriggerOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateTriggerParams()
 	}
@@ -146,17 +146,22 @@ func (a *Client) CreateTrigger(params *CreateTriggerParams, opts ...ClientOption
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateTriggerOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for create-trigger: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -165,7 +170,7 @@ func (a *Client) CreateTrigger(params *CreateTriggerParams, opts ...ClientOption
 DeletePager deletes triggers pager
 */
 func (a *Client) DeletePager(params *DeletePagerParams, opts ...ClientOption) (*DeletePagerOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeletePagerParams()
 	}
@@ -184,17 +189,22 @@ func (a *Client) DeletePager(params *DeletePagerParams, opts ...ClientOption) (*
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeletePagerOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for delete-pager: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -203,7 +213,7 @@ func (a *Client) DeletePager(params *DeletePagerParams, opts ...ClientOption) (*
 DeleteTriggerMetric deletes metric from last check and all trigger pattern metrics
 */
 func (a *Client) DeleteTriggerMetric(params *DeleteTriggerMetricParams, opts ...ClientOption) (*DeleteTriggerMetricOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteTriggerMetricParams()
 	}
@@ -222,17 +232,22 @@ func (a *Client) DeleteTriggerMetric(params *DeleteTriggerMetricParams, opts ...
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteTriggerMetricOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for delete-trigger-metric: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -241,7 +256,7 @@ func (a *Client) DeleteTriggerMetric(params *DeleteTriggerMetricParams, opts ...
 DeleteTriggerNodataMetrics deletes all metrics from last data which are in n o d a t a state it also deletes all trigger patterns of those metrics
 */
 func (a *Client) DeleteTriggerNodataMetrics(params *DeleteTriggerNodataMetricsParams, opts ...ClientOption) (*DeleteTriggerNodataMetricsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteTriggerNodataMetricsParams()
 	}
@@ -260,17 +275,22 @@ func (a *Client) DeleteTriggerNodataMetrics(params *DeleteTriggerNodataMetricsPa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteTriggerNodataMetricsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for delete-trigger-nodata-metrics: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -279,7 +299,7 @@ func (a *Client) DeleteTriggerNodataMetrics(params *DeleteTriggerNodataMetricsPa
 DeleteTriggerThrottling deletes throttling for a trigger
 */
 func (a *Client) DeleteTriggerThrottling(params *DeleteTriggerThrottlingParams, opts ...ClientOption) (*DeleteTriggerThrottlingOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteTriggerThrottlingParams()
 	}
@@ -298,17 +318,22 @@ func (a *Client) DeleteTriggerThrottling(params *DeleteTriggerThrottlingParams, 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteTriggerThrottlingOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for delete-trigger-throttling: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -317,7 +342,7 @@ func (a *Client) DeleteTriggerThrottling(params *DeleteTriggerThrottlingParams, 
 GetAllHeavyTriggers gets all heavy triggers
 */
 func (a *Client) GetAllHeavyTriggers(params *GetAllHeavyTriggersParams, opts ...ClientOption) (*GetAllHeavyTriggersOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAllHeavyTriggersParams()
 	}
@@ -336,17 +361,22 @@ func (a *Client) GetAllHeavyTriggers(params *GetAllHeavyTriggersParams, opts ...
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAllHeavyTriggersOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-all-heavy-triggers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -355,7 +385,7 @@ func (a *Client) GetAllHeavyTriggers(params *GetAllHeavyTriggersParams, opts ...
 GetAllTriggers gets all triggers
 */
 func (a *Client) GetAllTriggers(params *GetAllTriggersParams, opts ...ClientOption) (*GetAllTriggersOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAllTriggersParams()
 	}
@@ -374,17 +404,22 @@ func (a *Client) GetAllTriggers(params *GetAllTriggersParams, opts ...ClientOpti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAllTriggersOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-all-triggers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -393,7 +428,7 @@ func (a *Client) GetAllTriggers(params *GetAllTriggersParams, opts ...ClientOpti
 GetTrigger gets an existing trigger
 */
 func (a *Client) GetTrigger(params *GetTriggerParams, opts ...ClientOption) (*GetTriggerOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTriggerParams()
 	}
@@ -412,17 +447,22 @@ func (a *Client) GetTrigger(params *GetTriggerParams, opts ...ClientOption) (*Ge
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTriggerOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-trigger: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -431,7 +471,7 @@ func (a *Client) GetTrigger(params *GetTriggerParams, opts ...ClientOption) (*Ge
 GetTriggerDump gets trigger dump
 */
 func (a *Client) GetTriggerDump(params *GetTriggerDumpParams, opts ...ClientOption) (*GetTriggerDumpOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTriggerDumpParams()
 	}
@@ -450,17 +490,22 @@ func (a *Client) GetTriggerDump(params *GetTriggerDumpParams, opts ...ClientOpti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTriggerDumpOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-trigger-dump: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -469,7 +514,7 @@ func (a *Client) GetTriggerDump(params *GetTriggerDumpParams, opts ...ClientOpti
 GetTriggerMetrics gets metrics associated with certain trigger
 */
 func (a *Client) GetTriggerMetrics(params *GetTriggerMetricsParams, opts ...ClientOption) (*GetTriggerMetricsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTriggerMetricsParams()
 	}
@@ -488,17 +533,22 @@ func (a *Client) GetTriggerMetrics(params *GetTriggerMetricsParams, opts ...Clie
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTriggerMetricsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-trigger-metrics: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -507,7 +557,7 @@ func (a *Client) GetTriggerMetrics(params *GetTriggerMetricsParams, opts ...Clie
 GetTriggerState gets the trigger state as at last check
 */
 func (a *Client) GetTriggerState(params *GetTriggerStateParams, opts ...ClientOption) (*GetTriggerStateOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTriggerStateParams()
 	}
@@ -526,17 +576,22 @@ func (a *Client) GetTriggerState(params *GetTriggerStateParams, opts ...ClientOp
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTriggerStateOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-trigger-state: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -545,7 +600,7 @@ func (a *Client) GetTriggerState(params *GetTriggerStateParams, opts ...ClientOp
 GetTriggerThrottling gets a trigger with its throttling i e its next allowed message time
 */
 func (a *Client) GetTriggerThrottling(params *GetTriggerThrottlingParams, opts ...ClientOption) (*GetTriggerThrottlingOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTriggerThrottlingParams()
 	}
@@ -564,17 +619,22 @@ func (a *Client) GetTriggerThrottling(params *GetTriggerThrottlingParams, opts .
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTriggerThrottlingOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-trigger-throttling: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -583,7 +643,7 @@ func (a *Client) GetTriggerThrottling(params *GetTriggerThrottlingParams, opts .
 GetTriggersNoisiness gets triggers noisiness
 */
 func (a *Client) GetTriggersNoisiness(params *GetTriggersNoisinessParams, opts ...ClientOption) (*GetTriggersNoisinessOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetTriggersNoisinessParams()
 	}
@@ -602,17 +662,22 @@ func (a *Client) GetTriggersNoisiness(params *GetTriggersNoisinessParams, opts .
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetTriggersNoisinessOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-triggers-noisiness: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -621,7 +686,7 @@ func (a *Client) GetTriggersNoisiness(params *GetTriggersNoisinessParams, opts .
 GetUnusedTriggers gets unused triggers
 */
 func (a *Client) GetUnusedTriggers(params *GetUnusedTriggersParams, opts ...ClientOption) (*GetUnusedTriggersOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetUnusedTriggersParams()
 	}
@@ -640,17 +705,22 @@ func (a *Client) GetUnusedTriggers(params *GetUnusedTriggersParams, opts ...Clie
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetUnusedTriggersOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-unused-triggers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -659,7 +729,7 @@ func (a *Client) GetUnusedTriggers(params *GetUnusedTriggersParams, opts ...Clie
 RemoveTrigger removes trigger
 */
 func (a *Client) RemoveTrigger(params *RemoveTriggerParams, opts ...ClientOption) (*RemoveTriggerOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewRemoveTriggerParams()
 	}
@@ -678,17 +748,22 @@ func (a *Client) RemoveTrigger(params *RemoveTriggerParams, opts ...ClientOption
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*RemoveTriggerOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for remove-trigger: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -697,7 +772,7 @@ func (a *Client) RemoveTrigger(params *RemoveTriggerParams, opts ...ClientOption
 RenderTriggerMetrics renders trigger metrics plot
 */
 func (a *Client) RenderTriggerMetrics(params *RenderTriggerMetricsParams, opts ...ClientOption) (*RenderTriggerMetricsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewRenderTriggerMetricsParams()
 	}
@@ -716,17 +791,22 @@ func (a *Client) RenderTriggerMetrics(params *RenderTriggerMetricsParams, opts .
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*RenderTriggerMetricsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for render-trigger-metrics: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -739,7 +819,7 @@ func (a *Client) RenderTriggerMetrics(params *RenderTriggerMetricsParams, opts .
 For example, `/api/trigger/search?tags[0]=test&tags[1]=test1`
 */
 func (a *Client) SearchTriggers(params *SearchTriggersParams, opts ...ClientOption) (*SearchTriggersOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewSearchTriggersParams()
 	}
@@ -758,17 +838,22 @@ func (a *Client) SearchTriggers(params *SearchTriggersParams, opts ...ClientOpti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*SearchTriggersOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for search-triggers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -777,7 +862,7 @@ func (a *Client) SearchTriggers(params *SearchTriggersParams, opts ...ClientOpti
 SetTriggerMaintenance sets metrics and the trigger itself to maintenance mode
 */
 func (a *Client) SetTriggerMaintenance(params *SetTriggerMaintenanceParams, opts ...ClientOption) (*SetTriggerMaintenanceOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewSetTriggerMaintenanceParams()
 	}
@@ -796,17 +881,22 @@ func (a *Client) SetTriggerMaintenance(params *SetTriggerMaintenanceParams, opts
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*SetTriggerMaintenanceOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for set-trigger-maintenance: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -815,7 +905,7 @@ func (a *Client) SetTriggerMaintenance(params *SetTriggerMaintenanceParams, opts
 TriggerCheck validates trigger target
 */
 func (a *Client) TriggerCheck(params *TriggerCheckParams, opts ...ClientOption) (*TriggerCheckOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewTriggerCheckParams()
 	}
@@ -834,17 +924,22 @@ func (a *Client) TriggerCheck(params *TriggerCheckParams, opts ...ClientOption) 
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*TriggerCheckOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for trigger-check: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -853,7 +948,7 @@ func (a *Client) TriggerCheck(params *TriggerCheckParams, opts ...ClientOption) 
 UpdateTrigger updates existing trigger
 */
 func (a *Client) UpdateTrigger(params *UpdateTriggerParams, opts ...ClientOption) (*UpdateTriggerOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateTriggerParams()
 	}
@@ -872,17 +967,22 @@ func (a *Client) UpdateTrigger(params *UpdateTriggerParams, opts ...ClientOption
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateTriggerOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for update-trigger: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

@@ -67,7 +67,7 @@ type ClientService interface {
 DeletePattern deletes a moira pattern
 */
 func (a *Client) DeletePattern(params *DeletePatternParams, opts ...ClientOption) (*DeletePatternOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeletePatternParams()
 	}
@@ -86,17 +86,22 @@ func (a *Client) DeletePattern(params *DeletePatternParams, opts ...ClientOption
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeletePatternOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for delete-pattern: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
@@ -105,7 +110,7 @@ func (a *Client) DeletePattern(params *DeletePatternParams, opts ...ClientOption
 GetAllPatterns gets all patterns
 */
 func (a *Client) GetAllPatterns(params *GetAllPatternsParams, opts ...ClientOption) (*GetAllPatternsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetAllPatternsParams()
 	}
@@ -124,17 +129,22 @@ func (a *Client) GetAllPatterns(params *GetAllPatternsParams, opts ...ClientOpti
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetAllPatternsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
-	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for get-all-patterns: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

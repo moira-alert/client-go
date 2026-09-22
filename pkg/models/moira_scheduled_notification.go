@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -101,11 +102,15 @@ func (m *MoiraScheduledNotification) validateContact(formats strfmt.Registry) er
 
 	if m.Contact != nil {
 		if err := m.Contact.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("contact")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("contact")
 			}
+
 			return err
 		}
 	}
@@ -121,11 +126,15 @@ func (m *MoiraScheduledNotification) validateEvent(formats strfmt.Registry) erro
 
 	if m.Event != nil {
 		if err := m.Event.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("event")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("event")
 			}
+
 			return err
 		}
 	}
@@ -141,11 +150,15 @@ func (m *MoiraScheduledNotification) validatePlotting(formats strfmt.Registry) e
 
 	if m.Plotting != nil {
 		if err := m.Plotting.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("plotting")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("plotting")
 			}
+
 			return err
 		}
 	}
@@ -188,11 +201,15 @@ func (m *MoiraScheduledNotification) validateTrigger(formats strfmt.Registry) er
 
 	if m.Trigger != nil {
 		if err := m.Trigger.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("trigger")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("trigger")
 			}
+
 			return err
 		}
 	}
@@ -231,11 +248,15 @@ func (m *MoiraScheduledNotification) contextValidateContact(ctx context.Context,
 	if m.Contact != nil {
 
 		if err := m.Contact.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("contact")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("contact")
 			}
+
 			return err
 		}
 	}
@@ -248,11 +269,15 @@ func (m *MoiraScheduledNotification) contextValidateEvent(ctx context.Context, f
 	if m.Event != nil {
 
 		if err := m.Event.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("event")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("event")
 			}
+
 			return err
 		}
 	}
@@ -265,11 +290,15 @@ func (m *MoiraScheduledNotification) contextValidatePlotting(ctx context.Context
 	if m.Plotting != nil {
 
 		if err := m.Plotting.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("plotting")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("plotting")
 			}
+
 			return err
 		}
 	}
@@ -282,11 +311,15 @@ func (m *MoiraScheduledNotification) contextValidateTrigger(ctx context.Context,
 	if m.Trigger != nil {
 
 		if err := m.Trigger.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("trigger")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("trigger")
 			}
+
 			return err
 		}
 	}

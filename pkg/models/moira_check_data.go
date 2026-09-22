@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -123,11 +124,15 @@ func (m *MoiraCheckData) validateMaintenanceInfo(formats strfmt.Registry) error 
 
 	if m.MaintenanceInfo != nil {
 		if err := m.MaintenanceInfo.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("maintenance_info")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("maintenance_info")
 			}
+
 			return err
 		}
 	}
@@ -148,11 +153,15 @@ func (m *MoiraCheckData) validateMetrics(formats strfmt.Registry) error {
 		}
 		if val, ok := m.Metrics[k]; ok {
 			if err := val.Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("metrics" + "." + k)
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("metrics" + "." + k)
 				}
+
 				return err
 			}
 		}
@@ -212,11 +221,15 @@ func (m *MoiraCheckData) contextValidateMaintenanceInfo(ctx context.Context, for
 	if m.MaintenanceInfo != nil {
 
 		if err := m.MaintenanceInfo.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("maintenance_info")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("maintenance_info")
 			}
+
 			return err
 		}
 	}

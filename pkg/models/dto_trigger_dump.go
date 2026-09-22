@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -80,11 +81,15 @@ func (m *DtoTriggerDump) validateLastCheck(formats strfmt.Registry) error {
 
 	if m.LastCheck != nil {
 		if err := m.LastCheck.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("last_check")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("last_check")
 			}
+
 			return err
 		}
 	}
@@ -105,11 +110,15 @@ func (m *DtoTriggerDump) validateMetrics(formats strfmt.Registry) error {
 
 		if m.Metrics[i] != nil {
 			if err := m.Metrics[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("metrics" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("metrics" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -127,11 +136,15 @@ func (m *DtoTriggerDump) validateTrigger(formats strfmt.Registry) error {
 
 	if m.Trigger != nil {
 		if err := m.Trigger.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("trigger")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("trigger")
 			}
+
 			return err
 		}
 	}
@@ -166,11 +179,15 @@ func (m *DtoTriggerDump) contextValidateLastCheck(ctx context.Context, formats s
 	if m.LastCheck != nil {
 
 		if err := m.LastCheck.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("last_check")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("last_check")
 			}
+
 			return err
 		}
 	}
@@ -189,11 +206,15 @@ func (m *DtoTriggerDump) contextValidateMetrics(ctx context.Context, formats str
 			}
 
 			if err := m.Metrics[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("metrics" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("metrics" + "." + strconv.Itoa(i))
 				}
+
 				return err
 			}
 		}
@@ -208,11 +229,15 @@ func (m *DtoTriggerDump) contextValidateTrigger(ctx context.Context, formats str
 	if m.Trigger != nil {
 
 		if err := m.Trigger.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("trigger")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("trigger")
 			}
+
 			return err
 		}
 	}

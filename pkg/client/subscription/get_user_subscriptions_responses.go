@@ -7,6 +7,7 @@ package subscription
 
 import (
 	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -22,7 +23,7 @@ type GetUserSubscriptionsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetUserSubscriptionsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetUserSubscriptionsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetUserSubscriptionsOK()
@@ -110,7 +111,7 @@ func (o *GetUserSubscriptionsOK) readResponse(response runtime.ClientResponse, c
 	o.Payload = new(models.DtoSubscriptionList)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -180,7 +181,7 @@ func (o *GetUserSubscriptionsUnprocessableEntity) readResponse(response runtime.
 	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -250,7 +251,7 @@ func (o *GetUserSubscriptionsInternalServerError) readResponse(response runtime.
 	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

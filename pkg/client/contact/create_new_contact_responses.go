@@ -7,6 +7,7 @@ package contact
 
 import (
 	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -22,7 +23,7 @@ type CreateNewContactReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateNewContactReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *CreateNewContactReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewCreateNewContactOK()
@@ -116,7 +117,7 @@ func (o *CreateNewContactOK) readResponse(response runtime.ClientResponse, consu
 	o.Payload = new(models.DtoContact)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -186,7 +187,7 @@ func (o *CreateNewContactBadRequest) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -256,7 +257,7 @@ func (o *CreateNewContactUnprocessableEntity) readResponse(response runtime.Clie
 	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -326,7 +327,7 @@ func (o *CreateNewContactInternalServerError) readResponse(response runtime.Clie
 	o.Payload = new(models.APIErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
