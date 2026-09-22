@@ -40,6 +40,14 @@ type MoiraTriggerCheck struct {
 	// Example: check the size of /var/log
 	Desc *string `json:"desc,omitempty"`
 
+	// error for
+	// Example: 0
+	ErrorFor int64 `json:"error_for,omitempty"`
+
+	// error keep firing for
+	// Example: 0
+	ErrorKeepFiringFor int64 `json:"error_keep_firing_for,omitempty"`
+
 	// error value
 	// Example: 1000
 	// Required: true
@@ -94,6 +102,10 @@ type MoiraTriggerCheck struct {
 	// Required: true
 	Targets []string `json:"targets"`
 
+	// team id
+	// Example: d844f26b-4646-4fca-b43c-a871cc21169a
+	TeamID *string `json:"team_id,omitempty"`
+
 	// throttling
 	// Example: 0
 	// Required: true
@@ -123,6 +135,14 @@ type MoiraTriggerCheck struct {
 	// updated by
 	// Required: true
 	UpdatedBy *string `json:"updated_by"`
+
+	// warn for
+	// Example: 0
+	WarnFor int64 `json:"warn_for,omitempty"`
+
+	// warn keep firing for
+	// Example: 0
+	WarnKeepFiringFor int64 `json:"warn_keep_firing_for,omitempty"`
 
 	// warn value
 	// Example: 5000

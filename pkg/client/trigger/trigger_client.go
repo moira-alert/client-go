@@ -90,6 +90,8 @@ type ClientService interface {
 
 	DeleteTriggerThrottling(params *DeleteTriggerThrottlingParams, opts ...ClientOption) (*DeleteTriggerThrottlingOK, error)
 
+	GetAllHeavyTriggers(params *GetAllHeavyTriggersParams, opts ...ClientOption) (*GetAllHeavyTriggersOK, error)
+
 	GetAllTriggers(params *GetAllTriggersParams, opts ...ClientOption) (*GetAllTriggersOK, error)
 
 	GetTrigger(params *GetTriggerParams, opts ...ClientOption) (*GetTriggerOK, error)
@@ -308,6 +310,44 @@ func (a *Client) DeleteTriggerThrottling(params *DeleteTriggerThrottlingParams, 
 	// unexpected success response
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for delete-trigger-throttling: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetAllHeavyTriggers gets all heavy triggers
+*/
+func (a *Client) GetAllHeavyTriggers(params *GetAllHeavyTriggersParams, opts ...ClientOption) (*GetAllHeavyTriggersOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetAllHeavyTriggersParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "get-all-heavy-triggers",
+		Method:             "GET",
+		PathPattern:        "/trigger/heavy",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &GetAllHeavyTriggersReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetAllHeavyTriggersOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for get-all-heavy-triggers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -111,6 +111,12 @@ type SearchTriggersParams struct {
 	*/
 	Tags []string
 
+	/* TeamID.
+
+	   Search for triggers with this team ID
+	*/
+	TeamID *string
+
 	/* Text.
 
 	   Search text
@@ -276,6 +282,17 @@ func (o *SearchTriggersParams) WithTags(tags []string) *SearchTriggersParams {
 // SetTags adds the tags to the search triggers params
 func (o *SearchTriggersParams) SetTags(tags []string) {
 	o.Tags = tags
+}
+
+// WithTeamID adds the teamID to the search triggers params
+func (o *SearchTriggersParams) WithTeamID(teamID *string) *SearchTriggersParams {
+	o.SetTeamID(teamID)
+	return o
+}
+
+// SetTeamID adds the teamId to the search triggers params
+func (o *SearchTriggersParams) SetTeamID(teamID *string) {
+	o.TeamID = teamID
 }
 
 // WithText adds the text to the search triggers params

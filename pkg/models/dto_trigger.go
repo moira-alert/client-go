@@ -41,6 +41,14 @@ type DtoTrigger struct {
 	// Example: check the size of /var/log
 	Desc *string `json:"desc,omitempty"`
 
+	// Seconds the metric must be continuously >= ErrorValue before ERROR fires. 0 means fire instantly.
+	// Example: 0
+	ErrorFor int64 `json:"error_for,omitempty"`
+
+	// Seconds to keep reporting ERROR after the metric drops below ErrorValue. 0 means resolve instantly.
+	// Example: 0
+	ErrorKeepFiringFor int64 `json:"error_keep_firing_for,omitempty"`
+
 	// ERROR threshold
 	// Example: 1000
 	// Required: true
@@ -92,6 +100,10 @@ type DtoTrigger struct {
 	// Required: true
 	Targets []string `json:"targets"`
 
+	// ID of a Team that owns this trigger
+	// Example: d844f26b-4646-4fca-b43c-a871cc21169a
+	TeamID *string `json:"team_id,omitempty"`
+
 	// throttling
 	// Example: 0
 	// Required: true
@@ -122,6 +134,14 @@ type DtoTrigger struct {
 	// Username who updated trigger
 	// Required: true
 	UpdatedBy *string `json:"updated_by"`
+
+	// Seconds the metric must be continuously >= WarnValue before WARN fires. 0 means fire instantly.
+	// Example: 0
+	WarnFor int64 `json:"warn_for,omitempty"`
+
+	// Seconds to keep reporting WARN after the metric drops below WarnValue. 0 means resolve instantly.
+	// Example: 0
+	WarnKeepFiringFor int64 `json:"warn_keep_firing_for,omitempty"`
 
 	// WARN threshold
 	// Example: 500

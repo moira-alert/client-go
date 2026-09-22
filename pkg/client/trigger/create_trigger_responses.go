@@ -36,6 +36,12 @@ func (o *CreateTriggerReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
+	case 418:
+		result := NewCreateTriggerIMATeapot()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 422:
 		result := NewCreateTriggerUnprocessableEntity()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -137,10 +143,10 @@ func NewCreateTriggerBadRequest() *CreateTriggerBadRequest {
 /*
 CreateTriggerBadRequest describes a response with status code 400, with default header values.
 
-Bad request from client. Could be api.ErrorInvalidRequestExample or dto.SaveTriggerResponse
+Bad request from client
 */
 type CreateTriggerBadRequest struct {
-	Payload interface{}
+	Payload *models.APIErrorResponse
 }
 
 // IsSuccess returns true when this create trigger bad request response has a 2xx status code
@@ -183,14 +189,86 @@ func (o *CreateTriggerBadRequest) String() string {
 	return fmt.Sprintf("[PUT /trigger][%d] createTriggerBadRequest %s", 400, payload)
 }
 
-func (o *CreateTriggerBadRequest) GetPayload() interface{} {
+func (o *CreateTriggerBadRequest) GetPayload() *models.APIErrorResponse {
 	return o.Payload
 }
 
 func (o *CreateTriggerBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
+	o.Payload = new(models.APIErrorResponse)
+
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewCreateTriggerIMATeapot creates a CreateTriggerIMATeapot with default headers values
+func NewCreateTriggerIMATeapot() *CreateTriggerIMATeapot {
+	return &CreateTriggerIMATeapot{}
+}
+
+/*
+CreateTriggerIMATeapot describes a response with status code 418, with default header values.
+
+Target Validation failed
+*/
+type CreateTriggerIMATeapot struct {
+	Payload *models.DtoSaveTriggerResponse
+}
+
+// IsSuccess returns true when this create trigger i m a teapot response has a 2xx status code
+func (o *CreateTriggerIMATeapot) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create trigger i m a teapot response has a 3xx status code
+func (o *CreateTriggerIMATeapot) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create trigger i m a teapot response has a 4xx status code
+func (o *CreateTriggerIMATeapot) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create trigger i m a teapot response has a 5xx status code
+func (o *CreateTriggerIMATeapot) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create trigger i m a teapot response a status code equal to that given
+func (o *CreateTriggerIMATeapot) IsCode(code int) bool {
+	return code == 418
+}
+
+// Code gets the status code for the create trigger i m a teapot response
+func (o *CreateTriggerIMATeapot) Code() int {
+	return 418
+}
+
+func (o *CreateTriggerIMATeapot) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger][%d] createTriggerIMATeapot %s", 418, payload)
+}
+
+func (o *CreateTriggerIMATeapot) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /trigger][%d] createTriggerIMATeapot %s", 418, payload)
+}
+
+func (o *CreateTriggerIMATeapot) GetPayload() *models.DtoSaveTriggerResponse {
+	return o.Payload
+}
+
+func (o *CreateTriggerIMATeapot) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.DtoSaveTriggerResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
