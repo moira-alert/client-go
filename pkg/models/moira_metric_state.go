@@ -25,6 +25,14 @@ type MoiraMetricState struct {
 	// Example: false
 	DeletedButKept bool `json:"deleted_but_kept,omitempty"`
 
+	// ErrorRecoverSince is the unix timestamp when the metric first dropped below ErrorValue after ERROR had fired, 0 if not currently tracked.
+	// Example: 0
+	ErrorRecoverSince int64 `json:"error_recover_since,omitempty"`
+
+	// ErrorSince is the unix timestamp when the metric first became continuously >= ErrorValue, 0 if not currently tracked.
+	// Example: 0
+	ErrorSince int64 `json:"error_since,omitempty"`
+
 	// event timestamp
 	// Example: 1590741878
 	// Required: true
@@ -62,6 +70,15 @@ type MoiraMetricState struct {
 
 	// values
 	Values map[string]float64 `json:"values,omitempty"`
+
+	// WarnRecoverSince is the unix timestamp when the metric first dropped below WarnValue after WARN had fired, 0 if not currently tracked.
+	// Example: 0
+	WarnRecoverSince int64 `json:"warn_recover_since,omitempty"`
+
+	// AloneMetrics    map[string]string  `json:"alone_metrics"` // represents a relation between name of alone metrics and their targets
+	// WarnSince is the unix timestamp when the metric first became continuously >= WarnValue, 0 if not currently tracked.
+	// Example: 0
+	WarnSince int64 `json:"warn_since,omitempty"`
 }
 
 // Validate validates this moira metric state
